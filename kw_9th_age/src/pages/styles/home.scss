@@ -1,0 +1,59 @@
+@import "../../utilities/scss_variables";
+
+// Main Component Styles
+////////////////////////
+.home {
+  padding: 50px;
+  
+  // flex display
+  display: flex;
+  flex-direction: column;
+}
+
+div.home p {
+  margin-top: 5px;
+}
+
+// Section Headers
+//////////////////
+.header {  
+  display: block;
+  text-align: center;
+}
+.header h1, .sub-section h2 {  
+  text-align: center;
+  white-space: nowrap;
+  display: inline-block;
+}
+.sub-section {
+  margin-top: 20px;  
+}
+
+// Icons
+////////
+
+.icon {
+  position: relative;  
+  color: $fontColourAccent;
+  display: inline;
+}
+.scroll-icon {      
+  font-size: 1.8em;  
+  position: relative;
+  top: 2px;
+}
+.sub-icon {      
+  font-size: 1.2em;  
+}
+
+// Link Styles
+//////////////
+.home a {
+  display: block;
+  margin-top: 5px;
+  width: max-content;
+}
+.home a:hover {
+  color: $linkColourMain;
+  background-color: unset;
+}

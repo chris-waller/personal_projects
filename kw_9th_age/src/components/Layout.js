@@ -27,8 +27,8 @@ class Layout extends Component {
           </div>
           
           {/* Page content */}
-          <div className={styles.pageContent}>
-            <div check="Me">
+          <div className={styles.pageContentWrapper}>
+            <div className={styles.pageContent}>
               {this.props.children}
             </div>
           </div>

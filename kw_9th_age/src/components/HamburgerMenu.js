@@ -1,6 +1,5 @@
 // npm imports
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside'
 import { Link } from 'react-router-dom';
 import { FaRegWindowClose } from 'react-icons/fa';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Icon, Header } from 'semantic-ui-react';
 
 import Layout from '../components/Layout';
 

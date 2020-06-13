@@ -5,9 +5,27 @@ body {
 
   // Make sure no imported styles play with these in the future
   margin: 0px !important; 
-  padding: 0px !important; 
+  padding: 0px !important;
 }
 
-a {
+a {  
   text-decoration: none;
+  color: $linkColourMainHover;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, div {
+  font-family: "MedievalSharp", Times, sans-serif;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
+}
+
+h1::first-letter,
+h2::first-letter,
+h3::first-letter,
+h4::first-letter,
+h5::first-letter,
+h6::first-letter,
+p::first-letter {
+  font-size: 125%;
 }
