@@ -61,11 +61,11 @@ class Header extends Component {
     return (
       
       <div className={styles.header}>
-        <div>          
+        <div className={styles.wrapper} foo="bar">          
 
           {/* Home Icon Section */}
           {/* ***************** */}          
-          <div className={styles.logoSection} foo="bar">        
+          <div className={styles.logoSection} section="icon">        
               <Link to="/">          
                 <img title="Home" src={logo} className={styles.logo} />          
               </Link>          
@@ -74,21 +74,48 @@ class Header extends Component {
           {/* Links Section */}
           {/* ************* */}
           <div className={styles.linkSection}>
-            <Link 
-              to="/" 
-              className={styles.link}>
+            <div>
+              <Link 
+                to="/" 
+                className={styles.link}
+                title="Home"
+              >
                 Homestead
-            </Link>
-            <Link 
-              to="/about" 
-              className={styles.link}>
+              </Link>
+              <Link 
+                to="/map" 
+                className={styles.link}
+                title="Map"
+              >
+                The Known World
+              </Link>   
+              <Link 
+                to="/campaign" 
+                className={styles.link}
+                title="Campaign Information"
+              >
+                War Status
+              </Link>
+              <Link 
+                to="/members" 
+                className={styles.link}
+                title="Members"
+              >
+                The Village
+              </Link>          
+              <Link 
+                to="/about" 
+                className={styles.link}
+                title="About this site"
+              >
                 Town Crier
-            </Link>           
+              </Link>           
+            </div>
           </div>
           
           {/* Hambuger Menu Section */ }
           {/* ********************* */ }
-          <div className={ styles.menuSection}>
+          <div className={ styles.menuSection} section="menu">
             <HambugerMenu               
               iconUrl={hamburgerIcon} 
             />

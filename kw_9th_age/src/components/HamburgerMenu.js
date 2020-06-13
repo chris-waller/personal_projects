@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside'
 import { Link } from 'react-router-dom';
 
-
 // css imports
 import styles from './styles/hamburger-menu.scss';
 
@@ -76,7 +75,7 @@ class HamburgerMenu extends Component {
         </div>
         
         {/* Render the menu items here */}
-        {/* ************************** */}
+        {/* ************************** 
         <div className={styles.menuItems}>
           {menuItems.map(item => {
             return (
@@ -88,6 +87,7 @@ class HamburgerMenu extends Component {
             );
           })}       
         </div>
+        */}
         
       </div>
     );
