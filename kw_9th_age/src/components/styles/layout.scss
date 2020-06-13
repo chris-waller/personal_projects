@@ -22,7 +22,7 @@
 }
 
 // Main div for the individual page content
-.page-content div:first {
+.page-content div:first-of-type {
   // This block is to help with hiding the vertical scrollbar
   position: absolute;
   top: 0;

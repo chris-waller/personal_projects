@@ -73,8 +73,7 @@ class Header extends Component {
           
           {/* Links Section */}
           {/* ************* */}
-          <div className={styles.linkSection}>
-            <div>
+          <div className={styles.linkSection}>          
               <Link 
                 to="/" 
                 className={styles.link}
@@ -109,8 +108,7 @@ class Header extends Component {
                 title="About this site"
               >
                 Town Crier
-              </Link>           
-            </div>
+              </Link>                       
           </div>
           
           {/* Hambuger Menu Section */ }

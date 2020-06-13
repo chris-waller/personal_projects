@@ -28,7 +28,7 @@ class Layout extends Component {
           
           {/* Page content */}
           <div className={styles.pageContent}>
-            <div>
+            <div check="Me">
               {this.props.children}
             </div>
           </div>

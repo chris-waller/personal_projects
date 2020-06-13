@@ -27,7 +27,7 @@ a:hover {
   height: 70px;  
 }
 
-.header div:nth-child(1) {
+.wrapper {
   width: 100%;
   height: 100%;
   margin: 0px;
@@ -70,21 +70,21 @@ a:hover {
 }
 
 .menu-section {
-  width: 100%;
-
   // flex display
   display: none;
-  justify-content: center;
-  align-items: center;  
 }
 
 @media (max-width: 760px) {
   .logo-section, .link-section {
     display: none !important;
   }  
-  .menu-section {    
-    display: flex;
+  .menu-section {        
     width: 100%;
-    height: 30px;
+    height: 100%;
+
+    // flex display
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

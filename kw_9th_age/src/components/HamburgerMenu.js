@@ -3,16 +3,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside'
 import { Link } from 'react-router-dom';
+import { FaRegWindowClose } from 'react-icons/fa';
+import { FaAlignJustify } from 'react-icons/fa';
 
 // css imports
 import styles from './styles/hamburger-menu.scss';
 
 // image imports
-import cancelIcon from '../images/cancel-icon.png';
 
 const menuItems = [
-  {url: "/", text: "Home"},
-  {url: "/about", text: "About Us"},  
+  {url: "/", text: "Homestead", title: "Home"},
+  {url: "/map", text: "The Known World", title: "Map"},
+  {url: "/campaign", text: "War Status", title: "Campaign"},
+  {url: "/members", text: "The Village", title: "Members"},
+  {url: "/about", text: "Town Crier", title: "About this site"},  
 ];
 
 /**
@@ -62,32 +66,35 @@ class HamburgerMenu extends Component {
       menuClasses+= " " + styles.hide;
 
     return (
-      <div className={menuClasses} >
+      <div className={menuClasses} foo="menu start">
         
-        {/* cancel icon */}
-        <div className={styles.cancelIcon}>
-          <img 
-            src={cancelIcon}           
-            className={styles.cancelIcon}
-            title="Close Menu"
-            onClick={() => this.toggleMenu(false)}
-          />
+        {/* cancel icon */ }
+        <div className={styles.cancelIconWrapper} section="cancel">
+          <FaRegWindowClose 
+           onClick={() => this.toggleMenu(false)}
+           title="Close Menu"
+           className={styles.cancelIcon}
+          />          
         </div>
         
         {/* Render the menu items here */}
-        {/* ************************** 
-        <div className={styles.menuItems}>
-          {menuItems.map(item => {
-            return (
-              <Link to={item.url} className={styles.menuItem} key={item.url} >
-                <h5 title={item.text} > 
-                  {item.text} 
-                </h5>
-              </Link>
-            );
-          })}       
+        {/* ************************** */}
+        <div className={styles.menuItems} section="menu itmes start">
+          <div className={styles.menuItemsWrapper} meep="menu wrapper">
+            {menuItems.map(item => {
+              return (
+                <div className={styles.menuItem} ball="meat" key={item.text}>
+                  <Link to={item.url} key={item.url} >
+                    <h5 title={item.title} > 
+                      {item.text} 
+                    </h5>
+                  </Link>
+                </div>
+              );
+            })}
+          </div>       
         </div>
-        */}
+
         
       </div>
     );
@@ -98,13 +105,12 @@ class HamburgerMenu extends Component {
    */
   render() {
     return(
-      <div>
-        <img 
-          src={this.props.iconUrl} 
-          className={styles.icon}
-          title="Open Menu"
+      <div className={styles.hamburgerMenu} section="hamburguer menu main">
+        <FaAlignJustify 
           onClick={() => this.toggleMenu(!this.state.menuOpen)}
-        />        
+          title="Open Menu"
+          className={styles.hamburgerIcon}
+        />
         {this.renderMenu()}
       </div>
     );
@@ -113,8 +119,3 @@ class HamburgerMenu extends Component {
 }
 
 export default enhanceWithClickOutside(HamburgerMenu);
-
-// declare all prop types
-HamburgerMenu.propTypes = {    
-  iconUrl: PropTypes.string.isRequired,
-};
