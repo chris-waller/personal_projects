@@ -1,0 +1,13 @@
+@import "./utilities/scss_variables";
+
+body {
+  background-color: $mainColourBase;
+
+  // Make sure no imported styles play with these in the future
+  margin: 0px !important; 
+  padding: 0px !important; 
+}
+
+a {
+  text-decoration: none;
+}

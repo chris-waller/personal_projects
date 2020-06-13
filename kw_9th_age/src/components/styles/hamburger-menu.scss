@@ -1,0 +1,78 @@
+div.cancelIcon {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.icon, img.cancelIcon {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+img.cancelIcon {
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.menu {
+  position: fixed;
+  z-index: 1;
+  width: 80%;  
+  left: 10%;
+  top: 0;
+
+  border-color: lightgray;
+  border-style: solid;
+  border-top: 0px;
+  border-bottom: 0px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #1155CC;
+  /*
+  background: rgb(2,0,36);
+  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgb(77, 120, 177) 35%, rgb(0, 195, 255) 100%);
+  */
+
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+/* this class aids in hiding the scroll bar */
+.menu::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.menu.hide {
+  display: none;
+}
+
+.menuItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0px;
+}
+
+.menuItem {  
+  padding: 5px;
+  width: 100%;  
+  background-color: transparent;
+  border-bottom: 1px solid rgba(139, 143, 151);  
+  text-align: center;  
+}
+.menuItem:visited, .menuItem:link  {
+  color: white;
+}
+.menuItem:first-child {
+  border-top: 1px solid rgba(139, 143, 151);
+}
+.menuItem:hover {
+  background: #eeedff;
+  color: #000 !important;
+}
+
