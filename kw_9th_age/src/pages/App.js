@@ -4,14 +4,17 @@ import importedComponent from 'react-imported-component';
 
 import Home from './Home';
 import Loading from '../components/Loading';
+import MapPage from './Map';
 
 // Create separate bundle (or chunk) for each page
+/*
 const MapPage = importedComponent(
   () => import("./Map"), // webpackChunkName:'Map'
   {
     LoadingComponent: Loading
   }
 );
+*/
 const MembersPage = importedComponent(
   () => import("./Members"), // webpackChunkName:'Members'
   {

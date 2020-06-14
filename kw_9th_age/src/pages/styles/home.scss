@@ -57,3 +57,42 @@ div.home p {
   color: $linkColourMain;
   background-color: unset;
 }
+
+// World Section
+////////////////
+.world-section {
+  display: grid;
+  height: 100%;
+  row-gap: 10px;
+  column-gap: 5px;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 50% 50%;
+  grid-template-areas: 
+    "header header header image"
+    "footer footer footer footer";
+}
+.world-item1 {
+  grid-area: header;
+}
+.world-item2 {
+  grid-area: image;
+  border: 1px solid $borderColourMain;
+  // TODO: replace this image
+  background: url("../../images/world.png") no-repeat center;    
+  background-size: cover;
+}
+.world-item3 {
+  grid-area: footer;
+}
+
+@media(max-width: 800px) {
+  .world-section {    
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    grid-template-areas: 
+      "header"
+      "footer";
+  }
+
+}
+

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaScroll, FaGlobeAfrica, FaFortAwesome} from 'react-icons/fa';
 import { GiCrossbow, GiScreaming } from 'react-icons/gi';
+import classNames from 'classnames';
 
 // custom components
 import Layout from '../components/Layout';
@@ -53,10 +54,11 @@ const Home = () => {
     <Layout>
       <div className={styles.home}>
 
+        {/* Homestead Summary */}
         <div className={styles.header}>
-          <FaScroll className={styles.icon + " " + styles.scrollIcon}/>
-          <h1 cl>The Homestead</h1>
-          <FaScroll className={styles.icon + " " + styles.scrollIcon}/>
+          <FaScroll className={classNames(styles.icon, styles.scrollIcon)}/>
+          <h1>The Homestead</h1>
+          <FaScroll className={classNames(styles.icon, styles.scrollIcon)}/>
         </div>
         <div>
           <p>
@@ -70,17 +72,18 @@ const Home = () => {
           <h2>The Known World</h2>
           <FaGlobeAfrica className={styles.icon + " " + styles.subIcon}/>
         </div>
-        <div>
-          <p>
-            {worldText1}
-          </p>
-          <p>
-            {worldText2}
-          </p>          
+        <div className={styles.worldSection}>
+          <div className={styles.worldItem1} >
+            <p>{worldText1}</p>
+          </div>
+          <div className={styles.worldItem2} title="Map of Kaewool" />          
+          <div className={styles.worldItem3} >
+            <p>{worldText2}</p>
+          </div>
         </div>
         <div>
           <Link to="/map" >
-            Click HERE to explore Keawole
+            Click HERE to explore Keawool
           </Link>
         </div>
 

@@ -4,8 +4,7 @@ import Layout from '../components/Layout';
 
 const NoMatch = () => {
   return (
-    <Layout>
-      <Icon name="minus circle" size="big" />
+    <Layout>      
       <strong>Page not found!</strong>
     </Layout>
   );
