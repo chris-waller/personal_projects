@@ -1,20 +1,16 @@
 // npm imports
 import React, { Component } from 'react';
-import ImageMapper from 'react-image-mapper';
 import { FaGlobeAfrica} from 'react-icons/fa';
 
 // Custom components
 import Layout from '../components/Layout';
 import SectionHeader from '../components/SectionHeader';
-
-// Utility imports
-import {MAP} from "../utilities/world_image_map"
+import InteractiveMap from '../components/map/InteractiveMap';
 
 // Style imports
 import styles from './styles/map-page.scss';
 
-// Image imports
-import mainImage from '../images/world.png';
+
 
 /**
  * Map page to display the interactive world map.
@@ -47,15 +43,14 @@ class MapPage extends Component {
       }          
     }
 
-    this.areaClicked = this.areaClicked.bind(this);
-    this.areaEntered = this.areaEntered.bind(this);
+    this.areaSelected = this.areaSelected.bind(this);
     this.generateMapClicked = this.generateMapClicked.bind(this);
   }
 
   /**
    * User has clicked an area on the map
    */
-  areaClicked(area) {    
+  areaSelected(area) { 
     this.setState({
       selectedRegion: {
         coordinates: area.coords,
@@ -63,19 +58,7 @@ class MapPage extends Component {
         terrain: area.terrain
       }      
     });
-  }
-
-  /**
-   * User moused over an area on the map
-   */
-  areaEntered(area) {
-    this.setState({
-      currentRegion: {
-        coordinates: area.coords,
-        name: area.name,
-        terrain: area.terrain
-      }      
-    });
+    console.log(area)
   }
 
   generateMapClicked() {
@@ -100,20 +83,19 @@ class MapPage extends Component {
           </div>         
   
           {/* Play with image here */}
-          <div className={styles.worldMap} section="image_start">            
-            <ImageMapper section="the_image_mapper"
-              src={mainImage}
-              map={MAP}
-              className={styles.worldMap} 
-              width={1200}
-              height={600}
-              imgWidth={1810}
-              lineWidth={5}
-              onClick={area => this.areaClicked(area)}
-              onMouseEnter={area => this.areaEntered(area)}
-            />
+          <div className={styles.worldMap} section="image_start"> 
+            <InteractiveMap
+              areaSelected={this.areaSelected}
+            />           
+            
 
             {/*
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
             <div className={styles.info} >
               <div>Map Info</div>
               <div>&nbsp;</div>
