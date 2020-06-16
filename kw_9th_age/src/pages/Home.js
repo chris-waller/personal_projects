@@ -117,10 +117,7 @@ class Home extends Component {
           <div className={styles.worldSection}>
             <div className={styles.worldItem1} >
               <p>{worldText1}</p>
-            </div>
-            <Link to="/">          
-              <div title="Home" className={styles.logo} />          
-            </Link>          
+            </div>             
             <div
             className={styles.worldItem2} 
             title="Map of Kaewool" 
