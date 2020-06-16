@@ -3,13 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaScroll, FaGlobeAfrica, FaFortAwesome} from 'react-icons/fa';
 import { GiCrossbow, GiScreaming } from 'react-icons/gi';
-import classNames from 'classnames';
 
 // custom components
 import Layout from '../components/Layout';
 
 // css imports
 import styles from './styles/home.scss';
+import SectionHeader from '../components/SectionHeader';
 
 const Home = () => {
   const homesteadText = `Welcome to the Kitchener-Waterloo-London (KWL) T9A meeting grounds. This is
@@ -56,9 +56,11 @@ const Home = () => {
 
         {/* Homestead Summary */}
         <div className={styles.header}>
-          <FaScroll className={classNames(styles.icon, styles.scrollIcon)}/>
-          <h1>The Homestead</h1>
-          <FaScroll className={classNames(styles.icon, styles.scrollIcon)}/>
+          <SectionHeader 
+            text="Homestead" 
+            icon={<FaScroll />} 
+            headerType="h1" 
+          />
         </div>
         <div>
           <p>
@@ -68,9 +70,11 @@ const Home = () => {
 
         {/* The Known World (Map Page) */}
         <div className={styles.subSection}>
-          <FaGlobeAfrica className={styles.icon + " " + styles.subIcon}/>
-          <h2>The Known World</h2>
-          <FaGlobeAfrica className={styles.icon + " " + styles.subIcon}/>
+        <SectionHeader 
+            text="The Known World" 
+            icon={<FaGlobeAfrica />} 
+            headerType="h2" 
+          />          
         </div>
         <div className={styles.worldSection}>
           <div className={styles.worldItem1} >
@@ -89,9 +93,11 @@ const Home = () => {
 
         {/* War Status (Campaign Page) */}
         <div className={styles.subSection}>
-          <GiCrossbow className={styles.icon + " " + styles.subIcon}/>
-          <h2>War Status</h2>
-          <GiCrossbow className={styles.icon + " " + styles.subIcon}/>
+        <SectionHeader 
+            text="WarStatus" 
+            icon={<GiCrossbow />} 
+            headerType="h2" 
+          />   
         </div>
         <div>
           <p>
@@ -109,9 +115,11 @@ const Home = () => {
 
         {/* The Village (Members Page) */}
         <div className={styles.subSection}>
-          <FaFortAwesome className={styles.icon + " " + styles.subIcon}/>
-          <h2>The Village</h2>
-          <FaFortAwesome className={styles.icon + " " + styles.subIcon}/>
+        <SectionHeader 
+            text="The Village" 
+            icon={<FaFortAwesome />} 
+            headerType="h2" 
+          />                    
         </div>
         <div>
           <p>
@@ -129,9 +137,11 @@ const Home = () => {
 
         {/* Town Crier (About Page)*/}
         <div className={styles.subSection}>
-          <GiScreaming className={styles.icon + " " + styles.subIcon}/>
-          <h2>Town Crier</h2>
-          <GiScreaming className={styles.icon + " " + styles.subIcon}/>
+        <SectionHeader 
+            text="Town Crier" 
+            icon={<GiScreaming />} 
+            headerType="h2" 
+          />                    
         </div>
         <div>
           <p>

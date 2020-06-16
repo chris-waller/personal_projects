@@ -2,13 +2,10 @@
 import React, { Component } from 'react';
 import enhanceWithClickOutside from 'react-click-outside'
 import { Link } from 'react-router-dom';
-import { FaRegWindowClose } from 'react-icons/fa';
-import { FaAlignJustify } from 'react-icons/fa';
+import { FaRegWindowClose, FaAlignJustify } from 'react-icons/fa';
 
 // css imports
 import styles from './styles/hamburger-menu.scss';
-
-// image imports
 
 const menuItems = [
   {url: "/", text: "Homestead", title: "Home"},
@@ -44,7 +41,7 @@ class HamburgerMenu extends Component {
 
   /**
    * User is opening/closing the menu.
-   * @param openMenu if true, opening the menu
+   * @param {boolean} openMenu if true, opening the menu
    */
   toggleMenu(openMenu) {
     this.setState({
@@ -65,10 +62,10 @@ class HamburgerMenu extends Component {
       menuClasses+= " " + styles.hide;
 
     return (
-      <div className={menuClasses} foo="menu start">
+      <div className={menuClasses}>
         
         {/* cancel icon */ }
-        <div className={styles.cancelIconWrapper} section="cancel">
+        <div className={styles.cancelIcon}>
           <FaRegWindowClose 
            onClick={() => this.toggleMenu(false)}
            title="Close Menu"
@@ -78,23 +75,22 @@ class HamburgerMenu extends Component {
         
         {/* Render the menu items here */}
         {/* ************************** */}
-        <div className={styles.menuItems} section="menu itmes start">
-          <div className={styles.menuItemsWrapper} meep="menu wrapper">
+        <div className={styles.menuItemsWrapper}>
+          <div className={styles.menuItems}>
             {menuItems.map(item => {
               return (
-                <div className={styles.menuItem} ball="meat" key={item.text}>
+                
                   <Link to={item.url} key={item.url} >
+                    <div className={styles.menuItem} key={item.text}>
                     <h5 title={item.title} > 
                       {item.text} 
                     </h5>
-                  </Link>
-                </div>
+                    </div>
+                  </Link>                
               );
             })}
           </div>       
-        </div>
-
-        
+        </div>        
       </div>
     );
   }
@@ -104,7 +100,7 @@ class HamburgerMenu extends Component {
    */
   render() {
     return(
-      <div className={styles.hamburgerMenu} section="hamburguer menu main">
+      <div className={styles.hamburgerMenu}>
         <FaAlignJustify 
           onClick={() => this.toggleMenu(!this.state.menuOpen)}
           title="Open Menu"

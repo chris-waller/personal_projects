@@ -1,5 +1,6 @@
 @import "../../utilities/scss_variables";
 
+////////////////////////
 // Main Component Styles
 ////////////////////////
 .home {
@@ -13,9 +14,9 @@
 div.home p {
   margin-top: 5px;
 }
-
+////////////////////////
 // Section Headers
-//////////////////
+////////////////////////
 .header {  
   display: block;
   text-align: center;
@@ -29,25 +30,9 @@ div.home p {
   margin-top: 20px;  
 }
 
-// Icons
-////////
-
-.icon {
-  position: relative;  
-  color: $fontColourAccent;
-  display: inline;
-}
-.scroll-icon {      
-  font-size: 1.8em;  
-  position: relative;
-  top: 2px;
-}
-.sub-icon {      
-  font-size: 1.2em;  
-}
-
+////////////////////////
 // Link Styles
-//////////////
+////////////////////////
 .home a {
   display: block;
   margin-top: 5px;
@@ -58,8 +43,9 @@ div.home p {
   background-color: unset;
 }
 
+////////////////////////
 // World Section
-////////////////
+////////////////////////
 .world-section {
   display: grid;
   height: 100%;
@@ -85,6 +71,9 @@ div.home p {
   grid-area: footer;
 }
 
+///////////////////////////
+// Screen-width adjustments
+///////////////////////////
 @media(max-width: 800px) {
   .world-section {    
     grid-template-columns: 100%;

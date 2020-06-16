@@ -1,65 +1,43 @@
 @import "../../utilities/scss_variables";
 
+////////////////////////
+// Main Component Styles
+////////////////////////
 .hamburger-menu {
-  height: 100%;
-  width: 100%;
-
-  // flex display
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  justify-items: center;
 }
 
-.hamburger-icon, .cancel-icon {
-  width: 50px;
-  height: 50px;
- 
-  cursor: pointer;
-}
-.hamburger-icon {
-  color: $linkColourMain;
-}
-.cancel-icon {
-  color: $linkColourMainHover;
-  margin: 5px;
-  float: right;
-}
-
-.cancel-icon-wrapper {
-  align-self: end;
-}
-
+/////////////////
+// Menu
+/////////////////
 .menu {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
   width: 100%;  
+  height: 100%;
   background-color: $mainColourContrast;
   background-image: linear-gradient(to left, $mainColourContrast , $mainColourContrastFade);
-
-  // flex display
-  display: flex;
-  flex-direction: column;  
-  align-items: center;
 }
 
 .menu.hide {
   display: none;
 }
 
-.menu-items {  
+/////////////////
+// Menu Items
+/////////////////
+
+// these 2 styles are used to hide the vertical scroll bar
+.menu-items-wrapper {  
   width: 100%;
-  height: 200px;
-  overflow: hidden;
+  height: 200px;  
   position: relative;
-
-  border-bottom: 1px solid $borderColourMain;
+  border-bottom: 1px solid $borderColourMain;  
 }
-
-.menu-items-wrapper {
-  height: 100%;
-  height: 100%;
+.menu-items {  
   position: absolute;
   top: 0;
   bottom: 0;
@@ -68,16 +46,19 @@
   overflow-y: scroll;
 }
 
+.menu div:first {
+  background-color: red;;
+}
+
 .menu-item {  
   width: 100%; 
   height: 50px;
-  padding: 8px;     
-  text-align: center;
+  padding: 8px;       
   border-bottom: 1px solid $borderColourAlt;
-}
+  cursor: pointer;
 
-.menu-item:first-of-type {
-  border-top: 1px solid $borderColourAlt;
+  display: grid;
+  align-items: center;
 }
 
 .menu-item h5 {
@@ -88,61 +69,28 @@
   background-color: $mainColourContrastFade;
 }
 
-
-/*
-
-
-.menu {
-  position: fixed;
-  z-index: 1;
-  width: 120px;    
-  top: 0;
-
-  border-color: lightgray;
-  border-style: solid;
-  border-top: 0px;
-  border-bottom: 0px;
-
-  display: none;
-  flex-direction: column;
-
-  background-color: #1155CC;
-  
-  overflow-y: scroll;
-  scrollbar-width: none; //Firefox 
-  -ms-overflow-style: none;  //Internet Explorer 10+
-}
-// this class aids in hiding the scroll bar 
-.menu::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+/////////////////
+// Icons
+/////////////////
+div.cancel-icon {      
+  display: grid;
+  justify-items: end;
+  border-bottom: 1px solid $borderColourAlt;
 }
 
-
-
-.menuItems {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  margin: 0px;
+.hamburger-icon, svg.cancel-icon {
+  width: 50px;
+  height: 50px;   
+  cursor: pointer;
 }
 
-.menuItem {  
-  padding: 5px;
-  width: 100%;  
-  background-color: transparent;
-  border-bottom: 1px solid rgba(139, 143, 151);  
-  text-align: center;  
+.hamburger-icon {
+  color: $linkColourMain;
 }
-.menuItem:visited, .menuItem:link  {
-  color: white;
+.cancel-icon {
+  color: $linkColourMainHover; 
 }
-.menuItem:first-child {
-  border-top: 1px solid rgba(139, 143, 151);
+
+.cancel-icon-wrapper {
+  align-self: end;
 }
-.menuItem:hover {
-  background: #eeedff;
-  color: #000 !important;
-}
-*/

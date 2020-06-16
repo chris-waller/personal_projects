@@ -20,6 +20,10 @@ h1, h2, h3, h4, h5, h6, p, span, a, div {
   margin: 0px;
 }
 
+h1 {
+  line-height: 1.2em;
+}
+
 h1::first-letter,
 h2::first-letter,
 h3::first-letter,

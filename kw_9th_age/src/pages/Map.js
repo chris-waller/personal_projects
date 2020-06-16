@@ -1,9 +1,11 @@
 // npm imports
 import React, { Component } from 'react';
 import ImageMapper from 'react-image-mapper';
+import { FaScroll, FaGlobeAfrica, FaFortAwesome, FaCalculator} from 'react-icons/fa';
 
 // Custom components
 import Layout from '../components/Layout';
+import SectionHeader from '../components/SectionHeader';
 
 // Style imports
 import styles from './styles/map-page.scss';
@@ -119,8 +121,17 @@ class MapPage extends Component {
       <Layout>
         <div className={styles.mapPage}>
           <div className={styles.header}>
-            <h2>The Known World</h2>
+          <SectionHeader 
+            text="The Known World" 
+            icon={<FaGlobeAfrica />} 
+            headerType="h1" 
+          />   
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           
   
           {/* Play with image here */}

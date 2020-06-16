@@ -1,37 +1,14 @@
 @import "../../utilities/scss_variables";
 
+////////////////////////
+// Main Component Styles
+////////////////////////
 .header {
-  height: 100%;
   background-color: $mainColourContrast;
   background-image: linear-gradient(to left, $mainColourContrast , $mainColourContrastFade);
   border-bottom: 1px solid $borderColourMain;  
-  color: $fontColourAlt;    
+  color: $fontColourAlt;   
   
-  // flex display
-  display: flex;
-  align-items: center;
-}
-
-.header a {
-  color: $linkColourMain;
-}
-
-a:hover {
-  color: $linkColourMainHover;
-  background-color: $mainColourContrastFade;
-}
-
-.logo {
-  margin: 5px;
-  width: 67px;
-  height: 70px;  
-}
-
-.wrapper {
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-
   // flex display
   display: flex;
   justify-content: space-between;
@@ -39,6 +16,9 @@ a:hover {
   flex-wrap: nowrap;
 }
 
+//////////////////
+// Links
+//////////////////
 .link-section {  
   height: 100%;
 
@@ -47,44 +27,49 @@ a:hover {
   align-items: end;
 }
 
-.link-section div:first-of-type {
-  height: 50%;
-}
-
-.link-section a:last-of-type {
-  border-right: 2px solid $borderColourAlt;   
-}
-
 .link {
-  font-size: 1.3em;
-  min-width: 120px;
+  font-size: 1.3em;  
+  margin: 0px 2px;
   padding: 10px;
   text-align: center;
   white-space: nowrap;
-  border-left: 2px solid $borderColourAlt;  
-   
-
-  // flex display
-  display: flex;  
-  justify-content: center;  
+  border-left: 2px solid $borderColourAlt;     
 }
 
-.menu-section {
-  // flex display
+.header a {
+  color: $linkColourMain;
+}
+a:hover {
+  color: $linkColourMainHover;
+  background-color: $mainColourContrastFade;
+}
+
+//////////////////
+// Logo
+//////////////////
+.logo {
+  margin: 5px;
+  width: 67px;
+  height: 70px;  
+}
+
+/////////////////
+// Hamburger Menu
+/////////////////
+.menu-section {  
   display: none;
+  width: 100%;  
+  text-align: center;
 }
 
+///////////////////////////
+// Screen-width adjustments
+///////////////////////////
 @media (max-width: 760px) {
   .logo-section, .link-section {
-    display: none !important;
+    display: none;
   }  
   .menu-section {        
-    width: 100%;
-    height: 100%;
-
-    // flex display
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;    
   }
 }
