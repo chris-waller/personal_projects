@@ -1,0 +1,31 @@
+Date : 2020-06-16 12:49:53
+Directory : c:\Software Projects\Personal Projects\kw_9th_age\build-utils
+Total : 6 files,  174 codes, 5 comments, 3 blanks, all 182 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          6 |        174 |          5 |          3 |        182 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                           | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                              |          6 |        174 |          5 |          3 |        182 |
+| addons                                                                                         |          1 |          9 |          0 |          1 |         10 |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                       | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\addons\webpack.bundleanalyzer.js | JavaScript |          9 |          0 |          1 |         10 |
+| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\build-validations.js             | JavaScript |          7 |          0 |          1 |          8 |
+| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\common-paths.js                  | JavaScript |          7 |          0 |          1 |          8 |
+| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\webpack.common.js                | JavaScript |         52 |          2 |          0 |         54 |
+| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\webpack.dev.js                   | JavaScript |         53 |          1 |          0 |         54 |
+| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\webpack.prod.js                  | JavaScript |         46 |          2 |          0 |         48 |
+| Total                                                                                          |            |        174 |          5 |          3 |        182 |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

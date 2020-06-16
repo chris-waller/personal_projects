@@ -111,9 +111,8 @@ class MapPage extends Component {
               lineWidth={5}
               onClick={area => this.areaClicked(area)}
               onMouseEnter={area => this.areaEntered(area)}
-            />      
-            
-  
+            />
+
             {/*
             <div className={styles.info} >
               <div>Map Info</div>
@@ -148,7 +147,22 @@ class MapPage extends Component {
             </div>
             */}
           </div>
+
+          {/* Screen too small for this page */}
+          <div className={styles.pageTooSmall}>
+              <div>
+                Your screen is too small to properly utilize this page.<br />
+                Please use a larger screen to use this tool. Thank you.
+              </div>
+              <div
+                className={styles.pageTooSmallImage} 
+                title="Map of Kaewool"           
+              />         
+          </div> 
+
+
         </div>      
+      
       </Layout>
     );
   }  

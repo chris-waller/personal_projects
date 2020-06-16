@@ -86,9 +86,9 @@ class Home extends Component {
               <p>{WORLD_1}</p>
             </div>             
             <div
-            className={styles.worldItem2} 
-            title="Map of Kaewool" 
-            onClick={this.handleOnClick}  
+              className={styles.worldItem2} 
+              title="Map of Kaewool" 
+              onClick={this.handleOnClick}  
             />          
             <div className={styles.worldItem3} >
               <p>{WORLD_2}</p>
