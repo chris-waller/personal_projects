@@ -1,7 +1,7 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ImageMapper from 'react-image-mapper';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 
 // Style imports
 import styles from './interactive-map.scss';
@@ -24,8 +24,10 @@ class InteractiveMap extends Component {
     super(props)
 
     this.state = {
-
-    };
+      lat: 51.505,
+      lng: -0.09,
+      zoom: 13
+    }
 
     this.areaEntered = this.areaEntered.bind(this);
     this.areaClicked = this.areaClicked.bind(this);
@@ -52,11 +54,35 @@ class InteractiveMap extends Component {
   }
 
   /**
+   * Create the world map to render.
+   */
+  buildMap() {
+    const position = [this.state.lat, this.state.lng];
+
+    return (
+      <Map 
+        center={position} 
+        zoom={13} 
+        className={styles.interactiveMap}
+      >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
+        />
+      </Map>  
+    );
+  }
+
+  /**
    * Render.
    */
-  render() {
+  render() { 
+ 
     return(
-      <div className={styles.ineractiveMap}>
+      <div className={styles.interactiveMapWrapper} section="div_before_map">
+        {this.buildMap()}      
+
+        {/*
         <ImageMapper section="the_image_mapper"
           src={mainImage}
           map={MAP}
@@ -67,6 +93,7 @@ class InteractiveMap extends Component {
           onClick={area => this.areaClicked(area)}
           onMouseEnter={area => this.areaEntered(area)}
         />
+        */}
       </div>
     );
   }

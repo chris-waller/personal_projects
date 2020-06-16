@@ -3,7 +3,13 @@
 ////////////////////////
 // Main Component Styles
 ////////////////////////
+.interactive-map-wrapper {
+  width: 900px;  
+  height: 380px;
+
+  border: 2px solid black;
+}
+
 .interactive-map {
   height: 100%;
-  width: 100%;  
 }
