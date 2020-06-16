@@ -1,7 +1,7 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import { Map, ImageOverlay } from 'react-leaflet'
 
 // Style imports
 import styles from './interactive-map.scss';
@@ -22,12 +22,6 @@ class InteractiveMap extends Component {
    */
   constructor(props) {
     super(props)
-
-    this.state = {
-      lat: 51.505,
-      lng: -0.09,
-      zoom: 13
-    }
 
     this.areaEntered = this.areaEntered.bind(this);
     this.areaClicked = this.areaClicked.bind(this);
@@ -57,18 +51,20 @@ class InteractiveMap extends Component {
    * Create the world map to render.
    */
   buildMap() {
-    const position = [this.state.lat, this.state.lng];
+    const bounds = [[0,0], [10, 30]];
 
     return (
       <Map 
-        center={position} 
-        zoom={13} 
+        center={[5, 15]} 
+        zoom={6} 
+        minZoom={6}
+        maxZoom={8}
         className={styles.interactiveMap}
+        attributionControl={false}
+        zoomControl={false}
+        maxBounds={bounds}
       >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        />
+        <ImageOverlay url={mainImage} bounds={bounds} />
       </Map>  
     );
   }
