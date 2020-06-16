@@ -1,11 +1,14 @@
 // npm imports
 import React, { Component } from 'react';
 import ImageMapper from 'react-image-mapper';
-import { FaScroll, FaGlobeAfrica, FaFortAwesome, FaCalculator} from 'react-icons/fa';
+import { FaGlobeAfrica} from 'react-icons/fa';
 
 // Custom components
 import Layout from '../components/Layout';
 import SectionHeader from '../components/SectionHeader';
+
+// Utility imports
+import {MAP} from "../utilities/world_image_map"
 
 // Style imports
 import styles from './styles/map-page.scss';
@@ -13,48 +16,14 @@ import styles from './styles/map-page.scss';
 // Image imports
 import mainImage from '../images/world.png';
 
-const TERRAIN_TYPES = {
-  forest: "Forest",
-  hill: "Hill",
-  impassable: "Impassable",
-}
-
-const MAP = {
-	name: "my-map",
-	areas: [
-		{
-			name: "1",
-      shape: "rect",
-      coords: [3,4,802,601],
-      terrain: [
-        TERRAIN_TYPES.forest, TERRAIN_TYPES.hill, TERRAIN_TYPES.impassable
-      ],
-    },		
-    {
-			name: "2",
-      shape: "rect",
-      coords: [2042,5,811,594],
-      terrain: [
-        TERRAIN_TYPES.hill
-      ],
-    },		
-    {
-			name: "3",
-      shape: "rect",
-      coords: [10,610,1352,1430],
-      terrain: [],
-    },		
-    {
-			name: "4",
-      shape: "rect",
-      coords: [1361,603,2031,1434],
-      terrain: [TERRAIN_TYPES.impassable],
-		},
-	]
-};
-
 /**
- * Temporarily using this page as a playing ground
+ * Map page to display the interactive world map.
+ * Current goals for this page:
+ * 1) Create a fantasy world map with identifiable borders
+ * 2) Create a sitemap including terrain features. Add to world_image_map.js
+ * 3) When the user selects a territory, and clicks 'generate, a modal dialogue
+ *    will appears and then output the result. Gonna try to make this part look
+ *    a bit flashy.
  */
 class MapPage extends Component {
 
@@ -64,6 +33,7 @@ class MapPage extends Component {
   constructor(props) {
     super(props);
 
+    // nothing selected by default
     this.state = {
       selectedRegion: {
         coordinates: [0,0,0],
@@ -79,14 +49,13 @@ class MapPage extends Component {
 
     this.areaClicked = this.areaClicked.bind(this);
     this.areaEntered = this.areaEntered.bind(this);
-    this.buttonClicked = this.buttonClicked.bind(this);
+    this.generateMapClicked = this.generateMapClicked.bind(this);
   }
 
   /**
    * User has clicked an area on the map
    */
-  areaClicked(area) {
-    console.log(area);
+  areaClicked(area) {    
     this.setState({
       selectedRegion: {
         coordinates: area.coords,
@@ -97,7 +66,7 @@ class MapPage extends Component {
   }
 
   /**
-   * User moused over an area
+   * User moused over an area on the map
    */
   areaEntered(area) {
     this.setState({
@@ -109,8 +78,8 @@ class MapPage extends Component {
     });
   }
 
-  buttonClicked() {
-    alert("clicked");
+  generateMapClicked() {
+    alert("Generating the map....");
   }
 
   /**
@@ -120,37 +89,32 @@ class MapPage extends Component {
     return (
       <Layout>
         <div className={styles.mapPage}>
-          <div className={styles.header}>
-          <SectionHeader 
-            text="The Known World" 
-            icon={<FaGlobeAfrica />} 
-            headerType="h1" 
-          />   
-          </div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           
+          {/* Page header */}
+          <div className={styles.header}>
+            <SectionHeader 
+              text="Welcome to Kea'wole" 
+              icon={<FaGlobeAfrica />} 
+              headerType="h1" 
+            />
+          </div>         
   
           {/* Play with image here */}
-          <div className={styles.wrapper} section="foo">
+          <div className={styles.worldMap} section="image_start">            
+            <ImageMapper section="the_image_mapper"
+              src={mainImage}
+              map={MAP}
+              className={styles.worldMap} 
+              width={1200}
+              height={600}
+              imgWidth={1810}
+              lineWidth={5}
+              onClick={area => this.areaClicked(area)}
+              onMouseEnter={area => this.areaEntered(area)}
+            />      
             
-            <div>          
-              <ImageMapper section="bar"
-                src={mainImage}
-                map={MAP}
-                className={styles.mainImage} 
-                width={800}
-                height={400}
-                imgWidth={1810}
-                lineWidth={5}
-                onClick={area => this.areaClicked(area)}
-                onMouseEnter={area => this.areaEntered(area)}
-              />          
-            </div>
   
+            {/*
             <div className={styles.info} >
               <div>Map Info</div>
               <div>&nbsp;</div>
@@ -179,9 +143,10 @@ class MapPage extends Component {
 
               <div>&nbsp;</div>
               <div>
-                <button onClick={this.buttonClicked}>Generate Map</button>
+                <button onClick={this.generateMapClicked}>Generate Map</button>
               </div>
             </div>
+            */}
           </div>
         </div>      
       </Layout>
