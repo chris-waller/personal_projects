@@ -4,7 +4,7 @@
 // Main Component Styles
 ////////////////////////
 .home {
-  padding: 50px;
+  padding: 30px 50px;
   
   // flex display
   display: flex;
@@ -63,12 +63,18 @@ div.home p {
 .world-item2 {
   grid-area: image;
   border: 1px solid $borderColourMain;
+  
   // TODO: replace this image
   background: url("../../images/world.png") no-repeat center;    
   background-size: cover;
+  cursor: pointer;
 }
 .world-item3 {
   grid-area: footer;
+}
+
+.map {
+  height: 100%;
 }
 
 ///////////////////////////
@@ -83,5 +89,16 @@ div.home p {
       "footer";
   }
 
+}
+
+
+
+.logo {
+  margin: 5px;
+  width: 67px;
+  height: 70px;  
+
+  background: url("../../images/9th_age_seal.png") no-repeat center;    
+  background-size: cover;
 }
 

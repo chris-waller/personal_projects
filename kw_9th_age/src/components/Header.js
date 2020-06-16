@@ -9,7 +9,7 @@ import HambugerMenu from './HamburgerMenu';
 import styles from './styles/header.scss';
 
 // image imports
-import logo from "../images/9th_age_seal.png";
+// import logo from "../images/9th_age_seal.png";
 import hamburgerIcon from "../images/hamburger-icon.png";
 
 /**
@@ -24,11 +24,12 @@ class Header extends Component {
   render() {    
     return (      
       <div className={styles.header}>
+        
         {/* Home Icon Section */}
         {/* ***************** */}          
         <div className={styles.logoSection}>        
             <Link to="/">          
-              <img title="Home" src={logo} className={styles.logo} />          
+              <div title="Home" className={styles.logo} />          
             </Link>          
         </div>
         
