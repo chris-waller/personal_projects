@@ -1,16 +1,31 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, ImageOverlay } from 'react-leaflet'
+import { Map, ImageOverlay, GeoJSON } from 'react-leaflet'
 
 // Style imports
 import styles from './interactive-map.scss';
 
 // Image imports
-import mainImage from '../../images/world.png';
+import mainImage from '../../images/world_hex.png';
 
 // Utility imports
 import {MAP} from "../../utilities/world_image_map"
+
+
+const geojsonFeature = {
+  "type": "Feature",
+  "properties": {
+      "name": "Some Point",      
+      "popupContent": "This is the first popup I made!"
+  },
+  "geometry": {
+      "type": "Point",
+      "coordinates": [15,5]
+  }
+};
+
+
 
 /**
  * Display and interacte with the world map
@@ -65,9 +80,21 @@ class InteractiveMap extends Component {
         maxBounds={bounds}
       >
         <ImageOverlay url={mainImage} bounds={bounds} />
+        <GeoJSON 
+          data={geojsonFeature}  
+          onEachFeature={this.onEachFeature}  
+        />
       </Map>  
     );
   }
+
+  onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+    if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+    }
+  }
+
 
   /**
    * Render.
