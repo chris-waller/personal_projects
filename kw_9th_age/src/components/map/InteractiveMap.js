@@ -1,31 +1,20 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, ImageOverlay, GeoJSON } from 'react-leaflet'
+import { Map, ImageOverlay, Marker, Popup } from 'react-leaflet'
+import L from 'leaflet';
+import enhanceWithClickOutside from 'react-click-outside'
+import classNames from 'classnames';
 
 // Style imports
 import styles from './interactive-map.scss';
 
 // Image imports
 import mainImage from '../../images/world_hex.png';
+import army from '../../images/army.png';
 
 // Utility imports
 import {MAP} from "../../utilities/world_image_map"
-
-
-const geojsonFeature = {
-  "type": "Feature",
-  "properties": {
-      "name": "Some Point",      
-      "popupContent": "This is the first popup I made!"
-  },
-  "geometry": {
-      "type": "Point",
-      "coordinates": [15,5]
-  }
-};
-
-
 
 /**
  * Display and interacte with the world map
@@ -68,8 +57,42 @@ class InteractiveMap extends Component {
   buildMap() {
     const bounds = [[0,0], [10, 30]];
 
+    const army1 = new L.Icon({
+      iconUrl: army,  
+      iconRetinaUrl: army,
+      iconSize: [25,25],
+      className: classNames("leaflet-div-icon", styles.army1),
+    
+      iconAnchor: [15,5],
+      popupAnchor: [15,5],
+      iconSize: [25, 25],
+    });
+
+    const army2 = new L.Icon({
+      iconUrl: army,  
+      iconRetinaUrl: army,
+      iconSize: [25,25],
+      className: classNames("leaflet-div-icon", styles.army2),
+    
+      iconAnchor: [15,5],
+      popupAnchor: [15,5],
+      iconSize: [25, 25],
+    });
+
+    const army3 = new L.Icon({
+      iconUrl: army,  
+      iconRetinaUrl: army,
+      iconSize: [25,25],
+      className: classNames("leaflet-div-icon", styles.army3),
+    
+      iconAnchor: [15,5],
+      popupAnchor: [15,5],
+      iconSize: [25, 25],
+    });
+
     return (
-      <Map 
+      <Map
+        ref="worldMap" 
         center={[5, 15]} 
         zoom={6} 
         minZoom={6}
@@ -80,10 +103,21 @@ class InteractiveMap extends Component {
         maxBounds={bounds}
       >
         <ImageOverlay url={mainImage} bounds={bounds} />
-        <GeoJSON 
-          data={geojsonFeature}  
-          onEachFeature={this.onEachFeature}  
-        />
+        <Marker position={[5.5, 15.5]} icon={army1}>
+          <Popup>
+            Army 1
+          </Popup>
+        </Marker>
+        <Marker position={[4.5, 19]} icon={army2}>
+          <Popup>
+            Army 2
+          </Popup>
+        </Marker>
+        <Marker position={[7.5, 15.5]} icon={army3}>
+          <Popup>
+            Army 3
+          </Popup>
+        </Marker>
       </Map>  
     );
   }
@@ -93,6 +127,11 @@ class InteractiveMap extends Component {
     if (feature.properties && feature.properties.popupContent) {
         layer.bindPopup(feature.properties.popupContent);
     }
+  }  
+
+  handleClickOutside() {
+    console.log(this.refs.worldMap)
+    this.refs.worldMap.leafletElement.closePopup();
   }
 
 
@@ -122,7 +161,7 @@ class InteractiveMap extends Component {
   }
 }
 
-export default InteractiveMap;
+export default enhanceWithClickOutside(InteractiveMap);
 
 InteractiveMap.propTypes = {
   areaSelected: PropTypes.func.isRequired,
