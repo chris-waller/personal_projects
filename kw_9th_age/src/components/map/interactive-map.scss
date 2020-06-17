@@ -4,14 +4,19 @@
 // Main Component Styles
 ////////////////////////
 .interactive-map-wrapper {
-  width: 900px;  
-  height: 380px;
+  width: 1024px;  
+  height: 766px;
 
   border: 2px solid black;
 }
 
-.interactive-map {
+.map-layer {
   height: 100%;
+}
+
+.tile-layer {
+  //width: 2048;
+  //height: 1536;
 }
 
 .army1 {

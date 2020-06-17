@@ -1,8 +1,8 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, ImageOverlay, Marker, Popup } from 'react-leaflet'
-import L from 'leaflet';
+import { Map, ImageOverlay, Marker, Popup, GeoJSON, TileLayer } from 'react-leaflet'
+import L, {CRS} from 'leaflet';
 import enhanceWithClickOutside from 'react-click-outside'
 import classNames from 'classnames';
 
@@ -10,11 +10,11 @@ import classNames from 'classnames';
 import styles from './interactive-map.scss';
 
 // Image imports
-import mainImage from '../../images/world_hex.png';
+import mainImage from '../../images/keawol.png';
 import army from '../../images/army.png';
 
 // Utility imports
-import {MAP} from "../../utilities/world_image_map"
+import {MAP2} from "../../utilities/world_image_map"
 
 /**
  * Display and interacte with the world map
@@ -51,12 +51,18 @@ class InteractiveMap extends Component {
     });
   }
 
+  componentDidMount() {
+    const bounds = this.refs.worldMap.leafletElement.getBounds();
+    console.log("Bounds: ", bounds);
+  }
+
   /**
    * Create the world map to render.
    */
   buildMap() {
-    const bounds = [[0,0], [10, 30]];
+    const bounds = [[0,0], [383, 512]];
 
+    /*
     const army1 = new L.Icon({
       iconUrl: army,  
       iconRetinaUrl: army,
@@ -89,20 +95,46 @@ class InteractiveMap extends Component {
       popupAnchor: [15,5],
       iconSize: [25, 25],
     });
+    */
 
     return (
       <Map
-        ref="worldMap" 
-        center={[5, 15]} 
-        zoom={6} 
-        minZoom={6}
-        maxZoom={8}
-        className={styles.interactiveMap}
+        ref="worldMap"
+        crs={CRS.Simple}
+        center={[192, 256]} 
+        zoom={0} 
+        minZoom={1}
+        maxZoom={3}
+        className={styles.mapLayer}
         attributionControl={false}
         zoomControl={false}
         maxBounds={bounds}
       >
-        <ImageOverlay url={mainImage} bounds={bounds} />
+
+        <ImageOverlay 
+          url={mainImage} 
+          bounds={bounds}
+          className={styles.test}
+        />
+        
+        {/*
+        <TileLayer 
+          url={mainImage}
+          noWrap={true}
+          className={styles.tileLayer}
+        />
+        */}
+        
+
+        {/*GeoJSON */}
+        {/*
+        <GeoJSON 
+          data={MAP2} 
+          style={{"background-color": "red", "color": "red" }} 
+        />
+        */}
+        
+        {/* Marker examples 
         <Marker position={[5.5, 15.5]} icon={army1}>
           <Popup>
             Army 1
@@ -118,6 +150,8 @@ class InteractiveMap extends Component {
             Army 3
           </Popup>
         </Marker>
+        */}
+
       </Map>  
     );
   }
