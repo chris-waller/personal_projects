@@ -1,7 +1,7 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, ImageOverlay, Marker, Popup, GeoJSON, TileLayer } from 'react-leaflet'
+import { Map, ImageOverlay, Marker, Popup, GeoJSON } from 'react-leaflet'
 import L, {CRS} from 'leaflet';
 import enhanceWithClickOutside from 'react-click-outside'
 import classNames from 'classnames';
@@ -10,11 +10,11 @@ import classNames from 'classnames';
 import styles from './interactive-map.scss';
 
 // Image imports
-import mainImage from '../../images/keawol.png';
+import mainImage from '../../images/keawol_empty.jpg';
 import army from '../../images/army.png';
 
 // Utility imports
-import {MAP2} from "../../utilities/world_image_map"
+import {GEOJSON_REGIONS} from "../../utilities/world_image_map"
 
 /**
  * Display and interacte with the world map
@@ -29,6 +29,7 @@ class InteractiveMap extends Component {
 
     this.areaEntered = this.areaEntered.bind(this);
     this.areaClicked = this.areaClicked.bind(this);
+    this.onEachFeature = this.onEachFeature.bind(this);
   }
 
     /**
@@ -44,25 +45,106 @@ class InteractiveMap extends Component {
   areaEntered(area) {
     this.setState({
       currentRegion: {
-        coordinates: area.coords,
-        name: area.name,
-        terrain: area.terrain
+        //coordinates: area.coords,
+        //name: area.name,
+        //terrain: area.terrain
       }      
     });
   }
 
-  componentDidMount() {
-    const bounds = this.refs.worldMap.leafletElement.getBounds();
-    console.log("Bounds: ", bounds);
+  // `component` is now the first argument, since it's passed through the Function.bind method, we'll need to pass it through here to the relevant handlers
+  onEachFeature = (feature, layer) => {
+    const popup = `<Popup>${feature.properties.name}</Popup>`;
+    layer.bindPopup(popup);
+    
   }
+
+
 
   /**
    * Create the world map to render.
    */
   buildMap() {
-    const bounds = [[0,0], [383, 512]];
+    const bounds = [[0,0], [766,1024]];
+    
+    return (
+      <Map
+        ref="worldMap"
+        crs={CRS.Simple}
+        center={[383, 512]} // center of image
+        zoom={0} 
+        //minZoom={0}
+        maxZoom={3}
+        maxBoundsViscosity={1}
+        className={styles.mapLayer}
+        attributionControl={false}
+        zoomControl={false}
+        maxBounds={bounds}        
+      >
 
-    /*
+        <ImageOverlay 
+          url={mainImage} 
+          bounds={bounds}
+          className={styles.test}
+        />
+
+        {/*GeoJSON */}
+        <GeoJSON 
+          ref="foo"
+          data={GEOJSON_REGIONS} 
+          style={{"background-color": "red", "color": "red" }} 
+          onEachFeature={this.onEachFeature}
+        />
+        
+        {/* Marker examples 
+        <Marker position={[5.5, 15.5]} icon={army1}>
+          <Popup>
+            Army 1
+          </Popup>
+        </Marker>
+        <Marker position={[4.5, 19]} icon={army2}>
+          <Popup>
+            Army 2
+          </Popup>
+        </Marker>
+        <Marker position={[7.5, 15.5]} icon={army3}>
+          <Popup>
+            Army 3
+          </Popup>
+        </Marker>
+        */}
+
+      </Map>  
+    );
+  } 
+
+  handleClickOutside() {    
+    this.refs.worldMap.leafletElement.closePopup();
+  }
+
+
+  /**
+   * Render.
+   */
+  render() { 
+ 
+    return(
+      <div className={styles.interactiveMapWrapper} section="div_before_map">
+        {this.buildMap()}   
+      </div>
+    );
+  }
+}
+
+export default enhanceWithClickOutside(InteractiveMap);
+
+InteractiveMap.propTypes = {
+  areaSelected: PropTypes.func.isRequired,
+};
+
+
+
+/*
     const army1 = new L.Icon({
       iconUrl: army,  
       iconRetinaUrl: army,
@@ -96,107 +178,3 @@ class InteractiveMap extends Component {
       iconSize: [25, 25],
     });
     */
-
-    return (
-      <Map
-        ref="worldMap"
-        crs={CRS.Simple}
-        center={[192, 256]} 
-        zoom={0} 
-        minZoom={1}
-        maxZoom={3}
-        className={styles.mapLayer}
-        attributionControl={false}
-        zoomControl={false}
-        maxBounds={bounds}
-      >
-
-        <ImageOverlay 
-          url={mainImage} 
-          bounds={bounds}
-          className={styles.test}
-        />
-        
-        {/*
-        <TileLayer 
-          url={mainImage}
-          noWrap={true}
-          className={styles.tileLayer}
-        />
-        */}
-        
-
-        {/*GeoJSON */}
-        {/*
-        <GeoJSON 
-          data={MAP2} 
-          style={{"background-color": "red", "color": "red" }} 
-        />
-        */}
-        
-        {/* Marker examples 
-        <Marker position={[5.5, 15.5]} icon={army1}>
-          <Popup>
-            Army 1
-          </Popup>
-        </Marker>
-        <Marker position={[4.5, 19]} icon={army2}>
-          <Popup>
-            Army 2
-          </Popup>
-        </Marker>
-        <Marker position={[7.5, 15.5]} icon={army3}>
-          <Popup>
-            Army 3
-          </Popup>
-        </Marker>
-        */}
-
-      </Map>  
-    );
-  }
-
-  onEachFeature(feature, layer) {
-    // does this feature have a property named popupContent?
-    if (feature.properties && feature.properties.popupContent) {
-        layer.bindPopup(feature.properties.popupContent);
-    }
-  }  
-
-  handleClickOutside() {
-    console.log(this.refs.worldMap)
-    this.refs.worldMap.leafletElement.closePopup();
-  }
-
-
-  /**
-   * Render.
-   */
-  render() { 
- 
-    return(
-      <div className={styles.interactiveMapWrapper} section="div_before_map">
-        {this.buildMap()}      
-
-        {/*
-        <ImageMapper section="the_image_mapper"
-          src={mainImage}
-          map={MAP}
-          width={1200}
-          height={400}
-          imgWidth={1810}
-          lineWidth={5}
-          onClick={area => this.areaClicked(area)}
-          onMouseEnter={area => this.areaEntered(area)}
-        />
-        */}
-      </div>
-    );
-  }
-}
-
-export default enhanceWithClickOutside(InteractiveMap);
-
-InteractiveMap.propTypes = {
-  areaSelected: PropTypes.func.isRequired,
-};
