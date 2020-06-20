@@ -27,6 +27,10 @@ class InteractiveMap extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      selectedRegion: "0", //doesn't exist
+    }
+
     this.areaEntered = this.areaEntered.bind(this);
     this.areaClicked = this.areaClicked.bind(this);
     this.onEachFeature = this.onEachFeature.bind(this);
@@ -56,7 +60,15 @@ class InteractiveMap extends Component {
   onEachFeature = (feature, layer) => {
     const popup = `<Popup>${feature.properties.name}</Popup>`;
     layer.bindPopup(popup);
-    
+    //layer.onClick = this.regionClicked.bind("foo");
+    layer.onClick = this.regionClicked.bind(feature.properties.name, "foo");
+    console.log("check", layer);
+  }
+
+  regionClicked = (foo, bar) => {
+    alert("here"); 
+    console.log("Region clicked:", foo);    
+    console.log("Region clicked2:", bar);    
   }
 
 
@@ -75,7 +87,7 @@ class InteractiveMap extends Component {
         zoom={0} 
         //minZoom={0}
         maxZoom={3}
-        maxBoundsViscosity={1}
+        //maxBoundsViscosity={1}
         className={styles.mapLayer}
         attributionControl={false}
         zoomControl={false}
@@ -93,7 +105,7 @@ class InteractiveMap extends Component {
           ref="foo"
           data={GEOJSON_REGIONS} 
           style={{"background-color": "red", "color": "red" }} 
-          onEachFeature={this.onEachFeature}
+          onEachFeature={this.onEachFeature}          
         />
         
         {/* Marker examples 

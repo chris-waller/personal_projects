@@ -1,31 +1,56 @@
-Date : 2020-06-16 12:49:53
-Directory : c:\Software Projects\Personal Projects\kw_9th_age\build-utils
-Total : 6 files,  174 codes, 5 comments, 3 blanks, all 182 lines
+Date : 2020-06-18 07:56:12
+Directory : c:\Software Projects\Personal Projects\kw_9th_age\src
+Total : 25 files,  1087 codes, 318 comments, 219 blanks, all 1624 lines
 
 Languages
 +------------+------------+------------+------------+------------+------------+
 | language   | files      | code       | comment    | blank      | total      |
 +------------+------------+------------+------------+------------+------------+
-| JavaScript |          6 |        174 |          5 |          3 |        182 |
+| JavaScript |         16 |        735 |        232 |        140 |      1,107 |
+| SCSS       |          9 |        352 |         86 |         79 |        517 |
 +------------+------------+------------+------------+------------+------------+
 
 Directories
-+------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| path                                                                                           | files      | code       | comment    | blank      | total      |
-+------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| .                                                                                              |          6 |        174 |          5 |          3 |        182 |
-| addons                                                                                         |          1 |          9 |          0 |          1 |         10 |
-+------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                        | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                           |         25 |      1,087 |        318 |        219 |      1,624 |
+| components                                                                                  |         11 |        481 |        181 |        117 |        779 |
+| components\map                                                                              |          2 |        110 |         85 |         34 |        229 |
+| components\styles                                                                           |          4 |        174 |         40 |         35 |        249 |
+| pages                                                                                       |         10 |        450 |        126 |         87 |        663 |
+| pages\styles                                                                                |          2 |        117 |         33 |         29 |        179 |
+| utilities                                                                                   |          2 |        120 |         10 |          6 |        136 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 
 Files
-+------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| filename                                                                                       | language   | code       | comment    | blank      | total      |
-+------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\addons\webpack.bundleanalyzer.js | JavaScript |          9 |          0 |          1 |         10 |
-| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\build-validations.js             | JavaScript |          7 |          0 |          1 |          8 |
-| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\common-paths.js                  | JavaScript |          7 |          0 |          1 |          8 |
-| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\webpack.common.js                | JavaScript |         52 |          2 |          0 |         54 |
-| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\webpack.dev.js                   | JavaScript |         53 |          1 |          0 |         54 |
-| c:\Software Projects\Personal Projects\kw_9th_age\build-utils\webpack.prod.js                  | JavaScript |         46 |          2 |          0 |         48 |
-| Total                                                                                          |            |        174 |          5 |          3 |        182 |
-+------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                    | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\HamburgerMenu.js           | JavaScript |         76 |         25 |         15 |        116 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\Header.js                  | JavaScript |         67 |         12 |         13 |         92 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\Layout.js                  | JavaScript |         22 |         11 |          9 |         42 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\Loading.js                 | JavaScript |          5 |          0 |          2 |          7 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\SectionHeader.js           | JavaScript |         27 |          8 |          9 |         44 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\map\InteractiveMap.js      | JavaScript |         87 |         77 |         28 |        192 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\map\interactive-map.scss   | SCSS       |         23 |          8 |          6 |         37 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\styles\hamburger-menu.scss | SCSS       |         69 |         13 |         14 |         96 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\styles\header.scss         | SCSS       |         52 |         17 |         11 |         80 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\styles\layout.scss         | SCSS       |         29 |          5 |          5 |         39 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\components\styles\section-header.scss | SCSS       |         24 |          5 |          5 |         34 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\index.js                              | JavaScript |          8 |          0 |          3 |         11 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\index.scss                            | SCSS       |         28 |          1 |          6 |         35 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\About.js                        | JavaScript |         11 |          0 |          3 |         14 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\App.js                          | JavaScript |         45 |          9 |          4 |         58 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\Campaign.js                     | JavaScript |         11 |          0 |          3 |         14 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\Home.js                         | JavaScript |        138 |         20 |         17 |        175 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\Map.js                          | JavaScript |         74 |         59 |         20 |        153 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\Members.js                      | JavaScript |         11 |          0 |          3 |         14 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\NoMatch.js                      | JavaScript |         10 |          0 |          3 |         13 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\page_text.js                    | JavaScript |         33 |          5 |          5 |         43 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\styles\home.scss                | SCSS       |         73 |         17 |         15 |        105 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\pages\styles\map-page.scss            | SCSS       |         44 |         16 |         14 |         74 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\utilities\scss_variables.scss         | SCSS       |         10 |          4 |          3 |         17 |
+| c:\Software Projects\Personal Projects\kw_9th_age\src\utilities\world_image_map.js          | JavaScript |        110 |          6 |          3 |        119 |
+| Total                                                                                       |            |      1,087 |        318 |        219 |      1,624 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
