@@ -22,14 +22,12 @@ function createImageMapFromHTML() {
     let y = 0;
 
     // rows
-    for (let k = 0; k < 10; k++) {
+    for (let k = 0; k < 13; k++) {
 
       let regionName = (k % 2 === 0) ? counter : `${counter}-alt`;
-      let shiftX = 0;
       let shiftY = 0;
 
-      if (k % 2 !== 0) {
-        shiftX = polygonWidth * 0.25 * -1;
+      if (k % 2 !== 0) {        
         shiftY = polygonHeight * 0.5;
       }
 
@@ -44,41 +42,34 @@ function createImageMapFromHTML() {
           
       output += "\"coordinates\":[[";
       // point 1
-      output += `[${x + shiftX}, ${y + shiftY + (i * polygonHeight)}],`;
+      output += `[${x}, ${y + shiftY + (i * polygonHeight)}],`;
 
       // point 2 (test point only)
-      output += `[${x + shiftX + (polygonWidth * 0.25)}, ${(y + shiftY - (0.5 * polygonHeight)) + (i * polygonHeight)}],`;
+      output += `[${x + (polygonWidth * 0.25)}, ${(y + shiftY - (0.5 * polygonHeight)) + (i * polygonHeight)}],`;
 
       // point 3 (test point only)
-      output += `[${x + shiftX + polygonWidth * 0.75}, ${(y + shiftY - (0.5 * polygonHeight)) + (i * polygonHeight)}],`;
+      output += `[${x + polygonWidth * 0.75}, ${(y + shiftY - (0.5 * polygonHeight)) + (i * polygonHeight)}],`;
 
       // point 4 (will eventually be point 4)
-      output += `[${x + shiftX + polygonWidth}, ${y + shiftY + (i * polygonHeight)}],`;
+      output += `[${x + polygonWidth}, ${y + shiftY + (i * polygonHeight)}],`;
 
       // point 5 (test point only)
-      output += `[${x + shiftX + polygonWidth * 0.75}, ${y + shiftY + (i * polygonHeight) + (0.5 * polygonHeight)}],`;
+      output += `[${x + polygonWidth * 0.75}, ${y + shiftY + (i * polygonHeight) + (0.5 * polygonHeight)}],`;
 
       // point 6 (test point only)
-      output += `[${x + shiftX + polygonWidth * 0.25}, ${y + shiftY + (i * polygonHeight) + (0.5 * polygonHeight)}]`;
+      output += `[${x + polygonWidth * 0.25}, ${y + shiftY + (i * polygonHeight) + (0.5 * polygonHeight)}]`;
 
 
 
       output += "]]},}";
-      if (k != 10) {
+      if (k != 13) {
         output += ",";
       }
       output += "\n";  
-      x = polygonWidth * (k + 1);    
+      x = (polygonWidth * (k + 1)) * 0.75;    
       counter++;
     }
 
-    output += "\n";
-    output += "\n";
-    output += "\n";    
-    output += "\n";   
-    output += "\n";   
-    output += "\n";   
-    output += "\n";   
 
     y = polygonHeight * (i + 1);
     console.log("Y", y);
