@@ -60,9 +60,16 @@ class InteractiveMap extends Component {
   onEachFeature = (feature, layer) => {
     const popup = `<Popup>${feature.properties.name}</Popup>`;
     layer.bindPopup(popup);
+    
+    if (feature.properties.fillColor) {
+      layer.setStyle({fillColor : feature.properties.fillColor})
+    } else {
+      layer.setStyle({fillColor : "transparent"})
+    }
+    
     //layer.onClick = this.regionClicked.bind("foo");
-    layer.onClick = this.regionClicked.bind(feature.properties.name, "foo");
-    console.log("check", layer);
+    //layer.onClick = this.regionClicked.bind(feature.properties.name, "foo");
+    //console.log("check", layer);
   }
 
   regionClicked = (foo, bar) => {
@@ -104,7 +111,7 @@ class InteractiveMap extends Component {
         <GeoJSON 
           ref="foo"
           data={GEOJSON_REGIONS} 
-          style={{"background-color": "red", "color": "red" }} 
+          style={{"color": "blue", "fillColor": "transparent" }} 
           onEachFeature={this.onEachFeature}          
         />
         

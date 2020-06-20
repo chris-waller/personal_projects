@@ -736,7 +736,9 @@ export const GEOJSON_REGIONS = [
     "geometry": {
       "type": "Polygon", "coordinates":[[[844.8000000000001, 820.7142857142857],[870.4000000000001, 766],[921.6000000000001, 766],[947.2, 820.7142857142857],[921.6000000000001, 875.4285714285713],[870.4000000000001, 875.4285714285713]]]},},  {
     "type": "Feature",
-    "properties": {
+    "properties": {      
+			"fillColor": "red",
+			"fillOpacity": 0.5,
       "name": "Region 104",
     },
     "geometry": {
