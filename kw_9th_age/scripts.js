@@ -12,13 +12,10 @@ function createImageMapFromHTML() {
   //const baseCoord = [0,0];
   const polygonHeight = mapSize[1] / 7;
   const polygonWidth = mapSize[0] / 10;
-  console.log("tile height: ", polygonHeight);
-  console.log("tile width: ", polygonWidth);
-
-  
-  
+    
   let output = "";
-
+  let counter = 1;
+  
   // columns
   for (let i = 0; i < 8; i++) {    
     let x = 0;
@@ -26,10 +23,14 @@ function createImageMapFromHTML() {
 
     // rows
     for (let k = 0; k < 10; k++) {
+
+      let regionName = (k % 2 === 0) ? counter : `${counter}-alt`;
+
+
       output += `  {
         "type": "Feature",
         "properties": {
-          "name": "Region 1",    
+          "name": "Region ${regionName}",    
         },
         "geometry": {
           "type": "Polygon", `
@@ -61,6 +62,7 @@ function createImageMapFromHTML() {
       }
       output += "\n";  
       x = polygonWidth * (k + 1);    
+      counter++;
     }
 
     output += "\n";
