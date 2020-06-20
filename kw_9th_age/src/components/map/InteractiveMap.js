@@ -67,15 +67,18 @@ class InteractiveMap extends Component {
       layer.setStyle({fillColor : "transparent"})
     }
     
-    //layer.onClick = this.regionClicked.bind("foo");
-    //layer.onClick = this.regionClicked.bind(feature.properties.name, "foo");
-    //console.log("check", layer);
+    layer.on({
+      //mouseover: this.highlightFeature.bind(this),
+      //mouseout: this.resetHighlight.bind(this),
+      click: this.regionClicked.bind(this),
+    });
+
   }
 
-  regionClicked = (foo, bar) => {
-    alert("here"); 
-    console.log("Region clicked:", foo);    
-    console.log("Region clicked2:", bar);    
+  regionClicked = (e) => {    
+    const layer = e.target;
+    const regionName = layer.feature.properties.name;    
+    console.log(`User has selected ${regionName}`); 
   }
 
 
