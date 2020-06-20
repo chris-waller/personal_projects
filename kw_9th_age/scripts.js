@@ -25,6 +25,13 @@ function createImageMapFromHTML() {
     for (let k = 0; k < 10; k++) {
 
       let regionName = (k % 2 === 0) ? counter : `${counter}-alt`;
+      let shiftX = 0;
+      let shiftY = 0;
+
+      if (k % 2 !== 0) {
+        shiftX = polygonWidth * 0.25 * -1;
+        shiftY = polygonHeight * 0.5;
+      }
 
 
       output += `  {
@@ -37,22 +44,22 @@ function createImageMapFromHTML() {
           
       output += "\"coordinates\":[[";
       // point 1
-      output += `[${x}, ${y + (i * polygonHeight)}],`;
+      output += `[${x + shiftX}, ${y + shiftY + (i * polygonHeight)}],`;
 
       // point 2 (test point only)
-      output += `[${x + (polygonWidth * 0.25)}, ${(y - (0.5 * polygonHeight)) + (i * polygonHeight)}],`;
+      output += `[${x + shiftX + (polygonWidth * 0.25)}, ${(y + shiftY - (0.5 * polygonHeight)) + (i * polygonHeight)}],`;
 
       // point 3 (test point only)
-      output += `[${x + polygonWidth * 0.75}, ${(y - (0.5 * polygonHeight)) + (i * polygonHeight)}],`;
+      output += `[${x + shiftX + polygonWidth * 0.75}, ${(y + shiftY - (0.5 * polygonHeight)) + (i * polygonHeight)}],`;
 
       // point 4 (will eventually be point 4)
-      output += `[${x + polygonWidth}, ${y + (i * polygonHeight)}],`;
+      output += `[${x + shiftX + polygonWidth}, ${y + shiftY + (i * polygonHeight)}],`;
 
       // point 5 (test point only)
-      output += `[${x + polygonWidth * 0.75}, ${y + (i * polygonHeight) + (0.5 * polygonHeight)}],`;
+      output += `[${x + shiftX + polygonWidth * 0.75}, ${y + shiftY + (i * polygonHeight) + (0.5 * polygonHeight)}],`;
 
       // point 6 (test point only)
-      output += `[${x + polygonWidth * 0.25}, ${y + (i * polygonHeight) + (0.5 * polygonHeight)}]`;
+      output += `[${x + shiftX + polygonWidth * 0.25}, ${y + shiftY + (i * polygonHeight) + (0.5 * polygonHeight)}]`;
 
 
 
@@ -77,21 +84,7 @@ function createImageMapFromHTML() {
     console.log("Y", y);
   }
   output +="}";
-  console.log(output)
-
-  
-  /*
-  for (let i = 1; i < 11; i++) {
-    let output = "\"coordinates\":[[";
-    baseRegion.forEach(coord => {
-      let x = coord[0];
-      let y = coord[1];
-      output += `[${x}, ${y+(100*i)}],`;            
-    })
-    output += "]]";
-    console.log(output);
-  }
-  */
+  console.log(output)  
   
 
 console.log("Script ended.");
