@@ -8,18 +8,22 @@ createImageMapFromHTML();
 function createImageMapFromHTML() {
   console.log("Starting script createImageMapFromHTML()...");
 
-  const mapSize = [1024, 766];
-  //const baseCoord = [0,0];
+  const mapSize = [2048, 1522];
   const polygonHeight = mapSize[1] / 7;
   const polygonWidth = mapSize[0] / 10;
     
   let output = "";
   let counter = 1;
+
+  let fillColor = "transparent";
   
   // columns
   for (let i = 0; i < 8; i++) {    
     let x = 0;
     let y = 0;
+
+    //generate random fill colours for now
+    const backgroundsPerRow = Math.floor((Math.random() * 10) + 1);
 
     // rows
     for (let k = 0; k < 13; k++) {
@@ -31,11 +35,18 @@ function createImageMapFromHTML() {
         shiftY = polygonHeight * 0.5;
       }
 
+      //generate random fill colours for now
+      if (k % backgroundsPerRow === 0) {
+        fillColor = "red";
+      }
+
+
 
       output += `  {
         "type": "Feature",
         "properties": {
-          "name": "Region ${regionName}",    
+          "name": "Region ${regionName}",
+          "fillColor": "transparent"
         },
         "geometry": {
           "type": "Polygon", `

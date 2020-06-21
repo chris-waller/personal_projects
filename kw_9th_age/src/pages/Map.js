@@ -35,12 +35,7 @@ class MapPage extends Component {
         coordinates: [0,0,0],
         name: "N/A",
         terrain: ["N/A"],
-      },
-      currentRegion: {
-        coordinates: [0,0,0],
-        name: "N/A",
-        terrain: ["N/A"],
-      }          
+      },        
     }
 
     this.areaSelected = this.areaSelected.bind(this);
@@ -108,18 +103,6 @@ class MapPage extends Component {
               </div>
               <div>
                 Terrain: {this.state.selectedRegion.terrain.toString()}
-              </div>
-
-              <div>&nbsp;</div>
-              <div>CURRENT</div>
-              <div>
-                Coordinates: {this.state.currentRegion.coordinates.toString()}
-              </div>
-              <div>
-                Region Name: {this.state.currentRegion.name}
-              </div>
-              <div>
-                Terrain: {this.state.currentRegion.terrain.toString()}
               </div>
 
               <div>&nbsp;</div>

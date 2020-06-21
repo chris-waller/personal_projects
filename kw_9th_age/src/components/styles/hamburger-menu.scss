@@ -54,7 +54,7 @@
   width: 100%; 
   height: 50px;
   padding: 8px;       
-  border-bottom: 1px solid $borderColourAlt;
+  border-bottom: 1px solid $borderColourMain;
   cursor: pointer;
 
   display: grid;
@@ -75,7 +75,7 @@
 div.cancel-icon {      
   display: grid;
   justify-items: end;
-  border-bottom: 1px solid $borderColourAlt;
+  border-bottom: 1px solid $borderColourMain;
 }
 
 .hamburger-icon, svg.cancel-icon {

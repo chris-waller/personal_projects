@@ -4,7 +4,7 @@
 // Main Component Styles
 ////////////////////////
 .interactive-map-wrapper {
-  height: 766px;
+  height: 370px;
   width: 1024px;
   
 
@@ -24,6 +24,9 @@
 .tile-layer {
   //width: 2048;
   //height: 1536;
+}
+.army-icon {
+  display: grid;
 }
 
 .army1 {
