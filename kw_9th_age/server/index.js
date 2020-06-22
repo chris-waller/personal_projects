@@ -24,6 +24,7 @@ server.get("/world_map", function(req, res) {
     }
 
     const geoJsonMap = createGeoJsonFromData(results.rows);
+    
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(geoJsonMap);
@@ -60,7 +61,7 @@ function createGeoJsonFromData(data) {
      type: "Feature",
      properties: {
        name: regionName,
-       fillColor: "0, 128, 0",
+       fillColor: "transparent",
      },
      geometry: {
        type: "Polygon",

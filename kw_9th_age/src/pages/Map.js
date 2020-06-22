@@ -14,12 +14,6 @@ import styles from './styles/map-page.scss';
 
 /**
  * Map page to display the interactive world map.
- * Current goals for this page:
- * 1) Create a fantasy world map with identifiable borders
- * 2) Create a sitemap including terrain features. Add to world_image_map.js
- * 3) When the user selects a territory, and clicks 'generate, a modal dialogue
- *    will appears and then output the result. Gonna try to make this part look
- *    a bit flashy.
  */
 class MapPage extends Component {
 
@@ -53,7 +47,6 @@ class MapPage extends Component {
         terrain: area.terrain
       }      
     });
-    console.log(area)
   }
 
   generateMapClicked() {
@@ -63,8 +56,7 @@ class MapPage extends Component {
   /**
    * Render.
    */
-  render() {
-    console.log("here", this.state.mapData);
+  render() {    
     return (
       <Layout>
         <div className={styles.mapPage}>

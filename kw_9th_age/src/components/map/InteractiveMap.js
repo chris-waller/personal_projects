@@ -15,9 +15,6 @@ import styles from './interactive-map.scss';
 import mainImage from '../../images/keawol_empty.jpg';
 import army from '../../images/army.png';
 
-// Utility imports
-import {GEOJSON_REGIONS} from "../../utilities/world_image_map"
-
 /**
  * Display and interacte with the world map
  */
@@ -28,17 +25,10 @@ class InteractiveMap extends Component {
    */
   constructor(props) {
     super(props)
-
-    console.log("Map data props:", props.mapData);
+    
 
     this.state = {
-      mapData:   [{
-        type: 'Feature',
-        properties: {
-          name: "Sample",
-          fillColor: "green",
-        },
-        geometry: { type: 'Polygon', coordinates: [[[0,0], [500,500], [300,700]]] }
+      mapData:   [{        
       }],    
       selectedRegion: "0", //doesn't exist
     }
@@ -62,22 +52,16 @@ class InteractiveMap extends Component {
   getMapData() {
     const self = this;
     axios.get('http://localhost:3001/world_map')
-    .then(function (response) {
-      // handle success
-      const test = response.data.mapData;
-      //console.log("Retrieved data from the server:", test);
-      
+    .then((response) => {      
+      const mapData = response.data.mapData;            
       self.setState({
-        mapData: test,
+        mapData,
       });
     })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
+    .catch((error) => {      
+      console.error(error);
     })
-    .finally(function () {
-      // always executed
-    });
+    .finally(() => { /*do nothing */ });
   }
 
     /**
@@ -91,22 +75,21 @@ class InteractiveMap extends Component {
    * User moused over an area on the map
    */
   areaEntered(area) {
-    this.setState({
-      currentRegion: {
-        //coordinates: area.coords,
-        //name: area.name,
-        //terrain: area.terrain
-      }      
-    });
+    // don't think I'll need this event but keeping it here just in case
   }
 
-  // `component` is now the first argument, since it's passed through the Function.bind method, we'll need to pass it through here to the relevant handlers
+  /**
+   * 
+   * @param feature contains properties to add to the layer
+   * @param layer   the layer we are modifying
+   */
   onEachFeature = (feature, layer) => {
     const popup = `<Popup>${feature.properties.name}</Popup>`;
     layer.bindPopup(popup);
     
     this.fillRegion(layer, 0.8, false);
     
+    // bind events to each layer
     layer.on({
       mouseover: this.regionMouseover.bind(this),
       mouseout: this.regionMouseout.bind(this),
@@ -121,7 +104,7 @@ class InteractiveMap extends Component {
   regionClicked = (e) => {    
     const layer = e.target;
     const regionName = layer.feature.properties.name;    
-    //console.log(`User has selected ${regionName}`); 
+    console.log(`User has selected ${regionName}`); 
   }
 
   /**
@@ -141,21 +124,19 @@ class InteractiveMap extends Component {
   }
 
   /**
-   * Changes the background colour of a region.
+   * Changes the background colour and opacity of a region.
    */
   fillRegion(layer, opacity, isActive) {    
     let fillColor = layer.feature.properties.fillColor;
-    
-    
 
+    // regions that are currently active (hovering) will be highlighted white
     if (isActive) {
       fillColor = "rgba(255,255,255,1)";
     } else {
       if (fillColor !== "transparent") {
         fillColor = `rgba(${layer.feature.properties.fillColor},${opacity})`;
       }      
-    }
-    fillColor = `rgba(${layer.feature.properties.fillColor},${opacity})`;
+    }    
 
     layer.setStyle({
       fillColor,        
@@ -170,28 +151,16 @@ class InteractiveMap extends Component {
    */
   buildMap() {
     const bounds = [[0,0], [1522,2048]];
+    const geoJson = this.state.mapData;
 
-    const test2 = {
-      type: 'Feature',
-      properties: {
-
-      },
-      geometry: { type: 'Polygon', coordinates: [[[0,0], [1,1], [2,2]]] }
-    };
-
-    //const geoJson = this.state.mapData ? this.state.mapData : GEOJSON_REGIONS;
-    const geoJson = this.state.mapData;// ? test2 : GEOJSON_REGIONS;
+    // the geoJSON object will be re-drawn whenever it receives a new key
     const mapKey = uuidv4();
-
-    console.log("Rendering map with key:", mapKey);
-    console.log("Rendering map with data:", geoJson);
-    console.log("");
     
     return (
       <Map
         ref="worldMap"
         crs={CRS.Simple}
-        center={[383, 512]} // center of image
+        center={[383, 512]} 
         zoom={-1.7} 
         minZoom={-1.7}
         maxZoom={3}
@@ -202,7 +171,7 @@ class InteractiveMap extends Component {
         zoomControl={false}
         maxBounds={bounds}        
       >
-
+        {/* the map image */}
         <ImageOverlay 
           url={mainImage} 
           bounds={bounds}
@@ -210,12 +179,11 @@ class InteractiveMap extends Component {
         />
 
         {/*GeoJSON */}
-        <GeoJSON 
-          ref="foo"
+        <GeoJSON           
           key={mapKey}
           data={geoJson} 
           style={{
-            "color": "black",
+            "color": "rgb(0,0,0)",
             "weight": 1,
           }} 
           onEachFeature={this.onEachFeature}          
@@ -250,10 +218,9 @@ class InteractiveMap extends Component {
   /**
    * Render.
    */
-  render() { 
- 
+  render() {  
     return(
-      <div className={styles.interactiveMapWrapper} section="div_before_map">
+      <div className={styles.interactiveMapWrapper}>
         {this.buildMap()}   
       </div>
     );

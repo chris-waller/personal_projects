@@ -72,16 +72,14 @@ function createImageMapFromHTML() {
     
 
       x = (polygonWidth * (k + 1)) * 0.75; 
-      //console.log(regionInfo);      
       counter++;
     }
 
 
     y = polygonHeight * (i + 1);
-    //console.log("Y", y);
+
   }
-  //output +="}";
-  //console.log(output)  
+
   
 
 console.log("Script ended.");
