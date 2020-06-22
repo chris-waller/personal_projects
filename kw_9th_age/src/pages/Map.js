@@ -30,7 +30,7 @@ class MapPage extends Component {
     super(props);
 
     // nothing selected by default
-    this.state = {
+    this.state = {    
       selectedRegion: {
         coordinates: [0,0,0],
         name: "N/A",
@@ -64,6 +64,7 @@ class MapPage extends Component {
    * Render.
    */
   render() {
+    console.log("here", this.state.mapData);
     return (
       <Layout>
         <div className={styles.mapPage}>
@@ -80,7 +81,7 @@ class MapPage extends Component {
           {/* Play with image here */}
           <div className={styles.worldMap} section="image_start"> 
             <InteractiveMap
-              areaSelected={this.areaSelected}
+              areaSelected={this.areaSelected}             
             />           
             
 

@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { Map, ImageOverlay, Marker, Popup, GeoJSON } from 'react-leaflet'
 import L, {CRS} from 'leaflet';
 import enhanceWithClickOutside from 'react-click-outside'
+import axios from 'axios';
 import classNames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 
 // Style imports
 import styles from './interactive-map.scss';
@@ -27,13 +29,55 @@ class InteractiveMap extends Component {
   constructor(props) {
     super(props)
 
+    console.log("Map data props:", props.mapData);
+
     this.state = {
+      mapData:   [{
+        type: 'Feature',
+        properties: {
+          name: "Sample",
+          fillColor: "green",
+        },
+        geometry: { type: 'Polygon', coordinates: [[[0,0], [500,500], [300,700]]] }
+      }],    
       selectedRegion: "0", //doesn't exist
     }
 
     this.areaEntered = this.areaEntered.bind(this);
     this.areaClicked = this.areaClicked.bind(this);
     this.onEachFeature = this.onEachFeature.bind(this);
+    this.getMapData = this.getMapData.bind(this);
+  }
+
+  /**
+   * ComponentDidMount.
+   */
+  componentDidMount() {
+    this.getMapData();    
+  }
+
+  /**
+   * Retrieves the map data from the server.
+   */
+  getMapData() {
+    const self = this;
+    axios.get('http://localhost:3001/world_map')
+    .then(function (response) {
+      // handle success
+      const test = response.data.mapData;
+      //console.log("Retrieved data from the server:", test);
+      
+      self.setState({
+        mapData: test,
+      });
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
   }
 
     /**
@@ -77,7 +121,7 @@ class InteractiveMap extends Component {
   regionClicked = (e) => {    
     const layer = e.target;
     const regionName = layer.feature.properties.name;    
-    console.log(`User has selected ${regionName}`); 
+    //console.log(`User has selected ${regionName}`); 
   }
 
   /**
@@ -101,17 +145,18 @@ class InteractiveMap extends Component {
    */
   fillRegion(layer, opacity, isActive) {    
     let fillColor = layer.feature.properties.fillColor;
+    
+    
 
     if (isActive) {
       fillColor = "rgba(255,255,255,1)";
     } else {
       if (fillColor !== "transparent") {
         fillColor = `rgba(${layer.feature.properties.fillColor},${opacity})`;
-      }
-      
+      }      
     }
+    fillColor = `rgba(${layer.feature.properties.fillColor},${opacity})`;
 
-    console.log(fillColor);
     layer.setStyle({
       fillColor,        
     })
@@ -125,6 +170,22 @@ class InteractiveMap extends Component {
    */
   buildMap() {
     const bounds = [[0,0], [1522,2048]];
+
+    const test2 = {
+      type: 'Feature',
+      properties: {
+
+      },
+      geometry: { type: 'Polygon', coordinates: [[[0,0], [1,1], [2,2]]] }
+    };
+
+    //const geoJson = this.state.mapData ? this.state.mapData : GEOJSON_REGIONS;
+    const geoJson = this.state.mapData;// ? test2 : GEOJSON_REGIONS;
+    const mapKey = uuidv4();
+
+    console.log("Rendering map with key:", mapKey);
+    console.log("Rendering map with data:", geoJson);
+    console.log("");
     
     return (
       <Map
@@ -151,7 +212,8 @@ class InteractiveMap extends Component {
         {/*GeoJSON */}
         <GeoJSON 
           ref="foo"
-          data={GEOJSON_REGIONS} 
+          key={mapKey}
+          data={geoJson} 
           style={{
             "color": "black",
             "weight": 1,

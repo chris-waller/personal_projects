@@ -1,5 +1,6 @@
 // npm imports
 import React, {Component} from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { FaScroll, FaGlobeAfrica, FaFortAwesome} from 'react-icons/fa';
@@ -16,8 +17,6 @@ import SectionHeader from '../components/SectionHeader';
 import {HOMESTEAD, WORLD_1, WORLD_2, WAR_1, WAR_2,
   VILLAGE_1, VILLAGE_2, CRIER_1, CRIER_2} from './page_text'
 
-
-
 /**
  * 
  */
@@ -31,10 +30,47 @@ class Home extends Component {
 
     this.state = {
       redirect: false,
+      data: this.randomDogImage,
     }
 
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.simulateLogin = this.simulateLogin.bind(this);
   }
+  
+
+  /**
+   * ComponentDidMount.
+   */
+  componentDidMount() {
+    //this.simulateLogin();    
+  }
+
+
+  /**
+   * Fake login
+   */
+  simulateLogin() {
+    const self = this;
+    axios.get('http://localhost:3001/login/cwaller2@gmail.com/foobar')
+    .then(function (response) {
+      // handle success
+      console.log(response.data);
+      alert(`Logged in as ${response.data.firstName} ${response.data.lastName}\n${response.data.comments}`);
+      console.log(response.data.user);
+      self.setState({
+        user: response.data.user,
+      });
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+  }
+  
+
 
   /**
    * User has clicked the map image
@@ -50,6 +86,7 @@ class Home extends Component {
    * Render
    */
   render() {
+
     // user clicked the map image    
     if (this.state.redirect) {
       return <Redirect push to="/map" />;
@@ -65,6 +102,7 @@ class Home extends Component {
               text="Homestead" 
               icon={<FaScroll />} 
               headerType="h1" 
+              test={this.randomDogImage}
             />
           </div>
           <div>

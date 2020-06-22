@@ -1,0 +1,7 @@
+Postgres connection info:
+
+url: kwl-t9a-database.czsmiuaqey44.us-west-2.rds.amazonaws.com
+port: 5432
+name: kwl-t9a-database
+master username: postgres
+master password: APLDp5L4v0225s66OfDB
