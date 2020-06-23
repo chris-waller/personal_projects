@@ -40,13 +40,13 @@ class InteractiveMap extends Component {
     this.onEachFeature = this.onEachFeature.bind(this);
     this.getMapData = this.getMapData.bind(this);
     this.generateMarkers = this.generateMarkers.bind(this);   
-    this.test = this.test.bind(this); 
+    this.mapZoom = this.mapZoom.bind(this); 
   }
 
   /**
    * ComponentDidMount.
    */
-  componentDidMount() {
+  componentDidMount() {    
     this.getMapData();    
   }
 
@@ -181,13 +181,12 @@ class InteractiveMap extends Component {
         attributionControl={false}
         zoomControl={false}
         maxBounds={bounds}
-        onZoom={this.test}      
+        onZoom={this.mapZoom}      
       >
         {/* the map image */}
         <ImageOverlay 
           url={mainImage} 
           bounds={bounds}
-          className={styles.test}
         />
 
         {/*GeoJSON */}
@@ -209,7 +208,10 @@ class InteractiveMap extends Component {
     );
   } 
 
-  test() {
+  /**
+   * User is zooming in/out on the map
+   */
+  mapZoom() {
     this.setState({
       zoomLevel: this.refs.worldMap.leafletElement.getZoom(),
     });
@@ -236,7 +238,7 @@ class InteractiveMap extends Component {
                   
       // L.icon won't accept styles.
       // Instead of creating a stylesheet with pre-defined styles, we create them here.
-      // First we check we haven't already added this class
+      // First we check we haven't already added this class to the document.
       if (document.getElementById(legionClass) === null) {
         let style = document.createElement("style");
         style.type = 'text/css';
@@ -245,14 +247,15 @@ class InteractiveMap extends Component {
         document.getElementsByTagName('head')[0].appendChild(style);  
       }
 
-      let currentZoomLevel = this.state.zoomLevel;
-      // zoom levels (-1.7 to 0.6)
+      // Still not sure why the image overlay has these wierd zoom levels.
+      // Small hack to compensate for this. Hopefully I can find the time to look 
+      // into this in the future.
+      let currentZoomLevel = this.state.zoomLevel;      
       currentZoomLevel += 1.7;
       currentZoomLevel *= 10;
       
       const iconSize = [15 + currentZoomLevel, 15 + currentZoomLevel];
-      
-
+    
       const legionIcon = new L.Icon({
         iconUrl: army,  
         iconRetinaUrl: army,
