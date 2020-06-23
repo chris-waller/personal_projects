@@ -114,7 +114,7 @@ class MapPage extends Component {
               </div>
               <div
                 className={styles.pageTooSmallImage} 
-                title="Map of Kaewool"           
+                title="Map of Kae'wool"           
               />         
           </div> 
 

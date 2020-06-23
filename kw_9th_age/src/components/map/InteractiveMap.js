@@ -29,7 +29,9 @@ class InteractiveMap extends Component {
 
     this.state = {
       mapData:   [{        
-      }],    
+      }],
+      legions: [],
+      zoomLevel: -1.7,
       selectedRegion: "0", //doesn't exist
     }
 
@@ -37,6 +39,8 @@ class InteractiveMap extends Component {
     this.areaClicked = this.areaClicked.bind(this);
     this.onEachFeature = this.onEachFeature.bind(this);
     this.getMapData = this.getMapData.bind(this);
+    this.generateMarkers = this.generateMarkers.bind(this);   
+    this.test = this.test.bind(this); 
   }
 
   /**
@@ -52,10 +56,14 @@ class InteractiveMap extends Component {
   getMapData() {
     const self = this;
     axios.get('http://localhost:3001/world_map')
-    .then((response) => {      
-      const mapData = response.data.mapData;            
+    .then((response) => {   
+      
+      const mapData = response.data.regions;   
+      const legions = response.data.legions;
+            
       self.setState({
         mapData,
+        legions,
       });
     })
     .catch((error) => {      
@@ -87,7 +95,7 @@ class InteractiveMap extends Component {
     const popup = `<Popup>${feature.properties.name}</Popup>`;
     layer.bindPopup(popup);
     
-    this.fillRegion(layer, 0.8, false);
+    this.fillRegion(layer, false);
     
     // bind events to each layer
     layer.on({
@@ -112,7 +120,7 @@ class InteractiveMap extends Component {
    */
   regionMouseover(e) {
     const layer = e.target;
-    this.fillRegion(layer, 1, true);
+    this.fillRegion(layer, true);
   }
 
   /**
@@ -120,26 +128,29 @@ class InteractiveMap extends Component {
    */
   regionMouseout(e) {
     const layer = e.target;
-    this.fillRegion(layer, 1, false);
+    this.fillRegion(layer, false);
   }
 
   /**
    * Changes the background colour and opacity of a region.
    */
-  fillRegion(layer, opacity, isActive) {    
+  fillRegion(layer, isActive) {    
     let fillColor = layer.feature.properties.fillColor;
+    let opacity = 0.5;
 
-    // regions that are currently active (hovering) will be highlighted white
-    if (isActive) {
-      fillColor = "rgba(255,255,255,1)";
-    } else {
-      if (fillColor !== "transparent") {
-        fillColor = `rgba(${layer.feature.properties.fillColor},${opacity})`;
-      }      
-    }    
+    if (fillColor === null) {
+      opacity = isActive ? opacity : 0;
+      fillColor = `rgba(255,255,255,${opacity})`; 
+      
+    }
+    else {
+      opacity = isActive ? 0.7 : 0.5;
+      fillColor = `rgba(${layer.feature.properties.fillColor},${opacity})`;       
+    }
 
     layer.setStyle({
-      fillColor,        
+      fillColor,
+      fillOpacity: opacity,
     })
     
   }
@@ -161,15 +172,16 @@ class InteractiveMap extends Component {
         ref="worldMap"
         crs={CRS.Simple}
         center={[383, 512]} 
-        zoom={-1.7} 
+        zoom={this.state.zoomLevel} 
         minZoom={-1.7}
-        maxZoom={3}
+        maxZoom={0.6}
         zoomSnap={0.1}
         maxBoundsViscosity={0}
         className={styles.mapLayer}
         attributionControl={false}
         zoomControl={false}
-        maxBounds={bounds}        
+        maxBounds={bounds}
+        onZoom={this.test}      
       >
         {/* the map image */}
         <ImageOverlay 
@@ -183,35 +195,120 @@ class InteractiveMap extends Component {
           key={mapKey}
           data={geoJson} 
           style={{
-            "color": "rgb(0,0,0)",
-            "weight": 1,
+            "color": "rgb(0, 0, 0)",
+            "weight": "1",
+            "fillColr": "rgb(255,0,0)",
+            "fillOpacity": "0", 
           }} 
           onEachFeature={this.onEachFeature}          
         />
-        
-        {/* Marker examples */ }
-        <Marker position={[1230, 270]} icon={army1}>
-          <Popup>
-            Army 1
-          </Popup>
-        </Marker>
-        <Marker position={[900, 420]} icon={army2}>
-          <Popup>
-            Army 2
-          </Popup>
-        </Marker>
-        <Marker position={[800, 570]} icon={army3}>
-          <Popup>
-            Army 3
-          </Popup>
-        </Marker>
+
+        {this.generateMarkers()}        
 
       </Map>  
     );
   } 
 
+  test() {
+    this.setState({
+      zoomLevel: this.refs.worldMap.leafletElement.getZoom(),
+    });
+  }
+
+  /**
+   * Generate all markers for the map
+   */
+  generateMarkers() {
+
+    let legionMarkers = [];
+
+    const mapData = this.state.mapData;    
+
+    this.state.legions.forEach((legion) => {
+
+      const color = legion.color;
+      const colorName = legion.colorName;
+      const legionClass = `${colorName}Legion`;
+
+      // get the region this army is currently in
+      const mapData = this.state.mapData;      
+      const region = mapData.find(r => r.properties.id === legion.regionId);            
+                  
+      // L.icon won't accept styles.
+      // Instead of creating a stylesheet with pre-defined styles, we create them here.
+      // First we check we haven't already added this class
+      if (document.getElementById(legionClass) === null) {
+        let style = document.createElement("style");
+        style.type = 'text/css';
+        style.setAttribute("id", legionClass);
+        style.innerHTML = `.${legionClass} { background-color: rgb(${color}); }`;
+        document.getElementsByTagName('head')[0].appendChild(style);  
+      }
+
+      let currentZoomLevel = this.state.zoomLevel;
+      // zoom levels (-1.7 to 0.6)
+      currentZoomLevel += 1.7;
+      currentZoomLevel *= 10;
+      
+      const iconSize = [15 + currentZoomLevel, 15 + currentZoomLevel];
+      
+
+      const legionIcon = new L.Icon({
+        iconUrl: army,  
+        iconRetinaUrl: army,
+        iconSize,
+        className: classNames("leaflet-div-icon", styles.armyIcon, `${legionClass}`),      
+        //iconAnchor: [15,5],
+        //popupAnchor: [15,5],        
+      });
+
+      // create the marker to add to Leaflet
+      const legionMarker = React.createElement(
+        Marker, 
+        {
+          position: this.calculateRegionCenter(region),
+          icon: legionIcon,
+          key: uuidv4(),
+        },
+        <Popup>
+          {legion.name}
+        </Popup>
+      );
+
+
+      legionMarkers.push(legionMarker);
+    });
+
+    return React.createElement(React.Fragment, {}, legionMarkers); 
+  }
+
+  /**
+   * Closes any popup when the user clicks off the map
+   */
   handleClickOutside() {    
     this.refs.worldMap.leafletElement.closePopup();
+  }
+
+  /**
+   * Determine the center point of the region   
+   */
+  calculateRegionCenter(region) {
+    //console.log("Region Here", region);
+
+    // calculate region width    
+    const regionWidth = (region.geometry.coordinates[0][3][0] - region.geometry.coordinates[0][0][0]) / 2;
+    //console.log("width", regionWidth);
+
+    // calculate region height
+    const regionHeight = (region.geometry.coordinates[0][4][1] - region.geometry.coordinates[0][2][1]) / 2;
+    //console.log("height", regionHeight);
+    
+    const regionCenter = [
+      region.geometry.coordinates[0][2][1] + regionHeight,
+      region.geometry.coordinates[0][0][0] + regionWidth      
+    ];
+
+    return regionCenter    
   }
 
 
@@ -232,39 +329,3 @@ export default enhanceWithClickOutside(InteractiveMap);
 InteractiveMap.propTypes = {
   areaSelected: PropTypes.func.isRequired,
 };
-
-
-
-
-    const army1 = new L.Icon({
-      iconUrl: army,  
-      iconRetinaUrl: army,
-      iconSize: [15,15],
-      className: classNames("leaflet-div-icon", styles.armyIcon, styles.army1),
-    
-      iconAnchor: [15,5],
-      popupAnchor: [15,5],
-      iconSize: [25, 25],
-    });
-
-    const army2 = new L.Icon({
-      iconUrl: army,  
-      iconRetinaUrl: army,
-      iconSize: [25,25],
-      className: classNames("leaflet-div-icon", styles.armyIcon, styles.army2),
-    
-      iconAnchor: [15,5],
-      popupAnchor: [15,5],
-      iconSize: [25, 25],
-    });
-
-    const army3 = new L.Icon({
-      iconUrl: army,  
-      iconRetinaUrl: army,
-      iconSize: [25,25],
-      className: classNames("leaflet-div-icon", styles.armyIcon, styles.army3),
-    
-      iconAnchor: [15,5],
-      popupAnchor: [15,5],
-      iconSize: [25, 25],
-    });    

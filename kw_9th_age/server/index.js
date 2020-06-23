@@ -17,12 +17,17 @@ server.get("/world_map", function(req, res) {
   console.log("API call made to /world_map");
   
   client.query(
-    "SELECT * FROM kwl_t9a_db.world_map",
+    `SELECT regions.id AS regionId, regions.*, legions.id AS legion_id, legions.*, legions.name as legion_name  
+    FROM kwl_t9a_db.world_map regions 
+    LEFT OUTER JOIN kwl_t9a_db.legions legions 
+      ON legions.region_id = regions.id 
+    ORDER BY regionID`,
     (error, results) => {
     if (error) {
       throw error
     }
 
+    //console.log(results.row);
     const geoJsonMap = createGeoJsonFromData(results.rows);
     
 
@@ -45,11 +50,15 @@ server.listen(PORT, () => {
  */
 function createGeoJsonFromData(data) {
 
-  const mapData = [];
+  const regions = [];
+  const legions = [];
 
   data.forEach(row => {
+    //console.log("row", row);
     
+    const id = row["region_id"];
     const regionName = row["region_name"];
+    const regionColour = row["color"];
     const point1 = row["point1"];
     const point2 = row["point2"];
     const point3 = row["point3"];
@@ -60,8 +69,9 @@ function createGeoJsonFromData(data) {
    const mapRegion = {
      type: "Feature",
      properties: {
+       id,
        name: regionName,
-       fillColor: "transparent",
+       fillColor: regionColour,
      },
      geometry: {
        type: "Polygon",
@@ -75,10 +85,24 @@ function createGeoJsonFromData(data) {
        ]]
      }
    }
+   regions.push(mapRegion);
 
-    mapData.push(mapRegion);
+   if (row["legion_id"] !== null) {
+    const legion = {
+      id: row["legion_id"],
+      name: row["legion_name"],
+      color: row["color"],
+      colorName: row["color_name"],
+      regionId: row["region_id"],
+    }    
+    legions.push(legion);     
+   } 
+    
   });
 
-  console.log("returning mapdata", mapData)
-  return {mapData};
+  console.log("returning mapdata", legions);
+  return {
+    regions,
+    legions,
+  };
 }
