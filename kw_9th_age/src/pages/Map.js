@@ -70,8 +70,8 @@ class MapPage extends Component {
             />
           </div>         
   
-          {/* Play with image here */}
-          <div className={styles.worldMap} section="image_start"> 
+          {/* The Interactive Map */}
+          <div className={styles.worldMap}> 
             <InteractiveMap
               areaSelected={this.areaSelected}             
             />           

@@ -13,6 +13,28 @@ server.use(function(req, res, next) {
   next();
 });
 
+server.get("/legion_colours", function(req, res) {
+  console.log("");
+  console.log("*******************************");
+  console.log("API call made to /legion_colours");
+  console.log("*******************************");
+
+  const sqlQuery = "SELECT * FROM kwl_t9a_db.legion_colours ORDER BY name;";
+  
+  client.query(sqlQuery,
+    (error, results) => {
+    if (error) {
+      throw error
+    }
+
+    const legionColours = createLegionColoursFromData(results.rows);
+    console.log(legionColours)
+
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(legionColours);
+  })
+});
+
 server.get("/regions", function(req, res) {
   console.log("");
   console.log("*******************************");
@@ -34,13 +56,8 @@ server.get("/regions", function(req, res) {
 
     const geoJsonMap = createGeoJsonFromData(results.rows);
 
-    setTimeout(() => {
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(geoJsonMap);
-    }, 2000);
-    
-
-    
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(geoJsonMap);
   })
 });
 
@@ -64,12 +81,35 @@ server.get("/legions", function(req, res) {
     }
     const legions  = createLegionFromData(results.rows);
 
-    setTimeout(() => {
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(legions);
-    }, 2000);
-   
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(legions);
+  })
+
+});
+
+
+server.post("/legions/:legionName/:regionId/:colourId", function(req, res) {
+  console.log("");
+  console.log("*******************************");
+  console.log("API call made to /test");
+  console.log("*******************************");
+  console.log("posting");
+
+  const sqlInsertQuery = "INSERT INTO kwl_t9a_db.legions (name, region_id, colour_id) " +
+    `VALUES ('${req.params.legionName.replace("'", "''")}', ${req.params.regionId}, ${req.params.colourId});`;
+
+  const sqlUpdateQuery = "UPDATE kwl_t9a_db.regions " +
+    `SET colour_id = '${req.params.colourId}' `
+    + `WHERE id = ${req.params.regionId};`;
+
+  client.query(sqlInsertQuery + sqlUpdateQuery,
+    (error, results) => {
+    if (error) {
+      throw error
+    }
     
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json("Great");
   })
 
 });
@@ -129,9 +169,7 @@ function createGeoJsonFromData(data) {
     regions.push(mapRegion);    
   });
 
-  return {
-    regions   
-  };
+  return regions;
 }
 
 /**
@@ -153,4 +191,18 @@ function createLegionFromData(data) {
     legions.push(legion);
   })  
   return legions;
+}
+
+
+function createLegionColoursFromData(data) {
+  const legion_colours = [];
+  data.forEach(row => {
+    const id = row["id"];
+    const name = row["name"];
+    const rgb = row["rgb"];
+
+    const legion_colour = { id, name, rgb, };    
+    legion_colours.push(legion_colour);
+  })  
+  return legion_colours;
 }

@@ -31,7 +31,11 @@ class InteractiveMap extends Component {
       mapData:   [{        
       }],
       legions: [],
+      legionColours: [],
+
       zoomLevel: -1.7,
+      // the geoJSON object will be re-drawn whenever it receives a new key
+      mapKey: uuidv4(),
       selectedRegion: "0", //doesn't exist
     }
 
@@ -41,6 +45,8 @@ class InteractiveMap extends Component {
     this.getMapData = this.getMapData.bind(this);
     this.generateMarkers = this.generateMarkers.bind(this);   
     this.mapZoom = this.mapZoom.bind(this); 
+    this.addLegion = this.addLegion.bind(this);
+    this.getLegionColours = this.getLegionColours.bind(this);
   }
 
   /**
@@ -48,8 +54,27 @@ class InteractiveMap extends Component {
    */
   componentDidMount() {    
     this.getMapData();
-    //this.getLegions();
+    this.getLegionColours();
   }
+
+  /**
+   * Gets a list of all possible legion colours for use in the dropdown
+   */
+  getLegionColours() {
+    const self = this;
+
+    axios.get('http://localhost:3001/legion_colours')
+    .then((response) => {  
+      const legionColours = response.data;
+      self.setState({
+        legionColours,
+      });      
+    })
+    .catch((error) => {      
+      console.error(error);
+    })
+    .finally(() => { /*do nothing */ });
+  }  
 
   /**
    * Retrieves the map data from the server.
@@ -62,9 +87,11 @@ class InteractiveMap extends Component {
 
     axios.get('http://localhost:3001/regions')
     .then((response) => {  
-      const mapData = response.data.regions;                     
+      const mapData = response.data;   
+      const mapKey = uuidv4();                  
       self.setState({
         mapData,
+        mapKey,
       });      
     })
     .then(() => {     
@@ -80,10 +107,26 @@ class InteractiveMap extends Component {
     const self = this;
     axios.get('http://localhost:3001/legions')
     .then((response) => {        
-      const legions = response.data;      
+      const legions = response.data;  
       self.setState({
         legions,
       })      
+    })    
+    .catch((error) => {      
+      console.error(error);
+    })
+    .finally(() => { /*do nothing */ });
+  }
+
+  addLegion() {
+    const legionName = this.refs.legionName.value;
+    const regionId = this.refs.regionId.value;
+    const colourId = this.refs.colourId.value;
+    
+    const self = this;
+    axios.post(`http://localhost:3001/legions/${legionName}/${regionId}/${colourId}`)
+    .then((response) => {        
+      this.getMapData();
     })    
     .catch((error) => {      
       console.error(error);
@@ -130,7 +173,8 @@ class InteractiveMap extends Component {
    */
   regionClicked = (e) => {    
     const layer = e.target;
-    const regionName = layer.feature.properties.name;    
+    const regionName = layer.feature.properties.name;
+    this.refs.regionId.value = layer.feature.properties.id;  
     console.log(`User has selected ${regionName}`); 
   }
 
@@ -174,6 +218,27 @@ class InteractiveMap extends Component {
     
   }
 
+  /**
+   * Populates a dropdown with a list of colours from the db
+   */
+  buildLegionColoursDropdown() {
+    const legionColours = [];
+    this.state.legionColours.forEach((colour) => {
+      legionColours.push(
+        <option 
+          value={colour.id} 
+          style={{backgroundColor: `rgb(${colour.rgb})`}}
+        >
+          {colour.name}
+        </option>);
+    })      
+
+    return React.createElement(
+      "select", 
+      {ref: "colourId"}, 
+      legionColours
+    );
+  }
 
 
   /**
@@ -182,9 +247,6 @@ class InteractiveMap extends Component {
   buildMap() {
     const bounds = [[0,0], [1522,2048]];
     const geoJson = this.state.mapData;
-
-    // the geoJSON object will be re-drawn whenever it receives a new key
-    const mapKey = uuidv4();
     
     return (
       <Map
@@ -210,7 +272,7 @@ class InteractiveMap extends Component {
 
         {/*GeoJSON */}
         <GeoJSON           
-          key={mapKey}
+          key={this.state.mapKey}
           data={geoJson} 
           style={{
             "color": "rgb(0, 0, 0)",
@@ -323,20 +385,31 @@ class InteractiveMap extends Component {
     return regionCenter    
   }
 
-
   /**
    * Render.
    */
   render() {  
     return(
+      <div>
+      <div>
+        <button onClick={this.addLegion} >Add Legion</button>
+        &nbsp;&nbsp;Name <input type="text" ref="legionName" ></input>
+        &nbsp;&nbsp;Region ID <input type="text" ref="regionId" readOnly></input>
+        &nbsp;&nbsp;Colour 
+        {this.buildLegionColoursDropdown()}
+      </div>
       <div className={styles.interactiveMapWrapper}>
         {this.buildMap()}   
+      </div>
       </div>
     );
   }
 }
 
 export default enhanceWithClickOutside(InteractiveMap);
+
+
+
 
 InteractiveMap.propTypes = {
   areaSelected: PropTypes.func.isRequired,
