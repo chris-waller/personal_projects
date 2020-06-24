@@ -1,0 +1,31 @@
+-------------------
+Web Project
+-------------------
+$npm run dev
+
+
+
+-------------------
+Server Project
+-------------------
+$npm run dev:start
+$npm run script
+
+
+
+-------------------
+Database Project
+-------------------
+$npm run migrate:up -- --config-file ./config/dev.json --schema kwl_t9a_db
+$npm run migrate create migrationName
+
+
+
+
+-------------------
+Overall Setup
+-------------------
+$npm run migrate:up -- --config-file ./config/dev.json --schema kwl_t9a_db    (db project)
+$npm run script     (server project)
+
+

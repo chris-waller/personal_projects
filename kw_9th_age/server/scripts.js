@@ -1,4 +1,4 @@
-import client from './config/database';;
+import client from './config/database';
 
 /**
  * Use this function to somewhat automatically convert html image map data into the format
@@ -8,7 +8,10 @@ import client from './config/database';;
 function createImageMapFromHTML() {
   console.log("Starting script createImageMapFromHTML()...");
 
-  const mapSize = [2048, 1522];
+  const mapWidth = 2048;
+  const mapHeight = 1522;
+
+  const mapSize = [mapWidth, mapHeight];
   const polygonHeight = mapSize[1] / 7;
   const polygonWidth = mapSize[0] / 10;
     
@@ -28,7 +31,7 @@ function createImageMapFromHTML() {
     // rows
     for (let k = 0; k < 13; k++) {
 
-      let regionName = (k % 2 === 0) ? counter : `${counter}-alt`;
+      let regionName = `Region ${counter}`;
       let shiftY = 0;
 
       if (k % 2 !== 0) {        
@@ -59,17 +62,25 @@ function createImageMapFromHTML() {
         }
       }
 
-      console.log(regionInfo.geometry.coordinates)
+      let coord1 = regionInfo.geometry.coordinates[0][0].toString();      
+      let coord2 = regionInfo.geometry.coordinates[0][1].toString();      
+      let coord3 = regionInfo.geometry.coordinates[0][2].toString();      
+      let coord4 = regionInfo.geometry.coordinates[0][3].toString();      
+      let coord5 = regionInfo.geometry.coordinates[0][4].toString();      
+      let coord6 = regionInfo.geometry.coordinates[0][5].toString();      
+      
+      const sqlQuery = "INSERT INTO kwl_t9a_db.regions (name, coord1, coord2, coord3, coord4, coord5, coord6) " + 
+      `VALUES('${regionName}', '${coord1}', '${coord2}', '${coord3}', '${coord4}', '${coord5}', '${coord6}')`;
+
+      //console.log(sqlQuery);
 
       client.query(
-        "INSERT INTO kwl_t9a_db.world_map (region_name, point1, point2, point3, point4, point5, point6)" + 
-        `VALUES('${regionName}', '{${regionInfo.geometry.coordinates[0][0][0]}, ${regionInfo.geometry.coordinates[0][0][1]}}','{${regionInfo.geometry.coordinates[0][1][0]}, ${regionInfo.geometry.coordinates[0][1][1]}}','{${regionInfo.geometry.coordinates[0][2][0]}, ${regionInfo.geometry.coordinates[0][2][1]}}','{${regionInfo.geometry.coordinates[0][3][0]}, ${regionInfo.geometry.coordinates[0][3][1]}}','{${regionInfo.geometry.coordinates[0][4][0]}, ${regionInfo.geometry.coordinates[0][4][1]}}','{${regionInfo.geometry.coordinates[0][5][0]}, ${regionInfo.geometry.coordinates[0][5][1]}}')`,
+        sqlQuery,
         (error, results) => {
         if (error) {
           throw error
         }
-        });
-    
+      });
 
       x = (polygonWidth * (k + 1)) * 0.75; 
       counter++;

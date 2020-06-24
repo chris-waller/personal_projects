@@ -47,7 +47,8 @@ class InteractiveMap extends Component {
    * ComponentDidMount.
    */
   componentDidMount() {    
-    this.getMapData();    
+    this.getMapData();
+    this.getLegions();
   }
 
   /**
@@ -55,14 +56,25 @@ class InteractiveMap extends Component {
    */
   getMapData() {
     const self = this;
-    axios.get('http://localhost:3001/world_map')
-    .then((response) => {   
-      
-      const mapData = response.data.regions;   
-      const legions = response.data.legions;
-            
+    axios.get('http://localhost:3001/regions')
+    .then((response) => {         
+      const mapData = response.data.regions;         
       self.setState({
-        mapData,
+        mapData,        
+      });
+    })
+    .catch((error) => {      
+      console.error(error);
+    })
+    .finally(() => { /*do nothing */ });
+  }
+
+  getLegions() {
+    const self = this;
+    axios.get('http://localhost:3001/legions')
+    .then((response) => {         
+      const legions = response.data;      
+      self.setState({      
         legions,
       });
     })
@@ -224,17 +236,14 @@ class InteractiveMap extends Component {
 
     let legionMarkers = [];
 
-    const mapData = this.state.mapData;    
-
     this.state.legions.forEach((legion) => {
-
-      const color = legion.color;
-      const colorName = legion.colorName;
+      const color = legion.rgb;
+      const colorName = legion.colour;
       const legionClass = `${colorName}Legion`;
 
       // get the region this army is currently in
       const mapData = this.state.mapData;      
-      const region = mapData.find(r => r.properties.id === legion.regionId);            
+      const region = mapData.find(r => r.properties.id == legion.regionId);
                   
       // L.icon won't accept styles.
       // Instead of creating a stylesheet with pre-defined styles, we create them here.
@@ -243,7 +252,7 @@ class InteractiveMap extends Component {
         let style = document.createElement("style");
         style.type = 'text/css';
         style.setAttribute("id", legionClass);
-        style.innerHTML = `.${legionClass} { background-color: rgb(${color}); }`;
+        style.innerHTML = `.${legionClass} { background-color: rgba(${color}, 1); opacity: 1; }`;
         document.getElementsByTagName('head')[0].appendChild(style);  
       }
 
@@ -264,7 +273,6 @@ class InteractiveMap extends Component {
         //iconAnchor: [15,5],
         //popupAnchor: [15,5],        
       });
-
       // create the marker to add to Leaflet
       const legionMarker = React.createElement(
         Marker, 
@@ -296,15 +304,9 @@ class InteractiveMap extends Component {
    * Determine the center point of the region   
    */
   calculateRegionCenter(region) {
-    //console.log("Region Here", region);
-
-    // calculate region width    
+    // calculate region max width and height
     const regionWidth = (region.geometry.coordinates[0][3][0] - region.geometry.coordinates[0][0][0]) / 2;
-    //console.log("width", regionWidth);
-
-    // calculate region height
     const regionHeight = (region.geometry.coordinates[0][4][1] - region.geometry.coordinates[0][2][1]) / 2;
-    //console.log("height", regionHeight);
     
     const regionCenter = [
       region.geometry.coordinates[0][2][1] + regionHeight,

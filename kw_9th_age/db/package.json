@@ -1,0 +1,17 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "node-pg-migrate",
+    "migrate:up": "node-pg-migrate up"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "db-migrate-pg": "github:db-migrate/pg",
+    "node-pg-migrate": "^5.1.1",
+    "pg": "^8.2.1"
+  } 
+}

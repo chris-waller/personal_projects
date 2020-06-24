@@ -13,22 +13,28 @@ server.use(function(req, res, next) {
   next();
 });
 
-server.get("/world_map", function(req, res) {
-  console.log("API call made to /world_map");
+server.get("/regions", function(req, res) {
+  console.log("");
+  console.log("*******************************");
+  console.log("API call made to /regions");
+  console.log("*******************************");
+
+  const sqlQuery = "SELECT r.id AS region_id, r.name AS region_name, r.coord1, r.coord2, " + 
+    "r.coord3, r.coord4, r.coord5, r.coord6, c.id AS colour_id, c.name AS colour_name, c.rgb " + 
+  "FROM kwl_t9a_db.regions r " + 
+  "LEFT JOIN kwl_t9a_db.legion_colours c " + 
+    "ON r.colour_id = c.id " + 
+  "ORDER BY region_id";
   
-  client.query(
-    `SELECT regions.id AS regionId, regions.*, legions.id AS legion_id, legions.*, legions.name as legion_name  
-    FROM kwl_t9a_db.world_map regions 
-    LEFT OUTER JOIN kwl_t9a_db.legions legions 
-      ON legions.region_id = regions.id 
-    ORDER BY regionID`,
+  client.query(sqlQuery,
     (error, results) => {
     if (error) {
       throw error
     }
 
-    //console.log(results.row);
     const geoJsonMap = createGeoJsonFromData(results.rows);
+
+    console.log(geoJsonMap.regions[0].properties);
     
 
     res.setHeader('Content-Type', 'application/json');
@@ -36,12 +42,36 @@ server.get("/world_map", function(req, res) {
   })
 });
 
+
+server.get("/legions", function(req, res) {
+  console.log("");
+  console.log("*******************************");
+  console.log("API call made to /legions");
+  console.log("*******************************");
+
+  const sqlQuery = "SELECT l.id, l.name AS region_name, l.region_id, " +
+    "c.name AS colour_name, c.rgb " + 
+  "FROM kwl_t9a_db.legions l " +
+    "INNER JOIN kwl_t9a_db.legion_colours c " +
+  "ON l.colour_id = c.id";
+
+  client.query(sqlQuery,
+    (error, results) => {
+    if (error) {
+      throw error
+    }
+    const legions  = createLegionFromData(results.rows);    
+
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(legions);
+  })
+
+});
+
 // tell the app which port to listen on
 server.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
 });
-
-
 
 
 /**
@@ -51,58 +81,70 @@ server.listen(PORT, () => {
 function createGeoJsonFromData(data) {
 
   const regions = [];
-  const legions = [];
-
-  data.forEach(row => {
-    //console.log("row", row);
-    
+  
+  data.forEach(row => {    
     const id = row["region_id"];
     const regionName = row["region_name"];
-    const regionColour = row["color"];
-    const point1 = row["point1"];
-    const point2 = row["point2"];
-    const point3 = row["point3"];
-    const point4 = row["point4"];
-    const point5 = row["point5"];
-    const point6 = row["point6"];
-   
-   const mapRegion = {
-     type: "Feature",
-     properties: {
-       id,
-       name: regionName,
-       fillColor: regionColour,
-     },
-     geometry: {
-       type: "Polygon",
-       coordinates: [[
-        point1,         
-        point2,
-        point3,
-        point4,
-        point5,
-        point6,
-       ]]
-     }
-   }
-   regions.push(mapRegion);
+    const regionColour = row["rgb"];
 
-   if (row["legion_id"] !== null) {
-    const legion = {
-      id: row["legion_id"],
-      name: row["legion_name"],
-      color: row["color"],
-      colorName: row["color_name"],
-      regionId: row["region_id"],
-    }    
-    legions.push(legion);     
-   } 
-    
+    // cooridnates are stored as csv strings
+    const coord1 = row["coord1"].split(",").map(x => {
+      return parseInt(x);
+    });
+    const coord2 = row["coord2"].split(",").map(x => {
+      return parseInt(x);
+    });
+    const coord3 = row["coord3"].split(",").map(x => {
+      return parseInt(x);
+    });
+    const coord4 = row["coord4"].split(",").map(x => {
+      return parseInt(x);
+    });
+    const coord5 = row["coord5"].split(",").map(x => {
+      return parseInt(x);
+    });
+    const coord6 = row["coord6"].split(",").map(x => {
+      return parseInt(x);
+    });
+   
+   
+    const mapRegion = {
+      type: "Feature",
+      properties: {
+        id,
+        name: regionName,
+        fillColor: regionColour,
+      },
+      geometry: {
+        type: "Polygon",
+        coordinates: [[coord1, coord2, coord3, coord4, coord5, coord6]],
+      }
+    }
+    regions.push(mapRegion);    
   });
 
-  console.log("returning mapdata", legions);
   return {
-    regions,
-    legions,
+    regions   
   };
+}
+
+/**
+ * Will need to move this method.
+ * Create Legion from data
+ */
+function createLegionFromData(data) { 
+  const legions = [];
+  data.forEach(row => {
+    const id = row["id"];
+    const name = row["region_name"];
+    const regionId = row["region_id"];
+    const colour = row["colour_name"];
+    const rgb = row["rgb"];
+
+    const legion = {
+      id, name, regionId, colour, rgb
+    };    
+    legions.push(legion);
+  })  
+  return legions;
 }
