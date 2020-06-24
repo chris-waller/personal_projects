@@ -34,11 +34,13 @@ server.get("/regions", function(req, res) {
 
     const geoJsonMap = createGeoJsonFromData(results.rows);
 
-    console.log(geoJsonMap.regions[0].properties);
+    setTimeout(() => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(geoJsonMap);
+    }, 2000);
     
 
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(geoJsonMap);
+    
   })
 });
 
@@ -60,10 +62,14 @@ server.get("/legions", function(req, res) {
     if (error) {
       throw error
     }
-    const legions  = createLegionFromData(results.rows);    
+    const legions  = createLegionFromData(results.rows);
 
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(legions);
+    setTimeout(() => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(legions);
+    }, 2000);
+   
+    
   })
 
 });

@@ -48,21 +48,28 @@ class InteractiveMap extends Component {
    */
   componentDidMount() {    
     this.getMapData();
-    this.getLegions();
+    //this.getLegions();
   }
 
   /**
    * Retrieves the map data from the server.
+   * First, we get the region data and set the state.
+   * Next, we get the legion data. The legion data must be retrieved after the region data
+   * as the former needs to determine coordinates based on the latter.
    */
   getMapData() {
     const self = this;
+
     axios.get('http://localhost:3001/regions')
-    .then((response) => {         
-      const mapData = response.data.regions;         
+    .then((response) => {  
+      const mapData = response.data.regions;                     
       self.setState({
-        mapData,        
-      });
+        mapData,
+      });      
     })
+    .then(() => {     
+      this.getLegions();      
+    })    
     .catch((error) => {      
       console.error(error);
     })
@@ -72,12 +79,12 @@ class InteractiveMap extends Component {
   getLegions() {
     const self = this;
     axios.get('http://localhost:3001/legions')
-    .then((response) => {         
+    .then((response) => {        
       const legions = response.data;      
-      self.setState({      
+      self.setState({
         legions,
-      });
-    })
+      })      
+    })    
     .catch((error) => {      
       console.error(error);
     })

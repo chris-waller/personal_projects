@@ -1,27 +1,4 @@
-"filename", "language", "JavaScript", "SCSS", "comment", "blank", "total"
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\HamburgerMenu.js", "JavaScript", 76, 0, 25, 15, 116
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\Header.js", "JavaScript", 67, 0, 12, 13, 92
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\Layout.js", "JavaScript", 22, 0, 11, 9, 42
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\Loading.js", "JavaScript", 5, 0, 0, 2, 7
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\SectionHeader.js", "JavaScript", 27, 0, 8, 9, 44
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\map\InteractiveMap.js", "JavaScript", 157, 0, 39, 44, 240
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\map\interactive-map.scss", "SCSS", 0, 26, 8, 6, 40
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\styles\hamburger-menu.scss", "SCSS", 0, 69, 13, 14, 96
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\styles\header.scss", "SCSS", 0, 52, 17, 11, 80
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\styles\layout.scss", "SCSS", 0, 33, 5, 6, 44
-"c:\Software Projects\Personal Projects\kw_9th_age\src\components\styles\section-header.scss", "SCSS", 0, 24, 5, 5, 34
-"c:\Software Projects\Personal Projects\kw_9th_age\src\index.js", "JavaScript", 8, 0, 0, 3, 11
-"c:\Software Projects\Personal Projects\kw_9th_age\src\index.scss", "SCSS", 0, 28, 1, 6, 35
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\About.js", "JavaScript", 11, 0, 0, 3, 14
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\App.js", "JavaScript", 45, 0, 9, 4, 58
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\Campaign.js", "JavaScript", 11, 0, 0, 3, 14
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\Home.js", "JavaScript", 161, 0, 30, 22, 213
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\Map.js", "JavaScript", 90, 0, 56, 24, 170
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\Members.js", "JavaScript", 11, 0, 0, 3, 14
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\NoMatch.js", "JavaScript", 10, 0, 0, 3, 13
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\page_text.js", "JavaScript", 33, 0, 5, 5, 43
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\styles\home.scss", "SCSS", 0, 73, 17, 15, 105
-"c:\Software Projects\Personal Projects\kw_9th_age\src\pages\styles\map-page.scss", "SCSS", 0, 44, 16, 14, 74
-"c:\Software Projects\Personal Projects\kw_9th_age\src\utilities\scss_variables.scss", "SCSS", 0, 9, 4, 3, 16
-"c:\Software Projects\Personal Projects\kw_9th_age\src\utilities\world_image_map.js", "JavaScript", 845, 0, 6, 21, 872
-"Total", "-", 1579, 358, 287, 263, 2487
+"filename", "language", "JavaScript", "comment", "blank", "total"
+"c:\Software Projects\Personal Projects\kw_9th_age\db\migrations\1592924386422_seed.js", "JavaScript", 90, 15, 11, 116
+"c:\Software Projects\Personal Projects\kw_9th_age\db\migrations\1592960077313_legions.js", "JavaScript", 39, 1, 6, 46
+"Total", "-", 129, 16, 17, 162
