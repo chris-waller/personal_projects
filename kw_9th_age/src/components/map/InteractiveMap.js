@@ -53,8 +53,8 @@ class InteractiveMap extends Component {
    * ComponentDidMount.
    */
   componentDidMount() {    
-    this.getMapData();
     this.getLegionColours();
+    this.getMapData();    
   }
 
   /**
@@ -71,7 +71,14 @@ class InteractiveMap extends Component {
       });      
     })
     .catch((error) => {      
-      console.error(error);
+      console.error("Error retrieving legion colours", error);
+      this.setState({
+        legionColours: [{
+          id: -1,
+          name: "--Unavailable--",
+          rgb: "-1,-1-,1",
+        }]
+      });
     })
     .finally(() => { /*do nothing */ });
   }  
@@ -98,7 +105,7 @@ class InteractiveMap extends Component {
       this.getLegions();      
     })    
     .catch((error) => {      
-      console.error(error);
+      console.error("Error retrieving region data. Will not attempt to get legion data.", error);
     })
     .finally(() => { /*do nothing */ });
   }
@@ -113,7 +120,7 @@ class InteractiveMap extends Component {
       })      
     })    
     .catch((error) => {      
-      console.error(error);
+      console.error("Error retriving legion data", error);
     })
     .finally(() => { /*do nothing */ });
   }
@@ -122,14 +129,20 @@ class InteractiveMap extends Component {
     const legionName = this.refs.legionName.value;
     const regionId = this.refs.regionId.value;
     const colourId = this.refs.colourId.value;
+
+    // This will only occur if the legion colours dropdown failed to populate
+    if (colourId == -1) {
+      alert("Cannot add a new legion. There was a problem retrieving the list of colours from the server.");
+      return;
+    }
     
     const self = this;
     axios.post(`http://localhost:3001/legions/${legionName}/${regionId}/${colourId}`)
-    .then((response) => {        
+    .then(() => {        
       this.getMapData();
     })    
     .catch((error) => {      
-      console.error(error);
+      console.error("Failed to add legion to the map", error);
     })
     .finally(() => { /*do nothing */ });
   }
@@ -226,7 +239,8 @@ class InteractiveMap extends Component {
     this.state.legionColours.forEach((colour) => {
       legionColours.push(
         <option 
-          value={colour.id} 
+          value={colour.id}
+          key={colour.id}
           style={{backgroundColor: `rgb(${colour.rgb})`}}
         >
           {colour.name}

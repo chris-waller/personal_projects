@@ -10,6 +10,7 @@ server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader('Content-Type', 'application/json');
   next();
 });
 
@@ -24,13 +25,12 @@ server.get("/legion_colours", function(req, res) {
   client.query(sqlQuery,
     (error, results) => {
     if (error) {
-      throw error
+      res.status(500).json(error)
+      console.log(error);
+      return;
     }
 
     const legionColours = createLegionColoursFromData(results.rows);
-    console.log(legionColours)
-
-    res.setHeader('Content-Type', 'application/json');
     res.status(200).json(legionColours);
   })
 });
@@ -50,13 +50,13 @@ server.get("/regions", function(req, res) {
   
   client.query(sqlQuery,
     (error, results) => {
-    if (error) {
-      throw error
-    }
+      if (error) {
+        res.status(500).json(error);
+        console.log(error);
+        return;
+      }
 
     const geoJsonMap = createGeoJsonFromData(results.rows);
-
-    res.setHeader('Content-Type', 'application/json');
     res.status(200).json(geoJsonMap);
   })
 });
@@ -76,12 +76,13 @@ server.get("/legions", function(req, res) {
 
   client.query(sqlQuery,
     (error, results) => {
-    if (error) {
-      throw error
-    }
-    const legions  = createLegionFromData(results.rows);
+      if (error) {
+        res.status(500).json(error);
+        console.log(error);
+        return;
+      }
 
-    res.setHeader('Content-Type', 'application/json');
+    const legions  = createLegionFromData(results.rows);
     res.status(200).json(legions);
   })
 
@@ -104,12 +105,13 @@ server.post("/legions/:legionName/:regionId/:colourId", function(req, res) {
 
   client.query(sqlInsertQuery + sqlUpdateQuery,
     (error, results) => {
-    if (error) {
-      throw error
-    }
-    
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json("Great");
+      if (error) {
+        res.status(500).json(error);
+        console.log(error);
+        return;
+      }
+
+    res.status(200).json("success");
   })
 
 });

@@ -33,6 +33,7 @@ exports.up = (pgm) => {
       coord6: {type: "varchar", notNull: true},
       colour_id: {
         type: "smallint",
+        unique: true,
         foreignKey: {
           name: 'fk_regions',
           table: 'legion_colours',
