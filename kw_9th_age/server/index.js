@@ -92,7 +92,7 @@ server.get("/legions", function(req, res) {
 server.post("/legions/:legionName/:regionId/:colourId", function(req, res) {
   console.log("");
   console.log("*******************************");
-  console.log("API call made to /test");
+  console.log("API call made to /legions/:legionName/:regionId/:colourId");
   console.log("*******************************");
   console.log("posting");
 
@@ -104,6 +104,38 @@ server.post("/legions/:legionName/:regionId/:colourId", function(req, res) {
     + `WHERE id = ${req.params.regionId};`;
 
   client.query(sqlInsertQuery + sqlUpdateQuery,
+    (error, results) => {
+      if (error) {
+        res.status(500).json(error);
+        console.log(error);
+        return;
+      }
+
+    res.status(200).json("success");
+  })
+
+});
+
+server.put("/legions/:sourceRegionId/:legionId/:regionId/:colourId", function(req, res) {
+  console.log("");
+  console.log("*******************************");
+  console.log("API call made to /legions/legionId/:regionId/:colourId");
+  console.log("*******************************");
+  console.log("posting");
+
+  const sqlUpdateQuery = "UPDATE kwl_t9a_db.legions " +  
+  `SET region_id=${req.params.regionId} ` +
+  `WHERE id=${req.params.legionId};` +
+  "UPDATE kwl_t9a_db.regions " +
+  `SET colour_id=${req.params.colourId} ` +
+  `WHERE id=${req.params.regionId};` +
+  "UPDATE kwl_t9a_db.regions " +
+  `SET colour_id=null ` +
+  `WHERE id=${req.params.sourceRegionId};`
+
+  console.log(sqlUpdateQuery);
+
+  client.query(sqlUpdateQuery,
     (error, results) => {
       if (error) {
         res.status(500).json(error);

@@ -41,12 +41,15 @@ class InteractiveMap extends Component {
 
     this.areaEntered = this.areaEntered.bind(this);
     this.areaClicked = this.areaClicked.bind(this);
+    this.legionClicked = this.legionClicked.bind(this);
     this.onEachFeature = this.onEachFeature.bind(this);
     this.getMapData = this.getMapData.bind(this);
     this.generateMarkers = this.generateMarkers.bind(this);   
     this.mapZoom = this.mapZoom.bind(this); 
     this.addLegion = this.addLegion.bind(this);
     this.getLegionColours = this.getLegionColours.bind(this);
+    this.moveLegion = this.moveLegion.bind(this);
+
   }
 
   /**
@@ -147,11 +150,39 @@ class InteractiveMap extends Component {
     .finally(() => { /*do nothing */ });
   }
 
+  /**
+   * Move a legion from one region to another
+   */
+  moveLegion() {
+    const legionId = this.refs.movingLegionId.value;
+    const regionId = this.refs.destnRegionId.value;
+    const sourceRegionId = this.refs.sourceRegionId.value;
+    const colourId = this.refs.colourId.value;  
+
+    const self = this;
+    axios.put(`http://localhost:3001/legions/${sourceRegionId}/${legionId}/${regionId}/${colourId}`)
+    .then(() => {        
+      this.getMapData();
+    })    
+    .catch((error) => {      
+      console.error("Failed to move the legion", error);
+    })
+    .finally(() => { /*do nothing */ });
+
+  }
+
     /**
    * User has clicked an area on the map
    */
   areaClicked(area) { 
     this.props.areaSelected(area);
+  }
+
+  /**
+   * User has clicked a legion icon
+   */
+  legionClicked(legionId) {    
+    this.refs.movingLegionId.value = legionId;
   }
 
   /**
@@ -188,6 +219,7 @@ class InteractiveMap extends Component {
     const layer = e.target;
     const regionName = layer.feature.properties.name;
     this.refs.regionId.value = layer.feature.properties.id;  
+    this.refs.sourceRegionId.value = layer.feature.properties.id;  
     console.log(`User has selected ${regionName}`); 
   }
 
@@ -356,6 +388,7 @@ class InteractiveMap extends Component {
         //iconAnchor: [15,5],
         //popupAnchor: [15,5],        
       });
+      console.log("here", legion.id);
       // create the marker to add to Leaflet
       const legionMarker = React.createElement(
         Marker, 
@@ -363,9 +396,13 @@ class InteractiveMap extends Component {
           position: this.calculateRegionCenter(region),
           icon: legionIcon,
           key: uuidv4(),
+          check: "me",
+          onClick: this.legionClicked(legion.id)
         },
         <Popup>
-          {legion.name}
+          {
+            `${legion.id} ${legion.name}`
+          }
         </Popup>
       );
 
@@ -411,6 +448,12 @@ class InteractiveMap extends Component {
         &nbsp;&nbsp;Region ID <input type="text" ref="regionId" readOnly></input>
         &nbsp;&nbsp;Colour 
         {this.buildLegionColoursDropdown()}
+      </div>
+      <div>
+        <button onClick={this.moveLegion} >Move Legion</button>
+        &nbsp;&nbsp;Legion ID <input type="text" ref="movingLegionId" readOnly></input>
+        &nbsp;&nbsp;Source Region ID <input type="text" ref="sourceRegionId" readOnly></input>
+        &nbsp;&nbsp;Destination Region ID <input type="text" ref="destnRegionId"></input>
       </div>
       <div className={styles.interactiveMapWrapper}>
         {this.buildMap()}   
