@@ -123,6 +123,7 @@ server.put("/legions/:sourceRegionId/:legionId/:regionId/:colourId", function(re
   console.log("*******************************");
   console.log("posting");
 
+  // this needs to be in a SP on the db.
   const sqlUpdateQuery = "UPDATE kwl_t9a_db.legions " +  
   `SET region_id=${req.params.regionId} ` +
   `WHERE id=${req.params.legionId};` +

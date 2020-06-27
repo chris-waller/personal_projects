@@ -1,12 +1,15 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, ImageOverlay, Marker, Popup, GeoJSON } from 'react-leaflet'
+import { Map, ImageOverlay, Marker, Popup, GeoJSON } from 'react-leaflet';
 import L, {CRS} from 'leaflet';
-import enhanceWithClickOutside from 'react-click-outside'
+import enhanceWithClickOutside from 'react-click-outside';
 import axios from 'axios';
 import classNames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
+
+// Custom Components
+import LegionModal from './LegionModal';
 
 // Style imports
 import styles from './interactive-map.scss';
@@ -28,15 +31,23 @@ class InteractiveMap extends Component {
     
 
     this.state = {
+      // geoJSON map data -- contains region coords, names and colours
       mapData:   [{        
       }],
+      // list of legions that are currently on the map
       legions: [],
+      // list colours to be used in the legion colour dropdown
       legionColours: [],
-
+      // current zoom level of the Leaflet map
       zoomLevel: -1.7,
       // the geoJSON object will be re-drawn whenever it receives a new key
       mapKey: uuidv4(),
-      selectedRegion: "0", //doesn't exist
+      // indicates if the modal is currently open
+      modalOpen: false,
+
+
+      // the currently selected region
+      selectedRegion: null,
     }
 
     this.areaEntered = this.areaEntered.bind(this);
@@ -49,7 +60,7 @@ class InteractiveMap extends Component {
     this.addLegion = this.addLegion.bind(this);
     this.getLegionColours = this.getLegionColours.bind(this);
     this.moveLegion = this.moveLegion.bind(this);
-
+    this.toggleLegionModal = this.toggleLegionModal.bind(this);
   }
 
   /**
@@ -128,10 +139,10 @@ class InteractiveMap extends Component {
     .finally(() => { /*do nothing */ });
   }
 
-  addLegion() {
-    const legionName = this.refs.legionName.value;
-    const regionId = this.refs.regionId.value;
-    const colourId = this.refs.colourId.value;
+  addLegion(legionName, regionId, colourId) {
+    //const legionName = this.refs.legionName.value;
+    //const regionId = this.refs.regionId.value;
+    //const colourId = this.refs.colourId.value;
 
     // This will only occur if the legion colours dropdown failed to populate
     if (colourId == -1) {
@@ -142,7 +153,11 @@ class InteractiveMap extends Component {
     const self = this;
     axios.post(`http://localhost:3001/legions/${legionName}/${regionId}/${colourId}`)
     .then(() => {        
-      this.getMapData();
+      this.setState({
+        modalOpen: false,
+      }, () => {
+        this.getMapData();
+      });
     })    
     .catch((error) => {      
       console.error("Failed to add legion to the map", error);
@@ -217,10 +232,14 @@ class InteractiveMap extends Component {
    */
   regionClicked = (e) => {    
     const layer = e.target;
-    const regionName = layer.feature.properties.name;
-    this.refs.regionId.value = layer.feature.properties.id;  
-    this.refs.sourceRegionId.value = layer.feature.properties.id;  
-    console.log(`User has selected ${regionName}`); 
+    //const regionName = layer.feature.properties.name;
+    //this.refs.regionId.value = layer.feature.properties.id;  
+    //this.refs.sourceRegionId.value = layer.feature.properties.id;  
+    
+    this.setState({
+      modalOpen: true,
+      selectedRegion: layer,
+    })
   }
 
   /**
@@ -261,29 +280,6 @@ class InteractiveMap extends Component {
       fillOpacity: opacity,
     })
     
-  }
-
-  /**
-   * Populates a dropdown with a list of colours from the db
-   */
-  buildLegionColoursDropdown() {
-    const legionColours = [];
-    this.state.legionColours.forEach((colour) => {
-      legionColours.push(
-        <option 
-          value={colour.id}
-          key={colour.id}
-          style={{backgroundColor: `rgb(${colour.rgb})`}}
-        >
-          {colour.name}
-        </option>);
-    })      
-
-    return React.createElement(
-      "select", 
-      {ref: "colourId"}, 
-      legionColours
-    );
   }
 
 
@@ -388,7 +384,7 @@ class InteractiveMap extends Component {
         //iconAnchor: [15,5],
         //popupAnchor: [15,5],        
       });
-      console.log("here", legion.id);
+      
       // create the marker to add to Leaflet
       const legionMarker = React.createElement(
         Marker, 
@@ -436,29 +432,45 @@ class InteractiveMap extends Component {
     return regionCenter    
   }
 
+
+  /**
+   * Opens/closes the legion modal
+   */
+  toggleLegionModal(openModal) {        
+    this.setState({
+      modalOpen: !openModal,
+    })
+  }
+
   /**
    * Render.
    */
-  render() {  
+  render() {
+    const mapInteractionModal = (!this.state.modalOpen) ? false : (
+      <LegionModal 
+        closeModal={() => this.toggleLegionModal(true)}
+        selectedRegion={this.state.selectedRegion}
+        legionColours={this.state.legionColours}
+        addLegionCallback={this.addLegion}
+        map={mainImage}
+      />
+    );
+
     return(
-      <div>
-      <div>
-        <button onClick={this.addLegion} >Add Legion</button>
-        &nbsp;&nbsp;Name <input type="text" ref="legionName" ></input>
-        &nbsp;&nbsp;Region ID <input type="text" ref="regionId" readOnly></input>
-        &nbsp;&nbsp;Colour 
-        {this.buildLegionColoursDropdown()}
-      </div>
-      <div>
-        <button onClick={this.moveLegion} >Move Legion</button>
-        &nbsp;&nbsp;Legion ID <input type="text" ref="movingLegionId" readOnly></input>
-        &nbsp;&nbsp;Source Region ID <input type="text" ref="sourceRegionId" readOnly></input>
-        &nbsp;&nbsp;Destination Region ID <input type="text" ref="destnRegionId"></input>
-      </div>
-      <div className={styles.interactiveMapWrapper}>
-        {this.buildMap()}   
-      </div>
-      </div>
+      <React.Fragment>
+        {mapInteractionModal}
+        <div>  
+          <div>
+            <button onClick={this.moveLegion} >Move Legion</button>
+            &nbsp;&nbsp;Legion ID <input type="text" ref="movingLegionId" readOnly></input>
+            &nbsp;&nbsp;Source Region ID <input type="text" ref="sourceRegionId" readOnly></input>
+            &nbsp;&nbsp;Destination Region ID <input type="text" ref="destnRegionId"></input>
+          </div>
+          <div className={styles.interactiveMapWrapper}>
+            {this.buildMap()}   
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
 }
