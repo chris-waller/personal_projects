@@ -25,7 +25,7 @@ class LegionModal extends Component {
     this.state = {
       canvasContextURL: "",
       selectedLegionColour: null,
-      addLegionError: null,
+      addLegionError: "",
     }
 
     this.closeModal = this.closeModal.bind(this);
@@ -46,9 +46,9 @@ class LegionModal extends Component {
     
     this.refs.image.onload = () => {
       ctx.font = "30px Arial";
-      ctx.fillText("Hello World", 20, 100); 
       ctx.drawImage(this.refs.image, sx, sy, width, height, 0, 0, REGION_IMAGE_WIDTH, REGION_IMAGE_HEIGHT);      
-      let rgb = `rgb(${this.refs.colourId.value.substring(this.refs.colourId.value.indexOf("|") + 1)})`;
+
+      const rgb = `rgb(${this.refs.colourId.value.substring(this.refs.colourId.value.indexOf("|") + 1)})`;
       
       this.setState({
         canvasContextURL: canvas.toDataURL(),
@@ -115,7 +115,7 @@ class LegionModal extends Component {
     const legionName = this.refs.legionName.value;
     if (legionName === "") {
       this.setState({
-        addLegionError: "Foobar",
+        addLegionError: "Must specify a legion name.",
       })
       return;
     }
@@ -169,12 +169,17 @@ class LegionModal extends Component {
             <button onClick={this.addLegion} className={styles.addLegion} >Add Legion</button>          
           </div>  
 
-          <div className={styles.previewImage}>
-            <img 
-              src={army} 
-              style={{backgroundColor: `${this.state.selectedLegionColour}`}} 
-              width="50px" height="50px"  
-            />
+          <div className={styles.bottomArea}>
+            <div className={styles.error}>
+              {this.state.addLegionError}
+            </div>
+            <div className={styles.previewImage}>
+              <img 
+                src={army} 
+                style={{backgroundColor: `${this.state.selectedLegionColour}`}} 
+                width="50px" height="50px"  
+              />
+            </div>
           </div>  
 
 

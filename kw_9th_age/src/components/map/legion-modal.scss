@@ -68,9 +68,28 @@
   padding-right: 5px;  
 }
 
+.bottom-area {
+  height: 100%;
+  position: relative;
+}
+
+.error {
+  min-height: 20px;  
+  width: 100%;
+  text-align: center;
+  margin: 15px 0 0 0;
+  font-size: 1.3em;
+  font-style: italic;
+  color: red;
+}
+
 .preview-image {
   display: grid;
   justify-content: center;
   align-content: center;
-  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
