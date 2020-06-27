@@ -2,8 +2,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// helper methods
+import {getLegionIcon} from '../../helpers/HelperMethods';
+
+// Image imports
+import army from '../../images/army.png';
+
 // Style imports
 import styles from './legion-modal.scss';
+
+const REGION_IMAGE_WIDTH = 204;
+const REGION_IMAGE_HEIGHT = 217;
 
 /**
  * Display and interacte with the world map
@@ -13,30 +22,38 @@ class LegionModal extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      canvasContextURL: "",
+      selectedLegionColour: null,
+      addLegionError: null,
+    }
+
     this.closeModal = this.closeModal.bind(this);
     this.modalClicked = this.modalClicked.bind(this);
     this.addLegion = this.addLegion.bind(this);
+    this.dropdownChanged = this.dropdownChanged.bind(this);
   }
 
   componentDidMount() {
     const canvas = this.refs.canvas;
     const ctx = canvas.getContext("2d");
-    const img = this.refs.image;
-    
+            
     const coords = this.props.selectedRegion.feature.geometry.coordinates;
     const sx = coords[0][0][0];
-    const sy = coords[0][1][1];
-    const width = coords[0][3][0] - sx;
-    const height = coords[0][5][1] - sy;
-
-    console.log(`x: ${sx}  y: ${sy}`)
-    console.log(`width: ${width}  height: ${height}`)
-
-    img.onload = () => {
-      //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-      ctx.drawImage(img, sx, sy, width, height, 0, 0, 100, 100);
-      ctx.font = "40px Courier";
-      //ctx.fillText("test", 100, 75);
+    const sy = 1522 - coords[0][4][1];
+    const width = coords[0][3][0] - coords[0][0][0];
+    const height = coords[0][4][1] - coords[0][2][1];
+    
+    this.refs.image.onload = () => {
+      ctx.font = "30px Arial";
+      ctx.fillText("Hello World", 20, 100); 
+      ctx.drawImage(this.refs.image, sx, sy, width, height, 0, 0, REGION_IMAGE_WIDTH, REGION_IMAGE_HEIGHT);      
+      let rgb = `rgb(${this.refs.colourId.value.substring(this.refs.colourId.value.indexOf("|") + 1)})`;
+      
+      this.setState({
+        canvasContextURL: canvas.toDataURL(),
+        selectedLegionColour: rgb,
+      })
     }
   }
   
@@ -46,6 +63,13 @@ class LegionModal extends Component {
   closeModal() {
     //close modal
     this.props.closeModal();
+  }
+
+  dropdownChanged() {
+    let rgb = `rgb(${this.refs.colourId.value.substring(this.refs.colourId.value.indexOf("|") + 1)})`;
+    this.setState({
+      selectedLegionColour: rgb,
+    })
   }
 
   /**
@@ -61,11 +85,13 @@ class LegionModal extends Component {
    */
   buildLegionColoursDropdown() {
     const legionColours = [];
-    this.props.legionColours.forEach((colour) => {
+
+    this.props.legionColours.forEach((colour) => {   
+      const value = `${colour.id}|${colour.rgb}`;
       legionColours.push(
         <option 
-          value={colour.id}
-          key={colour.id}
+          value={value}
+          key={colour.rgb}
           style={{backgroundColor: `rgb(${colour.rgb})`}}
         >
           {colour.name}
@@ -74,7 +100,10 @@ class LegionModal extends Component {
 
     return React.createElement(
       "select", 
-      {ref: "colourId"}, 
+      {
+        ref: "colourId",
+        onChange: this.dropdownChanged
+      }, 
       legionColours
     );
   }
@@ -84,8 +113,14 @@ class LegionModal extends Component {
    */
   addLegion() {
     const legionName = this.refs.legionName.value;
+    if (legionName === "") {
+      this.setState({
+        addLegionError: "Foobar",
+      })
+      return;
+    }
     const regionId = this.refs.regionId.value;
-    const colourId = this.refs.colourId.value;  
+    const colourId = this.refs.colourId.value;      
     this.props.addLegionCallback(legionName, regionId, colourId);
   }
 
@@ -96,27 +131,52 @@ class LegionModal extends Component {
   render() {
     const regionInfo = this.props.selectedRegion.feature;
     const regionId = regionInfo.properties.id;
-    const regionName = regionInfo.properties.name;
+    //const regionName = regionInfo.properties.name;
     const regionColour = regionInfo.properties.fillColor;
-    
+    //const regionColourName = this.refs.colourId.value; 
 
     return (
       <div className={styles.legionModal} onClick={this.closeModal}>    
-        <div className={styles.legionModalInner} onClick={this.modalClicked}>
+        <canvas 
+          ref="canvas" 
+          width={REGION_IMAGE_WIDTH} 
+          height={REGION_IMAGE_HEIGHT} 
+          className={styles.hidden}
+
+        />       
+        <img ref="image" src={this.props.map} className={styles.hidden} />
+        <div 
+          className={styles.legionModalInner} 
+          onClick={this.modalClicked} 
+          style={{backgroundImage: 'url('+ this.state.canvasContextURL +')'}}
+        >
           
-          <button onClick={this.closeModal} className={styles.closeButton}>Close</button>          
+          {/*<button onClick={this.closeModal} className={styles.closeButton}>Close</button>*/}
           
-          <div>   
-            <div>Name <input type="text" ref="legionName" ></input></div>
-            <div>Region ID <input type="text" ref="regionId" readOnly value={regionId} /></div>
-            <div>Colour {this.buildLegionColoursDropdown()} </div>
-            <button onClick={this.addLegion} >Add Legion</button>
-        </div>
-        
-        <div>
-          <canvas ref="canvas" width={500} height={500} />
-          <img ref="image" src={this.props.map} className={styles.hidden} />
-        </div>
+          <div className={styles.addLegion}>   
+            <div className={styles.inputRow}>
+              <span>Name:</span> 
+              <input type="text" ref="legionName" size="40"  placeholder="Enter Legion Name"></input>
+            </div>
+            <div className={styles.inputRow}>
+              <span>Colour:</span> 
+              {this.buildLegionColoursDropdown()} 
+            </div>  
+            <div className={styles.inputRow}>
+              <span>Region ID:</span>
+              <input type="text" ref="regionId" readOnly value={regionId} size="4" />
+            </div>            
+            <button onClick={this.addLegion} className={styles.addLegion} >Add Legion</button>          
+          </div>  
+
+          <div className={styles.previewImage}>
+            <img 
+              src={army} 
+              style={{backgroundColor: `${this.state.selectedLegionColour}`}} 
+              width="50px" height="50px"  
+            />
+          </div>  
+
 
         </div>      
       </div>

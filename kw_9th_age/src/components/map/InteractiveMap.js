@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Custom Components
 import LegionModal from './LegionModal';
+import {getLegionIcon} from '../../helpers/HelperMethods';
 
 // Style imports
 import styles from './interactive-map.scss';
@@ -140,10 +141,6 @@ class InteractiveMap extends Component {
   }
 
   addLegion(legionName, regionId, colourId) {
-    //const legionName = this.refs.legionName.value;
-    //const regionId = this.refs.regionId.value;
-    //const colourId = this.refs.colourId.value;
-
     // This will only occur if the legion colours dropdown failed to populate
     if (colourId == -1) {
       alert("Cannot add a new legion. There was a problem retrieving the list of colours from the server.");
@@ -294,7 +291,7 @@ class InteractiveMap extends Component {
       <Map
         ref="worldMap"
         crs={CRS.Simple}
-        center={[383, 512]} 
+        center={[766, 1024]} 
         zoom={this.state.zoomLevel} 
         minZoom={-1.7}
         maxZoom={0.6}
@@ -350,23 +347,8 @@ class InteractiveMap extends Component {
     this.state.legions.forEach((legion) => {
       const color = legion.rgb;
       const colorName = legion.colour;
-      const legionClass = `${colorName}Legion`;
-
-      // get the region this army is currently in
-      const mapData = this.state.mapData;      
-      const region = mapData.find(r => r.properties.id == legion.regionId);
+      //const legionClass = `${colorName}Legion`;
                   
-      // L.icon won't accept styles.
-      // Instead of creating a stylesheet with pre-defined styles, we create them here.
-      // First we check we haven't already added this class to the document.
-      if (document.getElementById(legionClass) === null) {
-        let style = document.createElement("style");
-        style.type = 'text/css';
-        style.setAttribute("id", legionClass);
-        style.innerHTML = `.${legionClass} { background-color: rgba(${color}, 1); opacity: 1; }`;
-        document.getElementsByTagName('head')[0].appendChild(style);  
-      }
-
       // Still not sure why the image overlay has these wierd zoom levels.
       // Small hack to compensate for this. Hopefully I can find the time to look 
       // into this in the future.
@@ -375,15 +357,11 @@ class InteractiveMap extends Component {
       currentZoomLevel *= 10;
       
       const iconSize = [15 + currentZoomLevel, 15 + currentZoomLevel];
-    
-      const legionIcon = new L.Icon({
-        iconUrl: army,  
-        iconRetinaUrl: army,
-        iconSize,
-        className: classNames("leaflet-div-icon", styles.armyIcon, `${legionClass}`),      
-        //iconAnchor: [15,5],
-        //popupAnchor: [15,5],        
-      });
+      const legionIcon = getLegionIcon(colorName, color, army, iconSize);  
+
+      // get the region this army is currently in
+      const mapData = this.state.mapData;      
+      const region = mapData.find(r => r.properties.id == legion.regionId);
       
       // create the marker to add to Leaflet
       const legionMarker = React.createElement(
@@ -392,7 +370,6 @@ class InteractiveMap extends Component {
           position: this.calculateRegionCenter(region),
           icon: legionIcon,
           key: uuidv4(),
-          check: "me",
           onClick: this.legionClicked(legion.id)
         },
         <Popup>
@@ -401,8 +378,6 @@ class InteractiveMap extends Component {
           }
         </Popup>
       );
-
-
       legionMarkers.push(legionMarker);
     });
 
