@@ -25,16 +25,20 @@ class LegionModal extends Component {
     this.state = {
       canvasContextURL: "",
       selectedLegionColour: null,
-      addLegionError: "",
+      addLegionError: props.errorMessage
     }
 
     this.closeModal = this.closeModal.bind(this);
     this.modalClicked = this.modalClicked.bind(this);
     this.addLegion = this.addLegion.bind(this);
     this.dropdownChanged = this.dropdownChanged.bind(this);
+    this.keyPressed = this.keyPressed.bind(this);
   }
 
   componentDidMount() {
+    // listen for the escape key
+    document.addEventListener("keydown", this.keyPressed, false);
+
     const canvas = this.refs.canvas;
     const ctx = canvas.getContext("2d");
             
@@ -45,7 +49,6 @@ class LegionModal extends Component {
     const height = coords[0][4][1] - coords[0][2][1];
     
     this.refs.image.onload = () => {
-      ctx.font = "30px Arial";
       ctx.drawImage(this.refs.image, sx, sy, width, height, 0, 0, REGION_IMAGE_WIDTH, REGION_IMAGE_HEIGHT);      
 
       const rgb = `rgb(${this.refs.colourId.value.substring(this.refs.colourId.value.indexOf("|") + 1)})`;
@@ -56,13 +59,46 @@ class LegionModal extends Component {
       })
     }
   }
-  
+
+  /**
+   * componentWillUnmount
+   */
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyPressed, false);
+  }
+
+  /**
+   * getDerivedStateFromProps
+   */
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      addLegionError: nextProps.errorMessage? nextProps.errorMessage : prevState.addLegionError,
+    };
+  }
+
   /**
    * Tell the parent it's time to close the modal
    */
   closeModal() {
     //close modal
     this.props.closeModal();
+  }
+
+  /**
+   * User has pressed a keyboard key
+   */
+  keyPressed(event) {
+
+    // escape key
+    if (event.keyCode === 27) {
+      this.closeModal();
+    }
+
+    // enter key
+    if (event.keyCode === 13) {
+      this.addLegion();
+    }
+
   }
 
   dropdownChanged() {
@@ -109,18 +145,22 @@ class LegionModal extends Component {
   }
 
   /**
-   * 
+   * Add a legion to the map
    */
   addLegion() {
     const legionName = this.refs.legionName.value;
     if (legionName === "") {
       this.setState({
         addLegionError: "Must specify a legion name.",
-      })
+      });
       return;
     }
+
+    this.setState({
+      addLegionError: null,
+    });
     const regionId = this.refs.regionId.value;
-    const colourId = this.refs.colourId.value;      
+    const colourId = this.refs.colourId.value.substring(0, this.refs.colourId.value.indexOf("|"));      
     this.props.addLegionCallback(legionName, regionId, colourId);
   }
 
@@ -131,7 +171,7 @@ class LegionModal extends Component {
   render() {
     const regionInfo = this.props.selectedRegion.feature;
     const regionId = regionInfo.properties.id;
-    //const regionName = regionInfo.properties.name;
+    const regionName = regionInfo.properties.name;
     const regionColour = regionInfo.properties.fillColor;
     //const regionColourName = this.refs.colourId.value; 
 
@@ -156,15 +196,19 @@ class LegionModal extends Component {
           <div className={styles.addLegion}>   
             <div className={styles.inputRow}>
               <span>Name:</span> 
-              <input type="text" ref="legionName" size="40"  placeholder="Enter Legion Name"></input>
+              <input type="text" ref="legionName" size="35"  placeholder="Enter Legion Name"></input>
             </div>
             <div className={styles.inputRow}>
               <span>Colour:</span> 
               {this.buildLegionColoursDropdown()} 
             </div>  
             <div className={styles.inputRow}>
+              <span>Region Name:</span>
+              <input type="text" ref="regionName" readOnly value={regionName} className={styles.disabled} />
+            </div>            
+            <div className={styles.inputRow}>
               <span>Region ID:</span>
-              <input type="text" ref="regionId" readOnly value={regionId} size="4" />
+              <input type="text" ref="regionId" readOnly value={regionId} className={styles.disabled} size="4" />
             </div>            
             <button onClick={this.addLegion} className={styles.addLegion} >Add Legion</button>          
           </div>  
@@ -177,7 +221,7 @@ class LegionModal extends Component {
               <img 
                 src={army} 
                 style={{backgroundColor: `${this.state.selectedLegionColour}`}} 
-                width="50px" height="50px"  
+                className={styles.armyIcon}
               />
             </div>
           </div>  
@@ -199,4 +243,5 @@ LegionModal.propTypes = {
   selectedRegion: PropTypes.object.isRequired,
   legionColours: PropTypes.array.isRequired,
   map: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
 }

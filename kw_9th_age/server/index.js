@@ -104,10 +104,17 @@ server.post("/legions/:legionName/:regionId/:colourId", function(req, res) {
     + `WHERE id = ${req.params.regionId};`;
 
   client.query(sqlInsertQuery + sqlUpdateQuery,
-    (error, results) => {
+    (error) => {
       if (error) {
-        res.status(500).json(error);
-        console.log(error);
+        
+        let errorMessage = "Failed to add the legion";
+
+        if (error.message.includes("duplicate key") && (error.message.includes("legions_name_key"))) {
+          errorMessage = "Legion name already exists"
+        }
+
+      
+        res.status(500).json(errorMessage);        
         return;
       }
 

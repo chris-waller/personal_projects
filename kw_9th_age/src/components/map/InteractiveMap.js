@@ -5,7 +5,6 @@ import { Map, ImageOverlay, Marker, Popup, GeoJSON } from 'react-leaflet';
 import L, {CRS} from 'leaflet';
 import enhanceWithClickOutside from 'react-click-outside';
 import axios from 'axios';
-import classNames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 
 // Custom Components
@@ -45,10 +44,10 @@ class InteractiveMap extends Component {
       mapKey: uuidv4(),
       // indicates if the modal is currently open
       modalOpen: false,
-
-
       // the currently selected region
       selectedRegion: null,
+      // any errors returned from the server
+      serverError: null,
     }
 
     this.areaEntered = this.areaEntered.bind(this);
@@ -156,8 +155,11 @@ class InteractiveMap extends Component {
         this.getMapData();
       });
     })    
-    .catch((error) => {      
-      console.error("Failed to add legion to the map", error);
+    .catch((error, response) => {      
+      console.error(error.response.data);
+      this.setState({
+        serverError: error.response.data,
+      })
     })
     .finally(() => { /*do nothing */ });
   }
@@ -428,6 +430,7 @@ class InteractiveMap extends Component {
         legionColours={this.state.legionColours}
         addLegionCallback={this.addLegion}
         map={mainImage}
+        errorMessage={this.state.serverError}
       />
     );
 
