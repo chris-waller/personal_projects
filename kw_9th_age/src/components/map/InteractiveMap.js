@@ -361,29 +361,32 @@ class InteractiveMap extends Component {
    * Create the world map to render.
    */
   buildMap() {
-    const bounds = [[0,0], [2000, 3400]];
+    const boundY = 1522;
+    const boundX = 2048;
+    const bounds = [[0,0], [boundY, boundX]];
     const geoJson = this.state.mapData;
     
     return (
       <Map
         ref="worldMap"
         crs={CRS.Simple}
-        center={[766, 1024]} 
+        center={[boundX / 2, boundY / 2]} 
         zoom={this.state.zoomLevel} 
         minZoom={-1.7}
         maxZoom={-1}
         zoomSnap={0.1}
-        maxBoundsViscosity={0.9}
+        maxBoundsViscosity={1}
         className={styles.mapLayer}
         attributionControl={false}
         zoomControl={false}
-        maxBounds={bounds}
+        //maxBounds={bounds}
         onZoom={this.mapZoom}      
       >
         {/* the map image */}
         <ImageOverlay 
           url={mainImage} 
           bounds={bounds}
+          //center={[boundX, boundY]} 
           className={styles.test}
         />
 
@@ -398,7 +401,8 @@ class InteractiveMap extends Component {
             "fillOpacity": "0", 
           }} 
           onEachFeature={this.onEachFeature}
-          className={styles.test}       
+          className={styles.test} 
+          bounds={bounds}     
         />
 
         {/* Fullscreen button */}
