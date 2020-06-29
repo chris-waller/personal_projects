@@ -6,6 +6,7 @@ import L, {CRS} from 'leaflet';
 import enhanceWithClickOutside from 'react-click-outside';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 
 // Custom Components
 import LegionModal from './LegionModal';
@@ -52,6 +53,8 @@ class InteractiveMap extends Component {
       selectedLegion: null,
       // any errors returned from the server
       serverError: null,
+      // indicates if the map should be displayed in full screen
+      fullScreen: false,
     }
 
     this.areaEntered = this.areaEntered.bind(this);
@@ -68,6 +71,9 @@ class InteractiveMap extends Component {
     this.toggleMoveLegionModal = this.toggleMoveLegionModal.bind(this); 
     this.mousePressed = this.mousePressed.bind(this);   
     this.disableContextMenu = this.disableContextMenu.bind(this);
+    this.fullScreen = this.fullScreen.bind(this);
+    this.keyPressed = this.keyPressed.bind(this);
+    
   }
 
   /**
@@ -76,6 +82,7 @@ class InteractiveMap extends Component {
   componentDidMount() {   
     document.addEventListener("mousedown", this.mousePressed, false); 
     document.addEventListener("contextmenu", this.disableContextMenu);
+    document.addEventListener("keydown", this.keyPressed, false);
     this.getLegionColours();
     this.getMapData();    
   }
@@ -86,6 +93,7 @@ class InteractiveMap extends Component {
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.mousePressed, false);
     document.removeEventListener("contextmenu", this.disableContextMenu);
+    document.removeEventListener("keydown", this.keyPressed, false);
   }
 
   /**
@@ -102,10 +110,23 @@ class InteractiveMap extends Component {
   }
 
   /**
+   * User has pressed a keyboard key
+   */
+  keyPressed(event) {
+
+    // escape key
+    if (event.keyCode === 27) {
+      this.setState({
+        fullScreen: false,
+      })
+    }
+  }
+
+  /**
    * Disable the right-click context menu
    */
   disableContextMenu(event) {    
-    event.preventDefault();
+    //event.preventDefault();
   }
 
   /**
@@ -340,7 +361,7 @@ class InteractiveMap extends Component {
    * Create the world map to render.
    */
   buildMap() {
-    const bounds = [[0,0], [1522,2048]];
+    const bounds = [[0,0], [2000, 3400]];
     const geoJson = this.state.mapData;
     
     return (
@@ -350,9 +371,9 @@ class InteractiveMap extends Component {
         center={[766, 1024]} 
         zoom={this.state.zoomLevel} 
         minZoom={-1.7}
-        maxZoom={0.6}
+        maxZoom={-1}
         zoomSnap={0.1}
-        maxBoundsViscosity={0}
+        maxBoundsViscosity={0.9}
         className={styles.mapLayer}
         attributionControl={false}
         zoomControl={false}
@@ -363,6 +384,7 @@ class InteractiveMap extends Component {
         <ImageOverlay 
           url={mainImage} 
           bounds={bounds}
+          className={styles.test}
         />
 
         {/*GeoJSON */}
@@ -375,8 +397,13 @@ class InteractiveMap extends Component {
             "fillColr": "rgb(255,0,0)",
             "fillOpacity": "0", 
           }} 
-          onEachFeature={this.onEachFeature}          
+          onEachFeature={this.onEachFeature}
+          className={styles.test}       
         />
+
+        {/* Fullscreen button */}
+        <button onClick={this.fullScreen} className={styles.fullScreen}>X</button>
+        
 
         {this.generateMarkers()}        
 
@@ -488,6 +515,15 @@ class InteractiveMap extends Component {
   }
 
   /**
+   * Turn on full screen mode.
+   */
+  fullScreen() {
+    this.setState({
+      fullScreen: true,
+    })
+  }
+
+  /**
    * Render.
    */
   render() {
@@ -502,14 +538,14 @@ class InteractiveMap extends Component {
       />
     );
 
+    const classes = (this.state.fullScreen) ? 
+      classNames(styles.interactiveMapWrapper, styles.fullScreen) : styles.interactiveMapWrapper;    
     return(
       <React.Fragment>
         {legionModal}
-        <div>            
-          <div className={styles.interactiveMapWrapper}>
-            {this.buildMap()}   
-          </div>
-        </div>
+        <div className={classes}>          
+          {this.buildMap()}   
+        </div>        
       </React.Fragment>
     );
   }
