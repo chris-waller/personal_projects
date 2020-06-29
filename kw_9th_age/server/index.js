@@ -149,7 +149,13 @@ server.put("/legions/:legionId/:sourceRegionId/:destnRegionId/:colourId", functi
   client.query(sqlUpdateQuery,
     (error, results) => {
       if (error) {
-        res.status(500).json(error);
+        console.log(error.message);
+        let errorMessage = "Failed to add the legion";
+        if (error.message.includes("duplicate key") && (error.message.includes("legions_un"))) {
+          errorMessage = "A legion already exists in this region.";
+        }
+
+        res.status(500).json(errorMessage);
         console.log(error);
         return;
       }

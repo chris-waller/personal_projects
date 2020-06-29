@@ -35,8 +35,10 @@ class LegionModal extends Component {
     this.keyPressed = this.keyPressed.bind(this);
   }
 
+  /**
+   * componentDidMount.
+   */
   componentDidMount() {
-    // listen for the escape key
     document.addEventListener("keydown", this.keyPressed, false);
 
     const canvas = this.refs.canvas;

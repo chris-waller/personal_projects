@@ -65,15 +65,47 @@ class InteractiveMap extends Component {
     this.getLegionColours = this.getLegionColours.bind(this);
     this.moveLegion = this.moveLegion.bind(this);
     this.toggleAddLegionModal = this.toggleAddLegionModal.bind(this);
-    this.toggleMoveLegionModal = this.toggleMoveLegionModal.bind(this);
+    this.toggleMoveLegionModal = this.toggleMoveLegionModal.bind(this); 
+    this.mousePressed = this.mousePressed.bind(this);   
+    this.disableContextMenu = this.disableContextMenu.bind(this);
   }
 
   /**
    * ComponentDidMount.
    */
-  componentDidMount() {    
+  componentDidMount() {   
+    document.addEventListener("mousedown", this.mousePressed, false); 
+    document.addEventListener("contextmenu", this.disableContextMenu);
     this.getLegionColours();
     this.getMapData();    
+  }
+
+  /**
+   * componentWillUnmount
+   */
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.mousePressed, false);
+    document.removeEventListener("contextmenu", this.disableContextMenu);
+  }
+
+  /**
+   * User has pressed a mouse button
+   */
+  mousePressed(event) {
+    if (event.which === 3) {      
+      this.setState({
+        selectedRegion: null,
+        selectedLegion: null,
+        addLegionModalOpen: false,
+      })
+    }
+  }
+
+  /**
+   * Disable the right-click context menu
+   */
+  disableContextMenu(event) {    
+    event.preventDefault();
   }
 
   /**
@@ -163,7 +195,7 @@ class InteractiveMap extends Component {
         this.getMapData();
       });
     })    
-    .catch((error, response) => {      
+    .catch((error) => {      
       console.error(error.response.data);
       this.setState({
         serverError: error.response.data,
@@ -177,12 +209,17 @@ class InteractiveMap extends Component {
    */
   moveLegion(legionId, sourceRegionId, destnRegionId, colourId) {
 
+    if (sourceRegionId === destnRegionId) {
+      console.error("Can't move a legion onto the same region");
+      return;
+    }
+
     axios.put(`http://localhost:3001/legions/${legionId}/${sourceRegionId}/${destnRegionId}/${colourId}`)
     .then(() => {        
       this.getMapData();
     })    
     .catch((error) => {      
-      console.error("Failed to move the legion", error);
+      console.error("Failed to move the legion:", error.response.data);
     })
     .finally(() => { /*do nothing */ });
 
@@ -208,8 +245,8 @@ class InteractiveMap extends Component {
    * @param layer   the layer we are modifying
    */
   onEachFeature = (feature, layer) => {
-    const popup = `<Popup>${feature.properties.name}</Popup>`;
-    layer.bindPopup(popup);
+    //const popup = `<Popup>${feature.properties.name}</Popup>`;
+    //layer.bindPopup(popup);
     
     this.fillRegion(layer, false);
     
