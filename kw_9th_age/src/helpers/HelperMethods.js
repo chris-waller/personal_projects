@@ -4,7 +4,7 @@ import styles from './helper-methods.scss'
 /**
  *  Set a global style and then use it to create a Leaflet Icon.
  */
-export function getLegionIcon(colourName, color, imageURL, iconSize) {
+export function getLegionIcon(colourName, color, imageURL, iconSize, isLegionActive) {
 
   const styleName = `${colourName}Legion`;
 
@@ -19,11 +19,12 @@ export function getLegionIcon(colourName, color, imageURL, iconSize) {
     document.getElementsByTagName('head')[0].appendChild(style);  
   }
 
+  const style = (isLegionActive) ? styles.armyIconActive : styles.armyIconRegular;
   const legionIcon = new L.Icon({
     iconUrl: imageURL,  
     iconRetinaUrl: imageURL,
     iconSize,
-    className: classNames("leaflet-div-icon", styles.armyIcon, `${styleName}`),      
+    className: classNames("leaflet-div-icon", style, `${styleName}`),      
     //iconAnchor: [15,5],
     //popupAnchor: [15,5],        
   });

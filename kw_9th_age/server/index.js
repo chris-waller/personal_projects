@@ -69,7 +69,7 @@ server.get("/legions", function(req, res) {
   console.log("*******************************");
 
   const sqlQuery = "SELECT l.id, l.name AS region_name, l.region_id, " +
-    "c.name AS colour_name, c.rgb " + 
+    "c.id AS colour_id, c.name AS colour_name, c.rgb " + 
   "FROM kwl_t9a_db.legions l " +
     "INNER JOIN kwl_t9a_db.legion_colours c " +
   "ON l.colour_id = c.id";
@@ -106,13 +106,16 @@ server.post("/legions/:legionName/:regionId/:colourId", function(req, res) {
   client.query(sqlInsertQuery + sqlUpdateQuery,
     (error) => {
       if (error) {
-        
+        console.log(error.message);
         let errorMessage = "Failed to add the legion";
 
         if (error.message.includes("duplicate key") && (error.message.includes("legions_name_key"))) {
-          errorMessage = "Legion name already exists"
+          errorMessage = "Legion name already exists";
         }
 
+        if (error.message.includes("unique constraint") && (error.message.includes("legions_un"))) {
+          errorMessage = "A legion already exits. Cannot create a new one in this regions."
+        }
       
         res.status(500).json(errorMessage);        
         return;
@@ -123,20 +126,20 @@ server.post("/legions/:legionName/:regionId/:colourId", function(req, res) {
 
 });
 
-server.put("/legions/:sourceRegionId/:legionId/:regionId/:colourId", function(req, res) {
+server.put("/legions/:legionId/:sourceRegionId/:destnRegionId/:colourId", function(req, res) {
   console.log("");
   console.log("*******************************");
-  console.log("API call made to /legions/legionId/:regionId/:colourId");
+  console.log("API call made to /legions/legionId/:sourceRegionId/:destinRegionId/:colourId");
   console.log("*******************************");
   console.log("posting");
 
   // this needs to be in a SP on the db.
   const sqlUpdateQuery = "UPDATE kwl_t9a_db.legions " +  
-  `SET region_id=${req.params.regionId} ` +
+  `SET region_id=${req.params.destnRegionId} ` +
   `WHERE id=${req.params.legionId};` +
   "UPDATE kwl_t9a_db.regions " +
   `SET colour_id=${req.params.colourId} ` +
-  `WHERE id=${req.params.regionId};` +
+  `WHERE id=${req.params.destnRegionId};` +
   "UPDATE kwl_t9a_db.regions " +
   `SET colour_id=null ` +
   `WHERE id=${req.params.sourceRegionId};`
@@ -224,11 +227,12 @@ function createLegionFromData(data) {
     const id = row["id"];
     const name = row["region_name"];
     const regionId = row["region_id"];
+    const colourId = row["colour_id"];
     const colour = row["colour_name"];
     const rgb = row["rgb"];
 
     const legion = {
-      id, name, regionId, colour, rgb
+      id, name, regionId, colourId, colour, rgb
     };    
     legions.push(legion);
   })  

@@ -172,7 +172,7 @@ class LegionModal extends Component {
     const regionInfo = this.props.selectedRegion.feature;
     const regionId = regionInfo.properties.id;
     const regionName = regionInfo.properties.name;
-    const regionColour = regionInfo.properties.fillColor;
+    //const regionColour = regionInfo.properties.fillColor;
     //const regionColourName = this.refs.colourId.value; 
 
     return (

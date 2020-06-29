@@ -42,10 +42,14 @@ class InteractiveMap extends Component {
       zoomLevel: -1.7,
       // the geoJSON object will be re-drawn whenever it receives a new key
       mapKey: uuidv4(),
-      // indicates if the modal is currently open
-      modalOpen: false,
+      // indicates if the add legion modal is currently open
+      addLegionModalOpen: false,
+      // indicates if the move legion modal is currently open
+      moveLegionModalOpen: false,
       // the currently selected region
       selectedRegion: null,
+      // the currently selected legion
+      selectedLegion: null,
       // any errors returned from the server
       serverError: null,
     }
@@ -60,7 +64,8 @@ class InteractiveMap extends Component {
     this.addLegion = this.addLegion.bind(this);
     this.getLegionColours = this.getLegionColours.bind(this);
     this.moveLegion = this.moveLegion.bind(this);
-    this.toggleLegionModal = this.toggleLegionModal.bind(this);
+    this.toggleAddLegionModal = this.toggleAddLegionModal.bind(this);
+    this.toggleMoveLegionModal = this.toggleMoveLegionModal.bind(this);
   }
 
   /**
@@ -113,6 +118,8 @@ class InteractiveMap extends Component {
       self.setState({
         mapData,
         mapKey,
+        selectedRegion: null,
+        selectedLegion: null,
       });      
     })
     .then(() => {     
@@ -128,7 +135,7 @@ class InteractiveMap extends Component {
     const self = this;
     axios.get('http://localhost:3001/legions')
     .then((response) => {        
-      const legions = response.data;  
+      const legions = response.data;        
       self.setState({
         legions,
       })      
@@ -150,7 +157,8 @@ class InteractiveMap extends Component {
     axios.post(`http://localhost:3001/legions/${legionName}/${regionId}/${colourId}`)
     .then(() => {        
       this.setState({
-        modalOpen: false,
+        addLegionModalOpen: false,
+        moveLegionModalOpen: false,
       }, () => {
         this.getMapData();
       });
@@ -167,14 +175,9 @@ class InteractiveMap extends Component {
   /**
    * Move a legion from one region to another
    */
-  moveLegion() {
-    const legionId = this.refs.movingLegionId.value;
-    const regionId = this.refs.destnRegionId.value;
-    const sourceRegionId = this.refs.sourceRegionId.value;
-    const colourId = this.refs.colourId.value;  
+  moveLegion(legionId, sourceRegionId, destnRegionId, colourId) {
 
-    const self = this;
-    axios.put(`http://localhost:3001/legions/${sourceRegionId}/${legionId}/${regionId}/${colourId}`)
+    axios.put(`http://localhost:3001/legions/${legionId}/${sourceRegionId}/${destnRegionId}/${colourId}`)
     .then(() => {        
       this.getMapData();
     })    
@@ -190,13 +193,6 @@ class InteractiveMap extends Component {
    */
   areaClicked(area) { 
     this.props.areaSelected(area);
-  }
-
-  /**
-   * User has clicked a legion icon
-   */
-  legionClicked(legionId) {    
-    this.refs.movingLegionId.value = legionId;
   }
 
   /**
@@ -231,15 +227,36 @@ class InteractiveMap extends Component {
    */
   regionClicked = (e) => {    
     const layer = e.target;
-    //const regionName = layer.feature.properties.name;
-    //this.refs.regionId.value = layer.feature.properties.id;  
-    //this.refs.sourceRegionId.value = layer.feature.properties.id;  
+
+    // User is attempting to move the legion
+    if (this.state.selectedLegion) {
+      this.moveLegion(this.state.selectedLegion.id,
+        this.state.selectedLegion.regionId,
+        layer.feature.properties.id,
+        this.state.selectedLegion.colourId);
+        return;
+    }
     
     this.setState({
-      modalOpen: true,
+      addLegionModalOpen: true,
       selectedRegion: layer,
     })
   }
+
+  /**
+   * User has clicked a legion icon
+   */
+  legionClicked(legion) {        
+    const selectedRegion = this.state.mapData.find(
+      (region) => region.properties.id === legion.regionId
+    );
+
+    this.setState({
+      selectedRegion,
+      selectedLegion: legion,
+    });
+  }
+
 
   /**
    * User moused over a region
@@ -346,7 +363,7 @@ class InteractiveMap extends Component {
 
     let legionMarkers = [];
 
-    this.state.legions.forEach((legion) => {
+    this.state.legions.forEach((legion) => {      
       const color = legion.rgb;
       const colorName = legion.colour;
       //const legionClass = `${colorName}Legion`;
@@ -359,7 +376,10 @@ class InteractiveMap extends Component {
       currentZoomLevel *= 10;
       
       const iconSize = [15 + currentZoomLevel, 15 + currentZoomLevel];
-      const legionIcon = getLegionIcon(colorName, color, army, iconSize);  
+      let isLegionActive = 
+        (this.state.selectedLegion && this.state.selectedLegion.id === legion.id) ? true : false;
+      
+      const legionIcon = getLegionIcon(colorName, color, army, iconSize, isLegionActive);  
 
       // get the region this army is currently in
       const mapData = this.state.mapData;      
@@ -372,7 +392,7 @@ class InteractiveMap extends Component {
           position: this.calculateRegionCenter(region),
           icon: legionIcon,
           key: uuidv4(),
-          onClick: this.legionClicked(legion.id)
+          onClick: () => this.legionClicked(legion)
         },
         <Popup>
           {
@@ -411,11 +431,22 @@ class InteractiveMap extends Component {
 
 
   /**
-   * Opens/closes the legion modal
+   * Opens/closes the add legion modal
    */
-  toggleLegionModal(openModal) {        
+  toggleAddLegionModal(openModal) {        
     this.setState({
-      modalOpen: !openModal,
+      addLegionModalOpen: !openModal,
+      moveLegionModalOpen: false,
+    })
+  }
+
+  /**
+   * Opens/closes the move legion modal
+   */
+  toggleMoveLegionModal(openModal) {        
+    this.setState({
+      addLegionModalOpen: false,
+      moveLegionModalOpen: !openModal,
     })
   }
 
@@ -423,9 +454,9 @@ class InteractiveMap extends Component {
    * Render.
    */
   render() {
-    const mapInteractionModal = (!this.state.modalOpen) ? false : (
+    let legionModal = (!this.state.addLegionModalOpen) ? null : (
       <LegionModal 
-        closeModal={() => this.toggleLegionModal(true)}
+        closeModal={() => this.toggleAddLegionModal(true)}
         selectedRegion={this.state.selectedRegion}
         legionColours={this.state.legionColours}
         addLegionCallback={this.addLegion}
@@ -436,14 +467,8 @@ class InteractiveMap extends Component {
 
     return(
       <React.Fragment>
-        {mapInteractionModal}
-        <div>  
-          <div>
-            <button onClick={this.moveLegion} >Move Legion</button>
-            &nbsp;&nbsp;Legion ID <input type="text" ref="movingLegionId" readOnly></input>
-            &nbsp;&nbsp;Source Region ID <input type="text" ref="sourceRegionId" readOnly></input>
-            &nbsp;&nbsp;Destination Region ID <input type="text" ref="destnRegionId"></input>
-          </div>
+        {legionModal}
+        <div>            
           <div className={styles.interactiveMapWrapper}>
             {this.buildMap()}   
           </div>
