@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Map, ImageOverlay, Marker, Popup, GeoJSON } from 'react-leaflet';
-import L, {CRS} from 'leaflet';
+import {CRS} from 'leaflet';
 import enhanceWithClickOutside from 'react-click-outside';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -40,7 +40,7 @@ class InteractiveMap extends Component {
       // list colours to be used in the legion colour dropdown
       legionColours: [],
       // current zoom level of the Leaflet map
-      zoomLevel: -1.7,
+      zoomLevel: 0,
       // the geoJSON object will be re-drawn whenever it receives a new key
       mapKey: uuidv4(),
       // indicates if the add legion modal is currently open
@@ -361,36 +361,51 @@ class InteractiveMap extends Component {
    * Create the world map to render.
    */
   buildMap() {
-    const boundY = 1522;
-    const boundX = 2048;
+    const containerWidth = (this.state.fullScreen) ? window.innerWidth: 1024;
+    const containerHeight = (this.state.fullScreen) ? window.innerHeight: 370;
+    const boundX = containerWidth;
+    const boundY = containerHeight;
+    
+    // why is it (y,x)???
     const bounds = [[0,0], [boundY, boundX]];
-    const geoJson = this.state.mapData;
+    const center = [containerHeight / 2, containerWidth / 2];
+    const geoJson = this.state.mapData; 
+
+    console.log("Building map...");
+    console.log(`Width: ${containerWidth}  Height: ${containerHeight}`);
+    console.log(`center: ${center}`)
     
     return (
       <Map
         ref="worldMap"
-        crs={CRS.Simple}
-        center={[boundX / 2, boundY / 2]} 
+        crs={CRS.Simple}        
+        center={center} 
+        maxBounds={bounds}
         zoom={this.state.zoomLevel} 
-        minZoom={-1.7}
-        maxZoom={-1}
-        zoomSnap={0.1}
+        onZoom={this.mapZoom}  
+        zoomSnap={1}
+        minZoom={0}
+        maxZoom={0}
+       
+        //minZoom={-1.7}
+        //maxZoom={-1}
+        //zoomSnap={0.1}
         maxBoundsViscosity={1}
         className={styles.mapLayer}
         attributionControl={false}
-        zoomControl={false}
-        //maxBounds={bounds}
-        onZoom={this.mapZoom}      
+        zoomControl={false}        
+           
       >
-        {/* the map image */}
+        {/* the map image  */}
         <ImageOverlay 
-          url={mainImage} 
+          url={mainImage}          
           bounds={bounds}
-          //center={[boundX, boundY]} 
-          className={styles.test}
+          center={center} 
+          className={styles.mapImage}
         />
+ 
 
-        {/*GeoJSON */}
+        {/*GeoJSON
         <GeoJSON           
           key={this.state.mapKey}
           data={geoJson} 
@@ -404,9 +419,10 @@ class InteractiveMap extends Component {
           className={styles.test} 
           bounds={bounds}     
         />
+         */}
 
-        {/* Fullscreen button */}
-        <button onClick={this.fullScreen} className={styles.fullScreen}>X</button>
+        
+        
         
 
         {this.generateMarkers()}        
@@ -494,6 +510,7 @@ class InteractiveMap extends Component {
       region.geometry.coordinates[0][0][0] + regionWidth      
     ];
 
+    console.log(regionCenter);
     return regionCenter    
   }
 
@@ -524,6 +541,9 @@ class InteractiveMap extends Component {
   fullScreen() {
     this.setState({
       fullScreen: true,
+    }, () => {
+      console.log("here");
+      this.refs.worldMap.leafletElement.invalidateSize();
     })
   }
 
@@ -547,6 +567,8 @@ class InteractiveMap extends Component {
     return(
       <React.Fragment>
         {legionModal}
+        {/* Fullscreen button */}
+        <button onClick={this.fullScreen} className={styles.fullScreen}>X</button>
         <div className={classes}>          
           {this.buildMap()}   
         </div>        

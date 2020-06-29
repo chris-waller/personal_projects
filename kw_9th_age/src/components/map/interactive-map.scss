@@ -5,20 +5,25 @@
 ////////////////////////
 .interactive-map-wrapper {
   height: 370px;
-  width: 1024px;  
+  width: 1024px;
+  
+  position: relative;
 
   border: 2px solid black;
 }
 
 .map-layer {
-  height: 100%;
-
+  //border: 11px solid black;
   background-color: #345155;
   // All credit to this image goes to Jamie @ SimplyBackgrounds
-  // https://www.deviantart.com/simplybackgrounds/art/Water-Texture-49283686
-  // I did add a small filter to darken the image but is otherwise unmodified
+  // https://www.deviantart.com/simplybackgrounds/art/Water-Texture-49283686  
   background: url("../../images/water_texture.jpg") no-repeat center;    
   background-size: cover;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 div.full-screen {
@@ -36,7 +41,10 @@ button.full-screen {
   right: 0px;
 }
 
-.test {
-  width: 100%;
-  height: 100%;
+.map-image {
+  // width and height are being ignored here
+
+  border: none;
+  margin: 0px;
+  padding: 0px;
 }

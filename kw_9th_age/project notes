@@ -22,6 +22,18 @@ $npm run migrate create migrationName
 
 
 
+laitude = x, longitude = y
+
+L.Point = (x,y) in pixels
+L.Bounds = rectangular area in pixel form,  [[x1,y1],[x2,y2]]
+  - which way does this go?
+CRS.Simple => In this coordinate system, 1 map unit = 1px at zoom level 0
+
+
+
+
+
+
 -------------------
 Overall Setup
 -------------------
