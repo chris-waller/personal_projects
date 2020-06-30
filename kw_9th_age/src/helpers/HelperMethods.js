@@ -27,9 +27,52 @@ export function getLegionIcon(colourName, color, imageURL, iconSize, isLegionAct
     className: classNames("leaflet-div-icon", style, `${styleName}`),      
     //iconAnchor: [15,5],
     //popupAnchor: [15,5],        
-  });
-  
+  });  
 
   return legionIcon;
+}
+
+export function scaleGeoJSONData(geoJson, scaleWidth, scaleHeight) {
+  
+  let newGeoJSON = [];
+  Object.keys(geoJson).map((key, index) => {    
+    const region = geoJson[key];
+    const geometry = region["geometry"];
+    //console.log("old", geometry.coordinates[0][0]);
+    const newCoordinates = [];
+    
+    geometry.coordinates.forEach(coord => {
+      const innerArray = [];
+      coord.forEach(c => {
+        innerArray.push(scaleCoordinate(c, scaleWidth, scaleHeight));
+      })
+      newCoordinates.push(innerArray);
+    })
+    
+    const newRegion = {
+      ...region,
+      geometry: {
+        ...geometry,
+        coordinates: newCoordinates,
+      }
+    };
+    //console.log("here", newRegion); 
+    newGeoJSON.push(newRegion);
+  });
+
+  //console.log("here2", newGeoJSON);
+  //console.log("old", geoJson[30].geometry.coordinates[0][0]);
+  //console.log("new", newGeoJSON[30].geometry.coordinates[0][0]);
+  
+  return newGeoJSON;
+}
+
+function scaleCoordinate(coord, scaleWidth, scaleHeight) {  
+  //console.log("width", scaleWidth);
+  //console.log("height", scaleHeight);
+  const x = coord[0] * scaleWidth;
+  const y = coord[1] * scaleHeight;
+  
+  return [x, y];
 }
 

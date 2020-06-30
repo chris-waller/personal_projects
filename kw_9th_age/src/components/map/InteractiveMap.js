@@ -7,10 +7,11 @@ import enhanceWithClickOutside from 'react-click-outside';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
+import {AiOutlineFullscreen, AiOutlineFullscreenExit} from 'react-icons/ai';
 
 // Custom Components
 import LegionModal from './LegionModal';
-import {getLegionIcon} from '../../helpers/HelperMethods';
+import {scaleGeoJSONData, getLegionIcon} from '../../helpers/HelperMethods';
 
 // Style imports
 import styles from './interactive-map.scss';
@@ -18,6 +19,13 @@ import styles from './interactive-map.scss';
 // Image imports
 import mainImage from '../../images/keawol_empty.jpg';
 import army from '../../images/army.png';
+
+// Constants
+const BASE_ZOOM = 0.0
+const MIN_ZOOM = -0.1;
+const MAX_ZOOM = 1.0;
+const MAP_SIZE_WIDTH = 1024.0;
+const MAP_SIZE_HEIGHT = 370.0;
 
 /**
  * Display and interacte with the world map
@@ -35,12 +43,13 @@ class InteractiveMap extends Component {
       // geoJSON map data -- contains region coords, names and colours
       mapData:   [{        
       }],
+      mapDataFullscreen: [{}],
       // list of legions that are currently on the map
       legions: [],
       // list colours to be used in the legion colour dropdown
       legionColours: [],
       // current zoom level of the Leaflet map
-      zoomLevel: 0,
+      zoomLevel: BASE_ZOOM,
       // the geoJSON object will be re-drawn whenever it receives a new key
       mapKey: uuidv4(),
       // indicates if the add legion modal is currently open
@@ -100,7 +109,7 @@ class InteractiveMap extends Component {
    * User has pressed a mouse button
    */
   mousePressed(event) {
-    if (event.which === 3) {      
+    if (event.which === 3) {            
       this.setState({
         selectedRegion: null,
         selectedLegion: null,
@@ -118,6 +127,10 @@ class InteractiveMap extends Component {
     if (event.keyCode === 27) {
       this.setState({
         fullScreen: false,
+        mapKey: uuidv4(),
+        zoomLevel: BASE_ZOOM,
+      },() => {
+        this.refs.worldMap.leafletElement.invalidateSize();
       })
     }
   }
@@ -163,13 +176,17 @@ class InteractiveMap extends Component {
    */
   getMapData() {
     const self = this;
+    console.log("get map data");
 
     axios.get('http://localhost:3001/regions')
     .then((response) => {  
       const mapData = response.data;   
-      const mapKey = uuidv4();                  
+      const mapKey = uuidv4();      
+      const scaleWidth = window.innerWidth / MAP_SIZE_WIDTH;    
+      const scaleHeight = window.innerHeight / MAP_SIZE_HEIGHT;            
       self.setState({
         mapData,
+        mapDataFullscreen: scaleGeoJSONData(mapData, scaleWidth, scaleHeight),
         mapKey,
         selectedRegion: null,
         selectedLegion: null,
@@ -361,20 +378,18 @@ class InteractiveMap extends Component {
    * Create the world map to render.
    */
   buildMap() {
-    const containerWidth = (this.state.fullScreen) ? window.innerWidth: 1024;
-    const containerHeight = (this.state.fullScreen) ? window.innerHeight: 370;
+    const containerWidth = (this.state.fullScreen) ? window.innerWidth: MAP_SIZE_WIDTH;
+    const containerHeight = (this.state.fullScreen) ? window.innerHeight: MAP_SIZE_HEIGHT;
     const boundX = containerWidth;
     const boundY = containerHeight;
     
     // why is it (y,x)???
     const bounds = [[0,0], [boundY, boundX]];
     const center = [containerHeight / 2, containerWidth / 2];
-    const geoJson = this.state.mapData; 
-
-    console.log("Building map...");
-    console.log(`Width: ${containerWidth}  Height: ${containerHeight}`);
-    console.log(`center: ${center}`)
     
+    
+    const geoJson = this.state.fullScreen > 0 ? this.state.mapDataFullscreen : this.state.mapData; 
+
     return (
       <Map
         ref="worldMap"
@@ -383,13 +398,10 @@ class InteractiveMap extends Component {
         maxBounds={bounds}
         zoom={this.state.zoomLevel} 
         onZoom={this.mapZoom}  
-        zoomSnap={1}
-        minZoom={0}
-        maxZoom={0}
-       
-        //minZoom={-1.7}
-        //maxZoom={-1}
-        //zoomSnap={0.1}
+        zoomSnap={0.1}
+        minZoom={MIN_ZOOM}
+        maxZoom={MAX_ZOOM}       
+
         maxBoundsViscosity={1}
         className={styles.mapLayer}
         attributionControl={false}
@@ -403,9 +415,20 @@ class InteractiveMap extends Component {
           center={center} 
           className={styles.mapImage}
         />
+
+        {/* Fullscreen button */}
+        {
+          this.state.fullScreen ? 
+            <AiOutlineFullscreenExit className={styles.fullScreenBtn} onClick={() => this.fullScreen(false)} /> :
+            <AiOutlineFullscreen className={styles.fullScreenBtn} onClick={() => this.fullScreen(true)} />
+            
+        }
+        
+          
+        
  
 
-        {/*GeoJSON
+        {/*GeoJSON */}
         <GeoJSON           
           key={this.state.mapKey}
           data={geoJson} 
@@ -416,14 +439,9 @@ class InteractiveMap extends Component {
             "fillOpacity": "0", 
           }} 
           onEachFeature={this.onEachFeature}
-          className={styles.test} 
+          //className={styles.test} 
           bounds={bounds}     
-        />
-         */}
-
-        
-        
-        
+        />        
 
         {this.generateMarkers()}        
 
@@ -452,21 +470,16 @@ class InteractiveMap extends Component {
       const colorName = legion.colour;
       //const legionClass = `${colorName}Legion`;
                   
-      // Still not sure why the image overlay has these wierd zoom levels.
-      // Small hack to compensate for this. Hopefully I can find the time to look 
-      // into this in the future.
-      let currentZoomLevel = this.state.zoomLevel;      
-      currentZoomLevel += 1.7;
-      currentZoomLevel *= 10;
-      
-      const iconSize = [15 + currentZoomLevel, 15 + currentZoomLevel];
-      let isLegionActive = 
-        (this.state.selectedLegion && this.state.selectedLegion.id === legion.id) ? true : false;
-      
+      // create the legion icon
+      const baseSize = (this.state.fullScreen) ? 20 : 15;
+      const zoomScale = this.state.zoomLevel * 10 
+      const iconSize = [baseSize + zoomScale, baseSize + zoomScale];
+      const isLegionActive = 
+        (this.state.selectedLegion && this.state.selectedLegion.id === legion.id) ? true : false;      
       const legionIcon = getLegionIcon(colorName, color, army, iconSize, isLegionActive);  
 
       // get the region this army is currently in
-      const mapData = this.state.mapData;      
+      const mapData = (this.state.fullScreen) ? this.state.mapDataFullscreen : this.state.mapData;      
       const region = mapData.find(r => r.properties.id == legion.regionId);
       
       // create the marker to add to Leaflet
@@ -538,11 +551,12 @@ class InteractiveMap extends Component {
   /**
    * Turn on full screen mode.
    */
-  fullScreen() {
+  fullScreen(isFullScreen) {
     this.setState({
-      fullScreen: true,
-    }, () => {
-      console.log("here");
+      fullScreen: isFullScreen,
+      zoomLevel: BASE_ZOOM,
+      mapKey: uuidv4(),
+    }, () => {      
       this.refs.worldMap.leafletElement.invalidateSize();
     })
   }
@@ -567,8 +581,6 @@ class InteractiveMap extends Component {
     return(
       <React.Fragment>
         {legionModal}
-        {/* Fullscreen button */}
-        <button onClick={this.fullScreen} className={styles.fullScreen}>X</button>
         <div className={classes}>          
           {this.buildMap()}   
         </div>        

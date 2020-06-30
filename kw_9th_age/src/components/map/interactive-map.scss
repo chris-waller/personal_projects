@@ -35,10 +35,17 @@ div.full-screen {
   height: 100%;
 }
 
-button.full-screen {
+.full-screen-btn {
   position: absolute;
   top: 0px;
   right: 0px;
+  z-index: 1000;
+  background-color: $mainColourContrast;
+  color: $linkColourMain;
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  cursor: pointer;
 }
 
 .map-image {

@@ -46,7 +46,9 @@ class LegionModal extends Component {
             
     const coords = this.props.selectedRegion.feature.geometry.coordinates;
     const sx = coords[0][0][0];
+    // TODO: cannot hardcode numbers like this -- it's currently tied to the css height of the parent
     const sy = 1522 - coords[0][4][1];
+    
     const width = coords[0][3][0] - coords[0][0][0];
     const height = coords[0][4][1] - coords[0][2][1];
     
