@@ -5,10 +5,8 @@
 ////////////////////////
 .interactive-map-wrapper {
   height: 370px;
-  width: 1024px;
-  
+  width: 1024px;  
   position: relative;
-
   border: 2px solid black;
 }
 
@@ -31,7 +29,7 @@ div.full-screen {
   top: 0;
   left: 0;
   z-index: 10;
-  width: 100%;
+  width: 100vw;
   height: 100%;
 }
 
@@ -46,6 +44,13 @@ div.full-screen {
   height: 25px;
   margin: 5px;
   cursor: pointer;
+}
+.full-screen-btn:hover {
+  background-color: $mainColourContrastFade;
+}
+.full-screen-btn-fullscreen {
+  width: 40px;
+  height: 40px;
 }
 
 .map-image {

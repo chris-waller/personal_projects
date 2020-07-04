@@ -9,8 +9,8 @@ function createImageMapFromHTML() {
   console.log("Starting script createImageMapFromHTML()...");
 
   // image parameters
-  const mapWidth = 1024;
-  const mapHeight = 370;
+  const mapWidth = 2048;
+  const mapHeight = 1536;
   
   // specify the number of rows and columns to divide the image into
   const rowCount = 10;

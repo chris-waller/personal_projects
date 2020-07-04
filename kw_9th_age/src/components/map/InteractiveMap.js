@@ -21,11 +21,13 @@ import mainImage from '../../images/keawol_empty.jpg';
 import army from '../../images/army.png';
 
 // Constants
-const BASE_ZOOM = 0.0
-const MIN_ZOOM = -0.1;
-const MAX_ZOOM = 1.0;
-const MAP_SIZE_WIDTH = 1024.0;
-const MAP_SIZE_HEIGHT = 370.0;
+const BASE_ZOOM = -1.3;
+const MIN_ZOOM_REGULAR = -1.5;
+const MAX_ZOOM_REGULAR = -1.0;
+const MIN_ZOOM_FULLSCREEN = -1.5;
+const MAX_ZOOM_FULLSCREEN = -0.5;
+const MAP_SIZE_WIDTH = 2048.0;
+const MAP_SIZE_HEIGHT = 1536.0;
 
 /**
  * Display and interacte with the world map
@@ -44,6 +46,8 @@ class InteractiveMap extends Component {
       mapData:   [{        
       }],
       mapDataFullscreen: [{}],
+      // size of the map,
+      mapSize: [MAP_SIZE_WIDTH, MAP_SIZE_HEIGHT],
       // list of legions that are currently on the map
       legions: [],
       // list colours to be used in the legion colour dropdown
@@ -80,8 +84,10 @@ class InteractiveMap extends Component {
     this.toggleMoveLegionModal = this.toggleMoveLegionModal.bind(this); 
     this.mousePressed = this.mousePressed.bind(this);   
     this.disableContextMenu = this.disableContextMenu.bind(this);
-    this.fullScreen = this.fullScreen.bind(this);
+    this.toggleFullScreen = this.toggleFullScreen.bind(this);
     this.keyPressed = this.keyPressed.bind(this);
+    this.resetMapZoomLevels = this.resetMapZoomLevels.bind(this);
+    this.foo = this.foo.bind(this);
     
   }
 
@@ -113,7 +119,7 @@ class InteractiveMap extends Component {
       this.setState({
         selectedRegion: null,
         selectedLegion: null,
-        addLegionModalOpen: false,
+        addLegionModalOpen: false,        
       })
     }
   }
@@ -122,17 +128,31 @@ class InteractiveMap extends Component {
    * User has pressed a keyboard key
    */
   keyPressed(event) {
-
     // escape key
     if (event.keyCode === 27) {
+      /*
       this.setState({
         fullScreen: false,
         mapKey: uuidv4(),
         zoomLevel: BASE_ZOOM,
-      },() => {
+      },() => {        
         this.refs.worldMap.leafletElement.invalidateSize();
+        this.resetMapZoomLevels(false);
       })
+      */
+     this.toggleFullScreen(false);
     }
+  }
+
+  /**
+   * Resets the maps min/max zoom levels
+   */
+  resetMapZoomLevels(isFullScreen) {    
+    // update the min/max zoom levels of the map
+    this.refs.worldMap.leafletElement.setMinZoom(
+      isFullScreen ? MIN_ZOOM_FULLSCREEN : MIN_ZOOM_REGULAR);
+    this.refs.worldMap.leafletElement.setMaxZoom(
+      isFullScreen ? MAX_ZOOM_FULLSCREEN : MAX_ZOOM_REGULAR);
   }
 
   /**
@@ -181,12 +201,18 @@ class InteractiveMap extends Component {
     axios.get('http://localhost:3001/regions')
     .then((response) => {  
       const mapData = response.data;   
-      const mapKey = uuidv4();      
-      const scaleWidth = window.innerWidth / MAP_SIZE_WIDTH;    
-      const scaleHeight = window.innerHeight / MAP_SIZE_HEIGHT;            
+      const mapKey = uuidv4();
+      
       self.setState({
         mapData,
-        mapDataFullscreen: scaleGeoJSONData(mapData, scaleWidth, scaleHeight),
+        mapDataFullscreen: mapData,
+        /*
+        mapDataFullscreen: scaleGeoJSONData(
+          mapData, 
+          MAP_SIZE_WIDTH / window.innerWidth, 
+          window.innerHeight / MAP_SIZE_HEIGHT,
+        ),
+        */
         mapKey,
         selectedRegion: null,
         selectedLegion: null,
@@ -378,18 +404,17 @@ class InteractiveMap extends Component {
    * Create the world map to render.
    */
   buildMap() {
-    const containerWidth = (this.state.fullScreen) ? window.innerWidth: MAP_SIZE_WIDTH;
-    const containerHeight = (this.state.fullScreen) ? window.innerHeight: MAP_SIZE_HEIGHT;
+    const containerWidth = MAP_SIZE_WIDTH;// (this.state.fullScreen) ? window.innerWidth: MAP_SIZE_WIDTH;
+    const containerHeight = MAP_SIZE_HEIGHT;// (this.state.fullScreen) ? window.innerHeight: MAP_SIZE_HEIGHT;
     const boundX = containerWidth;
     const boundY = containerHeight;
     
     // why is it (y,x)???
     const bounds = [[0,0], [boundY, boundX]];
     const center = [containerHeight / 2, containerWidth / 2];
-    
-    
-    const geoJson = this.state.fullScreen > 0 ? this.state.mapDataFullscreen : this.state.mapData; 
 
+    console.log("map bounds", bounds);
+    
     return (
       <Map
         ref="worldMap"
@@ -399,17 +424,19 @@ class InteractiveMap extends Component {
         zoom={this.state.zoomLevel} 
         onZoom={this.mapZoom}  
         zoomSnap={0.1}
-        minZoom={MIN_ZOOM}
-        maxZoom={MAX_ZOOM}       
+        minZoom={this.state.fullScreen ? MIN_ZOOM_FULLSCREEN : MIN_ZOOM_REGULAR}
+        maxZoom={this.state.fullScreen ? MAX_ZOOM_FULLSCREEN : MAX_ZOOM_REGULAR}       
 
         maxBoundsViscosity={1}
         className={styles.mapLayer}
         attributionControl={false}
-        zoomControl={false}        
+        zoomControl={false}
+        preferCanvas={true}
+        onmoveend={this.foo}    
            
       >
         {/* the map image  */}
-        <ImageOverlay 
+        <ImageOverlay
           url={mainImage}          
           bounds={bounds}
           center={center} 
@@ -419,23 +446,23 @@ class InteractiveMap extends Component {
         {/* Fullscreen button */}
         {
           this.state.fullScreen ? 
-            <AiOutlineFullscreenExit className={styles.fullScreenBtn} onClick={() => this.fullScreen(false)} /> :
-            <AiOutlineFullscreen className={styles.fullScreenBtn} onClick={() => this.fullScreen(true)} />
+            <AiOutlineFullscreenExit 
+              className={classNames(styles.fullScreenBtn, styles.fullScreenBtnFullscreen)} 
+              onClick={() => this.toggleFullScreen(false)} 
+            /> :
+            <AiOutlineFullscreen className={styles.fullScreenBtn} onClick={() => this.toggleFullScreen(true)} />
             
-        }
-        
-          
-        
- 
+        } 
 
         {/*GeoJSON */}
-        <GeoJSON           
+        <GeoJSON       
+          ref="foo"    
           key={this.state.mapKey}
-          data={geoJson} 
+          data={this.state.fullScreen > 0 ? this.state.mapDataFullscreen : this.state.mapData} 
           style={{
             "color": "rgb(0, 0, 0)",
             "weight": "1",
-            "fillColr": "rgb(255,0,0)",
+            "fillColor": "rgb(255,0,0)",
             "fillOpacity": "0", 
           }} 
           onEachFeature={this.onEachFeature}
@@ -471,7 +498,7 @@ class InteractiveMap extends Component {
       //const legionClass = `${colorName}Legion`;
                   
       // create the legion icon
-      const baseSize = (this.state.fullScreen) ? 20 : 15;
+      const baseSize = (this.state.fullScreen) ? 35 : 30;
       const zoomScale = this.state.zoomLevel * 10 
       const iconSize = [baseSize + zoomScale, baseSize + zoomScale];
       const isLegionActive = 
@@ -522,8 +549,6 @@ class InteractiveMap extends Component {
       region.geometry.coordinates[0][2][1] + regionHeight,
       region.geometry.coordinates[0][0][0] + regionWidth      
     ];
-
-    console.log(regionCenter);
     return regionCenter    
   }
 
@@ -551,15 +576,30 @@ class InteractiveMap extends Component {
   /**
    * Turn on full screen mode.
    */
-  fullScreen(isFullScreen) {
+  toggleFullScreen(isFullScreen) {
+    const mapSize = (isFullScreen) ? 
+      [MAP_SIZE_WIDTH, MAP_SIZE_HEIGHT] :
+      [MAP_SIZE_WIDTH, MAP_SIZE_HEIGHT]
     this.setState({
       fullScreen: isFullScreen,
       zoomLevel: BASE_ZOOM,
       mapKey: uuidv4(),
-    }, () => {      
-      this.refs.worldMap.leafletElement.invalidateSize();
+      mapSize,
+    }, () => {
+      this.resetMapZoomLevels(isFullScreen);          
+      this.refs.worldMap.leafletElement.invalidateSize(false);
+      this.refs.foo.leafletElement.bringToFront();
+      
     })
   }
+
+  foo() {
+    //alert("2");
+    console.log("foo");
+    this.refs.worldMap.leafletElement.invalidateSize();
+    this.refs.foo.leafletElement.bringToFront();
+  }
+  
 
   /**
    * Render.
@@ -590,8 +630,6 @@ class InteractiveMap extends Component {
 }
 
 export default enhanceWithClickOutside(InteractiveMap);
-
-
 
 
 InteractiveMap.propTypes = {
