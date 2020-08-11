@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{566:function(e,n,a){"use strict";a.r(n);var t=a(1),l=a.n(t),u=a(108);n.default=function(){return l.a.createElement(u.a,null,l.a.createElement("h2",null,"About Page"),l.a.createElement("p",null,"This page was loaded asynchronously!!!"))}}}]);
+//# sourceMappingURL=2.88bf0e277eb733c23964.js.map
