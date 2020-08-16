@@ -1,0 +1,103 @@
+@import "../../utilities/global_styles";
+
+/* This file will be used for all banner components */
+
+.banner {
+  display: flex;  
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quote {
+  font-family: 'Sacramento', cursive;
+  font-size: 2.5em;
+  font-weight: 100;
+  margin-top: 15px;  
+  letter-spacing: 4px;
+}
+
+.sub-quote {
+  margin-top: 10px;
+  font-size: 1.8em;
+  text-align: center;
+}
+
+.header {
+  width: 70%;
+  padding-right: 40px;
+}
+
+div.book-now {
+  display: grid;
+  justify-content: center;
+
+}
+
+a.book-now {
+  width: 250px;
+  padding: 3px 0;
+  background-color: $colour8;
+  opacity: 0.83;
+  color: #fff !important;
+  font-size: 2em;
+  font-weight: bold;
+  border: 1px solid $colour8;  
+  text-align: center;  
+  display: inline-block;  
+}
+
+.office-image2 { 
+  height: 200px;
+  width: 300px;  
+  background: url("../../images/owner2.jpg") no-repeat center;  
+  background-size: contain;     
+}
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+  .banner {
+    justify-content: space-between;
+  }
+  .quote {
+    font-size: 1.8em;    
+  } 
+  .header {
+    padding-right: 15px;
+  }
+  a.book-now {   
+    width: 170px;
+    font-size: 1.6em;
+  }
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) {
+  .banner {
+    display: block;
+  }
+  .header {
+    width: 100%;
+    scroll-padding-right: 0px;
+    padding-right: 5px;
+  }
+  .quote {
+    font-size: 1.5em;
+  }  
+  .sub-quote {
+    text-align: center;
+    font-size: 1.6em;
+  }
+  a.book-now {
+    margin-top: 10px;;
+    width: 140px;
+    font-size: 1.3em;
+  }
+  .office-image2 {         
+    background: url("../../images/owner2.jpg") no-repeat center;  
+    background-size: contain;     
+  }
+}

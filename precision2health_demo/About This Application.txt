@@ -1,0 +1,3 @@
+This is a clone of an application I wrote for a friend to get her a simple website up and running during the Covid pandemic. She already had a booking site through a 3rd party but wanted to start some personal branding.
+
+I decided to write a ReactJS app in anticipation of moving the booking portion over sometime in the future. At the moment, the site is extremely basic but does a good job of demonstrating my design, programming and organizational approaches.

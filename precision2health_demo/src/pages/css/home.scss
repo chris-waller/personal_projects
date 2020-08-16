@@ -1,0 +1,33 @@
+
+@import "../../utilities/global_styles";
+
+///////////////////////
+// Main Component Style
+///////////////////////
+.white-area {
+  display: grid;
+  justify-content: center;
+  padding: 10px 150px 0px 150px;
+}
+
+.page-section {
+  margin-top: 25px;
+}
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+  .white-area {
+    padding: 10px 50px;
+  }
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) {
+  .white-area {
+    padding: 10px 20px;
+  }
+}

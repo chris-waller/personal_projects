@@ -1,0 +1,66 @@
+@import "../../utilities/global_styles";
+
+.services {
+  height: 100%;
+  width: 100%;
+  background: url("../../images/background4.jpg") no-repeat center;    
+  background-size: cover;
+
+  color: #fff;
+}
+
+.servicesOverlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.42);
+  padding: 30px 0;
+}
+
+.heading {
+  width: 100%;
+  margin: 15px 0 0 0;
+  padding: 0 $pagePaddingLeftRight;
+}
+
+.heading div {
+  font-size: 1.3em;
+  margin: 5px 0;
+}
+
+.services h1 {
+  text-align: center;  
+}
+.white-override {
+  color: #fff;
+}
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+  .heading {
+    padding: 0 50px;
+  }
+  .list {
+    list-style-position: inside;
+    padding-left: 0px;
+  }
+  .services h1 {
+    font-size: 1.3em;
+  }
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) { 
+  .heading {
+    padding: 0 20px;
+  }
+  .list {
+    list-style-position: inside;
+    padding-left: 0px;
+  }
+}

@@ -1,0 +1,145 @@
+@import "../../utilities/global_styles";
+
+///////////////////
+// Component Styles
+///////////////////
+.header {
+  padding-bottom: 35px;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.menu-row {
+  padding: 10px;
+
+  // flex display
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;  
+}
+
+.home-icon {
+  color: $colour8;
+  padding: 10px 30px 0px 0px;
+}
+
+
+/////////////////////
+// Link Section
+/////////////////////
+.link-section {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  font-size: 1.3em;
+  text-align: center;
+  display: flex;  
+  justify-content: center;
+  white-space: nowrap;
+  margin-right: 15px;
+  color: $colour2;  
+}
+
+.link:hover {
+  color: $linkColourAlt;
+  text-decoration: none;
+}
+
+.book-now {
+  width: 110px;
+  padding: 3px 0;
+  background-color: $colour8;
+  opacity: 0.83;
+  color: #fff !important;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: 1px solid $colour8;
+  margin: 0 60px 0 30px;
+  line-height: 1.3em;
+  text-align: center;
+}
+
+.logo-section-container {
+  height: 100%;
+  display: grid;
+  align-content: center;
+}
+
+.logo-section {
+  width: 100%;  
+  height: 150px;
+  background-color: $backgroundColourMain;
+  opacity: 0.7;
+  border-radius: 20px;  
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.logo {
+  width: 400px;
+  height: 150px;
+  background: url("../../images/logo.png") no-repeat center;    
+  background-size: contain;  
+}
+
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+  .logo-section {
+    height: 90px;
+  }
+  .logo {
+    height: 80px;
+    width: 310px;    
+  }
+  .home-icon {
+    display:none;
+  }
+  .book-now {
+    margin-right: 5px;
+    margin-left: 0px;
+    display: block;
+  }
+  .link-section {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }  
+  .link {
+    font-size: 1.1em;
+  }
+  .book-now {
+    font-size: 1em;
+    width: 100px;
+  }
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) {
+  .book-now {
+    width: 80px;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+  .logo-section {
+    height: 90px;
+  }
+  .logo {
+    height: 80px;
+    width: 310px;    
+  }
+  .header {
+    padding-bottom: 5px;
+  }
+}

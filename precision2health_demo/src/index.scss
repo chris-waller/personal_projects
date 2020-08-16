@@ -1,0 +1,55 @@
+@import "./utilities/global_styles";
+
+@font-face {
+  font-family: 'Aileron-Regular';
+  src: local('Aileron-Regular'), 
+    url(./fonts/Aileron-Regular.otf) 
+    format('woff2');
+}
+@font-face {
+  font-family: 'Aileron-Thin';
+  src: local('Aileron-Thin'), 
+    url(./fonts/Aileron-Thin.otf) 
+    format('woff2');
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, div {
+  padding: 0px;
+  margin: 0px;  
+}
+
+h1, h2, h3, h4, h5, h6 {  
+  font-family: 'Aileron-Regular';    
+  color: #0c4ca3;
+  letter-spacing: 4px;
+}
+
+p, span, div {  
+  font-family: 'Aileron-Thin';  
+  color: #006cbd;
+  letter-spacing: 1px;
+}
+
+a, a:visited {  
+  font-family: 'Aileron-Regular';  
+  color: #006cbc;  
+}
+a:hover {
+  text-decoration: none;  
+}
+
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) {
+  h3 {
+    font-size: 1.3em;
+  }
+}

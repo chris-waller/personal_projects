@@ -1,0 +1,77 @@
+@import "../../utilities/global_styles";
+
+.osteopathy {
+  height: 100%;
+  width: 100%;
+  background: url("../../images/background3.jpg") no-repeat center;    
+  background-size: cover;  
+}
+
+.osteopathy-overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255, 0.42);
+  padding: 30px 0;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 1.75rem;
+  
+}
+
+.summary {
+  margin-bottom: 15px;
+  display: flex;
+  color: #fff;
+}
+
+div.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+img.logo {
+  width: 235x;
+  height: 90px;
+}
+
+div.quotes {
+  display: flex;
+}
+
+.page-content {
+  padding: 0 $pagePaddingLeftRight;
+}
+
+.collapsible {
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+  .page-content {
+    padding: 0 50px;
+  }
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) {   
+  .title {
+    font-size: 1.3em;
+  }
+  .page-content {
+    padding: 0 20px;
+  }
+}

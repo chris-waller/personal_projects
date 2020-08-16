@@ -1,0 +1,64 @@
+@import "../../utilities/global_styles";
+
+.about {
+  height: 100%;
+  width: 100%;
+  background: url("../../images/background2.jpg") no-repeat center;    
+  background-size: cover;    
+  position: relative;
+  z-index: 0;  
+}
+
+.about-overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 30px 0;
+  background-color: rgba(0,198,255, 0.3)
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.page-content {
+  padding: 0 $pagePaddingLeftRight;
+}
+
+.page-content div {
+  margin: 20px 0;
+  color: white;
+}
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+  .page-content {
+    padding: 0 50px;
+  }
+  .about-overlay {
+    padding: 25px 0;
+  }
+  .title {
+    margin-bottom: 0px;
+  }
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) { 
+  .page-content {
+    padding: 0 20px;
+  }
+  .about-overlay {
+    padding: 25px 0;
+  }
+  .title {
+    margin-bottom: 10px;
+  }
+}

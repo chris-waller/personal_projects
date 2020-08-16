@@ -1,0 +1,58 @@
+@import "../../utilities/global_styles";
+
+.bio h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.picture-row {
+  display: flex;
+  align-items: center;
+}
+
+.bio-image {
+  height: 300px;
+  width: 200px;
+  background: url("../../images/owner.png") no-repeat center;    
+  background-size: object-fit;
+}
+
+.bio-text div{
+  margin: 10px 0 0 30px;
+}
+
+.no-margin {
+  margin: 0px !important;
+}
+
+.collapsible {  
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) { 
+  .picture-row {
+    display: block;
+  }
+  .bio-image-wrapper {
+    display: grid;
+    justify-content: center;
+  }
+  .bio-image {
+    margin: 20px 0;
+    height: 200px;    
+    background-size: cover;
+  }
+  .bio-text div {
+    margin: 0;
+  }
+}

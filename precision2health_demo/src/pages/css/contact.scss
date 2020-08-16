@@ -1,0 +1,69 @@
+@import "../../utilities/global_styles";
+
+.contact {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 0;  
+}
+
+.contact-overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;    
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.75em;
+}
+
+.info {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  margin: 15px 0 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.footer div {
+  color: black;
+  margin: 0 5px;
+}
+
+.social-links div {
+  margin: 0 10px;  
+}
+
+.social-links img {
+  width: 30px;
+  height: 30px;
+}
+
+.phone {
+  font-family: 'Aileron-Regular';
+}
+
+/* ****************** */
+/* Medium Screen Size */
+/* ****************** */
+@media (max-width: 1000px) {
+}
+
+/* ****************** */
+/* Small Screen Size */
+/* ****************** */
+@media (max-width: 480px) {
+  .info {
+    font-size: 1em;
+  }
+ .title {
+   font-size: 1.3em;
+ }
+}
