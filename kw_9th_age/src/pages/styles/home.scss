@@ -77,16 +77,16 @@ div.home p {
   height: 100%;
 }
 
-/* ****************** */
-/* Medium Screen Size */
-/* ****************** */
-@media (max-width: 875px) {
-}
-
-/* ****************** */
-/* Small Screen Size */
-/* ****************** */
-@media (max-width: 480px) {
-  
+///////////////////////////
+// Screen-width adjustments
+///////////////////////////
+@media(max-width: 800px) {
+  .world-section {    
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    grid-template-areas: 
+      "header"
+      "footer";
+  }
 }
 
