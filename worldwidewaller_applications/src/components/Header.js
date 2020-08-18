@@ -24,12 +24,12 @@ class Header extends Component {
         {/* ***************** */}          
         <div className={styles.logoSection}>        
             <Link to="/">          
-              <div title="Home" className={styles.logo} />          
+              <div title="Home" className={styles.logo}>Home</div>         
             </Link>          
         </div>
         
         {/* Links Section */}
-        {/* ************* */}
+        {/* *************
         <div className={styles.linkSection}>          
             <Link 
               to="/" 
@@ -39,6 +39,7 @@ class Header extends Component {
               Home
             </Link>                               
         </div>
+        */}
         
         {/* Hambuger Menu Section */ }
         {/* ********************* */ }

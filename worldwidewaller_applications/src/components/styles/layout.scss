@@ -55,16 +55,46 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   color: var(--fontColorHover);
 }
 
+/* DropDown menu */
+/* ************* */
+$dropdownWidth: 100px;
+div.select-theme {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+  width: $dropdownWidth;
+}
+h5.select-theme {
+  text-align: center;
+  color: var(--fontColorAlt);
+}
+.drop-down {
+  cursor: pointer;
+  width: $dropdownWidth;
+  position: absolute;
+  right: 0px;
+  border: 1px solid var(--borderColorAlt);
+}
+.drop-down-placeholder{
+  background-color: var(--menuBgMain);
+}
+.drop-down-menu {
+  background-color: var(--menuBgAlt);
+}
 
-// Wrapper & child to help with hiding the vertical scrollbar.
-// Does not impact page scrollabilty.
+
+/* Page Content */
+/* ************* */
 .page-content-wrapper {
-  // scrollbar stuff here
+  grid-area: "page_content";
+
+  // used to hide vertical scrollbar
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
-  grid-area: "page_content";
+  
 }
 .page-content-wrapper.collapsed {
   height: 100%;
@@ -72,9 +102,9 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 }
 
 .page-content {  
-  padding: $paddingPageContent;
+  padding: var(--paddingPageContent);
 
-  //scrollbar stuff here
+  // used to hide vertical scrollbar
   position: absolute;
   top: 0;
   bottom: 0;

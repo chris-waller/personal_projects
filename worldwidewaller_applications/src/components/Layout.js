@@ -13,12 +13,6 @@ import styles from './styles/layout.scss';
 // utilities
 import changeTheme from '../utilities/change-theme.js';
 
-const THEMES = [
-  { value: styles.theme1, label: 'Theme1' },
-  { value: styles.theme2, label: 'Theme2', className: 'myOptionClassName' },
-];
-
-
 /**
  * This component is responsible for the overall site layout and styling.
  * General site layout will be done here. The styling of the header and pages
@@ -26,22 +20,33 @@ const THEMES = [
  */
 export default class Layout extends Component {
 
+  THEMES = [
+    { value: styles.default_theme, label: 'Ocean' },
+    { value: styles.greyscale_theme, label: 'Greyscale' },
+    { value: styles.pilgrim_theme, label: 'Pilgrim', className: 'myOptionClassName' },
+  ];
+  
+  // set the default site theme here
+  DEFAULT_THEME = this.THEMES.find(theme => theme.value === styles.greyscale_theme);
+  
   /**
    * Constructor.
    */
   constructor() {
     super();
 
+    console.log(this.DEFAULT_THEME);
+
     this.state =  {
       // This will need to go into a redux store so we can keep the menu
       // toggled between page changes
       headerCollapsed: false,      
-      selectedTheme: { value: THEMES[0].value, label: THEMES[0].label}
+      selectedTheme: { value: this.DEFAULT_THEME.value, label: this.DEFAULT_THEME.label}
     };
 
     // This will need to go into a redux store so we can keep the theme
     // between page changes
-    changeTheme(styles.theme1);
+    changeTheme(classNames(styles.theme, this.DEFAULT_THEME.value));
 
     this.collapseHeader = this.collapseHeader.bind(this);
     this.themeChanged = this.themeChanged.bind(this)
@@ -54,28 +59,17 @@ export default class Layout extends Component {
     this.setState({
       headerCollapsed: !this.state.headerCollapsed
     });
-  }
+  }  
 
-  toggleThemes() {
-
-
-
-    if (this.refs.selectedTheme.props.value === styles.theme1) {      
-      changeTheme(styles.theme2);
-      this.setState({
-        selectedTheme: styles.theme2,
-      });      
-    } else {            
-      changeTheme(styles.theme1);
-      this.setState({
-        selectedTheme: styles.theme1,
-      });      
-    }
-  }
-
+  /**
+   * User has changed the themed
+   * @param {} option 
+   */
   themeChanged (option) {    
+    // no point on going further if the user selected the same theme
     if (option.label === this.state.selectedTheme.label) return;
-    changeTheme(option.value);
+    
+    changeTheme(classNames(styles.theme, option.value));
     this.setState({selectedTheme: option})
   }
   
@@ -101,15 +95,18 @@ export default class Layout extends Component {
           {/* Site Header */}
           <div className={classNames(styles.siteHeader, collapsedStyle)}>
             <Header />
-            <DropDown
-              options={THEMES}
-              onChange={this.themeChanged}
-              value={this.state.selectedTheme}
-              placeholder="Select an option"
-              //className={ toggleClassName ? 'my-custom-class' : '' }
-              //placeholderClassName={ togglePlaholderClassName ? 'my-custom-class' : '' }
-              //menuClassName={ toggleMenuClassName ? 'my-custom-class' : '' }
-            />
+            <div className={styles.selectTheme}>
+              <h5 className={styles.selectTheme}>Select Theme</h5>
+              <DropDown
+                options={this.THEMES}
+                onChange={this.themeChanged}
+                value={this.state.selectedTheme}
+                placeholder="Select an option"
+                className={styles.dropDown}
+                placeholderClassName={ styles.dropDownPlaceholder}
+                menuClassName={ styles.dropDownMenu }
+              />
+            </div>
           </div>
 
           {/* Collapse Header */}
