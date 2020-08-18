@@ -1,13 +1,14 @@
+// when setting the colours, set them in order of darkest to lightest
 .default_theme {
-  --color1: #03045E;
-  --color2: #023E8A;
-  --color3: #0077B6;
-  --color4: #0096C7;
+  --color1: #CAF0F8;
+  --color2: #ADE8F4;
+  --color3: #90E0EF;
+  --color4: #48CAE4;
   --color5: #00B4D8;
-  --color6: #48CAE4;
-  --color7: #90E0EF;
-  --color8: #ADE8F4;
-  --color9: #CAF0F8;
+  --color6: #0096C7;
+  --color7: #0077B6;
+  --color8: #023E8A;
+  --color9: #03045E;
 }
 .greyscale_theme {
   --color1: #eeeeee;
@@ -22,14 +23,14 @@
 }
 .pilgrim_theme {
   --color1: #CBC6B1;
-  --color2: #594840;
+  --color2: #B49C7A;
   --color3: #B8A06D;
-  --color4: #71593E;
-  --color5: #967047;
-  --color6: #B49C7A;
-  --color7: #B49C7A;
-  --color8: #B49C7A;
-  --color9: #B49C7A;
+  --color4: #967047;
+  --color5: #71593E;
+  --color6: #594840;
+  --color7: #594840;
+  --color8: #594840;
+  --color9: #594840;
 }
 
 .theme {
@@ -49,6 +50,7 @@
   // menu styles
   --menuBgMain: var(--color3);
   --menuBgAlt: var(--color2);
+  --menuBgHover: var(--color1);
   
   // link styles
   --linkColorMain: var(--color5);

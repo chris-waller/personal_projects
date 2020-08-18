@@ -21,9 +21,9 @@ import changeTheme from '../utilities/change-theme.js';
 export default class Layout extends Component {
 
   THEMES = [
-    { value: styles.default_theme, label: 'Ocean' },
-    { value: styles.greyscale_theme, label: 'Greyscale' },
-    { value: styles.pilgrim_theme, label: 'Pilgrim', className: 'myOptionClassName' },
+    { value: styles.default_theme, label: 'Ocean', className: styles.menuItem },
+    { value: styles.greyscale_theme, label: 'Greyscale', className: styles.menuItem },
+    { value: styles.pilgrim_theme, label: 'Pilgrim', className: styles.menuItem },
   ];
   
   // set the default site theme here
@@ -104,7 +104,7 @@ export default class Layout extends Component {
                 placeholder="Select an option"
                 className={styles.dropDown}
                 placeholderClassName={ styles.dropDownPlaceholder}
-                menuClassName={ styles.dropDownMenu }
+                menuClassName={ styles.dropDownMenu } 
               />
             </div>
           </div>

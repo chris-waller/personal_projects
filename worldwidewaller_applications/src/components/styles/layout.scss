@@ -82,6 +82,9 @@ h5.select-theme {
 .drop-down-menu {
   background-color: var(--menuBgAlt);
 }
+.menu-item:hover {
+  background-color: var(--menuBgHover)
+}
 
 
 /* Page Content */
