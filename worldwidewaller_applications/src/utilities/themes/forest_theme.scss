@@ -1,15 +1,15 @@
-.greyscale_theme {
-  --color1: #F8F9FA;
-  --color2: #E9ECEF;
-  --color3: #DEE2E6;
-  --color4: #CED4DA;
-  --color5: #ADB5BD;
-  --color6: #6C757D;
-  --color7: #495057;
-  --color8: #343A40;
-  --color9: #212529;
+.forest_theme {
+  --color1: #D8F3DC;
+  --color2: #B7E4C7;
+  --color3: #95D5B2;
+  --color4: #74C69D;
+  --color5: #74C69D;
+  --color6: #74C69D;
+  --color7: #2D6A4F;
+  --color8: #1B4332;
+  --color9: #081C15;
 
-  --themeBgColorMain: var(--color2);
+  --themeBgColorMain: var(--color1);
   --themeBgColorAlt: var(--color4);
   --themeFontColorMain: var(--color9);
   --themeFontColorAlt: var(--color3);
@@ -19,7 +19,7 @@
   --themeLinkHoverColorAlt: var(--color8);
   --themeBorderColorMain: var(--color7);
   --themeBorderColorAlt: var(--color 5);
-  --themeMenuBgColor: var(--color5);
-  --themeMenuItemsBgColor: var(--color3);
+  --themeMenuBgColor: var(--color4);
+  --themeMenuItemsBgColor: var(--color2);
   --themeMenuBgHoverColor: var(--color1);
 }

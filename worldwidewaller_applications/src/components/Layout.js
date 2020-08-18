@@ -21,6 +21,7 @@ import changeTheme from '../utilities/change-theme.js';
 export default class Layout extends Component {
 
   THEMES = [
+    { value: styles.forest_theme, label: 'Forest', className: styles.menuItem },
     { value: styles.greyscale_theme, label: 'Greyscale', className: styles.menuItem },
     { value: styles.default_theme, label: 'Ocean', className: styles.menuItem },    
     { value: styles.pilgrim_theme, label: 'Pilgrim', className: styles.menuItem },
