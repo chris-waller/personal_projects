@@ -1,0 +1,29 @@
+@import './greyscale_theme.scss';
+@import './pilgrim_theme.scss';
+@import './worldwidewaller_theme.scss';
+
+.theme {
+  // main background colors
+  --bgColorMain: var(--themeBgColorMain);
+  --headerColor: var(--themeBgColorAlt);
+
+  // font styles
+  --fontFamily:  "Arvo", Times, sans-serif;
+  --fontColorDark: var(--themeFontColorDark);
+  --fontColorLight: var(--themeFontColorLight);   
+  
+  // border styles
+  --borderColorMain: var(--themeBorderColorMain);
+  --borderColorAlt: var(--themeBorderColorAlt);
+
+  // link styles
+  --linkColorDark: var(--themeLinkColorDark);
+  --linkColorLight: var(--themeLinkColorLight);
+  --linkColorHover: var(--themeLinkColorHover);
+
+  // menu styles
+  --menuBgColor: var(--themeMenuBgColor);
+  --menuItemsBgColor: var(--themeMenuItemsBgColor);
+  --menuBgHoverColor: var(--themeMenuBgHoverColor);
+}
+
