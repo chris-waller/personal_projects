@@ -10,7 +10,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   width: 100%;
   height: 100%;
   background-color: var(--bgColorMain);
-  color: var(--fontColorDark);
+  color: var(--fontColorMain);
   font-family: var(--fontFamily);
 
   // site grid layout
@@ -67,7 +67,7 @@ div.select-theme {
 }
 h5.select-theme {
   text-align: center;
-  color: var(--fontColorDark);
+  color: var(--fontColorMain);
 }
 .drop-down {
   cursor: pointer;

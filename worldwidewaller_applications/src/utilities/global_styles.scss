@@ -3,15 +3,15 @@
 /* Put all global styles in here */
 /* ***************************** */
 a, a:visited {
-  color: var(--linkColorDark);
+  color: var(--linkColorMain);
 }
 
 a:hover {
-  color: var(--linkColorHover);
+  color: var(--linkHoverColorMain);
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  color: var(--fontColorDark);
+  color: var(--fontColorMain);
   padding: 0px;
   margin: 0px;
 }

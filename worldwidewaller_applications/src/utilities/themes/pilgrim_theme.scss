@@ -1,11 +1,25 @@
 .pilgrim_theme {
-  --color1: #CBC6B1;
-  --color2: #B49C7A;
-  --color3: #B8A06D;
-  --color4: #967047;
-  --color5: #71593E;
-  --color6: #594840;
-  --color7: #594840;
-  --color8: #594840;
-  --color9: #594840;
+  --color1: #E6B8A2;
+  --color2: #DEAB90;
+  --color3: #D69F7E;
+  --color4: #CD9777;
+  --color5: #C38E70;
+  --color6: #B07D62;
+  --color7: #9D6B53;
+  --color8: #8A5A44;
+  --color9: #774936;
+
+  --themeBgColorMain: var(--color1);
+  --themeBgColorAlt: var(--color4);
+  --themeFontColorMain: var(--color9);
+  --themeFontColorAlt: var(--color3);
+  --themeLinkColorMain: var(--color8);
+  --themeLinkColorAlt: var(--color5);
+  --themeLinkHoverColorMain: var(--color6);
+  --themeLinkHoverColorAlt: var(--color8);
+  --themeBorderColorMain: var(--color7);
+  --themeBorderColorAlt: var(--color 5);
+  --themeMenuBgColor: var(--color3);
+  --themeMenuItemsBgColor: var(--color2);
+  --themeMenuBgHoverColor: var(--color1);
 }

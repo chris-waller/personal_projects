@@ -9,17 +9,18 @@
 
   // font styles
   --fontFamily:  "Arvo", Times, sans-serif;
-  --fontColorDark: var(--themeFontColorDark);
-  --fontColorLight: var(--themeFontColorLight);   
+  --fontColorMain: var(--themeFontColorMain);
+  --fontColorAlt: var(--themeFontColorAlt);   
   
   // border styles
   --borderColorMain: var(--themeBorderColorMain);
   --borderColorAlt: var(--themeBorderColorAlt);
 
   // link styles
-  --linkColorDark: var(--themeLinkColorDark);
-  --linkColorLight: var(--themeLinkColorLight);
-  --linkColorHover: var(--themeLinkColorHover);
+  --linkColorMain: var(--themeLinkColorMain);
+  --linkColorAlt: var(--themeLinkColorAlt);
+  --linkHoverColorMain: var(--themeLinkHoverColorMain);
+  --linkHoverColorAlt: var(--themeLinkHoverColorAlt);
 
   // menu styles
   --menuBgColor: var(--themeMenuBgColor);
