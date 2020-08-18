@@ -1,0 +1,26 @@
+.default_theme {
+  --color1: #979DAC;
+  --color2: #7D8597;
+  --color3: #5C677D;
+  --color4: #33415C;
+  --color5: #001233;
+  --color6: #001845;
+  --color7: #023E7D;
+  --color8: #0353A4;
+  --color9: #0466C8;
+
+  --themeBgColorMain: var(--color1);
+  --themeBgColorAlt: var(--color3);
+  //--themeFontColorMain: var(--color9);
+  --themeFontColorMain: #e9ebf1;
+  --themeFontColorAlt: var(--color3);
+  --themeLinkColorMain: var(--color7);
+  --themeLinkColorAlt: var(--color5);
+  --themeLinkHoverColorMain: var(--color6);
+  --themeLinkHoverColorAlt: var(--color8);
+  --themeBorderColorMain: var(--color6);
+  --themeBorderColorAlt: var(--color5);
+  --themeMenuBgColor: var(--color6);
+  --themeMenuItemsBgColor: var(--color4);
+  --themeMenuBgHoverColor: var(--color1);
+}
