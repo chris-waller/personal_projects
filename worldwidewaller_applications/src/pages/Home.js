@@ -16,6 +16,37 @@ const Home = () => {
           Precision2Health Demo Site
         </a>
       </p>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div><div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div><div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div><div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
+      <div>More text</div>
     </Layout>
   );
 };
