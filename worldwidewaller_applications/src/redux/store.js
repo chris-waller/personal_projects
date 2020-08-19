@@ -1,15 +1,19 @@
+/************* **/
+/* Redux store */
+/***************/
+
 //npm imports
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import logger from "redux-logger";
 
 // reducers
-import setClientOptions from './reducers/clientOptions';
+import setTheme from './reducers/clientSettings';
 const rootReducer =  combineReducers({
-  setClientOptions,
+  setTheme,
 });
 
-
+// create the store with devtools and logging
 export default createStore(
   rootReducer,
   composeWithDevTools(

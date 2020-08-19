@@ -12,11 +12,10 @@ import Header from './Header';
 import styles from './styles/layout.scss';
 
 // utilities
-import changeTheme from '../utilities/change-theme.js';
-import {THEMES as SITE_THEMES} from '../utilities/themes/themes';
+import {THEME_NAMES, getSiteThemes, changeTheme} from '../utilities/theme_helpers';
 
 // redux actions
-import {setClientOptions} from "../redux/actions";
+import {setTheme} from "../redux/actions";
 
 /**
  * This component is responsible for the overall site layout and styling.
@@ -25,23 +24,24 @@ import {setClientOptions} from "../redux/actions";
  */
 class Layout extends Component {
 
+  // toggle the site's default theme here
+  defaultThemeName = THEME_NAMES.HALLOWEEN;
+
   /**
    * Constructor.
    */
   constructor(props) {
     super(props);
 
-    //console.log("Selected theme", props.selectedTheme); 
-    const siteThemes = this.createSiteThemes(SITE_THEMES);
+    // get theme info for the dropdown -- will eventually want to rename this
+    const siteThemes = getSiteThemes();    
     const selectedTheme = props.selectedTheme === null ?
-      siteThemes.find(theme => theme.label === "Halloween") :
+      siteThemes.find(theme => theme.label === this.defaultThemeName) :
       siteThemes.find(theme => theme.label === props.selectedTheme);
-    //console.log("Selected theme2", selectedTheme);
+
+    // set the initial theme
+    this.updateSiteTheme(props.setTheme, selectedTheme.label, selectedTheme.value);
     
-
-    changeTheme(classNames(styles.theme, selectedTheme.value));
-    props.setClientOptions(selectedTheme.label);
-
     this.state =  {
       // This will need to go into a redux store so we can keep the menu
       // toggled between page changes
@@ -55,58 +55,30 @@ class Layout extends Component {
   }
 
   /**
-   * Creates an array of theme styles
-   */
-  createSiteThemes(themes) {
-    let siteThemes = [];
-    themes.forEach(theme => {
-      siteThemes.push(
-        {
-          value: this.getThemeStyle(theme),
-          label: theme, 
-          className: styles.menuItem 
-        },
-      );      
-    });    
-    return siteThemes;
-  }
-
-  getThemeStyle(themeName) {
-    switch(themeName) {
-      case 'Default':
-        return styles.default_theme;
-      case 'Forest':
-        return styles.forest_theme;
-      case 'Astronomy':
-        return styles.greyscale_theme;
-      case 'Halloween':
-        return styles.pilgrim_theme;
-      default:
-        return styles.default_theme;              
-    }
-  }
-
-  
-
-  /**
    * Expand/collapse the header
    */
   collapseHeader() {
     this.setState({
       headerCollapsed: !this.state.headerCollapsed
     });
-  }  
+  }
 
   /**
-   * User has changed the theme.
+   * Updates the site's theme in the DOM and informs redux of the change.
    */
-  themeChanged (option) {    
-    //console.log("here");
+  updateSiteTheme(setTheme, themeName, themeStyle) {
+    changeTheme(classNames(styles.theme, themeStyle));
+    setTheme(themeName);
+  }
+
+  /**
+   * User has changed the theme with the dropdown.
+   */
+  themeChanged (option) {        
     // no point on going further if the user selected the same theme
     if (option.label === this.state.selectedTheme.label) return;
     
-    changeTheme(classNames(styles.theme, option.value));
-    this.props.setClientOptions(option.label);
+    this.updateSiteTheme(this.props.setTheme, option.label, option.value);
     this.setState({selectedTheme: option})
   }
   
@@ -114,7 +86,6 @@ class Layout extends Component {
    * Render.
    */
   render() {
-
     // adjust styles for header expansion/collapse
     const collapsedStyle = this.state.headerCollapsed ? styles.collapsed : null;    
     const collapseText = this.state.headerCollapsed ? "Expand Menu" : "Collapse Menu";
@@ -173,13 +144,13 @@ class Layout extends Component {
 
 const mapStateToProps = (state, ownProps = {}) => {
   return { 
-    selectedTheme: state.setClientOptions.selectedTheme, 
+    selectedTheme: state.setTheme.selectedTheme, 
   }
 };
 
 export default connect(
   mapStateToProps,
-  {setClientOptions}
+  {setTheme}
 )(Layout);
 
 

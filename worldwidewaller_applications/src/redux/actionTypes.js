@@ -1,1 +1,5 @@
-export const SET_CLIENT_OPTIONS = "SET_CLIENT_OPTIONS";
+/**********************/
+/* Redux action types */
+/**********************/
+
+export const SET_THEME = "SET_THEME";

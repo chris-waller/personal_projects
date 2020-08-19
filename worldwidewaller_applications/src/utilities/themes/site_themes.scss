@@ -1,8 +1,11 @@
-@import './greyscale_theme.scss';
+/***********************************/
+/* Set theme-related global styles */
+/***********************************/
+
+@import './astronomy_theme.scss';
 @import './halloween_theme.scss';
 @import './forest_theme.scss';
-@import './default_theme.scss';
-
+@import './ocean_theme.scss';
 
 .theme {
   // background styles

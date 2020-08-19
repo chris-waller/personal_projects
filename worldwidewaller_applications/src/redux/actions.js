@@ -1,6 +1,12 @@
-import { SET_CLIENT_OPTIONS } from "./actionTypes";
+/*********************/
+/* Redux action file */
+/*********************/
+import { SET_THEME } from "./actionTypes";
 
-export const setClientOptions = selectedTheme => ({
-  type: SET_CLIENT_OPTIONS,
+/**
+ * Sets the application theme.
+ */
+export const setTheme = selectedTheme => ({
+  type: SET_THEME,
   payload: { selectedTheme }
 });
