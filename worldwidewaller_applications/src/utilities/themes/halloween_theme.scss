@@ -8,9 +8,11 @@
   --color7: #9D6B53;
   --color8: #8A5A44;
   --color9: #774936;
+  --bGUrlMain: url('../../images/halloween-background.jpg') no-repeat center;
 
   --themeBgColorMain: var(--color1);
   --themeBgColorAlt: var(--color4);
+  --themeBgUrlMain: var(--bGUrlMain);
   --themeFontColorMain: var(--color9);
   --themeFontColorAlt: var(--color3);
   --themeLinkColorMain: var(--color8);

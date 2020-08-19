@@ -11,11 +11,19 @@ const config = {
   },
   module: {
     rules: [
+      // JS loader
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
-      }
+      },
+      // File loader
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader',
+        ],
+      },
     ]
   },
   optimization: {

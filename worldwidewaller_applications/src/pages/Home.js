@@ -15,6 +15,7 @@ const Home = () => {
           Precision2Health Demo Site
         </a>
       </p>
+      {/*
       <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vestibulum orci orci, in blandit lorem egestas non. Proin convallis dolor at ante rutrum ultricies. Maecenas vel lorem euismod, efficitur mauris ut, consectetur justo. Nullam nec vestibulum quam. Morbi ullamcorper vitae lacus eget varius. Aenean condimentum luctus nisl id mollis. In hac habitasse platea dictumst. Aliquam erat volutpat. Pellentesque sit amet lorem venenatis, dapibus ante nec, dapibus lacus. Aliquam ultricies, nibh a vestibulum aliquam, tortor mi pretium leo, at volutpat augue massa eget nunc. Quisque ullamcorper vestibulum pharetra. Nulla ultricies et felis varius hendrerit. Morbi sed urna vestibulum, egestas arcu nec, dapibus quam.<br /><br />
         Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam ut ante laoreet, mollis erat ac, vehicula nunc. Suspendisse tortor eros, vehicula eget finibus malesuada, condimentum vel urna. Curabitur vitae elementum nunc. Praesent sem felis, iaculis at ex id, aliquet volutpat quam. Donec gravida quis velit et bibendum. Curabitur tincidunt semper sagittis.<br /><br />
@@ -27,6 +28,7 @@ const Home = () => {
         Sed ligula mi, facilisis a elit sed, tempor scelerisque nulla. Integer quis justo vehicula, tincidunt odio quis, maximus metus. Nam mollis accumsan nisi, sed lobortis elit bibendum vel. Vivamus a pellentesque lectus. Vivamus nec ipsum quis nisl tincidunt efficitur. In ut tortor non metus molestie tempus. Vestibulum finibus ipsum quis magna egestas rutrum. Sed dapibus luctus leo quis mattis.<br /><br />
         Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec volutpat ullamcorper neque at cursus. Aliquam vitae nisi ac urna egestas porttitor in quis nunc. Pellentesque et vulputate felis. Sed orci nisi, tempus id arcu ac, faucibus semper libero. Cras faucibus euismod molestie. Nulla sed fermentum tellus. Aliquam enim felis, interdum quis elementum ac, porta et dolor. Sed at nisi in sem venenatis viverra eu sed nulla. Aliquam gravida metus ac dignissim accumsan. Curabitur commodo luctus enim, quis convallis dui vestibulum sed. Quisque sit amet nisl ac ex rhoncus vulputate id eu lorem.<br /><br />
       </div>
+      */}
     </Layout>
   );
 };

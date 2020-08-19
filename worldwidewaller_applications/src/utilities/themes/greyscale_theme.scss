@@ -8,9 +8,11 @@
   --color7: #495057;
   --color8: #343A40;
   --color9: #212529;
-
+  --bGUrlMain: url('../../images/black-white-background.jpg') no-repeat center;
+  
   --themeBgColorMain: var(--color2);
   --themeBgColorAlt: var(--color4);
+  --themeBgUrlMain: var(--bGUrlMain);
   --themeFontColorMain: var(--color9);
   --themeFontColorAlt: var(--color3);
   --themeLinkColorMain: var(--color8);

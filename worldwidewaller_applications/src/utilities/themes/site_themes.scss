@@ -1,13 +1,15 @@
 @import './greyscale_theme.scss';
-@import './pilgrim_theme.scss';
+@import './halloween_theme.scss';
 @import './forest_theme.scss';
 @import './default_theme.scss';
 
 
 .theme {
-  // main background colors
+  // background styles
   --bgColorMain: var(--themeBgColorMain);
+  --bgUrlMain: var(--themeBgUrlMain);
   --headerColor: var(--themeBgColorAlt);
+
 
   // font styles
   --fontFamily:  "Arvo", Times, sans-serif;

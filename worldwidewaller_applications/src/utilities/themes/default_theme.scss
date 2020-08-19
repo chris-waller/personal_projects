@@ -8,11 +8,13 @@
   --color7: #023E7D;
   --color8: #0353A4;
   --color9: #0466C8;
+  --color10: #E9EBF1;
+  --bGUrlMain: url('../../images/default-background.jpg') no-repeat center;
 
   --themeBgColorMain: var(--color1);
   --themeBgColorAlt: var(--color3);
-  //--themeFontColorMain: var(--color9);
-  --themeFontColorMain: #e9ebf1;
+  --themeBgUrlMain: var(--bGUrlMain);
+  --themeFontColorMain: var(--color10);
   --themeFontColorAlt: var(--color3);
   --themeLinkColorMain: var(--color7);
   --themeLinkColorAlt: var(--color5);

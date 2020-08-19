@@ -23,8 +23,8 @@ export default class Layout extends Component {
   THEMES = [
     { value: styles.default_theme, label: 'Default', className: styles.menuItem },
     { value: styles.forest_theme, label: 'Forest', className: styles.menuItem },
-    { value: styles.greyscale_theme, label: 'Greyscale', className: styles.menuItem },    
-    { value: styles.pilgrim_theme, label: 'Pilgrim', className: styles.menuItem },
+    { value: styles.greyscale_theme, label: 'Astronomy', className: styles.menuItem },    
+    { value: styles.pilgrim_theme, label: 'Halloween', className: styles.menuItem },
   ];
   
   // set the default site theme here
