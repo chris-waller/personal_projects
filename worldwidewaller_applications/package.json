@@ -21,7 +21,12 @@
     "react-dropdown": "^1.7.0",
     "react-icons": "^3.10.0",
     "react-imported-component": "^6.2.1",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.0.0",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-react-session": "^2.6.1",
     "semantic-ui-react": "^0.88.2"
   },
   "devDependencies": {
@@ -42,6 +47,8 @@
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.7.0",
     "react-hot-loader": "^4.12.21",
+    "redux-devtools": "^3.6.1",
+    "redux-devtools-extension": "^2.13.8",
     "rimraf": "^3.0.2",
     "sass": "^1.26.8",
     "sass-loader": "^8.0.2",

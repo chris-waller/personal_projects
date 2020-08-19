@@ -1,5 +1,6 @@
 // npm imports
 import React, { Component } from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
 
 // custom components
 import Layout from '../components/Layout';
@@ -12,7 +13,8 @@ export default class Home extends Component {
   render() {
     return (
       <Layout>
-        <h1>World Wide Waller Applications</h1>  
+        <h1>World Wide Waller Applications</h1>
+        <Link to="/foobar" >Foobar</Link>        
         <p>
           <a 
             href="http://precision2health-demo.s3-website-us-west-2.amazonaws.com/"
