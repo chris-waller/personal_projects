@@ -7,12 +7,11 @@
   --color6: #74C69D;
   --color7: #2D6A4F;
   --color8: #1B4332;
-  --color9: #081C15;
-  --bGUrlMain: url('../../images/forest-background.jpg') no-repeat center;
+  --color9: #081C15;  
 
   --themeBgColorMain: var(--color1);
   --themeBgColorAlt: var(--color4);
-  --themeBgUrlMain: var(--bGUrlMain);
+  --themeBgMain: url('../../images/forest-background.jpg') no-repeat center var(--themeBgColorMain);  
   --themeFontColorMain: var(--color9);
   --themeFontColorAlt: var(--color3);
   --themeLinkColorMain: var(--color8);

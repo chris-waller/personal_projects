@@ -36,8 +36,6 @@ export default class Layout extends Component {
   constructor() {
     super();
 
-    console.log(this.DEFAULT_THEME);
-
     this.state =  {
       // This will need to go into a redux store so we can keep the menu
       // toggled between page changes
@@ -63,8 +61,7 @@ export default class Layout extends Component {
   }  
 
   /**
-   * User has changed the themed
-   * @param {} option 
+   * User has changed the theme.
    */
   themeChanged (option) {    
     // no point on going further if the user selected the same theme
@@ -90,7 +87,7 @@ export default class Layout extends Component {
       null
     );
 
-    return (
+    return (      
       <div className={classNames(styles.layout, collapsedStyle)}>
           
           {/* Site Header */}
@@ -122,8 +119,9 @@ export default class Layout extends Component {
             </span>
           </div>
           
-          {/* Page Content */}
+          {/* Page Content */}          
           <div className={classNames(styles.pageContentWrapper, collapsedStyle)}>
+            <div className={styles.pageContentOverlay} />
             <div className={styles.pageContent}>
               {this.props.children}
             </div>

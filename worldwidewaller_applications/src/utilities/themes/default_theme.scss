@@ -1,26 +1,27 @@
 .default_theme {
-  --color1: #979DAC;
-  --color2: #7D8597;
-  --color3: #5C677D;
-  --color4: #33415C;
-  --color5: #001233;
-  --color6: #001845;
-  --color7: #023E7D;
-  --color8: #0353A4;
-  --color9: #0466C8;
-  --color10: #E9EBF1;
-  --bGUrlMain: url('../../images/default-background.jpg') no-repeat center;
+  --color1: #0A0E11;
+  --color2: #03192E;  
+  --color3: #013257;
+  --color4: #004066;
+  --color5: #023E7D;
+  --color6: #006287;
+  --color7: #558DAD;
+  --color8: #9BCAE6;
+  --color9: #A9D1EA;
+  --color10: #e5e9eb;
+  
 
   --themeBgColorMain: var(--color1);
-  --themeBgColorAlt: var(--color3);
-  --themeBgUrlMain: var(--bGUrlMain);
+  --themeBgColorAlt: var(--color2);
+  --themeBgMain: url('../../images/default-background.jpg') no-repeat center var(--themeBgColorMain);
+  --themeBgHeader: url('../../images/default-background-alt.jpg') no-repeat center var(--themeBgColorAlt);
   --themeFontColorMain: var(--color10);
   --themeFontColorAlt: var(--color3);
-  --themeLinkColorMain: var(--color7);
+  --themeLinkColorMain: var(--color9);
   --themeLinkColorAlt: var(--color5);
-  --themeLinkHoverColorMain: var(--color6);
+  --themeLinkHoverColorMain: var(--color7);
   --themeLinkHoverColorAlt: var(--color8);
-  --themeBorderColorMain: var(--color6);
+  --themeBorderColorMain: var(--color1);
   --themeBorderColorAlt: var(--color5);
   --themeMenuBgColor: var(--color6);
   --themeMenuItemsBgColor: var(--color4);

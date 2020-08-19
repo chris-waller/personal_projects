@@ -6,10 +6,10 @@
 
 .theme {
   // background styles
-  --bgColorMain: var(--themeBgColorMain);
-  --bgUrlMain: var(--themeBgUrlMain);
-  --headerColor: var(--themeBgColorAlt);
-
+  --bgMain: var(--themeBgMain);
+  --bgAlt: var(--themeBgAlt);
+  --bgColorMain: var(--themeBgColorMain);  
+  --bgColorAlt: var(--themeBgColorAlt);
 
   // font styles
   --fontFamily:  "Arvo", Times, sans-serif;
