@@ -10,9 +10,10 @@
   --color9: #774936;
   --bgMain: url('../../images/halloween-background.jpg') no-repeat center;
 
-  --themeBgColorMain: var(--color1);
+  --themeBgColorMain: var(--color9);
   --themeBgColorAlt: var(--color4);
-  --themeBgMain: var(--bgMain);
+  --themeBgMain: url('../../images/halloween-background.jpg') no-repeat center var(--themeBgColorMain);
+  --themeBgHeader: url('../../images/halloween-background.jpg') no-repeat center var(--themeBgColorAlt);
   --themeFontColorMain: var(--color9);
   --themeFontColorAlt: var(--color3);
   --themeLinkColorMain: var(--color8);
