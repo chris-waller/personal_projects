@@ -9,8 +9,12 @@
 
 .theme {
   // background styles
-  --bgMain: var(--themeBgMain);
+  --bgXl: var(--themeBgXl);
+  --bgLarge: var(--themeBgLarge);
+  --bgMed: var(--themeBgMed);
+  --bgSm: var(--themeBgSm);
   --bgAlt: var(--themeBgAlt);
+  --bgHeader: var(--themeBgHeader);
   --bgColorMain: var(--themeBgColorMain);  
   --bgColorAlt: var(--themeBgColorAlt);
 

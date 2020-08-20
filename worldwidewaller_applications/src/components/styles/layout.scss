@@ -12,9 +12,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 
 .layout {
   width: 100%;
-  height: 100%;
-  background: var(--bgMain);  
-  background-size: cover;  
+  height: 100%; 
   color: var(--fontColorMain);
   font-family: var(--fontFamily);    
 
@@ -30,15 +28,18 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 }
 
 .site-header {  
-  grid-area: header;  
-  background: var(--bgMain);  
-  background-size: cover;  
+  grid-area: header;
+  background: var(--bgHeader);
   border-bottom: 1px solid var(--borderColorMain);
 }
 .site-header.collapsed {
   display: none;
 }
 
+.collapseHeaderWrapper {
+  display: grid;
+  justify-content: center;
+}
 .collapse-header {
   width: 100%;
   height: $collapseHeaderHeight;    
@@ -50,7 +51,8 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 }
 .collapse-header.collapsed {
   top: 5px;
-  z-index: 1;
+  z-index: 1;  
+  background-color: var(--borderColorMain);
 }
 
 .collapse-icon {
@@ -97,6 +99,7 @@ h5.select-theme {
 /* ************* */
 .page-content-wrapper {
   grid-area: "page_content";
+  background: var(--bgXl);
 
   // used to hide vertical scrollbar
   width: 100%;
@@ -130,3 +133,24 @@ h5.select-theme {
   right: -17px; 
   overflow-y: scroll;  
 }
+
+/* Background Image Sizes */
+/* ********************** */
+@media (max-width: 640px) {
+  .page-content-wrapper {
+    background: var(--bgSmall);  
+  }
+}
+@media (max-width: 1280px) {
+  .page-content-wrapper {
+    background: var(--bgMed);  
+  }
+}
+@media (max-width: 1920px) {
+  .page-content-wrapper {
+    background: var(--bgLarge);  
+  }
+}
+
+
+

@@ -140,11 +140,12 @@ class Layout extends Component {
           title={collapseText}
         >
 
-          <span
+          <div
+            className={styles.collapseHeaderWrapper}
             onClick={this.collapseHeader}
           >
             {collapseIcon}
-          </span>
+          </div>
         </div>
 
         {/* Page Content */}
