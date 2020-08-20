@@ -11,11 +11,25 @@
   --color6: #74C69D;
   --color7: #2D6A4F;
   --color8: #1B4332;
-  --color9: #081C15;  
-
+  --color9: #081C15;
   --themeBgColorMain: var(--color1);
-  --themeBgColorAlt: var(--color4);
-  --themeBgXl: url('../../images/forest-background.jpg') no-repeat center var(--themeBgColorMain);  
+  --themeBgColorAlt: var(--color3);
+
+  --bgXl: url('../../images/backgrounds/forest_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgLarge: url('../../images/backgrounds/forest_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgMed: url('../../images/backgrounds/forest_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgSm: url('../../images/backgrounds/forest_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgHeader: url('../../images/backgrounds/forest_bg_header.jpg') center / cover no-repeat var(--themeBgColorMain);
+
+  /* Set global CSS variables here */
+  /* ***************************** */
+  // background  
+  --themeBgXl: var(--bgXl);
+  --themeBgLarge: var(--bgLarge);
+  --themeBgMed: var(--bgMedium);
+  --themeBgSm: var(--bgSmall);
+  --themeBgHeader: var(--bgXl);
+ 
   --themeFontColorMain: var(--color9);
   --themeFontColorAlt: var(--color3);
   --themeLinkColorMain: var(--color8);
