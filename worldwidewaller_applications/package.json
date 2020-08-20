@@ -1,7 +1,7 @@
 {
   "name": "worldwidewaller_applications",
   "version": "1.0.0",
-  "description": "The main web application for WorldWideWaller Applications",
+  "description": "The main web application for WorldWideWaller Applications.",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --env.env=dev",
