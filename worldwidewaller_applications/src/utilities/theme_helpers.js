@@ -1,20 +1,19 @@
-/**************************************************/
-/* Use this file for any theme-related javascript */
-/**************************************************/
+/* *********************************************** */
+/* Use this file for any theme-related javascript  */
+/* *********************************************** */
 
 // styles imports
 import styles from './themes/site_themes.scss';
-
 
 /**
  * All themes supported by this application
  */
 export const THEME_NAMES = {
-  OCEAN: "Ocean",
-  FOREST: "Forest",
-  ASTRONOMY: "Astronomy",
-  HALLOWEEN: "Halloween",
-}
+  OCEAN: 'Ocean',
+  FOREST: 'Forest',
+  ASTRONOMY: 'Astronomy',
+  HALLOWEEN: 'Halloween',
+};
 
 /**
  * List of theme names and their associated styles.
@@ -36,7 +35,7 @@ export const THEMES = [
   {
     name: THEME_NAMES.HALLOWEEN,
     classname: styles.halloween_theme,
-  }  
+  },
 ];
 
 /**
@@ -44,14 +43,13 @@ export const THEMES = [
  * Includess the react css classnames
  */
 export function getSiteThemes() {
-
-  let siteThemes = [];
-  THEMES.forEach(theme => {
+  const siteThemes = [];
+  THEMES.forEach((theme) => {
     siteThemes.push(
       {
         value: theme.classname,
-        label: theme.name, 
-        className: styles.menuItem 
+        label: theme.name,
+        className: styles.menuItem,
       },
     );
   });
@@ -63,5 +61,6 @@ export function getSiteThemes() {
  * Changes the site theme by updating the CSS of the overall site div
  */
 export function changeTheme(newThemeName) {
-  document.getElementById('root').className = "root " + newThemeName;  
+  // eslint-disable-next-line no-undef
+  document.getElementById('root').className = `root ${newThemeName}`;
 }

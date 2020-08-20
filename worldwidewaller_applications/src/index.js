@@ -1,12 +1,12 @@
 // npm imports
-import React from "react";
-import ReactDOM from "react-dom";
-import { hot } from "react-hot-loader/root";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { hot } from 'react-hot-loader/root';
 
 // custom components
-import App from "./App";
+import App from './App';
 
-const render = (Component) =>
-  ReactDOM.render(<Component />, document.getElementById("root"));
+// eslint-disable-next-line react/no-render-return-value, no-undef
+const render = (Component) => ReactDOM.render(<Component />, document.getElementById('root'));
 
 render(hot(App));

@@ -1,15 +1,17 @@
-/************* **/
+/* *********** */
 /* Redux store */
-/***************/
+/* *********** */
 
-//npm imports
-import { createStore, applyMiddleware, combineReducers, compose } from "redux";
-import {composeWithDevTools} from 'redux-devtools-extension';
-import logger from "redux-logger";
+// npm imports
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
 
-// reducers
+// reducer import
 import setTheme from './reducers/clientSettings';
-const rootReducer =  combineReducers({
+
+// add all reducers here
+const rootReducer = combineReducers({
   setTheme,
 });
 
@@ -17,6 +19,6 @@ const rootReducer =  combineReducers({
 export default createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(logger)
-  )
+    applyMiddleware(logger),
+  ),
 );
