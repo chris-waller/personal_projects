@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack -p --env.env=prod"
   },
   "keywords": [],
-  "author": "Chris Waller",
+  "author": "Chris J Waller",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",
