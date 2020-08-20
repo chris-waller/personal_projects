@@ -2,5 +2,5 @@
 /* Redux action types */
 /* ****************** */
 
-// eslint-disable-next-line import/prefer-default-export
 export const SET_THEME = 'SET_THEME';
+export const TOGGLE_HEADER_COLLAPSED = 'TOGGLE_HEADER_COLLAPSED';

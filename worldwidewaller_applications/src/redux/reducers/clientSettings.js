@@ -3,7 +3,7 @@
 /* ***************************************** */
 
 // helper files
-import { SET_THEME } from '../actionTypes';
+import { SET_THEME, TOGGLE_HEADER_COLLAPSED } from '../actionTypes';
 
 // initial state
 const initialState = {
@@ -11,15 +11,20 @@ const initialState = {
   selectedTheme: null,
 };
 
-/**
- * Sets the theme for the application.
- */
-const setTheme = (state = initialState, action) => {
+const updateClientSettings = (state = initialState, action) => {
   switch (action.type) {
+    // Sets the theme for the application
     case SET_THEME: {
       return {
         ...state,
-        selectedTheme: action.payload.selectedTheme,
+        selectedTheme: action.payload.theme,
+      };
+    }
+    // Toggles the main header open/close for the application
+    case TOGGLE_HEADER_COLLAPSED: {
+      return {
+        ...state,
+        headerCollapsed: action.payload.isCollapsed,
       };
     }
     default: {
@@ -27,4 +32,5 @@ const setTheme = (state = initialState, action) => {
     }
   }
 };
-export default setTheme;
+
+export default updateClientSettings;

@@ -17,7 +17,10 @@ import styles from './styles/layout.scss';
 import { THEME_NAMES, getSiteThemes, changeTheme } from '../utilities/theme_helpers';
 
 // redux actions
-import setThemeAction from '../redux/actions';
+import {
+  setTheme as setThemeAction,
+  toggleHeader as toggleHeaderAction,
+} from '../redux/actions';
 
 /**
  * This component is responsible for the overall site layout and styling.
@@ -44,6 +47,7 @@ class Layout extends Component {
 
     // get theme info for the dropdown -- will eventually want to rename this
     const siteThemes = getSiteThemes();
+
     const selectedTheme = props.selectedTheme === null
       ? siteThemes.find((theme) => theme.label === this.defaultThemeName)
       : siteThemes.find((theme) => theme.label === props.selectedTheme);
@@ -54,7 +58,7 @@ class Layout extends Component {
     this.state = {
       // This will need to go into a redux store so we can keep the menu
       // toggled between page changes
-      headerCollapsed: false,
+      headerCollapsed: props.headerCollapsed,
       siteThemes,
       selectedTheme,
     };
@@ -68,6 +72,11 @@ class Layout extends Component {
    */
   collapseHeader() {
     const { headerCollapsed } = this.state;
+
+    // eslint-disable-next-line react/destructuring-assignment
+    const toggleHeader = this.props.toggleHeaderAction;
+    toggleHeader(!headerCollapsed);
+
     this.setState({
       headerCollapsed: !headerCollapsed,
     });
@@ -154,21 +163,26 @@ class Layout extends Component {
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state, ownProps = {}) => (
   {
-    selectedTheme: state.setTheme.selectedTheme,
+    selectedTheme: state.updateClientSettings.selectedTheme,
+    headerCollapsed: state.updateClientSettings.headerCollapsed,
   }
 );
 
 export default connect(
   mapStateToProps,
-  { setThemeAction },
+  { setThemeAction, toggleHeaderAction },
 )(Layout);
 
 Layout.defaultProps = {
   selectedTheme: null,
+  headerCollapsed: false,
 };
 
 Layout.propTypes = {
   selectedTheme: PropTypes.string,
   setThemeAction: PropTypes.func.isRequired,
+  headerCollapsed: PropTypes.bool,
+  toggleHeaderAction: PropTypes.func.isRequired,
+
   children: PropTypes.node.isRequired,
 };
