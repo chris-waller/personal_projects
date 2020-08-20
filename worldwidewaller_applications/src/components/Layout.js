@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import Header from './Header';
 
 // css imports
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from './styles/layout.scss';
 
 // utilities

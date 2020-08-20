@@ -3,6 +3,7 @@
 /* *********************************************** */
 
 // styles imports
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from './themes/site_themes.scss';
 
 /**
@@ -22,18 +23,22 @@ export const THEME_NAMES = {
 export const THEMES = [
   {
     name: THEME_NAMES.OCEAN,
+    // eslint-disable-next-line css-modules/no-undef-class
     classname: styles.ocean_theme,
   },
   {
     name: THEME_NAMES.FOREST,
+    // eslint-disable-next-line css-modules/no-undef-class
     classname: styles.forest_theme,
   },
   {
     name: THEME_NAMES.ASTRONOMY,
+    // eslint-disable-next-line css-modules/no-undef-class
     classname: styles.astronomy_theme,
   },
   {
     name: THEME_NAMES.HALLOWEEN,
+    // eslint-disable-next-line css-modules/no-undef-class
     classname: styles.halloween_theme,
   },
 ];
@@ -49,7 +54,7 @@ export function getSiteThemes() {
       {
         value: theme.classname,
         label: theme.name,
-        className: styles.menuItem,
+        // className: styles.menuItem,
       },
     );
   });

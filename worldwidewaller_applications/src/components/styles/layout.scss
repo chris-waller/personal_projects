@@ -1,10 +1,14 @@
 @import "../../utilities/themes/site_themes";
 @import "../../utilities/global_styles";
 
-// header height calculatoins
+// header height calculations
 $headerHeight: 90px;
 $collapseHeaderHeight: 20px;
 $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
+
+.theme {
+  z-index: 1,
+}
 
 .layout {
   width: 100%;
