@@ -1,18 +1,19 @@
-const commonPaths = require('./common-paths');
 const webpack = require('webpack');
+const commonPaths = require('./common-paths');
+
 const port = process.env.PORT || 3000;
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const config = {
   mode: 'development',
   entry: {
-    app: `${commonPaths.appEntry}/index.js`
+    app: `${commonPaths.appEntry}/index.js`,
   },
   output: {
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
   },
   resolve: {
     alias: {
-      "react-dom": "@hot-loader/react-dom",
+      'react-dom': '@hot-loader/react-dom',
     },
   },
   devtool: 'inline-source-map',
@@ -22,22 +23,22 @@ const config = {
         test: /\.[cs][ac]?ss$/i,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           {
             loader: 'css-loader',
             options: {
               modules: true,
               localsConvention: 'camelCase',
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
             loader: 'sass-loader',
-          }
-        ]
-      }
-    ]
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -45,10 +46,10 @@ const config = {
   ],
   devServer: {
     host: 'localhost',
-    port: port,
+    port,
     historyApiFallback: true,
     hot: true,
-    open: false
-  }
+    open: false,
+  },
 };
 module.exports = config;
