@@ -36,9 +36,6 @@ class Layout extends Component {
     setTheme(themeName);
   }
 
-  // toggle the site's default theme here
-  defaultThemeName = THEME_NAMES.HALLOWEEN;
-
   /**
    * Constructor.
    */
@@ -48,11 +45,20 @@ class Layout extends Component {
     // get theme info for the dropdown -- will eventually want to rename this
     const siteThemes = getSiteThemes();
 
-    const selectedTheme = props.selectedTheme === null
-      ? siteThemes.find((theme) => theme.label === this.defaultThemeName)
-      : siteThemes.find((theme) => theme.label === props.selectedTheme);
-
     // set the initial theme
+    let defaultThemeName = THEME_NAMES.HALLOWEEN;
+    // eslint-disable-next-line no-undef
+    let defaultTheme = (new URLSearchParams(window.location.search)).get('default_theme');
+    // query param provided for the theme
+    if (defaultTheme !== null) {
+      // check if the provided theme exists
+      defaultTheme = THEME_NAMES[defaultTheme.toUpperCase()];
+      defaultThemeName = defaultTheme;
+    }
+
+    const selectedTheme = props.selectedTheme === null
+      ? siteThemes.find((theme) => theme.label === defaultThemeName)
+      : siteThemes.find((theme) => theme.label === props.selectedTheme);
     Layout.updateSiteTheme(props.setThemeAction, selectedTheme.label, selectedTheme.value);
 
     this.state = {
