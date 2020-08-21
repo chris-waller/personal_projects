@@ -16,13 +16,14 @@
   --color9: #774936;
   --color10: #000000;
   --themeBgColorMain: var(--color10);
-  --bgOpacity: 0.25;
-  --themeBgColorAlt: var(--color4);
+  --bgOpacity: 0.4;
+  --themeBgColorAlt: var(--color10);
   --bgXl: url('../../images/backgrounds/halloween_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgLarge: url('../../images/backgrounds/halloween_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgMed: url('../../images/backgrounds/halloween_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgSm: url('../../images/backgrounds/halloween_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgHeader: url('../../images/backgrounds/halloween_bg_header.jpg') center / contain no-repeat var(--themeBgColorMain);
+  --bgHeader: url('../../images/backgrounds/halloween_bg_header.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --headerLogo: url('../../images/backgrounds/halloween_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
   
   /* Set global CSS variables here */
   /* ***************************** */
@@ -33,6 +34,7 @@
   --themeBgSm: var(--bgSmall);
   --themeBgHeader: var(--bgXl);
   --themeBgOpacity: var(--bgOpacity);
+  --themeHeaderLogo: var(--headerLogo);
 
   // font
   --themeFontColorMain: var(--color9);

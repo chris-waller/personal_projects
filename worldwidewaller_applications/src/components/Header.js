@@ -1,81 +1,42 @@
 // npm imports
-import React, { Component } from 'react';
-import { Redirect } from 'react-router';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-// style imports
+// css imports
 import styles from './styles/header.scss';
+
+// image imports
 
 /**
  * This component is responsible for displaying the site header.
  * The header will be replaced with a humburger menu at a specified screen size
  */
-class Header extends Component {
-  /**
-   * Constructor.
-   */
-  constructor() {
-    super();
+const Header = () => (
+  <div className={styles.container}>
 
-    this.state = {
-      redirect: false,
-    };
-
-    this.handleOnClick = this.handleOnClick.bind(this);
-  }
-
-  /**
-   * User has clicked a the home button.
-   */
-  handleOnClick() {
-    this.setState({ redirect: true });
-  }
-
-  /**
-   * Render.
-   */
-  render() {
-    const { redirect } = this.state;
-    // user clicked the map image
-    if (redirect) {
-      return <Redirect push to="/" />;
-    }
-
-    return (
-      <div className={styles.container}>
-
-        {/* Home Icon Section */}
-        {/* ***************** */}
-        <div className={styles.homeSection}>
-
-          <div
-            title="Home"
-            onClick={this.handleOnClick}
-            className={styles.homeButton}
-          >
-            Home
-          </div>
-          pl.p.lp.lp.lp.
+    {/* Home Icon Section */}
+    {/* ***************** */}
+    <div className={styles.logoSection}>
+      <Link to="/">
+        <div className={styles.homeLink} title="Home">
+          <div title="Home">&nbsp;</div>
         </div>
-        ijmimjimjimjijijmiijm
-        {/* Links Section */}
-        {/* *************
-        <div className={styles.linkSection}>
-            <Link
-              to="/"
-              className={styles.link}
-              title="Home"
-            >
-              Home
-            </Link>
-        </div>
-        */}
+      </Link>
+    </div>
 
-        {/* Hambuger Menu Section */ }
-        {/* ********************* */ }
-        <div className={styles.menuSection} />
-      </div>
-    );
-  }
-}
+    {/* Links Section */}
+    {/* *************
+    <div className={styles.linkSection}>
+        <Link
+          to="/"
+          className={styles.link}
+          title="Home"
+        >
+          Home
+        </Link>
+    </div>
+    */}
+  </div>
+);
 
 export default Header;
