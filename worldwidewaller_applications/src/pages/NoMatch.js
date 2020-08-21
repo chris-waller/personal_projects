@@ -8,7 +8,7 @@ import Layout from '../components/Layout';
 const NoMatch = () => (
   <Layout>
     <h1>Page Not Found</h1>
-    <Link to="/foobar">fjdskfjdslk</Link>
+    <Link to="/">Home</Link>
   </Layout>
 );
 
