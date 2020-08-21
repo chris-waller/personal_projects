@@ -14,7 +14,7 @@ const App = () => (
   <Router>
     <Provider store={store}>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route path="/" exact component={Home} />
         <Route component={NoMatch} />
       </Switch>
     </Provider>
