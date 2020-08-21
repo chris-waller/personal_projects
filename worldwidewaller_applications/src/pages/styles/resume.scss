@@ -1,4 +1,37 @@
 .container {
   width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;  
+}
+
+.section {
+  width: 100%;
+  margin: 5px;
+  padding-top: 10px;
+  background-color: white;
+  color: black; 
+}
+
+.header {  
+  display: grid;
+  justify-content: center;
+}
+.header > h1,
+.header >h2 {
+  text-align: center;
+  margin: 1px 0px;
+}
+
+.section-content {
+  margin: 10px 30px;
+}
+
+.list li {
+  margin-bottom: 2px;
+}
+
+.list-lvl2 {
+  margin: 0 0 0 25px;
+  list-style-type: square;
 }
