@@ -13,13 +13,13 @@
   --color8: #1B4332;
   --color9: #081C15;
   --themeBgColorMain: var(--color1);
+  --bgOpacity: 0.4;
   --themeBgColorAlt: var(--color3);
-
   --bgXl: url('../../images/backgrounds/forest_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgLarge: url('../../images/backgrounds/forest_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgMed: url('../../images/backgrounds/forest_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgSm: url('../../images/backgrounds/forest_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgHeader: url('../../images/backgrounds/forest_bg_header.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgHeader: url('../../images/backgrounds/forest_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
 
   /* Set global CSS variables here */
   /* ***************************** */
@@ -29,6 +29,7 @@
   --themeBgMed: var(--bgMedium);
   --themeBgSm: var(--bgSmall);
   --themeBgHeader: var(--bgXl);
+  --themeBgOpacity: var(--bgOpacity);
  
   --themeFontColorMain: var(--color9);
   --themeFontColorAlt: var(--color3);

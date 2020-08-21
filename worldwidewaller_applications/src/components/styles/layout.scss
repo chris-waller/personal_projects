@@ -120,7 +120,7 @@ h5.select-theme {
   width: 100%;
   height: 100%;
   background-color: var(--bgColorMain);
-  opacity: 0.4;
+  opacity: var(--bgOpacity);
 }
 .page-content {  
   padding: 10px;
