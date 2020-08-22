@@ -155,9 +155,9 @@ class Layout extends Component {
         </div>
 
         {/* Page Content */}
-        <div className={classNames(styles.pageContentWrapper, collapsedStyle)}>
-          <div className={styles.pageContentOverlay} />
-          <div className={styles.pageContent}>
+        <div id="wrapper" className={classNames(styles.pageContentWrapper, collapsedStyle)}>
+          <div id="foo" className={styles.pageContentOverlay} />
+          <div id="bar" className={styles.pageContent}>
             {children}
           </div>
         </div>

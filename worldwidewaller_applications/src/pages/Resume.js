@@ -1,6 +1,7 @@
 // npm imports
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import Collapsible from 'react-collapsible';
 // import { Link } from 'react-router-dom';
 
 // style imports
@@ -9,8 +10,33 @@ import styles from './styles/resume.scss';
 // custom components
 import Layout from '../components/Layout';
 
-/* eslint-disable */
+/* eslint-disable max-len, react/no-unused-state */
 class Resume extends Component {
+  /**
+   * Constructor.
+   */
+  constructor() {
+    super();
+
+    this.state = {
+      isCollapsed: false,
+    };
+  }
+
+  /**
+   * Toggle function for collapsible section.
+   */
+  collapseClicked() {
+    console.log('here');
+    const { isCollapsed } = !this.state;
+    this.setState({
+      isCollapsed,
+    });
+  }
+
+  /**
+   * Render.
+   */
   render() {
     return (
       <Layout>
@@ -18,7 +44,7 @@ class Resume extends Component {
           <div className={classNames(styles.section, styles.header)}>
             <h1>Chris Waller</h1>
             <h2>Full Stack Web Application Devloper & Tech Lead</h2>
-            
+
             {/* Introduction */ }
             <div className={styles.sectionContent}>
               <p>
@@ -30,29 +56,104 @@ class Resume extends Component {
               <ul className={styles.list}>
                 <li>
                   <p>Scalable, cross-platform web design, development & deployment</p>
-                  <li className={styles.listLvl2}>ReactJs, JavaScript, CSS, HTML5, Core Java expertise</li>
-                  <li className={styles.listLvl2}>Add a 2nd point</li>
+                  <ul>
+                    <li>ReactJs, JavaScript, CSS, HTML5, Core Java expertise</li>
+                    <li>Add a 2nd point</li>
+                  </ul>
                 </li>
                 <li>
                   <p>Database administration, configuration & development</p>
-                  <li className={styles.listLvl2}>SQL expertise including stored procedures, transactions, scheduled jobs, database backup & replication</li>
+                  <ul>
+                    <li>SQL expertise including stored procedures, transactions, scheduled jobs, database backup & replication</li>
+                  </ul>
                 </li>
                 <li>
                   <p>Requirements gathering, stakeholder demos, acceptance-test preparation, commissioning, troubleshooting (change this)</p>
-                  <li className={styles.listLvl2}>Some other info here</li>
+                  <ul>
+                    <li>Some other info here</li>
+                  </ul>
                 </li>
               </ul>
             </div>
           </div>
-          
+
           {/* Technical Skills */}
-          <div className={styles.section}>Technical Skills</div>
-          <div className={styles.section}>Managment Skills</div>
-          <div className={styles.section}>Professional Achievments</div>
-          <div className={styles.section}>Professional Expertise</div>
-          <div className={styles.section}>Links</div>
-          <div className={styles.section}>Education</div>
-          <div className={styles.section}>Hobbies/Interests</div>
+          <Collapsible
+            trigger="Managment Skills"
+            className={styles.section}
+            openedClassName={styles.section}
+            triggerClassName={styles.trigger}
+            triggerOpenedClassName={styles.trigger}
+          >
+            <p>Skill 1</p>
+          </Collapsible>
+
+          {/* Technical Skills */}
+          <Collapsible
+            trigger="Professional Achievments"
+            className={styles.section}
+            openedClassName={styles.section}
+            triggerClassName={styles.trigger}
+            triggerOpenedClassName={styles.trigger}
+          >
+            <p>Skill 1</p>
+          </Collapsible>
+
+          {/* Technical Skills */}
+          <Collapsible
+            trigger="Professional Expertise"
+            className={styles.section}
+            openedClassName={styles.section}
+            triggerClassName={styles.trigger}
+            triggerOpenedClassName={styles.trigger}
+          >
+            <p>Skill 1</p>
+          </Collapsible>
+
+          {/* Technical Skills */}
+          <Collapsible
+            trigger="Links"
+            className={styles.section}
+            openedClassName={styles.section}
+            triggerClassName={styles.trigger}
+            triggerOpenedClassName={styles.trigger}
+          >
+            <p>Skill 1</p>
+          </Collapsible>
+
+          {/* Technical Skills */}
+          <Collapsible
+            trigger="Education"
+            className={styles.section}
+            openedClassName={styles.section}
+            triggerClassName={styles.trigger}
+            triggerOpenedClassName={styles.trigger}
+          >
+            <p>Skill 1</p>
+          </Collapsible>
+
+          {/* Technical Skills */}
+          <Collapsible
+            trigger="Hobbies/Interests"
+            className={styles.section}
+            openedClassName={styles.section}
+            triggerClassName={styles.trigger}
+            triggerOpenedClassName={styles.trigger}
+          >
+            <p>Skill 1</p>
+          </Collapsible>
+
+          {/* Technical Skills */}
+          <Collapsible
+            trigger="Technical Skills"
+            className={styles.section}
+            openedClassName={styles.section}
+            triggerClassName={styles.trigger}
+            triggerOpenedClassName={styles.trigger}
+          >
+            <p>Skill 1</p>
+          </Collapsible>
+
         </div>
       </Layout>
     );
