@@ -46,7 +46,7 @@ class Layout extends Component {
     const siteThemes = getSiteThemes();
 
     // set the initial theme
-    let defaultThemeName = THEME_NAMES.HALLOWEEN;
+    let defaultThemeName = THEME_NAMES.OCEAN;
     // eslint-disable-next-line no-undef
     let defaultTheme = (new URLSearchParams(window.location.search)).get('default_theme');
     // query param provided for the theme

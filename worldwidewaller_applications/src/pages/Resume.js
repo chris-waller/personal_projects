@@ -1,14 +1,19 @@
 // npm imports
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Collapsible from 'react-collapsible';
-// import { Link } from 'react-router-dom';
 
 // style imports
 import styles from './styles/resume.scss';
 
 // custom components
 import Layout from '../components/Layout';
+import Achievements from './page_components/Achievments';
+import Education from './page_components/Education';
+import Experience from './page_components/Experience';
+import Hobbies from './page_components/Hobbies';
+import Links from './page_components/Links';
+import ManagementSkills from './page_components/ManagementSkills';
+import TechnicalSkills from './page_components/TechnicalSkills';
 
 /* eslint-disable max-len, react/no-unused-state */
 class Resume extends Component {
@@ -38,12 +43,31 @@ class Resume extends Component {
    * Render.
    */
   render() {
+    const classes = {
+      sectionClassName: styles.section,
+      triggerClassName: styles.trigger,
+      openClassName: styles.open,
+      contentClassName: styles.content,
+    };
+
+    /* eslint-disable react/jsx-props-no-spreading */
+    const pageCommponents = [
+      <TechnicalSkills key="tech" {...classes} />,
+      <ManagementSkills key="management" {...classes} />,
+      <Achievements key="achieve" {...classes} />,
+      <Experience key="experience" {...classes} />,
+      <Links key="links" {...classes} />,
+      <Education key="education" {...classes} />,
+      <Hobbies key="hobbies" {...classes} />,
+    ];
+    /* eslint-enable react/jsx-props-no-spreading */
+
     return (
       <Layout>
         <div className={styles.container}>
           <div className={classNames(styles.section, styles.header)}>
             <h1>Chris Waller</h1>
-            <h2>Full Stack Web Application Devloper & Tech Lead</h2>
+            <h2>Full Stack Web Application Developer & Tech Lead</h2>
 
             {/* Introduction */ }
             <div className={styles.sectionContent}>
@@ -77,82 +101,7 @@ class Resume extends Component {
             </div>
           </div>
 
-          {/* Technical Skills */}
-          <Collapsible
-            trigger="Managment Skills"
-            className={styles.section}
-            openedClassName={styles.section}
-            triggerClassName={styles.trigger}
-            triggerOpenedClassName={styles.trigger}
-          >
-            <p>Skill 1</p>
-          </Collapsible>
-
-          {/* Technical Skills */}
-          <Collapsible
-            trigger="Professional Achievments"
-            className={styles.section}
-            openedClassName={styles.section}
-            triggerClassName={styles.trigger}
-            triggerOpenedClassName={styles.trigger}
-          >
-            <p>Skill 1</p>
-          </Collapsible>
-
-          {/* Technical Skills */}
-          <Collapsible
-            trigger="Professional Expertise"
-            className={styles.section}
-            openedClassName={styles.section}
-            triggerClassName={styles.trigger}
-            triggerOpenedClassName={styles.trigger}
-          >
-            <p>Skill 1</p>
-          </Collapsible>
-
-          {/* Technical Skills */}
-          <Collapsible
-            trigger="Links"
-            className={styles.section}
-            openedClassName={styles.section}
-            triggerClassName={styles.trigger}
-            triggerOpenedClassName={styles.trigger}
-          >
-            <p>Skill 1</p>
-          </Collapsible>
-
-          {/* Technical Skills */}
-          <Collapsible
-            trigger="Education"
-            className={styles.section}
-            openedClassName={styles.section}
-            triggerClassName={styles.trigger}
-            triggerOpenedClassName={styles.trigger}
-          >
-            <p>Skill 1</p>
-          </Collapsible>
-
-          {/* Technical Skills */}
-          <Collapsible
-            trigger="Hobbies/Interests"
-            className={styles.section}
-            openedClassName={styles.section}
-            triggerClassName={styles.trigger}
-            triggerOpenedClassName={styles.trigger}
-          >
-            <p>Skill 1</p>
-          </Collapsible>
-
-          {/* Technical Skills */}
-          <Collapsible
-            trigger="Technical Skills"
-            className={styles.section}
-            openedClassName={styles.section}
-            triggerClassName={styles.trigger}
-            triggerOpenedClassName={styles.trigger}
-          >
-            <p>Skill 1</p>
-          </Collapsible>
+          {pageCommponents}
 
         </div>
       </Layout>
