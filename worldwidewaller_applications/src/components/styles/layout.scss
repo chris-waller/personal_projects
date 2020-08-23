@@ -101,9 +101,7 @@ h5.select-theme {
 .page-content-wrapper {
   grid-area: "page_content";
   background-color: var(--bgColorMain);
-  //background: var(--bgXl);
 
-  // used to hide vertical scrollbar
   width: 100%;
   height: 100%;
   position: relative;
