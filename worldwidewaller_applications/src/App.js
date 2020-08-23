@@ -4,7 +4,7 @@ import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 // custom components
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import Resume from './pages/Resume';
 import NoMatch from './pages/NoMatch';
 
@@ -15,7 +15,7 @@ const App = () => (
   <Router>
     <Provider store={store}>
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={Resume} />
         <Route path="/resume" exact component={Resume} />
         <Route component={NoMatch} />
       </Switch>
