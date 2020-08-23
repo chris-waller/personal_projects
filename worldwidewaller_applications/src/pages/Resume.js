@@ -1,6 +1,5 @@
 // npm imports
 import React, { Component } from 'react';
-import classNames from 'classnames';
 
 // style imports
 import styles from './styles/resume.scss';
@@ -66,12 +65,13 @@ class Resume extends Component {
     return (
       <Layout>
         <div className={styles.container}>
-          <div className={classNames(styles.section, styles.header)}>
-            <h1>Chris Waller</h1>
-            <h2>Full Stack Web Application Developer & Tech Lead</h2>
-
+          <div className={styles.section}>
             {/* Introduction */ }
             <div className={styles.sectionContent}>
+              <div className={styles.header}>
+                <h1>Chris Waller</h1>
+                <h2>Full Stack Web Application Developer & Tech Lead</h2>
+              </div>
               <p>
                 8+ years experience designing, developing, delivering and maintaining dynamic, cross-platform web applications.
                 6+ years experience successfully working with both internal and external stakeholders to define project scope and

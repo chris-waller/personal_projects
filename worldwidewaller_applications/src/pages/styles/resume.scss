@@ -13,7 +13,7 @@
 .section {
   width: 100%;
   margin: 20px 0 0 0;
-  padding: 10px 45px 10px;
+  padding: 10px 45px;
   border: 3px solid var(--borderColorMain);
   color: var(--fontColorMain);
   background-color: var(--bgColorMain);
@@ -24,6 +24,7 @@
 .header {  
   display: grid;
   justify-content: center;
+  margin-bottom: 10px;
 }
 .header > h1,
 .header >h2 {
@@ -42,8 +43,6 @@
   margin-bottom: 2px;
 }
 
-/* Background Image Sizes */
-/* ********************** */
 @media screen and (max-width: $smallMaxWidth) {   
   .container {
     font-size: 0.8em;

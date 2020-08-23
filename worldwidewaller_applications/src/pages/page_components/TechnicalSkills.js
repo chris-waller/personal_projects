@@ -17,6 +17,7 @@ const TechnicalSkills = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
+    open
   >
     <p>Languages: JavaScript, CSC/SCSS, HTML5, SQL, Java 8, Ruby on Rails, PHP, XML, YML, C#</p>
     <p>

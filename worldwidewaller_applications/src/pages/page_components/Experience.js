@@ -16,6 +16,7 @@ const Experience = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
+    open
   >
     <p>My work experience</p>
   </Collapsible>

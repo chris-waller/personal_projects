@@ -16,6 +16,7 @@ const Hobbies = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
+    open
   >
     <p>My hobbies</p>
   </Collapsible>

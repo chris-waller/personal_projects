@@ -16,6 +16,7 @@ const Education = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
+    open
   >
     <p>My Education</p>
   </Collapsible>

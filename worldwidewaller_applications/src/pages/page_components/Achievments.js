@@ -17,6 +17,7 @@ const Achievements = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
+    open
   >
     <p>Achievements here</p>
   </Collapsible>
