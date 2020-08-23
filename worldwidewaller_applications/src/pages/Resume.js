@@ -7,13 +7,13 @@ import collapsibleStyles from './styles/collapsible.scss';
 
 // custom components
 import Layout from '../components/Layout';
-import Achievements from './page_components/Achievments';
-import Education from './page_components/Education';
-import Experience from './page_components/Experience';
-import Hobbies from './page_components/Hobbies';
-import Links from './page_components/Links';
-import ManagementSkills from './page_components/ManagementSkills';
-import TechnicalSkills from './page_components/TechnicalSkills';
+import Achievements from './page_components/resume/Achievments';
+import Education from './page_components/resume/Education';
+import Experience from './page_components/resume/Experience';
+import Hobbies from './page_components/resume/Hobbies';
+import Links from './page_components/resume/Links';
+import ManagementSkills from './page_components/resume/ManagementSkills';
+import TechnicalSkills from './page_components/resume/TechnicalSkills';
 
 // TODO: remove this before final version
 /* eslint-disable max-len, react/no-unused-state */

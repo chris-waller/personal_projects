@@ -6,6 +6,9 @@ import classNames from 'classnames';
 // custom components
 import Collapsible from 'react-collapsible';
 
+// style imports
+// import styles from './styles/technical_skills.scss';
+
 /* eslint-disable max-len, react/no-unused-state */
 const TechnicalSkills = ({
   sectionClassName, triggerClassName, openClassName, contentClassName,
@@ -19,7 +22,7 @@ const TechnicalSkills = ({
     contentInnerClassName={contentClassName}
     open
   >
-    <p>Languages: JavaScript, CSC/SCSS, HTML5, SQL, Java 8, Ruby on Rails, PHP, XML, YML, C#</p>
+    <p>Languages: JavaScript, CSS/SCSS, HTML5, SQL, Java 8, Ruby on Rails, PHP, XML, YML, C#</p>
     <p>
       Framerworks & Libraries: ReactJs, redux, AJAX, JSON, flex, bootsrap, npm, webpack, jQuery, leaflet, mapbox, highcharts,
       recaptcha, OATH2, Java DropWizard, .NET, Crystal Reports, SSRS
