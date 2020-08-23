@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 // style imports
 import styles from './styles/resume.scss';
+import collapsibleStyles from './styles/collapsible.scss';
 
 // custom components
 import Layout from '../components/Layout';
@@ -15,6 +16,7 @@ import Links from './page_components/Links';
 import ManagementSkills from './page_components/ManagementSkills';
 import TechnicalSkills from './page_components/TechnicalSkills';
 
+// TODO: remove this before final version
 /* eslint-disable max-len, react/no-unused-state */
 class Resume extends Component {
   /**
@@ -32,7 +34,6 @@ class Resume extends Component {
    * Toggle function for collapsible section.
    */
   collapseClicked() {
-    console.log('here');
     const { isCollapsed } = !this.state;
     this.setState({
       isCollapsed,
@@ -45,9 +46,9 @@ class Resume extends Component {
   render() {
     const classes = {
       sectionClassName: styles.section,
-      triggerClassName: styles.trigger,
-      openClassName: styles.open,
-      contentClassName: styles.content,
+      triggerClassName: collapsibleStyles.trigger,
+      openClassName: collapsibleStyles.open,
+      contentClassName: collapsibleStyles.content,
     };
 
     /* eslint-disable react/jsx-props-no-spreading */

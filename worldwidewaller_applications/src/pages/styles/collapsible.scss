@@ -1,0 +1,14 @@
+.trigger {
+  display: grid;
+  justify-content: center;
+  font-size: 1.5em;
+  padding: 7.5px 0 5px 0;
+  cursor: pointer;  
+}
+.trigger.open  {
+  margin-bottom: 15px;  
+}
+
+.content {
+  margin-bottom: 20px;
+}
