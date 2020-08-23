@@ -83,7 +83,6 @@ class Resume extends Component {
                   <p>Scalable, cross-platform web design, development & deployment</p>
                   <ul>
                     <li>ReactJs, JavaScript, CSS, HTML5, Core Java expertise</li>
-                    <li>Add a 2nd point</li>
                   </ul>
                 </li>
                 <li>

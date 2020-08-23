@@ -13,12 +13,12 @@
 .section {
   width: 100%;
   margin: 20px 0 0 0;
-  padding: 10px 45px 10px 45px;
+  padding: 10px 45px 10px;
   border: 3px solid var(--borderColorMain);
   color: var(--fontColorMain);
   background-color: var(--bgColorMain);
   opacity: 0.8;
-  border-radius: 50px;
+  border-radius: 30px;
 }
 
 .header {  
@@ -45,11 +45,28 @@
 /* Background Image Sizes */
 /* ********************** */
 @media screen and (max-width: $smallMaxWidth) {   
-
+  .container {
+    font-size: 0.8em;
+  }
+  .section {
+    padding: 10px 0px;
+    
+  }
+  .section-content {
+    margin: 10px 15px;
+  }
+  .list {
+    padding-left: 25px;
+  }  
+  .list ul {
+    padding-left: 20px;
+  }
 }
 
 @media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  
-
+  .section {
+    padding: 10px 20px;
+  }
 }
 
 @media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {  

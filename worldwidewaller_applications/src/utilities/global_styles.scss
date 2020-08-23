@@ -2,6 +2,8 @@
 /* Use this file for all global styles */
 /***************************************/
 
+@import './screen_dimensions.scss';
+
 a, a:visited {
   color: var(--linkColorMain);
 }
@@ -14,4 +16,13 @@ h1, h2, h3, h4, h5, h6, p {
   color: var(--fontColorMain);
   padding: 0px;
   margin: 0px;
+}
+
+@media screen and (max-width: $smallMaxWidth) { 
+  h1 {
+    font-size: 25px;
+  }
+  h2 {
+    font-size: 17px;
+  }
 }
