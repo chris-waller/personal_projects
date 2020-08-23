@@ -1,7 +1,7 @@
 // npm imports
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 // custom components
 import Collapsible from 'react-collapsible';
