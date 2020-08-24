@@ -18,12 +18,12 @@
   --themeBgColorMain: var(--color10);
   --bgOpacity: 0.4;
   --themeBgColorAlt: var(--color3);
-  --bgXl: url('../../images/backgrounds/halloween_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgLarge: url('../../images/backgrounds/halloween_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgMed: url('../../images/backgrounds/halloween_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgSm: url('../../images/backgrounds/halloween_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgHeader: url('../../images/backgrounds/halloween_bg_header.jpg') center / cover no-repeat var(--themeBgColorAlt);
-  --headerLogo: url('../../images/backgrounds/halloween_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --bgXl: url('~images/backgrounds/halloween_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgLarge: url('~images/backgrounds/halloween_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgMed: url('~images/backgrounds/halloween_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgSm: url('~images/backgrounds/halloween_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgHeader: url('~images/backgrounds/halloween_bg_header.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --headerLogo: url('~images/backgrounds/halloween_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
   
   /* Set global CSS variables here */
   /* ***************************** */

@@ -15,12 +15,12 @@
   --themeBgColorMain: var(--color2);
   --bgOpacity: 0.4;
   --themeBgColorAlt: var(--color4);
-  --bgXl: url('../../images/backgrounds/astronomy_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgLarge: url('../../images/backgrounds/astronomy_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgMed: url('../../images/backgrounds/astronomy_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgSm: url('../../images/backgrounds/astronomy_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgHeader: url('../../images/backgrounds/astronomy_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --headerLogo: url('../../images/backgrounds/astronomy_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --bgXl: url('~images/backgrounds/astronomy_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgLarge: url('~images/backgrounds/astronomy_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgMed: url('~images/backgrounds/astronomy_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgSm: url('~images/backgrounds/astronomy_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgHeader: url('~images/backgrounds/astronomy_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --headerLogo: url('~images/backgrounds/astronomy_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
 
   /* Set global CSS variables here */
   /* ***************************** */

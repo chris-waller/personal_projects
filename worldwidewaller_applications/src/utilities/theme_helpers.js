@@ -4,7 +4,7 @@
 
 // styles imports
 // eslint-disable-next-line css-modules/no-unused-class
-import styles from './themes/site_themes.scss';
+import styles from '~/styles/site_themes.scss';
 
 /**
  * All themes supported by this application

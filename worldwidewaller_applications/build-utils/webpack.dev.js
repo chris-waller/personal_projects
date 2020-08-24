@@ -34,7 +34,18 @@ const config = {
             },
           },
           {
+            loader: 'resolve-url-loader',
+            options: {
+              root: '',
+            },
+          },
+          {
             loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                indentedSyntax: true,
+              },
+            },
           },
         ],
       },

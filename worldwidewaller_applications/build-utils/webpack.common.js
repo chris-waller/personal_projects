@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const commonPaths = require('./common-paths');
 
@@ -8,6 +9,14 @@ const config = {
   output: {
     path: commonPaths.outputPath,
     publicPath: '/',
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json', '.scss', '.css'],
+    alias: {
+      styles: path.join(path.join(__dirname, '/../'), 'src/styles'),
+      utilities: path.join(path.join(__dirname, '/../'), 'src/utilities'),
+      images: path.join(path.join(__dirname, '/../'), 'src/images'),
+    },
   },
   module: {
     rules: [

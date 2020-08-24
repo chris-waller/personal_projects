@@ -1,6 +1,6 @@
-@import "../../utilities/themes/site_themes";
-@import "../../utilities/global_styles";
-@import "../../utilities/screen_dimensions";
+@import "~styles/site_themes";
+@import "~styles/global_styles";
+@import "~styles/screen_dimensions";
 
 // header height calculations
 $headerHeight: 90px;

@@ -2,10 +2,10 @@
 /* Set theme-related global styles */
 /***********************************/
 
-@import './astronomy_theme.scss';
-@import './halloween_theme.scss';
-@import './forest_theme.scss';
-@import './ocean_theme.scss';
+@import './themes/astronomy_theme.scss';
+@import './themes/halloween_theme.scss';
+@import './themes/forest_theme.scss';
+@import './themes/ocean_theme.scss';
 
 .theme {
   // background styles

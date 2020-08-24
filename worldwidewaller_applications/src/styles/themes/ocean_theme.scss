@@ -15,12 +15,12 @@
   --themeBgColorMain: var(--color1);
   --bgOpacity: 0.5;
   --themeBgColorAlt: var(--color2);
-  --bgXl: url('../../images/backgrounds/ocean_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgLarge: url('../../images/backgrounds/ocean_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgMed: url('../../images/backgrounds/ocean_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgSm: url('../../images/backgrounds/ocean_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgHeader: url('../../images/backgrounds/ocean_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --headerLogo: url('../../images/backgrounds/ocean_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --bgXl: url('~images/backgrounds/ocean_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgLarge: url('~images/backgrounds/ocean_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgMed: url('~images/backgrounds/ocean_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgSm: url('~images/backgrounds/ocean_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --bgHeader: url('~images/backgrounds/ocean_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
+  --headerLogo: url('~images/backgrounds/ocean_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
   
    /* Set global CSS variables here */
   /* ***************************** */
