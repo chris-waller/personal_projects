@@ -92,10 +92,7 @@ class Resume extends Component {
                   </ul>
                 </li>
                 <li>
-                  <p>Requirements gathering, stakeholder demos, acceptance-test preparation, commissioning, troubleshooting (change this)</p>
-                  <ul>
-                    <li>Some other info here</li>
-                  </ul>
+                  <p>Requirements gathering, stakeholder demos, acceptance-test preparation, commissioning, troubleshooting</p>
                 </li>
               </ul>
             </div>

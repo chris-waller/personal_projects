@@ -23,6 +23,10 @@ const TechnicalSkills = ({
     open
   >
     <div className={styles.container}>
+      <p className={styles.summary}>
+        All listed skills have been used professionally to develop and deliver production-ready web applications
+      </p>
+
       <div className={styles.row}>
         <p className={styles.heading}>
           Languages:
