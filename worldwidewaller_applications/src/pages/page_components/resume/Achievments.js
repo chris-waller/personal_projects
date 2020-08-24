@@ -8,7 +8,7 @@ import Collapsible from 'react-collapsible';
 
 /* eslint-disable max-len, react/no-unused-state */
 const Achievements = ({
-  sectionClassName, triggerClassName, openClassName, contentClassName,
+  sectionClassName, triggerClassName, openClassName, contentClassName, isOpen,
 }) => (
   <Collapsible
     trigger="Achievements"
@@ -17,7 +17,7 @@ const Achievements = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
-    open
+    open={isOpen}
   >
     <p>Achievements here</p>
   </Collapsible>
@@ -31,4 +31,5 @@ Achievements.propTypes = {
   triggerClassName: PropTypes.string.isRequired,
   openClassName: PropTypes.string.isRequired,
   contentClassName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };

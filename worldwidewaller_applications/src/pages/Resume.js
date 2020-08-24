@@ -25,17 +25,34 @@ class Resume extends Component {
     super();
 
     this.state = {
-      isCollapsed: false,
+      sectionsOpen: {
+        achievementsOpen: false,
+        educationOpen: false,
+        experienceOpen: false,
+        hobbiesOpen: false,
+        linksOpen: false,
+        managementOpen: false,
+        technicalOpen: false,
+      },
     };
+
+    this.expandCollapseAll = this.expandCollapseAll.bind(this);
   }
 
   /**
-   * Toggle function for collapsible section.
+   * Expands/collapses all sections.
    */
-  collapseClicked() {
-    const { isCollapsed } = !this.state;
+  expandCollapseAll(isOpen) {
     this.setState({
-      isCollapsed,
+      sectionsOpen: {
+        achievementsOpen: isOpen,
+        educationOpen: isOpen,
+        experienceOpen: isOpen,
+        hobbiesOpen: isOpen,
+        linksOpen: isOpen,
+        managementOpen: isOpen,
+        technicalOpen: isOpen,
+      },
     });
   }
 
@@ -50,21 +67,32 @@ class Resume extends Component {
       contentClassName: collapsibleStyles.content,
     };
 
+    const { sectionsOpen } = this.state;
+    const {
+      achievementsOpen, educationOpen, experienceOpen, hobbiesOpen, linksOpen, managementOpen, technicalOpen,
+    } = sectionsOpen;
+
     /* eslint-disable react/jsx-props-no-spreading */
     const pageCommponents = [
-      <TechnicalSkills key="tech" {...classes} />,
-      <ManagementSkills key="management" {...classes} />,
-      <Achievements key="achieve" {...classes} />,
-      <Experience key="experience" {...classes} />,
-      <Links key="links" {...classes} />,
-      <Education key="education" {...classes} />,
-      <Hobbies key="hobbies" {...classes} />,
+      <TechnicalSkills key="tech" {...classes} isOpen={!technicalOpen} />,
+      <ManagementSkills key="management" {...classes} isOpen={!managementOpen} />,
+      <Achievements key="achieve" {...classes} isOpen={!achievementsOpen} />,
+      <Experience key="experience" {...classes} isOpen={!experienceOpen} />,
+      <Links key="links" {...classes} isOpen={!linksOpen} />,
+      <Education key="education" {...classes} isOpen={!educationOpen} />,
+      <Hobbies key="hobbies" {...classes} isOpen={!hobbiesOpen} />,
     ];
     /* eslint-enable react/jsx-props-no-spreading */
 
     return (
       <Layout>
         <div className={styles.container}>
+          <button type="button" onClick={() => this.expandCollapseAll(true)}>
+            Collapse All
+          </button>
+          <button type="button" onClick={() => this.expandCollapseAll(false)}>
+            Expand All
+          </button>
           <div className={styles.section}>
             {/* Introduction */ }
             <div className={styles.sectionContent}>

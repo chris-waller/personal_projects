@@ -10,7 +10,7 @@ import Collapsible from 'react-collapsible';
 import styles from './styles/management_skills.scss';
 
 const ManagementSkills = ({
-  sectionClassName, triggerClassName, openClassName, contentClassName,
+  sectionClassName, triggerClassName, openClassName, contentClassName, isOpen,
 }) => (
   <Collapsible
     trigger="Management Skills"
@@ -19,7 +19,7 @@ const ManagementSkills = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
-    open
+    open={isOpen}
   >
     <ul className={styles.list}>
       <span>People Management:</span>
@@ -50,4 +50,5 @@ ManagementSkills.propTypes = {
   triggerClassName: PropTypes.string.isRequired,
   openClassName: PropTypes.string.isRequired,
   contentClassName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };

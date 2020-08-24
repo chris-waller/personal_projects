@@ -10,7 +10,7 @@ import Collapsible from 'react-collapsible';
 import styles from './styles/links.scss';
 
 const Links = ({
-  sectionClassName, triggerClassName, openClassName, contentClassName,
+  sectionClassName, triggerClassName, openClassName, contentClassName, isOpen,
 }) => (
   <Collapsible
     trigger="Professional Links"
@@ -19,7 +19,7 @@ const Links = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
-    open
+    open={isOpen}
   >
     <div className={styles.links}>
       <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=Yv-xtL_wfiU">
@@ -47,4 +47,5 @@ Links.propTypes = {
   triggerClassName: PropTypes.string.isRequired,
   openClassName: PropTypes.string.isRequired,
   contentClassName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };

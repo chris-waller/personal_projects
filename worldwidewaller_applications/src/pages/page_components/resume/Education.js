@@ -10,7 +10,7 @@ import Collapsible from 'react-collapsible';
 import styles from './styles/education.scss';
 
 const Education = ({
-  sectionClassName, triggerClassName, openClassName, contentClassName,
+  sectionClassName, triggerClassName, openClassName, contentClassName, isOpen,
 }) => (
   <Collapsible
     trigger="Education"
@@ -19,7 +19,7 @@ const Education = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
-    open
+    open={isOpen}
   >
     <div className={styles.container}>
       <div className={styles.content}>
@@ -52,4 +52,5 @@ Education.propTypes = {
   triggerClassName: PropTypes.string.isRequired,
   openClassName: PropTypes.string.isRequired,
   contentClassName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };

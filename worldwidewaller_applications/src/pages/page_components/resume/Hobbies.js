@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Collapsible from 'react-collapsible';
 
 const Hobbies = ({
-  sectionClassName, triggerClassName, openClassName, contentClassName,
+  sectionClassName, triggerClassName, openClassName, contentClassName, isOpen,
 }) => (
   <Collapsible
     trigger="Hobbies & Interests"
@@ -16,7 +16,7 @@ const Hobbies = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
-    open
+    open={isOpen}
   >
     <p>My hobbies</p>
   </Collapsible>
@@ -29,4 +29,5 @@ Hobbies.propTypes = {
   triggerClassName: PropTypes.string.isRequired,
   openClassName: PropTypes.string.isRequired,
   contentClassName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };

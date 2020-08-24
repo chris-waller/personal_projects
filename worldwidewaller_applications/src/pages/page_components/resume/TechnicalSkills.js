@@ -11,7 +11,7 @@ import styles from './styles/technical_skills.scss';
 
 /* eslint-disable max-len */
 const TechnicalSkills = ({
-  sectionClassName, triggerClassName, openClassName, contentClassName,
+  sectionClassName, triggerClassName, openClassName, contentClassName, isOpen,
 }) => (
   <Collapsible
     trigger="Technical Skills"
@@ -20,7 +20,7 @@ const TechnicalSkills = ({
     triggerClassName={triggerClassName}
     triggerOpenedClassName={classNames(triggerClassName, openClassName)}
     contentInnerClassName={contentClassName}
-    open
+    open={isOpen}
   >
     <div className={styles.container}>
       <p className={styles.summary}>
@@ -103,4 +103,5 @@ TechnicalSkills.propTypes = {
   triggerClassName: PropTypes.string.isRequired,
   openClassName: PropTypes.string.isRequired,
   contentClassName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
