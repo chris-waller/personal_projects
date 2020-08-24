@@ -6,7 +6,7 @@ import styles from './styles/resume.scss';
 import collapsibleStyles from './styles/collapsible.scss';
 
 // custom components
-import Layout from '../components/Layout';
+import Layout from '~/components/Layout';
 import Achievements from './page_components/resume/Achievments';
 import Education from './page_components/resume/Education';
 import Experience from './page_components/resume/Experience';
