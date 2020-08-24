@@ -3,7 +3,7 @@ import React from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 
 // custom components
-import Layout from '../components/Layout';
+import Layout from '~/components/Layout';
 
 const Home = () => (
   <Layout>
