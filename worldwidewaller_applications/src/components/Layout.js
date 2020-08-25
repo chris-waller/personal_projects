@@ -41,7 +41,6 @@ class Layout extends Component {
    */
   constructor(props) {
     super(props);
-
     // get theme info for the dropdown -- will eventually want to rename this
     const siteThemes = getSiteThemes();
 
@@ -107,7 +106,7 @@ class Layout extends Component {
    */
   render() {
     const { headerCollapsed, siteThemes, selectedTheme } = this.state;
-    const { children } = this.props;
+    const { children, headerOptions } = this.props;
 
     // adjust styles for header expansion/collapse
     const collapsedStyle = headerCollapsed ? styles.collapsed : null;
@@ -125,7 +124,7 @@ class Layout extends Component {
 
         {/* Site Header */}
         <div className={classNames(styles.siteHeader, collapsedStyle)}>
-          <Header />
+          <Header headerOptions={headerOptions} />
           <div className={styles.selectTheme}>
             <h5 className={styles.selectTheme}>Select Theme</h5>
             <DropDown
@@ -190,6 +189,7 @@ Layout.propTypes = {
   setThemeAction: PropTypes.func.isRequired,
   headerCollapsed: PropTypes.bool,
   toggleHeaderAction: PropTypes.func.isRequired,
-
+  // eslint-disable-next-line react/forbid-prop-types, react/no-unused-prop-types
+  headerOptions: PropTypes.array.isRequired,
   children: PropTypes.node.isRequired,
 };

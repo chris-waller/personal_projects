@@ -10,7 +10,10 @@ const Summary = () => (
     {/* Introduction */ }
     <div className={styles.sectionContent}>
       <div className={styles.header}>
+        {/*
+        <h1>Chris Waller</h1>
         <h2>Full Stack Web Application Developer & Tech Lead</h2>
+        */}
       </div>
       <p>
         8+ years experience designing, developing, delivering and maintaining dynamic, cross-platform web applications.

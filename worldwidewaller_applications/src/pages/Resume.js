@@ -28,17 +28,18 @@ class Resume extends Component {
    */
   constructor() {
     super();
+    const defaultOpen = false;
 
     this.state = {
       sectionsOpen: {
-        achievements: true,
-        education: true,
-        experience: true,
-        hobbies: true,
-        links: true,
-        management: true,
-        summary: true,
-        technical: true,
+        achievements: defaultOpen,
+        education: defaultOpen,
+        experience: defaultOpen,
+        hobbies: defaultOpen,
+        links: defaultOpen,
+        management: defaultOpen,
+        summary: defaultOpen,
+        technical: defaultOpen,
       },
     };
 
@@ -170,7 +171,7 @@ class Resume extends Component {
       <Collapsible
         key="summary"
         resumeSection={RESUME_SECTIONS.SUMMARY}
-        trigger="Summary"
+        trigger="Career Summary"
         {...classes}
         isOpen={summary}
         handleTriggerClick={this.onTriggerClick}
@@ -264,17 +265,21 @@ class Resume extends Component {
     ];
     /* eslint-enable react/jsx-props-no-spreading */
 
-    return (
-      <Layout>
-        <div className={styles.container}>
-          <button type="button" onClick={() => this.expandCollapseAll(false)}>
-            Collapse All
-          </button>
-          <button type="button" onClick={() => this.expandCollapseAll(true)}>
-            Expand All
-          </button>
-          {pageCommponents}
+    const headerOptions = [
+      <button key="collapse_all" type="button" onClick={() => this.expandCollapseAll(false)}>
+        Collapse All
+      </button>,
+      <button key="expand_all" type="button" onClick={() => this.expandCollapseAll(true)}>
+        Expand All
+      </button>,
+    ];
 
+    return (
+      <Layout
+        headerOptions={headerOptions}
+      >
+        <div className={styles.container}>
+          {pageCommponents}
         </div>
       </Layout>
     );

@@ -1,5 +1,6 @@
 // npm imports
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 // css imports
@@ -11,32 +12,58 @@ import styles from './styles/header.scss';
  * This component is responsible for displaying the site header.
  * The header will be replaced with a humburger menu at a specified screen size
  */
-const Header = () => (
-  <div className={styles.container}>
+class Header extends Component {
+  constructor(props) {
+    super(props);
 
-    {/* Home Icon Section */}
-    {/* ***************** */}
-    <div className={styles.logoSection}>
-      <Link to="/">
-        <div className={styles.homeLink} title="Home">
-          <div title="Home">&nbsp;</div>
+    this.state = {
+      foo: 'bar',
+    };
+  }
+
+  render() {
+    const { headerOptions } = this.props;
+
+    const { foo } = this.state;
+    if (foo === 'bat') {
+      return null;
+    }
+
+    return (
+      <div className={styles.container}>
+
+        {/* Home Icon Section */}
+        {/* ***************** */}
+        <div className={styles.logoSection}>
+          <Link to="/">
+            <div className={styles.homeLink} title="Home">
+              <div title="Home">&nbsp;</div>
+            </div>
+          </Link>
         </div>
-      </Link>
-    </div>
 
-    {/* Links Section */}
-    {/* *************
-    <div className={styles.linkSection}>
-        <Link
-          to="/"
-          className={styles.link}
-          title="Home"
-        >
-          Home
-        </Link>
-    </div>
-    */}
-  </div>
-);
+        {/* Options Section */}
+        {/* ************* */}
+        <div className={styles.optionsSection}>
+          {headerOptions.map((option) => (
+            React.createElement(
+              option.type,
+              {
+                key: option.key,
+                ...option.props,
+              },
+              option.props.children,
+            )
+          ))}
+        </div>
 
+      </div>
+    );
+  }
+}
 export default Header;
+
+Header.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  headerOptions: PropTypes.array.isRequired,
+};
