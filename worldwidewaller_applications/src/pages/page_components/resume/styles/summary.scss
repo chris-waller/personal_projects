@@ -16,10 +16,6 @@
   margin: 1px 0px;
 }
 
-.section-content {
-  margin: 10px 30px;
-}
-
 .list ul {
   padding-left: 25px;
 }
@@ -28,13 +24,6 @@
 }
 
 @media screen and (max-width: $smallMaxWidth) {   
-  .section {
-    padding: 10px 0px;
-    
-  }
-  .section-content {
-    margin: 10px 5px;
-  }
   .list {
     padding-left: 25px;
   }  
@@ -44,9 +33,7 @@
 }
 
 @media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  
-  .section {
-    padding: 10px 20px;
-  }
+
 }
 
 @media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {  

@@ -188,7 +188,7 @@ class Resume extends Component {
         isOpen={technical}
         handleTriggerClick={this.onTriggerClick}
       >
-        <ManagementSkills />
+        <TechnicalSkills />
       </Collapsible>,
 
       // Management Section
@@ -200,7 +200,7 @@ class Resume extends Component {
         isOpen={management}
         handleTriggerClick={this.onTriggerClick}
       >
-        <TechnicalSkills />
+        <ManagementSkills />
       </Collapsible>,
 
       // Management Section
