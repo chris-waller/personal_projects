@@ -52,82 +52,13 @@ class Resume extends Component {
    */
   onTriggerClick(sectionName, isOpen) {
     const { sectionsOpen } = this.state;
-    switch (sectionName) {
-      case RESUME_SECTIONS.SUMMARY:
-        this.setState({
-          sectionsOpen: {
-            ...sectionsOpen,
-            summary: isOpen,
-          },
-        });
-        break;
 
-      case RESUME_SECTIONS.TECHNICAL:
-        this.setState({
-          sectionsOpen: {
-            ...sectionsOpen,
-            technical: isOpen,
-          },
-        });
-        break;
-
-      case RESUME_SECTIONS.MANAGEMENT:
-        this.setState({
-          sectionsOpen: {
-            ...sectionsOpen,
-            management: isOpen,
-          },
-        });
-        break;
-
-      case RESUME_SECTIONS.ACHIEVEMENTS:
-        this.setState({
-          sectionsOpen: {
-            ...sectionsOpen,
-            achievements: isOpen,
-          },
-        });
-        break;
-
-      case RESUME_SECTIONS.EXPERIENCE:
-        this.setState({
-          sectionsOpen: {
-            ...sectionsOpen,
-            experience: isOpen,
-          },
-        });
-        break;
-
-      case RESUME_SECTIONS.LINKS:
-        this.setState({
-          sectionsOpen: {
-            ...sectionsOpen,
-            links: isOpen,
-          },
-        });
-        break;
-
-      case RESUME_SECTIONS.EDUCATION:
-        this.setState({
-          sectionsOpen: {
-            ...sectionsOpen,
-            education: isOpen,
-          },
-        });
-        break;
-
-      case RESUME_SECTIONS.HOBBIES:
-        this.setState({
-          sectionsOpen: {
-            ...sectionsOpen,
-            hobbies: isOpen,
-          },
-        });
-        break;
-
-      default:
-        break;
-    }
+    this.setState({
+      sectionsOpen: {
+        ...sectionsOpen,
+        [sectionName]: isOpen,
+      },
+    });
   }
 
   /**
