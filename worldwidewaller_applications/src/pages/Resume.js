@@ -131,7 +131,7 @@ class Resume extends Component {
         isOpen={sectionOpen}
         handleTriggerClick={this.onTriggerClick}
       >
-        <Summary />
+        {sectionType.component}
       </Collapsible>
     );
   }
