@@ -170,7 +170,7 @@ class Resume extends Component {
       <Collapsible
         key="summary"
         resumeSection={RESUME_SECTIONS.SUMMARY}
-        trigger="Chris Waller"
+        trigger="Summary"
         {...classes}
         isOpen={summary}
         handleTriggerClick={this.onTriggerClick}
