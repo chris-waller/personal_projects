@@ -57,7 +57,8 @@ export default Collapsible;
 
 Collapsible.propTypes = {
   trigger: PropTypes.string.isRequired,
-  resumeSection: PropTypes.string.isRequired,
+  // eslint-disable-next-line
+  resumeSection: PropTypes.object.isRequired,
   sectionClassName: PropTypes.string.isRequired,
   triggerClassName: PropTypes.string.isRequired,
   openClassName: PropTypes.string.isRequired,

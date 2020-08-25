@@ -17,11 +17,41 @@ import ManagementSkills from './page_components/resume/ManagementSkills';
 import Summary from './page_components/resume/Summary';
 import TechnicalSkills from './page_components/resume/TechnicalSkills';
 
-// utilities
-import RESUME_SECTIONS from '~/utilities/constants';
+const RESUME_SECTIONS = {
+  ACHIEVEMENTS: {
+    name: 'achievements',
+    component: <Achievements />,
+  },
+  EDUCATION: {
+    name: 'education',
+    component: <Education />,
+  },
+  EXPERIENCE: {
+    name: 'experience',
+    component: <Experience />,
+  },
+  HOBBIES: {
+    name: 'hobbies',
+    component: <Hobbies />,
+  },
+  LINKS: {
+    name: 'links',
+    component: <Links />,
+  },
+  MANAGEMENT: {
+    name: 'management',
+    component: <ManagementSkills />,
+  },
+  SUMMARY: {
+    name: 'summary',
+    component: <Summary />,
+  },
+  TECHNICAL: {
+    name: 'technical',
+    component: <TechnicalSkills />,
+  },
+};
 
-// TODO: remove this before final version
-/* eslint-disable max-len */
 class Resume extends Component {
   /**
    * Constructor.
@@ -50,13 +80,13 @@ class Resume extends Component {
   /**
    * User has clicked a trigger
    */
-  onTriggerClick(sectionName, isOpen) {
+  onTriggerClick(section, isOpen) {
     const { sectionsOpen } = this.state;
 
     this.setState({
       sectionsOpen: {
         ...sectionsOpen,
-        [sectionName]: isOpen,
+        [section.name]: isOpen,
       },
     });
   }
@@ -80,9 +110,10 @@ class Resume extends Component {
   }
 
   /**
-   * Render.
+   * Create the provided page component.
    */
-  render() {
+  createPageComponent(sectionType, trigger) {
+    const sectionOpen = this.state.sectionsOpen[sectionType.name];
     const classes = {
       sectionClassName: styles.section,
       triggerClassName: collapsibleStyles.trigger,
@@ -90,112 +121,25 @@ class Resume extends Component {
       contentClassName: collapsibleStyles.content,
     };
 
-    const { sectionsOpen } = this.state;
-    const {
-      achievements, education, experience, hobbies, links, management, technical, summary,
-    } = sectionsOpen;
-
-    /* eslint-disable react/jsx-props-no-spreading */
-    const pageCommponents = [
-
-      // Summary Section
+    return (
       <Collapsible
-        key="summary"
-        resumeSection={RESUME_SECTIONS.SUMMARY}
-        trigger="Career Summary"
+        key={sectionType.name}
+        resumeSection={sectionType}
+        trigger={trigger}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...classes}
-        isOpen={summary}
+        isOpen={sectionOpen}
         handleTriggerClick={this.onTriggerClick}
       >
         <Summary />
-      </Collapsible>,
+      </Collapsible>
+    );
+  }
 
-      // Technical Section
-      <Collapsible
-        key="technical"
-        resumeSection={RESUME_SECTIONS.TECHNICAL}
-        trigger="Technical Skills"
-        {...classes}
-        isOpen={technical}
-        handleTriggerClick={this.onTriggerClick}
-      >
-        <TechnicalSkills />
-      </Collapsible>,
-
-      // Management Section
-      <Collapsible
-        key="management"
-        resumeSection={RESUME_SECTIONS.MANAGEMENT}
-        trigger="Management Skills"
-        {...classes}
-        isOpen={management}
-        handleTriggerClick={this.onTriggerClick}
-      >
-        <ManagementSkills />
-      </Collapsible>,
-
-      // Management Section
-      <Collapsible
-        key="achieve"
-        resumeSection={RESUME_SECTIONS.ACHIEVEMENTS}
-        trigger="Professional Achievements"
-        {...classes}
-        isOpen={achievements}
-        handleTriggerClick={this.onTriggerClick}
-      >
-        <Achievements />
-      </Collapsible>,
-
-      // Experience Section
-      <Collapsible
-        key="experience"
-        resumeSection={RESUME_SECTIONS.EXPERIENCE}
-        trigger="Professional Experience"
-        {...classes}
-        isOpen={experience}
-        handleTriggerClick={this.onTriggerClick}
-      >
-        <Experience />
-      </Collapsible>,
-
-      // Links Section
-      <Collapsible
-        key="links"
-        resumeSection={RESUME_SECTIONS.LINKS}
-        trigger="Links"
-        {...classes}
-        isOpen={links}
-        handleTriggerClick={this.onTriggerClick}
-      >
-        <Links />
-      </Collapsible>,
-
-      // Education Section
-      <Collapsible
-        key="education"
-        resumeSection={RESUME_SECTIONS.EDUCATION}
-        trigger="Education"
-        {...classes}
-        isOpen={education}
-        handleTriggerClick={this.onTriggerClick}
-      >
-        <Education />
-      </Collapsible>,
-
-      // Hobbies Section
-      <Collapsible
-        key="hobbies"
-        resumeSection={RESUME_SECTIONS.HOBBIES}
-        trigger="Hobbies & Interests"
-        {...classes}
-        isOpen={hobbies}
-        handleTriggerClick={this.onTriggerClick}
-      >
-        <Hobbies />
-      </Collapsible>,
-    ];
-    /* eslint-enable react/jsx-props-no-spreading */
-
+  /**
+   * Render.
+   */
+  render() {
     const headerOptions = [
       <button key="collapse_all" type="button" onClick={() => this.expandCollapseAll(false)}>
         Collapse All
@@ -210,7 +154,14 @@ class Resume extends Component {
         headerOptions={headerOptions}
       >
         <div className={styles.container}>
-          {pageCommponents}
+          {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
+          {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
+          {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}
+          {this.createPageComponent(RESUME_SECTIONS.ACHIEVEMENTS, 'Professional Achievements')}
+          {this.createPageComponent(RESUME_SECTIONS.EXPERIENCE, 'Professional Experience')}
+          {this.createPageComponent(RESUME_SECTIONS.LINKS, 'Links')}
+          {this.createPageComponent(RESUME_SECTIONS.EDUCATION, 'Education')}
+          {this.createPageComponent(RESUME_SECTIONS.HOBBIES, 'Hobbies')}
         </div>
       </Layout>
     );
