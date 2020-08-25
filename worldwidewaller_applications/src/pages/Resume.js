@@ -7,16 +7,21 @@ import collapsibleStyles from './styles/collapsible.scss';
 
 // custom components
 import Layout from '~/components/Layout';
+import Collapsible from '~/components/Collapsible';
 import Achievements from './page_components/resume/Achievments';
 import Education from './page_components/resume/Education';
 import Experience from './page_components/resume/Experience';
 import Hobbies from './page_components/resume/Hobbies';
 import Links from './page_components/resume/Links';
 import ManagementSkills from './page_components/resume/ManagementSkills';
+import Summary from './page_components/resume/Summary';
 import TechnicalSkills from './page_components/resume/TechnicalSkills';
 
+// utilities
+import RESUME_SECTIONS from '~/utilities/constants';
+
 // TODO: remove this before final version
-/* eslint-disable max-len, react/no-unused-state */
+/* eslint-disable max-len */
 class Resume extends Component {
   /**
    * Constructor.
@@ -26,17 +31,102 @@ class Resume extends Component {
 
     this.state = {
       sectionsOpen: {
-        achievementsOpen: false,
-        educationOpen: false,
-        experienceOpen: false,
-        hobbiesOpen: false,
-        linksOpen: false,
-        managementOpen: false,
-        technicalOpen: false,
+        achievements: true,
+        education: true,
+        experience: true,
+        hobbies: true,
+        links: true,
+        management: true,
+        summary: true,
+        technical: true,
       },
     };
 
     this.expandCollapseAll = this.expandCollapseAll.bind(this);
+    this.onTriggerClick = this.onTriggerClick.bind(this);
+  }
+
+  /**
+   * User has clicked a trigger
+   */
+  onTriggerClick(sectionName, isOpen) {
+    const { sectionsOpen } = this.state;
+    switch (sectionName) {
+      case RESUME_SECTIONS.SUMMARY:
+        this.setState({
+          sectionsOpen: {
+            ...sectionsOpen,
+            summary: isOpen,
+          },
+        });
+        break;
+
+      case RESUME_SECTIONS.TECHNICAL:
+        this.setState({
+          sectionsOpen: {
+            ...sectionsOpen,
+            technical: isOpen,
+          },
+        });
+        break;
+
+      case RESUME_SECTIONS.MANAGEMENT:
+        this.setState({
+          sectionsOpen: {
+            ...sectionsOpen,
+            management: isOpen,
+          },
+        });
+        break;
+
+      case RESUME_SECTIONS.ACHIEVEMENTS:
+        this.setState({
+          sectionsOpen: {
+            ...sectionsOpen,
+            achievements: isOpen,
+          },
+        });
+        break;
+
+      case RESUME_SECTIONS.EXPERIENCE:
+        this.setState({
+          sectionsOpen: {
+            ...sectionsOpen,
+            experience: isOpen,
+          },
+        });
+        break;
+
+      case RESUME_SECTIONS.LINKS:
+        this.setState({
+          sectionsOpen: {
+            ...sectionsOpen,
+            links: isOpen,
+          },
+        });
+        break;
+
+      case RESUME_SECTIONS.EDUCATION:
+        this.setState({
+          sectionsOpen: {
+            ...sectionsOpen,
+            education: isOpen,
+          },
+        });
+        break;
+
+      case RESUME_SECTIONS.HOBBIES:
+        this.setState({
+          sectionsOpen: {
+            ...sectionsOpen,
+            hobbies: isOpen,
+          },
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 
   /**
@@ -45,13 +135,14 @@ class Resume extends Component {
   expandCollapseAll(isOpen) {
     this.setState({
       sectionsOpen: {
-        achievementsOpen: isOpen,
-        educationOpen: isOpen,
-        experienceOpen: isOpen,
-        hobbiesOpen: isOpen,
-        linksOpen: isOpen,
-        managementOpen: isOpen,
-        technicalOpen: isOpen,
+        achievements: isOpen,
+        education: isOpen,
+        experience: isOpen,
+        hobbies: isOpen,
+        links: isOpen,
+        management: isOpen,
+        summary: isOpen,
+        technical: isOpen,
       },
     });
   }
@@ -69,63 +160,119 @@ class Resume extends Component {
 
     const { sectionsOpen } = this.state;
     const {
-      achievementsOpen, educationOpen, experienceOpen, hobbiesOpen, linksOpen, managementOpen, technicalOpen,
+      achievements, education, experience, hobbies, links, management, technical, summary,
     } = sectionsOpen;
 
     /* eslint-disable react/jsx-props-no-spreading */
     const pageCommponents = [
-      <TechnicalSkills key="tech" {...classes} isOpen={!technicalOpen} />,
-      <ManagementSkills key="management" {...classes} isOpen={!managementOpen} />,
-      <Achievements key="achieve" {...classes} isOpen={!achievementsOpen} />,
-      <Experience key="experience" {...classes} isOpen={!experienceOpen} />,
-      <Links key="links" {...classes} isOpen={!linksOpen} />,
-      <Education key="education" {...classes} isOpen={!educationOpen} />,
-      <Hobbies key="hobbies" {...classes} isOpen={!hobbiesOpen} />,
+
+      // Summary Section
+      <Collapsible
+        key="summary"
+        resumeSection={RESUME_SECTIONS.SUMMARY}
+        trigger="Chris Waller"
+        {...classes}
+        isOpen={summary}
+        handleTriggerClick={this.onTriggerClick}
+      >
+        <Summary />
+      </Collapsible>,
+
+      // Technical Section
+      <Collapsible
+        key="technical"
+        resumeSection={RESUME_SECTIONS.TECHNICAL}
+        trigger="Technical Skills"
+        {...classes}
+        isOpen={technical}
+        handleTriggerClick={this.onTriggerClick}
+      >
+        <ManagementSkills />
+      </Collapsible>,
+
+      // Management Section
+      <Collapsible
+        key="management"
+        resumeSection={RESUME_SECTIONS.MANAGEMENT}
+        trigger="Management Skills"
+        {...classes}
+        isOpen={management}
+        handleTriggerClick={this.onTriggerClick}
+      >
+        <TechnicalSkills />
+      </Collapsible>,
+
+      // Management Section
+      <Collapsible
+        key="achieve"
+        resumeSection={RESUME_SECTIONS.ACHIEVEMENTS}
+        trigger="Achievements"
+        {...classes}
+        isOpen={achievements}
+        handleTriggerClick={this.onTriggerClick}
+      >
+        <Achievements />
+      </Collapsible>,
+
+      // Experience Section
+      <Collapsible
+        key="experience"
+        resumeSection={RESUME_SECTIONS.EXPERIENCE}
+        trigger="Professional Experience"
+        {...classes}
+        isOpen={experience}
+        handleTriggerClick={this.onTriggerClick}
+      >
+        <Experience />
+      </Collapsible>,
+
+      // Links Section
+      <Collapsible
+        key="links"
+        resumeSection={RESUME_SECTIONS.LINKS}
+        trigger="Links"
+        {...classes}
+        isOpen={links}
+        handleTriggerClick={this.onTriggerClick}
+      >
+        <Links />
+      </Collapsible>,
+
+      // Education Section
+      <Collapsible
+        key="education"
+        resumeSection={RESUME_SECTIONS.EDUCATION}
+        trigger="Education"
+        {...classes}
+        isOpen={education}
+        handleTriggerClick={this.onTriggerClick}
+      >
+        <Education />
+      </Collapsible>,
+
+      // Hobbies Section
+      <Collapsible
+        key="hobbies"
+        resumeSection={RESUME_SECTIONS.HOBBIES}
+        trigger="Hobbies"
+        {...classes}
+        isOpen={hobbies}
+        handleTriggerClick={this.onTriggerClick}
+      >
+        <Hobbies />
+      </Collapsible>,
     ];
     /* eslint-enable react/jsx-props-no-spreading */
 
     return (
       <Layout>
         <div className={styles.container}>
-          <button type="button" onClick={() => this.expandCollapseAll(true)}>
+          <button type="button" onClick={() => this.expandCollapseAll(false)}>
             Collapse All
           </button>
-          <button type="button" onClick={() => this.expandCollapseAll(false)}>
+          <button type="button" onClick={() => this.expandCollapseAll(true)}>
             Expand All
           </button>
-          <div className={styles.section}>
-            {/* Introduction */ }
-            <div className={styles.sectionContent}>
-              <div className={styles.header}>
-                <h1>Chris Waller</h1>
-                <h2>Full Stack Web Application Developer & Tech Lead</h2>
-              </div>
-              <p>
-                8+ years experience designing, developing, delivering and maintaining dynamic, cross-platform web applications.
-                6+ years experience successfully working with both internal and external stakeholders to define project scope and
-                deliverables. 5+ years experience in tech lead roles with a proven track record of delivering results. 5+ years
-                experience deploying production-ready cloud-based web applications in AWS, Linux or Windows environments.
-              </p>
-              <ul className={styles.list}>
-                <li>
-                  <p>Scalable, cross-platform web design, development & deployment</p>
-                  <ul>
-                    <li>ReactJs, JavaScript, CSS, HTML5, Core Java expertise</li>
-                  </ul>
-                </li>
-                <li>
-                  <p>Database administration, configuration & development</p>
-                  <ul>
-                    <li>SQL expertise including stored procedures, transactions, scheduled jobs, database backup & replication</li>
-                  </ul>
-                </li>
-                <li>
-                  <p>Requirements gathering, stakeholder demos, acceptance-test preparation, commissioning, troubleshooting</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-
           {pageCommponents}
 
         </div>

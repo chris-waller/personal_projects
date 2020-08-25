@@ -1,0 +1,54 @@
+@import '~styles/global_styles.scss';
+
+.section {
+  width: 100%;
+  height: 100%;
+}
+
+.header {  
+  display: grid;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.header > h1,
+.header >h2 {
+  text-align: center;
+  margin: 1px 0px;
+}
+
+.section-content {
+  margin: 10px 30px;
+}
+
+.list ul {
+  padding-left: 25px;
+}
+.list li {
+  margin-bottom: 2px;
+}
+
+@media screen and (max-width: $smallMaxWidth) {   
+  .section {
+    padding: 10px 0px;
+    
+  }
+  .section-content {
+    margin: 10px 5px;
+  }
+  .list {
+    padding-left: 25px;
+  }  
+  .list ul {
+    padding-left: 20px;
+  }
+}
+
+@media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  
+  .section {
+    padding: 10px 20px;
+  }
+}
+
+@media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {  
+
+}
