@@ -207,7 +207,7 @@ class Resume extends Component {
       <Collapsible
         key="achieve"
         resumeSection={RESUME_SECTIONS.ACHIEVEMENTS}
-        trigger="Achievements"
+        trigger="Professional Achievements"
         {...classes}
         isOpen={achievements}
         handleTriggerClick={this.onTriggerClick}
@@ -255,7 +255,7 @@ class Resume extends Component {
       <Collapsible
         key="hobbies"
         resumeSection={RESUME_SECTIONS.HOBBIES}
-        trigger="Hobbies"
+        trigger="Hobbies & Interests"
         {...classes}
         isOpen={hobbies}
         handleTriggerClick={this.onTriggerClick}

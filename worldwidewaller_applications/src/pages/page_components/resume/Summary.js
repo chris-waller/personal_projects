@@ -7,12 +7,6 @@ import styles from './styles/summary.scss';
 /* eslint-disable max-len */
 const Summary = () => (
   <div className={styles.section}>
-    <div className={styles.header}>
-      {/*
-      <h1>Chris Waller</h1>
-      <h2>Full Stack Web Application Developer & Tech Lead</h2>
-      */}
-    </div>
     <p>
       8+ years experience designing, developing, delivering and maintaining dynamic, cross-platform web applications.
       6+ years experience successfully working with both internal and external stakeholders to define project scope and
@@ -23,17 +17,20 @@ const Summary = () => (
       <li>
         <p>Scalable, cross-platform web design, development & deployment</p>
         <ul>
-          <li>ReactJs, JavaScript, CSS, HTML5, Core Java expertise</li>
+          <li className={styles.header}>ReactJs, JavaScript, CSS, HTML5, Core Java expertise</li>
         </ul>
       </li>
       <li>
         <p>Database administration, configuration & development</p>
         <ul>
-          <li>SQL expertise including stored procedures, transactions, scheduled jobs, database backup & replication</li>
+          <li className={styles.header}>SQL expertise including stored procedures, transactions, scheduled jobs, database backup & replication</li>
         </ul>
       </li>
       <li>
         <p>Requirements gathering, stakeholder demos, acceptance-test preparation, commissioning, troubleshooting</p>
+        <ul>
+          <li className={styles.header}>Put something here</li>
+        </ul>
       </li>
     </ul>
   </div>

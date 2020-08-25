@@ -5,9 +5,9 @@ import React from 'react';
 import styles from './styles/management_skills.scss';
 
 const ManagementSkills = () => (
-  <div>
+  <div className={styles.container}>
     <ul className={styles.list}>
-      <span>People Management:</span>
+      <p className={styles.header}>People Management:</p>
       <li>Onboard new team members (design docs, dev/build environment setups)</li>
       <li>Interviews for management, senior, intermediate, junior and co-op positions</li>
       <li>
@@ -17,7 +17,7 @@ const ManagementSkills = () => (
       </li>
     </ul>
     <ul className={styles.list}>
-      <span>Project Management:</span>
+      <p className={styles.header}>Project Management:</p>
       <li>Agile development as a preferred project methodology</li>
       <li>Scope management, including managing the dreaded scope-creep</li>
       <li>Project-based meeting organization (local or remote)</li>

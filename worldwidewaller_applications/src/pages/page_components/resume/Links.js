@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './styles/links.scss';
 
 const Links = () => (
-  <div className={styles.links}>
+  <div className={styles.container}>
     <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=Yv-xtL_wfiU">
       AeryonLive beta promo video 1
     </a>
