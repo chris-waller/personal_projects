@@ -14,30 +14,29 @@
 }
 
 .row {  
-  display:flex;
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
 }
 
 .heading {
-  width: 17%;
+  width: 20%;
   text-align: right;
   font-style: italic;
-  color: var(--fontColorAlt);
-  display: grid;
-  align-content: center;
+  color: var(--fontColorAlt);  
 }
 
 .skills {
-  width: 83%;
+  width: 80%;
   margin-left: 20px;
 }
 
 @media screen and (max-width: $smallMaxWidth) {   
   .heading {
-    width: 22%;
+    width: 27%;
   }
   .skills {
-    width: 78%
+    width: 73%
   }
 }
 @media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  

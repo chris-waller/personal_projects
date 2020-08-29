@@ -20,7 +20,7 @@ const updateClientSettings = (state = initialState, action) => {
         selectedTheme: action.payload.theme,
       };
     }
-    // Toggles the main header open/close for the application
+    // Toggles the main header open/closed for the application
     case TOGGLE_HEADER_COLLAPSED: {
       return {
         ...state,

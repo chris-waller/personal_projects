@@ -3,31 +3,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+// custom components
+import ThemeSelector from './ThemeSelector';
+
 // css imports
 import styles from './styles/header.scss';
-
-// image imports
 
 /**
  * This component is responsible for displaying the site header.
  * The header will be replaced with a humburger menu at a specified screen size
  */
+/* eslint-disable react/prefer-stateless-function */
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      foo: 'bar',
-    };
-  }
-
   render() {
     const { headerOptions } = this.props;
-
-    const { foo } = this.state;
-    if (foo === 'bat') {
-      return null;
-    }
 
     return (
       <div className={styles.container}>
@@ -55,6 +44,7 @@ class Header extends Component {
               option.props.children,
             )
           ))}
+          <ThemeSelector />
         </div>
 
       </div>

@@ -1,15 +1,9 @@
-@import "~styles/site_themes";
-@import "~styles/global_styles";
 @import "~styles/screen_dimensions";
 
 // header height calculations
 $headerHeight: 90px;
 $collapseHeaderHeight: 20px;
 $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
-
-.theme {
-  z-index: 1,
-}
 
 .layout {
   width: 100%;
@@ -63,38 +57,6 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 .collapse-icon:hover {
   color: var(--fontColorHover);
 }
-
-/* DropDown menu */
-/* ************* */
-$dropdownWidth: 100px;
-div.select-theme {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  z-index: 1;
-  width: $dropdownWidth;
-}
-h5.select-theme {
-  text-align: center;
-  color: var(--fontColorMain);
-}
-.drop-down {
-  cursor: pointer;
-  width: $dropdownWidth;
-  position: absolute;
-  right: 0px;
-  border: 1px solid var(--borderColorMain);
-}
-.drop-down-placeholder{
-  background-color: var(--menuBgColor);
-}
-.drop-down-menu {
-  background-color: var(--menuItemsBgColor);
-}
-.menu-item:hover {
-  background-color: var(--menuBgHoverColor)
-}
-
 
 /* Page Content */
 /* ************* */
