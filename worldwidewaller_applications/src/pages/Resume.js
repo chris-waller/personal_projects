@@ -162,7 +162,10 @@ class Resume extends Component {
             {/* TODO: This will eventually need to be put into a
             proper API call when I have a server setup */ }
             <Link to={resumePdf} target="_blank" download>
-              <button type="button">Download PDF</button>
+              <Button
+                type="button"
+                text="Downlaod PDF"
+              />
             </Link>
           </div>
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}

@@ -38,10 +38,11 @@ export default Button;
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   sizeIsMax: PropTypes.bool,
 };
 
 Button.defaultProps = {
   sizeIsMax: true,
+  onClick: () => {},
 };
