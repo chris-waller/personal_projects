@@ -28,6 +28,7 @@ class ThemeSelector extends Component {
    */
   static updateSiteTheme(setTheme, themeName, newThemeStyle) {
     console.log('theme selector changing to new theme style:', newThemeStyle);
+    // eslint-disable-next-line
     changeTheme(classNames(styles.theme, newThemeStyle));
     setTheme(themeName);
   }

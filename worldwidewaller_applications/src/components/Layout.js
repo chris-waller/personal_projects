@@ -22,8 +22,6 @@ import {
   toggleHeader as toggleHeaderAction,
 } from '../redux/actions';
 
-/* eslint-disable */ 
-
 /**
  * This component is responsible for the overall site layout and styling.
  * General site layout will be done here. The styling of the header and pages
@@ -34,6 +32,7 @@ class Layout extends Component {
    * Updates the site's theme in the DOM and informs redux of the change.
    */
   static updateSiteTheme(setTheme, themeName, newThemeStyle) {
+    // eslint-disable-next-line
     changeTheme(classNames(styles.theme, newThemeStyle));
     setTheme(themeName);
   }
@@ -48,17 +47,17 @@ class Layout extends Component {
   constructor(props) {
     super(props);
 
-    let themeName = DEFAULT_THEME;    
+    let themeName = DEFAULT_THEME;
 
     // figure out which theme to set (user, query param or default)
-    let queryParamTheme = (new URLSearchParams(window.location.search)).get('default_theme');
-    let currentTheme = props.selectedTheme;
+    const queryParamTheme = (new URLSearchParams(window.location.search)).get('default_theme');
+    const currentTheme = props.selectedTheme;
     if (currentTheme !== null
       && THEME_NAMES[currentTheme.toUpperCase()] !== undefined) {
-        themeName = THEME_NAMES[currentTheme.toUpperCase()];        
+      themeName = THEME_NAMES[currentTheme.toUpperCase()];
     } else if (queryParamTheme !== null
       && THEME_NAMES[queryParamTheme.toUpperCase()] !== undefined) {
-        themeName = THEME_NAMES[queryParamTheme.toUpperCase()];
+      themeName = THEME_NAMES[queryParamTheme.toUpperCase()];
     }
 
     // ensure we've actually found the theme
@@ -81,7 +80,6 @@ class Layout extends Component {
   collapseHeader() {
     const { headerCollapsed } = this.state;
 
-    // eslint-disable-next-line react/destructuring-assignment
     const toggleHeader = this.props.toggleHeaderAction;
     toggleHeader(!headerCollapsed);
 
@@ -143,8 +141,7 @@ class Layout extends Component {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-const mapStateToProps = (state, ownProps = {}) => (
+const mapStateToProps = (state) => (
   {
     selectedTheme: state.updateClientSettings.selectedTheme,
     headerCollapsed: state.updateClientSettings.headerCollapsed,
