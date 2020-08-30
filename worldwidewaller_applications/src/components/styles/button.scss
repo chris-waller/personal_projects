@@ -1,12 +1,12 @@
 .container {
-  width: max-content;
-  height: 30px;
+  width: max-content;  
 }
 .container.min {
   width: min-content;
 }
 
 .button {
+  height: 30px;
   color: var(--buttonFontColor);
   background-color: var(--buttonBgColor);
   border: var(--buttonBorder);
