@@ -36,6 +36,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 .collapseHeaderWrapper {
   display: grid;
   justify-content: center;
+  color: var(--fontColorAlt);
 }
 .collapse-header {
   width: 100%;
@@ -49,7 +50,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 .collapse-header.collapsed {
   top: 5px;
   z-index: 1;  
-  background-color: var(--borderColorMain);
+  background-color: var(--bgColorAlt);
 }
 
 .collapse-icon {
@@ -76,7 +77,6 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   margin-top: $collapseHeaderHeight;
 }
 
-/*
 .page-content-overlay {
   position: absolute;
   top: 0px;
@@ -85,10 +85,11 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   height: 100%;  
   background-color: var(--bgColorMain);
   opacity: var(--bgOpacity);
-}
-*/
-.page-content {
   background: var(--bgXl);
+}
+
+.page-content {
+  background: transparent;
   width: 100%;
   height: 100%;  
   padding: 10px;  
@@ -99,9 +100,6 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   left: 0;    
   overflow-y: scroll;
   overflow-x: scroll;
-
-  // display: grid;
-  // justify-content: center;
 
   // hides the scrollbar
   scrollbar-width: none; /* Firefox */
@@ -115,18 +113,18 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 /* Background Image Sizes */
 /* ********************** */
 @media screen and (max-width: $smallMaxWidth) {   
-  .page-content{
+  .page-content-overlay{
    background: var(--bgSm);  
   }
 }
 @media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  
-  .page-content {
+  .page-content-overlay {
     background: var(--bgMed);  
   }
 }
 
 @media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {  
-  .page-content {
+  .page-content-overlay {
     background: var(--bgLarge);  
   }
 }

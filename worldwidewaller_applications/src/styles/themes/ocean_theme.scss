@@ -13,7 +13,7 @@
   --color9: #A9D1EA;
   --color10: #e5e9eb;
   --themeBgColorMain: var(--color1);
-  --bgOpacity: 0.5;
+  --bgOpacity: 0.7;
   --themeBgColorAlt: var(--color2);
   --bgXl: url('~images/backgrounds/ocean_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgLarge: url('~images/backgrounds/ocean_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
@@ -21,6 +21,7 @@
   --bgSm: url('~images/backgrounds/ocean_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgHeader: url('~images/backgrounds/ocean_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
   --headerLogo: url('~images/backgrounds/ocean_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --headerCollapsedBgColor: var(--color4);
   
    /* Set global CSS variables here */
   /* ***************************** */
@@ -31,6 +32,7 @@
   --themeBgSm: var(--bgSmall);
   --themeBgHeader: var(--bgXl);
   --themeBgOpacity: var(--bgOpacity);
+  --themeHeaderCollapsedBgColor: var(--headerCollapsedBgColor);
 
   --themeFontColorMain: var(--color10);
   --themeFontColorAlt: var(--color7);

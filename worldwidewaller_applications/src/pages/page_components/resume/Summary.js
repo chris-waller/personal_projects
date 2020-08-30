@@ -15,21 +15,21 @@ const Summary = () => (
     </p>
     <ul className={styles.list}>
       <li>
-        <p>Scalable, cross-platform web design, development & deployment</p>
+        <p className={styles.header}>Scalable, cross-platform web design, development & deployment</p>
         <ul>
-          <li className={styles.header}>ReactJs, JavaScript, CSS, HTML5, Core Java expertise</li>
+          <li>ReactJs, JavaScript, CSS, HTML5, Core Java expertise</li>
         </ul>
       </li>
       <li>
-        <p>Database administration, configuration & development</p>
+        <p className={styles.header}>Database administration, configuration & development</p>
         <ul>
-          <li className={styles.header}>SQL expertise including stored procedures, transactions, scheduled jobs, database backup & replication</li>
+          <li>SQL expertise including stored procedures, transactions, scheduled jobs, database backup & replication</li>
         </ul>
       </li>
       <li>
-        <p>Requirements gathering, stakeholder demos, acceptance-test preparation, commissioning, troubleshooting</p>
+        <p className={styles.header}>Requirements gathering, stakeholder demos, acceptance-test preparation, commissioning, troubleshooting</p>
         <ul>
-          <li className={styles.header}>Put something here</li>
+          <li>Full & constant SDLC expsosure througout a 9+ year career</li>
         </ul>
       </li>
     </ul>

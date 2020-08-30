@@ -150,13 +150,13 @@ class Resume extends Component {
         <div className={styles.container}>
           <div className={styles.pageOptions}>
             <Button
-              text="Collapse All"
-              onClick={() => this.expandCollapseAll(false)}
+              text="Expand All"
+              onClick={() => this.expandCollapseAll(true)}
               className={styles.pageOption}
             />
             <Button
-              text="Expand All"
-              onClick={() => this.expandCollapseAll(true)}
+              text="Collapse All"
+              onClick={() => this.expandCollapseAll(false)}
               className={styles.pageOption}
             />
             {/* TODO: This will eventually need to be put into a
