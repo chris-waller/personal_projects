@@ -76,6 +76,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   margin-top: $collapseHeaderHeight;
 }
 
+/*
 .page-content-overlay {
   position: absolute;
   top: 0px;
@@ -85,6 +86,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   background-color: var(--bgColorMain);
   opacity: var(--bgOpacity);
 }
+*/
 .page-content {
   background: var(--bgXl);
   width: 100%;
@@ -98,8 +100,8 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   overflow-y: scroll;
   overflow-x: scroll;
 
-  display: grid;
-  justify-content: center;
+  // display: grid;
+  // justify-content: center;
 
   // hides the scrollbar
   scrollbar-width: none; /* Firefox */

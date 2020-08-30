@@ -6,7 +6,7 @@ import Layout from '~/components/Layout';
 import ThemeSelector from '~/components/ThemeSelector';
 
 // css imports
-// import styles from './styles/settings.scss';
+import styles from './styles/settings.scss';
 
 /* eslint-disable react/prefer-stateless-function */
 class Settings extends Component {
@@ -28,8 +28,12 @@ class Settings extends Component {
     console.log(this.state.foo);
     return (
       <Layout>
-        <h1>Application Settings</h1>
-        <ThemeSelector />
+        <div className={styles.container}>
+          <h1 className={styles.header}>Application Settings</h1>
+          <div className={styles.themeSelector}>
+            <ThemeSelector />
+          </div>
+        </div>
       </Layout>
     );
   }

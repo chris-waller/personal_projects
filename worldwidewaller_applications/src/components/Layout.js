@@ -130,7 +130,9 @@ class Layout extends Component {
 
         {/* Page Content */}
         <div id="wrapper" className={classNames(styles.pageContentWrapper, collapsedStyle)}>
+          {/* TODO: fix this overlay. It's not working anymore
           <div className={styles.pageContentOverlay} />
+          */}
           <div className={styles.pageContent}>
             {children}
           </div>
