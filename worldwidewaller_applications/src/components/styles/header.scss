@@ -1,4 +1,6 @@
-@import '~styles/global_styles.scss';
+@import "~styles/site_themes";
+@import "~styles/global_styles";
+@import "~styles/screen_dimensions";
 
 .container {
   width: 100%;
@@ -29,18 +31,21 @@
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
-// TODO: this is a little bit of a hack because the header can currently receive <a> tags (via <Link> render)
-// This is happening because I must use React Router to download the pdf. All of this will disappear once I
-// hook up the backend API and can serve the files properly. At that point, only <button> nodes will be 
-// coming in.
-button {  
-  height: 50px;
-  width: min-content;
-  background-color: var(--buttonBgColor);
-  border: 1px solid var(--borderColorMain);
-  color: var(--fontColorMain);
-  margin: 0px 5px;
+.link {
+  font-size: 1.5em;
+  padding: 0px 7.5px;
+}
+
+@media screen and (max-width: $smallMaxWidth) {   
+  .link {
+    font-size: 1em;
+    padding: 0 5px;
+  }
+}
+@media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  
+}
+@media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {  
 }

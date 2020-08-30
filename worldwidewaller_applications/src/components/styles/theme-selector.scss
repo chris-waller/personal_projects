@@ -1,40 +1,41 @@
 @import "~styles/site_themes";
+@import "~styles/global_styles";
 @import "~styles/screen_dimensions";
 
-.theme {
-  z-index: 1,
+.container {
+  display: flex;
+  height: 30px;
 }
 
 /* DropDown menu */
 /* ************* */
-$dropdownWidth: 100px;
+$dropdownWidth: 110px;
+$dropdownPadding: 3px;
 div.select-theme {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  z-index: 1;
-  width: $dropdownWidth;
+  width: $dropdownWidth;  
 }
 h5.select-theme {
-  text-align: center;
   color: var(--fontColorMain);
+  margin-right: 10px;
 }
 
 .drop-down {
+  position: relative;
+  z-index: 3;
   cursor: pointer;
   width: $dropdownWidth;
-  position: absolute;
-  right: 0px;
   border: 1px solid var(--borderColorMain);
 }
 .drop-down-placeholder{
   background-color: var(--menuBgColor);
+  padding: $dropdownPadding;
 }
 .drop-down-menu {
   background-color: var(--menuItemsBgColor);
+  padding: $dropdownPadding;
 }
-/*
-.menu-item:hover {
-  background-color: var(--menuBgHoverColor)
+
+.theme {
+  z-index: 1;
 }
-*/
+

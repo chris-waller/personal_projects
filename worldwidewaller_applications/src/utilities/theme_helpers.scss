@@ -1,0 +1,10 @@
+.menu-item {
+  border-bottom: 1px solid var(--borderColorMain)
+}
+.menu-item:last-of-type {
+  border: 0px;
+}
+
+.menu-item:hover {
+  background-color: var(--menuBgHoverColor)
+}

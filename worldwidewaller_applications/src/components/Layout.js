@@ -9,13 +9,20 @@ import { connect } from 'react-redux';
 import Header from './Header';
 
 // css imports
-// eslint-disable-next-line css-modules/no-unused-class
 import styles from './styles/layout.scss';
+
+// utilities
+import {
+  THEME_NAMES, DEFAULT_THEME, getSiteThemes, changeTheme,
+} from '../utilities/theme_helpers';
 
 // redux actions
 import {
+  setTheme as setThemeAction,
   toggleHeader as toggleHeaderAction,
 } from '../redux/actions';
+
+/* eslint-disable */ 
 
 /**
  * This component is responsible for the overall site layout and styling.
@@ -24,12 +31,44 @@ import {
  */
 class Layout extends Component {
   /**
+   * Updates the site's theme in the DOM and informs redux of the change.
+   */
+  static updateSiteTheme(setTheme, themeName, newThemeStyle) {
+    changeTheme(classNames(styles.theme, newThemeStyle));
+    setTheme(themeName);
+  }
+
+  /**
    * Constructor.
+   * Responsible for setting the site theme. This will be one of the following:
+   *  - default config
+   *  - query param
+   *  - user set (currently only works after the user toggles the theme in-session)
    */
   constructor(props) {
     super(props);
 
+    let themeName = DEFAULT_THEME;    
+
+    // figure out which theme to set (user, query param or default)
+    let queryParamTheme = (new URLSearchParams(window.location.search)).get('default_theme');
+    let currentTheme = props.selectedTheme;
+    if (currentTheme !== null
+      && THEME_NAMES[currentTheme.toUpperCase()] !== undefined) {
+        themeName = THEME_NAMES[currentTheme.toUpperCase()];        
+    } else if (queryParamTheme !== null
+      && THEME_NAMES[queryParamTheme.toUpperCase()] !== undefined) {
+        themeName = THEME_NAMES[queryParamTheme.toUpperCase()];
+    }
+
+    // ensure we've actually found the theme
+    const siteThemes = getSiteThemes();
+    const selectedTheme = siteThemes.find((theme) => theme.label === themeName);
+    Layout.updateSiteTheme(props.setThemeAction, selectedTheme.label, selectedTheme.value);
+
     this.state = {
+      // This will need to go into a redux store so we can keep the menu
+      // toggled between page changes
       headerCollapsed: props.headerCollapsed,
     };
 
@@ -56,7 +95,7 @@ class Layout extends Component {
    */
   render() {
     const { headerCollapsed } = this.state;
-    const { children, headerOptions } = this.props;
+    const { children } = this.props;
 
     // adjust styles for header expansion/collapse
     const collapsedStyle = headerCollapsed ? styles.collapsed : null;
@@ -74,9 +113,7 @@ class Layout extends Component {
 
         {/* Site Header */}
         <div className={classNames(styles.siteHeader, collapsedStyle)}>
-          <Header
-            headerOptions={headerOptions}
-          />
+          <Header />
         </div>
 
         {/* Collapse Header */}
@@ -94,7 +131,7 @@ class Layout extends Component {
         </div>
 
         {/* Page Content */}
-        <div className={classNames(styles.pageContentWrapper, collapsedStyle)}>
+        <div id="wrapper" className={classNames(styles.pageContentWrapper, collapsedStyle)}>
           <div className={styles.pageContentOverlay} />
           <div className={styles.pageContent}>
             {children}
@@ -109,23 +146,25 @@ class Layout extends Component {
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state, ownProps = {}) => (
   {
+    selectedTheme: state.updateClientSettings.selectedTheme,
     headerCollapsed: state.updateClientSettings.headerCollapsed,
   }
 );
 
 export default connect(
   mapStateToProps,
-  { toggleHeaderAction },
+  { setThemeAction, toggleHeaderAction },
 )(Layout);
 
 Layout.defaultProps = {
+  selectedTheme: null,
   headerCollapsed: false,
 };
 
 Layout.propTypes = {
+  selectedTheme: PropTypes.string,
+  setThemeAction: PropTypes.func.isRequired,
   headerCollapsed: PropTypes.bool,
   toggleHeaderAction: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  headerOptions: PropTypes.array.isRequired,
   children: PropTypes.node.isRequired,
 };

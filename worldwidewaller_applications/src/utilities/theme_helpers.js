@@ -3,18 +3,20 @@
 /* *********************************************** */
 
 // styles imports
-// eslint-disable-next-line css-modules/no-unused-class
 import styles from '~/styles/site_themes.scss';
+// import themeHelpers from './theme_helpers.scss';
 
 /**
  * All themes supported by this application
  */
 export const THEME_NAMES = {
-  OCEAN: 'Ocean',
-  FOREST: 'Forest',
   ASTRONOMY: 'Astronomy',
+  FOREST: 'Forest',
   HALLOWEEN: 'Halloween',
+  OCEAN: 'Ocean',
 };
+
+export const DEFAULT_THEME = THEME_NAMES.OCEAN;
 
 /**
  * List of theme names and their associated styles.
@@ -22,9 +24,9 @@ export const THEME_NAMES = {
  */
 export const THEMES = [
   {
-    name: THEME_NAMES.OCEAN,
+    name: THEME_NAMES.ASTRONOMY,
     // eslint-disable-next-line css-modules/no-undef-class
-    classname: styles.ocean_theme,
+    classname: styles.astronomy_theme,
   },
   {
     name: THEME_NAMES.FOREST,
@@ -32,14 +34,14 @@ export const THEMES = [
     classname: styles.forest_theme,
   },
   {
-    name: THEME_NAMES.ASTRONOMY,
-    // eslint-disable-next-line css-modules/no-undef-class
-    classname: styles.astronomy_theme,
-  },
-  {
     name: THEME_NAMES.HALLOWEEN,
     // eslint-disable-next-line css-modules/no-undef-class
     classname: styles.halloween_theme,
+  },
+  {
+    name: THEME_NAMES.OCEAN,
+    // eslint-disable-next-line css-modules/no-undef-class
+    classname: styles.ocean_theme,
   },
 ];
 
@@ -54,7 +56,8 @@ export function getSiteThemes() {
       {
         value: theme.classname,
         label: theme.name,
-        // className: styles.menuItem,
+        // TODO: move this into the dropdown
+        // className: themeHelpers.menuItem,
       },
     );
   });

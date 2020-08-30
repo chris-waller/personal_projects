@@ -7,6 +7,10 @@
 @import './themes/forest_theme.scss';
 @import './themes/ocean_theme.scss';
 
+.foo {
+  z-index: 1;
+}
+
 .theme {
   // background styles
   --bgXl: var(--themeBgXl);

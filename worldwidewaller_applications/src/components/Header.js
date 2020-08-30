@@ -1,10 +1,6 @@
 // npm imports
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
-// custom components
-import ThemeSelector from './ThemeSelector';
 
 // css imports
 import styles from './styles/header.scss';
@@ -15,9 +11,31 @@ import styles from './styles/header.scss';
  */
 /* eslint-disable react/prefer-stateless-function */
 class Header extends Component {
-  render() {
-    const { headerOptions } = this.props;
+  /**
+   * Constructor.
+   */
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      showThemeSelector: false,
+    };
+  }
+
+  /**
+   * Toggle the theme selector modal open/closed.
+   */
+  toggleThemeSelector() {
+    const { showThemeSelector } = this.state;
+    this.setState({
+      showThemeSelector: !showThemeSelector,
+    });
+  }
+
+  /**
+   * Render.
+   */
+  render() {
     return (
       <div className={styles.container}>
 
@@ -31,20 +49,12 @@ class Header extends Component {
           </Link>
         </div>
 
-        {/* Options Section */}
+        {/* Links Section */}
         {/* ************* */}
         <div className={styles.optionsSection}>
-          {headerOptions.map((option) => (
-            React.createElement(
-              option.type,
-              {
-                key: option.key,
-                ...option.props,
-              },
-              option.props.children,
-            )
-          ))}
-          <ThemeSelector />
+          <Link to="/" className={styles.link}>Resume</Link>
+          <Link to="/settings" className={styles.link}>Settings</Link>
+          <Link to="/contact" className={styles.link}>Contact Me</Link>
         </div>
 
       </div>
@@ -52,8 +62,3 @@ class Header extends Component {
   }
 }
 export default Header;
-
-Header.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  headerOptions: PropTypes.array.isRequired,
-};

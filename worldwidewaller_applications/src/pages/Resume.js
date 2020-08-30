@@ -1,6 +1,6 @@
 // npm imports
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 // style imports
 import styles from './styles/resume.scss';
@@ -19,7 +19,7 @@ import Summary from './page_components/resume/Summary';
 import TechnicalSkills from './page_components/resume/TechnicalSkills';
 
 // resource imports
-import resumePdf from '~/resources/resume.pdf';
+// import resumePdf from '~/resources/resume.pdf';
 
 const RESUME_SECTIONS = {
   ACHIEVEMENTS: {
@@ -144,6 +144,7 @@ class Resume extends Component {
    * Render.
    */
   render() {
+    /*
     const headerOptions = [
       <button key="collapse_all" type="button" onClick={() => this.expandCollapseAll(false)}>
         Collapse All
@@ -156,11 +157,10 @@ class Resume extends Component {
         <button type="button">Download Resume</button>
       </Link>,
     ];
+    */
 
     return (
-      <Layout
-        headerOptions={headerOptions}
-      >
+      <Layout>
         <div className={styles.container}>
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}

@@ -1,4 +1,10 @@
+@import "~styles/site_themes";
+@import "~styles/global_styles";
 @import "~styles/screen_dimensions";
+
+.theme {
+  z-index: 1;
+}
 
 // header height calculations
 $headerHeight: 90px;

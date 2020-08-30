@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 
 // custom components
 // import Home from './pages/Home';
-import Resume from './pages/Resume';
-import NoMatch from './pages/NoMatch';
+import Resume from '~/pages/Resume';
+import Settings from '~/pages/Settings';
+import Contact from '~/pages/Contact';
+import NoMatch from '~/pages/NoMatch';
 
 // redux store
 import store from './redux/store';
@@ -17,6 +19,8 @@ const App = () => (
       <Switch>
         <Route path="/" exact component={Resume} />
         <Route path="/resume" exact component={Resume} />
+        <Route path="/settings" exact component={Settings} />
+        <Route path="/contact" exact component={Contact} />
         <Route component={NoMatch} />
       </Switch>
     </Provider>
