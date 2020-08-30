@@ -40,6 +40,9 @@
 }
 
 @media screen and (max-width: $smallMaxWidth) {   
+  .logo-section {
+    width: 75px;
+  }
   .link {
     font-size: 1em;
     padding: 0 5px;

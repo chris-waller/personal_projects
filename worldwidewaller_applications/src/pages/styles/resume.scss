@@ -21,6 +21,16 @@
   border-radius: 30px;
 }
 
+.page-options {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.page-option {
+  margin: 0px 5px;
+}
+
 
 @media screen and (max-width: $smallMaxWidth) {   
   .container {

@@ -1,6 +1,6 @@
 // npm imports
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // style imports
 import styles from './styles/resume.scss';
@@ -17,9 +17,10 @@ import Links from './page_components/resume/Links';
 import ManagementSkills from './page_components/resume/ManagementSkills';
 import Summary from './page_components/resume/Summary';
 import TechnicalSkills from './page_components/resume/TechnicalSkills';
+import Button from '~/components/Button';
 
 // resource imports
-// import resumePdf from '~/resources/resume.pdf';
+import resumePdf from '~/resources/resume.pdf';
 
 const RESUME_SECTIONS = {
   ACHIEVEMENTS: {
@@ -144,24 +145,26 @@ class Resume extends Component {
    * Render.
    */
   render() {
-    /*
-    const headerOptions = [
-      <button key="collapse_all" type="button" onClick={() => this.expandCollapseAll(false)}>
-        Collapse All
-      </button>,
-      <button key="expand_all" type="button" onClick={() => this.expandCollapseAll(true)}>
-        Expand All
-      </button>,
-      // TODO: This will eventually need to be put into a proper API call when I have a server setup
-      <Link to={resumePdf} target="_blank" download>
-        <button type="button">Download Resume</button>
-      </Link>,
-    ];
-    */
-
     return (
       <Layout>
         <div className={styles.container}>
+          <div className={styles.pageOptions}>
+            <Button
+              text="Collapse All"
+              onClick={() => this.expandCollapseAll(false)}
+              className={styles.pageOption}
+            />
+            <Button
+              text="Expand All"
+              onClick={() => this.expandCollapseAll(true)}
+              className={styles.pageOption}
+            />
+            {/* TODO: This will eventually need to be put into a
+            proper API call when I have a server setup */ }
+            <Link to={resumePdf} target="_blank" download>
+              <button type="button">Download PDF</button>
+            </Link>
+          </div>
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
           {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}

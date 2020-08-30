@@ -7,10 +7,6 @@
 @import './themes/forest_theme.scss';
 @import './themes/ocean_theme.scss';
 
-.foo {
-  z-index: 1;
-}
-
 .theme {
   // background styles
   --bgXl: var(--themeBgXl);
@@ -40,7 +36,9 @@
   --linkHoverColorAlt: var(--themeLinkHoverColorAlt);
 
   // button styles
+  --buttonFontColor: var(--themeButtonFontColor);
   --buttonBgColor: var(--themeButtonBgColor);
+  --buttonBorder: var(--themeButtonBorder);
 
   // menu styles
   --menuBgColor: var(--themeMenuBgColor);

@@ -1,0 +1,18 @@
+// @import '~styles/site_themes.scss';
+
+.container {
+  width: max-content;
+  height: 30px;
+}
+.container.min {
+  width: min-content;
+}
+
+.button {
+  color: var(--buttonFontColor);
+  background-color: var(--buttonBgColor);
+  border: var(--buttonBorder);
+  margin: 1px;
+  border-radius: 10px;
+  cursor: pointer;
+}
