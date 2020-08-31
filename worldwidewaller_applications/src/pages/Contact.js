@@ -33,11 +33,13 @@ class Contact extends Component {
       <Layout>
         <div>
           <span>Email:&nbsp;&nbsp;</span>
-          <span>chris.waller@worldwidewaller.ca</span>
+          <a href="mailto:chris.waller@worldwidewaller.ca">
+            chris.waller@worldwidewaller(temp).ca
+          </a>
         </div>
         <div>
           <span>Phone #:&nbsp;&nbsp;</span>
-          <span>226-791-8618</span>
+          <span>555-555-5555</span>
         </div>
         <div>
           <br />
