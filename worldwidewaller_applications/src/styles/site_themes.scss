@@ -19,7 +19,7 @@
   --bgColorAlt: var(--themeBgColorAlt);
   --bgOpacity: var(--themeBgOpacity);
   --headerLogo: var(--themeHeaderLogo);
-  //--headerCollapsedBgColor: var(--themeHeaderCollapsedBgColor)
+  --headerCollapsedBgColor: var(-themeHeaderCollapsedBgColor);
 
   // font styles
   --fontFamily:  "Arvo", Times, sans-serif;
@@ -45,5 +45,8 @@
   --menuBgColor: var(--themeMenuBgColor);
   --menuItemsBgColor: var(--themeMenuItemsBgColor);
   --menuBgHoverColor: var(--themeMenuBgHoverColor);
+
+  // extras
+  --textShadow: var(--themeTextShadow);
 }
 

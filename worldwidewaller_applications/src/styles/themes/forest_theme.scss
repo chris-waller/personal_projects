@@ -1,7 +1,6 @@
 /****************/
 /* Forest Theme */
 /****************/
-
 .forest_theme {
   --color1: #D8F3DC;
   --color2: #B7E4C7;
@@ -13,14 +12,15 @@
   --color8: #1B4332;
   --color9: #081C15;
   --themeBgColorMain: var(--color1);
-  --bgOpacity: 0.4;
-  --themeBgColorAlt: var(--color3);
+  --bgOpacity: 0.8;
+  --themeBgColorAlt: var(--color9);
   --bgXl: url('~images/backgrounds/forest_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgLarge: url('~images/backgrounds/forest_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgMed: url('~images/backgrounds/forest_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgSm: url('~images/backgrounds/forest_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgHeader: url('~images/backgrounds/forest_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
   --headerLogo: url('~images/backgrounds/forest_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --headerCollapsedBgColor: var(--color8);
 
   /* Set global CSS variables here */
   /* ***************************** */
@@ -31,19 +31,21 @@
   --themeBgSm: var(--bgSmall);
   --themeBgHeader: var(--bgXl);
   --themeBgOpacity: var(--bgOpacity);
+  --themeHeaderCollapsedBgColor: var(--headerCollapsedBgColor);
  
-  --themeFontColorMain: var(--color9);
-  --themeFontColorAlt: var(--color7);
-  --themeLinkColorMain: var(--color8);
-  --themeLinkColorAlt: var(--color5);
-  --themeLinkHoverColorMain: var(--color6);
+  --themeFontColorMain: var(--color1);
+  --themeFontColorAlt: var(--color6);
+  --themeLinkColorMain: var(--color6);
+  --themeLinkColorAlt: var(--color6);
+  --themeLinkHoverColorMain: var(--color7);
   --themeLinkHoverColorAlt: var(--color8);
   --themeBorderColorMain: var(--color7);
   --themeBorderColorAlt: var(--color 5);
-  --themeMenuBgColor: var(--color4);
-  --themeMenuItemsBgColor: var(--color2);
+  --themeMenuBgColor: var(--color7);
+  --themeMenuItemsBgColor: var(--color8);
   --themeMenuBgHoverColor: var(--color1);
-  --themeButtonFontColor: var(--color8);
-  --themeButtonBgColor: var(--color6);
-  --themeButtonBorder: 5px groove var(--color6);
+  --themeButtonFontColor: var(--color7);
+  --themeButtonBgColor: var(--color3);
+  --themeButtonBorder: 5px groove var(--color7);
+  --themeTextShadow: 2px 2px 2px var(--color9);
 }

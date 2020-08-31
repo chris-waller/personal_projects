@@ -5,28 +5,26 @@
 .halloween_theme {
   /* Theme-specific properties here */
   /* ****************************** */
-  --color1: #E6B8A2;
-  --color2: #DEAB90;
-  --color3: #D69F7E;
-  --color4: #CD9777;
-  --color5: #C38E70;
-  --color6: #B07D62;
-  --color7: #9D6B53;
-  --color8: #8A5A44;
-  --color9: #774936;
-  --color10: #000000;
-  --themeBgColorMain: var(--color10);
-  --bgOpacity: 0.4;
-  --themeBgColorAlt: var(--color3);
+  --color1: #0A090C;
+  --color2: #230514;
+  --color3: #2b0715;
+  --color4: #3b0313;
+  --color5: #EB0508;
+  --color6: #b94303;
+  --color7: #F98011;
+  --color8: #F7974C;
+  --color9: #F8BB24;
+  --themeBgColorMain: var(--color1);
+  --bgOpacity: 1;
+  --themeBgColorAlt: var(--color2);
   --bgXl: url('~images/backgrounds/halloween_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgLarge: url('~images/backgrounds/halloween_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgMed: url('~images/backgrounds/halloween_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgSm: url('~images/backgrounds/halloween_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgHeader: url('~images/backgrounds/halloween_bg_header.jpg') center / cover no-repeat var(--themeBgColorAlt);
   --headerLogo: url('~images/backgrounds/halloween_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --headerCollapsedBgColor: var(--color4);
   
-  /* Set global CSS variables here */
-  /* ***************************** */
   // background  
   --themeBgXl: var(--bgXl);
   --themeBgLarge: var(--bgLarge);
@@ -34,24 +32,21 @@
   --themeBgSm: var(--bgSmall);
   --themeBgHeader: var(--bgXl);
   --themeBgOpacity: var(--bgOpacity);
-  --themeHeaderLogo: var(--headerLogo);
+  --themeHeaderCollapsedBgColor: var(--headerCollapsedBgColor);
 
-  // font
-  --themeFontColorMain: var(--color9);
-  --themeFontColorAlt: var(--color3);
-
-  // link
-  --themeLinkColorMain: var(--color8);
+  --themeFontColorMain: var(--color7);
+  --themeFontColorAlt: var(--color6);
+  --themeLinkColorMain: var(--color5);
   --themeLinkColorAlt: var(--color5);
   --themeLinkHoverColorMain: var(--color6);
   --themeLinkHoverColorAlt: var(--color8);
-
-  // border
-  --themeBorderColorMain: var(--color7);
-  --themeBorderColorAlt: var(--color 5);
-
-  // menu
-  --themeMenuBgColor: var(--color3);
-  --themeMenuItemsBgColor: var(--color2);
+  --themeBorderColorMain: var(--color4);
+  --themeBorderColorAlt: var(--color5);
+  --themeMenuBgColor: var(--color4);
+  --themeMenuItemsBgColor: var(--color3);
   --themeMenuBgHoverColor: var(--color1);
+  --themeButtonFontColor: var(--color7);
+  --themeButtonBgColor: var(--color4);
+  --themeButtonBorder: 5px groove var(--color3);
+  --themeTextShadow: 2px 2px 2px var(--color2);
 }

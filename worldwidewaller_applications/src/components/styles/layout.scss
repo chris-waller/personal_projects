@@ -50,7 +50,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 .collapse-header.collapsed {
   top: 5px;
   z-index: 1;  
-  background-color: var(--bgColorAlt);
+  background-color: var(--headerCollapsedBgColor);
 }
 
 .collapse-icon {

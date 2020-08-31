@@ -23,8 +23,6 @@
   --headerLogo: url('~images/backgrounds/ocean_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
   --headerCollapsedBgColor: var(--color4);
   
-   /* Set global CSS variables here */
-  /* ***************************** */
   // background  
   --themeBgXl: var(--bgXl);
   --themeBgLarge: var(--bgLarge);
@@ -47,5 +45,6 @@
   --themeMenuBgHoverColor: var(--color1);
   --themeButtonFontColor: var(--color8);
   --themeButtonBgColor: var(--color6);
-  --themeButtonBorder: 5px groove var(--color6);
+  --themeButtonBorder: 5px groove var(--color7);
+  --themeTextShadow: 2px 2px 2px var(--color2);
 }
