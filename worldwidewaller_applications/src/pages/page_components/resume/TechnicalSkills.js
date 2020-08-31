@@ -8,11 +8,6 @@ import styles from './styles/technical_skills.scss';
 /* eslint-disable max-len, react/prefer-stateless-function */
 export default class TechnicalSkills extends Component {
   /**
-   * Highlites specified text.
-   */
-  getHighlightedText = (text) => this.props.getHighlightedText(text)
-
-  /**
    * Render.
    */
   render() {
@@ -27,7 +22,7 @@ export default class TechnicalSkills extends Component {
       testing: 'J Unit, Mockito, Cucumber, Selenium',
     };
     Object.keys(pageText).forEach((key) => {
-      const highligtedText = this.getHighlightedText(pageText[key]);
+      const highligtedText = this.props.getHighlightedText(pageText[key]);
       pageText[key] = highligtedText;
     });
 

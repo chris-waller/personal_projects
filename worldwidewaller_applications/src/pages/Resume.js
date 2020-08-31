@@ -99,7 +99,7 @@ class Resume extends Component {
    * Highlites specified text.
    */
   getHighlightedText = (text) => {
-    const searchText = ['HTML', 'JavaScript', 'a', 'i'];
+    const searchText = ['HTML', 'JavaScript', 'ar'];
     let highlightedText = text;
 
     searchText.forEach((searchTerm) => {
@@ -165,31 +165,31 @@ class Resume extends Component {
     const RESUME_SECTIONS = {
       ACHIEVEMENTS: {
         name: 'achievements',
-        component: <Achievements />,
+        component: <Achievements getHighlightedText={this.getHighlightedText} />,
       },
       EDUCATION: {
         name: 'education',
-        component: <Education />,
+        component: <Education getHighlightedText={this.getHighlightedText} />,
       },
       EXPERIENCE: {
         name: 'experience',
-        component: <Experience />,
+        component: <Experience getHighlightedText={this.getHighlightedText} />,
       },
       HOBBIES: {
         name: 'hobbies',
-        component: <Hobbies />,
+        component: <Hobbies getHighlightedText={this.getHighlightedText} />,
       },
       LINKS: {
         name: 'links',
-        component: <Links />,
+        component: <Links getHighlightedText={this.getHighlightedText} />,
       },
       MANAGEMENT: {
         name: 'management',
-        component: <ManagementSkills />,
+        component: <ManagementSkills getHighlightedText={this.getHighlightedText} />,
       },
       SUMMARY: {
         name: 'summary',
-        component: <Summary />,
+        component: <Summary getHighlightedText={this.getHighlightedText} />,
       },
       TECHNICAL: {
         name: 'technical',
