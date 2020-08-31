@@ -27,7 +27,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 .site-header {  
   grid-area: header;
   background: var(--bgHeader);
-  border-bottom: 1px solid var(--borderColorMain);
+  border-bottom: 2px solid var(--borderColorMain);
 }
 .site-header.collapsed {
   display: none;
@@ -69,8 +69,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 
   width: 100%;
   height: 100%;
-  position: relative;
-  
+  position: relative;  
 }
 .page-content-wrapper.collapsed {
   height: 100%;
@@ -96,7 +95,6 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   position: absolute;
   z-index: 0;
   top: 0;
-  bottom: 0;
   left: 0;    
   overflow-y: scroll;
   overflow-x: scroll;

@@ -31,7 +31,19 @@ class Contact extends Component {
     console.log(this.state.foo);
     return (
       <Layout>
-        Contact Me
+        <div>
+          <span>Email:&nbsp;&nbsp;</span>
+          <span>chris.waller@worldwidewaller.ca</span>
+        </div>
+        <div>
+          <span>Phone #:&nbsp;&nbsp;</span>
+          <span>226-791-8618</span>
+        </div>
+        <div>
+          <br />
+          Developer Note: &nbsp;&nbsp;This page is currently being&nbsp;
+          polished for prod-ready presentation.
+        </div>
       </Layout>
     );
   }

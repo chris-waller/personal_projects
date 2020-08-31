@@ -1,6 +1,8 @@
 // npm imports
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // style imports
 import styles from './styles/resume.scss';
@@ -22,60 +24,37 @@ import Button from '~/components/Button';
 // resource imports
 import resumePdf from '~/resources/resume.pdf';
 
-const RESUME_SECTIONS = {
-  ACHIEVEMENTS: {
-    name: 'achievements',
-    component: <Achievements />,
-  },
-  EDUCATION: {
-    name: 'education',
-    component: <Education />,
-  },
-  EXPERIENCE: {
-    name: 'experience',
-    component: <Experience />,
-  },
-  HOBBIES: {
-    name: 'hobbies',
-    component: <Hobbies />,
-  },
-  LINKS: {
-    name: 'links',
-    component: <Links />,
-  },
-  MANAGEMENT: {
-    name: 'management',
-    component: <ManagementSkills />,
-  },
-  SUMMARY: {
-    name: 'summary',
-    component: <Summary />,
-  },
-  TECHNICAL: {
-    name: 'technical',
-    component: <TechnicalSkills />,
-  },
-};
+// redux actions
+import {
+  toggleResumeSections,
+} from '../redux/actions';
 
 class Resume extends Component {
   /**
+   * Informs redux of the site toggle
+   */
+  static updateSectionToggle(updateSection, sectionsOpen) {
+    updateSection(sectionsOpen);
+  }
+
+  /**
    * Constructor.
    */
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     const defaultOpen = false;
 
+    // check if we've already set sections open/closed in redux
+    let { sectionsOpen } = props;
+    const toggleSections = props.toggleResumeSections;
+    if (sectionsOpen === null) {
+      sectionsOpen = this.getOpenSections(defaultOpen);
+      Resume.updateSectionToggle(toggleSections, sectionsOpen);
+    }
+
     this.state = {
-      sectionsOpen: {
-        achievements: defaultOpen,
-        education: defaultOpen,
-        experience: defaultOpen,
-        hobbies: defaultOpen,
-        links: defaultOpen,
-        management: defaultOpen,
-        summary: defaultOpen,
-        technical: defaultOpen,
-      },
+      sectionsOpen,
     };
 
     this.expandCollapseAll = this.expandCollapseAll.bind(this);
@@ -86,31 +65,44 @@ class Resume extends Component {
    * User has clicked a trigger
    */
   onTriggerClick(section, isOpen) {
-    const { sectionsOpen } = this.state;
+    let { sectionsOpen } = this.state;
+
+    sectionsOpen = {
+      ...sectionsOpen,
+      [`${section.name}Open`]: isOpen,
+    };
 
     this.setState({
-      sectionsOpen: {
-        ...sectionsOpen,
-        [section.name]: isOpen,
-      },
+      sectionsOpen,
+    }, () => {
+      Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
     });
   }
+
+  /**
+   * Returns an object representing every resume section and thier open/closed status
+   */
+  getOpenSections = (isOpen) => ({
+    achievementsOpen: isOpen,
+    educationOpen: isOpen,
+    experienceOpen: isOpen,
+    hobbiesOpen: isOpen,
+    linksOpen: isOpen,
+    managementOpen: isOpen,
+    summaryOpen: isOpen,
+    technicalOpen: isOpen,
+  });
 
   /**
    * Expands/collapses all sections.
    */
   expandCollapseAll(isOpen) {
+    const sectionsOpen = this.getOpenSections(isOpen);
+
     this.setState({
-      sectionsOpen: {
-        achievements: isOpen,
-        education: isOpen,
-        experience: isOpen,
-        hobbies: isOpen,
-        links: isOpen,
-        management: isOpen,
-        summary: isOpen,
-        technical: isOpen,
-      },
+      sectionsOpen,
+    }, () => {
+      Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
     });
   }
 
@@ -118,7 +110,7 @@ class Resume extends Component {
    * Create the provided page component.
    */
   createPageComponent(sectionType, trigger) {
-    const sectionOpen = this.state.sectionsOpen[sectionType.name];
+    const sectionOpen = this.state.sectionsOpen[`${sectionType.name}Open`];
     const classes = {
       sectionClassName: styles.section,
       triggerClassName: collapsibleStyles.trigger,
@@ -145,6 +137,41 @@ class Resume extends Component {
    * Render.
    */
   render() {
+    const RESUME_SECTIONS = {
+      ACHIEVEMENTS: {
+        name: 'achievements',
+        component: <Achievements />,
+      },
+      EDUCATION: {
+        name: 'education',
+        component: <Education />,
+      },
+      EXPERIENCE: {
+        name: 'experience',
+        component: <Experience />,
+      },
+      HOBBIES: {
+        name: 'hobbies',
+        component: <Hobbies />,
+      },
+      LINKS: {
+        name: 'links',
+        component: <Links />,
+      },
+      MANAGEMENT: {
+        name: 'management',
+        component: <ManagementSkills />,
+      },
+      SUMMARY: {
+        name: 'summary',
+        component: <Summary />,
+      },
+      TECHNICAL: {
+        name: 'technical',
+        component: <TechnicalSkills />,
+      },
+    };
+
     return (
       <Layout>
         <div className={styles.container}>
@@ -182,4 +209,23 @@ class Resume extends Component {
   }
 }
 
-export default Resume;
+const mapStateToProps = (state) => (
+  {
+    sectionsOpen: state.updateClientSettings.resumeSections,
+  }
+);
+
+export default connect(
+  mapStateToProps,
+  { toggleResumeSections },
+)(Resume);
+
+Resume.defaultProps = {
+  sectionsOpen: null,
+};
+
+Resume.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  sectionsOpen: PropTypes.object,
+  toggleResumeSections: PropTypes.func.isRequired,
+};

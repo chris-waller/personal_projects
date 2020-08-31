@@ -33,6 +33,13 @@ class Settings extends Component {
           <div className={styles.themeSelector}>
             <ThemeSelector />
           </div>
+          <div>
+            <br />
+            Developer Note: &nbsp;This page is more of a placeholder until I get a proper&nbsp;
+            back-end setup so I can save user-settings to a db.
+            <br />
+            At the moment, this is purely redux client-side session management only.
+          </div>
         </div>
       </Layout>
     );

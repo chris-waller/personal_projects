@@ -1,7 +1,11 @@
 /* ****************** */
 /* Redux action file  */
 /* ****************** */
-import { SET_THEME, TOGGLE_HEADER_COLLAPSED } from './actionTypes';
+import {
+  SET_THEME,
+  TOGGLE_HEADER_COLLAPSED,
+  TOGGLE_RESUME_SECTIONS,
+} from './actionTypes';
 
 /**
  * Sets the application theme.
@@ -17,4 +21,12 @@ export const setTheme = (theme) => ({
 export const toggleHeader = (isCollapsed) => ({
   type: TOGGLE_HEADER_COLLAPSED,
   payload: { isCollapsed },
+});
+
+/**
+ * Toggles the Resume page sections open/closed
+ */
+export const toggleResumeSections = (sections) => ({
+  type: TOGGLE_RESUME_SECTIONS,
+  payload: { sections },
 });
