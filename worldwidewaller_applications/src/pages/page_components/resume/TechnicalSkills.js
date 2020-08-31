@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // style imports
 import styles from './styles/technical_skills.scss';
 
-/* eslint-disable max-len, react/prefer-stateless-function */
+// eslint-disable-next-line react/prefer-stateless-function
 export default class TechnicalSkills extends Component {
   /**
    * Render.
@@ -29,7 +29,10 @@ export default class TechnicalSkills extends Component {
     return (
       <div className={styles.container}>
         <p className={styles.summary}>
-          All listed skills have been used professionally to develop and deliver production-ready web applications
+          {`
+            All listed skills have been used professionally to develop and deliver
+             production-ready web applications
+          `}
         </p>
         <Section headerText="Languages:" skills={pageText.languages} />
         <Section headerText="Frameworks & Libraries:" skills={pageText.frameWorks} />
@@ -48,6 +51,7 @@ TechnicalSkills.propTypes = {
   getHighlightedText: PropTypes.func.isRequired,
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Section extends Component {
   render() {
     return (

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // style imports
 import styles from './styles/management_skills.scss';
 
-/* eslint-disable max-len, react/prefer-stateless-function */
+// eslint-disable-next-line react/prefer-stateless-function
 export default class ManagementSkills extends Component {
   render() {
     const pageText = {
