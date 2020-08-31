@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import reactStringReplace from 'react-string-replace';
 
 // style imports
 import styles from './styles/resume.scss';
@@ -94,6 +96,28 @@ class Resume extends Component {
   });
 
   /**
+   * Highlites specified text.
+   */
+  getHighlightedText = (text) => {
+    const searchText = ['HTML', 'JavaScript', 'a', 'i'];
+    let highlightedText = text;
+
+    searchText.forEach((searchTerm) => {
+      highlightedText = reactStringReplace(
+        highlightedText,
+        searchTerm,
+        (match) => (
+          <span key={uuidv4()} style={{ background: 'red' }}>
+            {match}
+          </span>
+        ),
+      );
+    });
+
+    return highlightedText;
+  }
+
+  /**
    * Create the provided page component.
    */
   createPageComponent = (sectionType, trigger) => {
@@ -169,7 +193,7 @@ class Resume extends Component {
       },
       TECHNICAL: {
         name: 'technical',
-        component: <TechnicalSkills />,
+        component: <TechnicalSkills getHighlightedText={this.getHighlightedText} />,
       },
     };
 
