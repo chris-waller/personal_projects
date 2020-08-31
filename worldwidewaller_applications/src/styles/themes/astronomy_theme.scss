@@ -3,15 +3,15 @@
 /*******************/
 
 .astronomy_theme {
-  --color1: #F8F9FA;
-  --color2: #E9ECEF;
-  --color3: #DEE2E6;
-  --color4: #CED4DA;
-  --color5: #ADB5BD;
-  --color6: #6C757D;
-  --color7: #495057;
-  --color8: #343A40;
-  --color9: #212529;
+  --color1: #131C2D;
+  --color2: #0B182C;
+  --color3: #200E6E;
+  --color4: #625f85;
+  --color5: #484192;
+  --color6: #af7ecc;
+  --color7: #545A70;
+  --color8: #9a9fcf;
+  --color9: #DCE3EA;
   --themeBgColorMain: var(--color2);
   --bgOpacity: 0.4;
   --themeBgColorAlt: var(--color4);
@@ -21,6 +21,7 @@
   --bgSm: url('~images/backgrounds/astronomy_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
   --bgHeader: url('~images/backgrounds/astronomy_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
   --headerLogo: url('~images/backgrounds/astronomy_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
+  --headerCollapsedBgColor: var(--color4);
 
   /* Set global CSS variables here */
   /* ***************************** */
@@ -33,14 +34,18 @@
   --themeBgOpacity: var(--bgOpacity);
   
   --themeFontColorMain: var(--color9);
-  --themeFontColorAlt: var(--color7);
-  --themeLinkColorMain: var(--color8);
+  --themeFontColorAlt: var(--color6);
+  --themeLinkColorMain: var(--color6);
   --themeLinkColorAlt: var(--color5);
-  --themeLinkHoverColorMain: var(--color6);
+  --themeLinkHoverColorMain: var(--color5);
   --themeLinkHoverColorAlt: var(--color8);
-  --themeBorderColorMain: var(--color7);
-  --themeBorderColorAlt: var(--color 5);
+  --themeBorderColorMain: var(--color1);
+  --themeBorderColorAlt: var(--color5);
   --themeMenuBgColor: var(--color5);
   --themeMenuItemsBgColor: var(--color3);
   --themeMenuBgHoverColor: var(--color1);
+  --themeButtonFontColor: var(--color8);
+  --themeButtonBgColor: var(--color5);
+  --themeButtonBorder: 5px groove var(--color7);
+  --themeTextShadow: 2px 2px 2px var(--color2);
 }

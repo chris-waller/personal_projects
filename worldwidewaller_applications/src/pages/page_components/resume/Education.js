@@ -7,7 +7,7 @@ import styles from './styles/education.scss';
 const Education = () => (
   <div className={styles.container}>
     <div className={styles.content}>
-      <div>
+      <div className={styles.section}>
         <a
           target="__blank"
           href="https://academics.sheridancollege.ca/programs/computer-systems-technology-software-development-and-network-engineering"
