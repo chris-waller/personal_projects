@@ -99,7 +99,7 @@ class Resume extends Component {
    * Highlites specified text.
    */
   getHighlightedText = (text) => {
-    const searchText = ['HTML', 'JavaScript', 'ar'];
+    const searchText = ['HTML', 'JavaScript', 'a'];
     let highlightedText = text;
 
     searchText.forEach((searchTerm) => {

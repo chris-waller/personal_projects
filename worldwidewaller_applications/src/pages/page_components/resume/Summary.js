@@ -9,8 +9,7 @@ import styles from './styles/summary.scss';
 export default class Summary extends Component {
   render() {
     const pageText = {
-      overview: `
-      8+ years experience designing, developing, delivering and maintaining dynamic, cross-platform web applications.
+      overview: `8+ years experience designing, developing, delivering and maintaining dynamic, cross-platform web applications.
        6+ years experience successfully working with both internal and external stakeholders to define project scope and
       deliverables.
        5+ years experience in tech lead roles with a proven track record of delivering results.
