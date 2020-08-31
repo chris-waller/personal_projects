@@ -164,16 +164,20 @@ class Resume extends Component {
 
   searchBoxKeyDown(event) {
     // console.log(event.keyCode);
-    // we really only care about the tab, enter and space key
-    if (event.keyCode !== 9 && event.keyCode !== 13 && event.keyCode !== 32) return;
+    // we really only care about the tab, enter, comma or space keys
+    if (event.keyCode !== 9
+      && event.keyCode !== 13
+      && event.keyCode !== 188
+      && event.keyCode !== 32
+    ) return;
 
     let { searchText } = this.state;
     const lastIndex = searchText.lastIndexOf(',');
     let searchTerm = searchText.substring(lastIndex + 1, searchText.length);
     searchTerm = searchTerm.trim();
 
-    // user has pressed the tab key so we need to complete the current search term
-    if (event.keyCode === 9 || event.keyCode === 13) {
+    // user has pressed the tab/enter/comma key so we need to complete the current search term
+    if (event.keyCode === 9 || event.keyCode === 13 || event.keyCode === 188) {
       event.preventDefault();
 
       // user hasn't entered any text yet
