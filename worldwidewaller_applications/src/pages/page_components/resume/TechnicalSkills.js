@@ -66,8 +66,13 @@ class Section extends Component {
     );
   }
 }
+
 Section.propTypes = {
   headerText: PropTypes.string.isRequired,
-  // eslint-disable-next-line
-  skills: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  skills: PropTypes.array,
+};
+
+Section.defaultProps = {
+  skills: [],
 };

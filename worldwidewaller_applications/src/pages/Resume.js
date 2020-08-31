@@ -57,10 +57,14 @@ class Resume extends Component {
 
     this.state = {
       sectionsOpen,
+      searchText: '',
     };
 
+    this.searchBarRef = React.createRef();
     this.expandCollapseAll = this.expandCollapseAll.bind(this);
     this.onTriggerClick = this.onTriggerClick.bind(this);
+    this.searchBoxChanged = this.searchBoxChanged.bind(this);
+    this.searchBoxKeyDown = this.searchBoxKeyDown.bind(this);
   }
 
   /**
@@ -99,7 +103,7 @@ class Resume extends Component {
    * Highlites specified text.
    */
   getHighlightedText = (text) => {
-    const searchText = ['HTML'];
+    const searchText = this.state.searchText.split(',');
     let highlightedText = text;
 
     searchText.forEach((searchTerm) => {
@@ -158,6 +162,46 @@ class Resume extends Component {
     });
   }
 
+  searchBoxKeyDown(event) {
+    // console.log(event.keyCode);
+    // we really only care about the tab, enter and space key
+    if (event.keyCode !== 9 && event.keyCode !== 13 && event.keyCode !== 32) return;
+
+    let { searchText } = this.state;
+    const lastIndex = searchText.lastIndexOf(',');
+    let searchTerm = searchText.substring(lastIndex + 1, searchText.length);
+    searchTerm = searchTerm.trim();
+
+    // user has pressed the tab key so we need to complete the current search term
+    if (event.keyCode === 9 || event.keyCode === 13) {
+      event.preventDefault();
+
+      // user hasn't entered any text yet
+      if (searchTerm === '') return;
+
+      // add the comma we're using as a delimeter
+      searchText = `${searchText.trim()},`;
+      this.setState({
+        searchText,
+      });
+      return;
+    }
+
+    // user has pressed the space key
+    if (searchTerm.length < 1) {
+      event.preventDefault();
+    }
+  }
+
+  /**
+   * User has changed the value of the search box.
+   */
+  searchBoxChanged(event) {
+    this.setState({
+      searchText: event.target.value,
+    });
+  }
+
   /**
    * Render.
    */
@@ -197,6 +241,8 @@ class Resume extends Component {
       },
     };
 
+    const { searchText } = this.state;
+
     return (
       <Layout>
         <div className={styles.container}>
@@ -216,9 +262,21 @@ class Resume extends Component {
             <Link to={resumePdf} target="_blank" download>
               <Button
                 type="button"
-                text="Downlaod PDF"
+                text="Download PDF"
               />
             </Link>
+          </div>
+          <div className={styles.searchBar}>
+            <span className={styles.searchBar}>Search Resume:</span>
+            <input
+              type="text"
+              ref={this.searchBarRef}
+              className={styles.searchBox}
+              placeholder="Search resume (use tab/enter to complete term)"
+              value={searchText}
+              onChange={this.searchBoxChanged}
+              onKeyDown={this.searchBoxKeyDown}
+            />
           </div>
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}

@@ -12,23 +12,8 @@ import Layout from '~/components/Layout';
  * The header will be replaced with a humburger menu at a specified screen size
  */
 /* eslint-disable react/prefer-stateless-function */
-class Contact extends Component {
-  /**
-   * Constructor.
-   */
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      foo: 'bar',
-    };
-  }
-
-  /**
-   * Render.
-   */
+export default class Contact extends Component {
   render() {
-    console.log(this.state.foo);
     return (
       <Layout>
         <div>
@@ -50,4 +35,3 @@ class Contact extends Component {
     );
   }
 }
-export default Contact;

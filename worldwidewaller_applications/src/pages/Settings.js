@@ -9,21 +9,7 @@ import ThemeSelector from '~/components/ThemeSelector';
 import styles from './styles/settings.scss';
 
 /* eslint-disable react/prefer-stateless-function */
-class Settings extends Component {
-  /**
-   * Constructor.
-   */
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      foo: 'bar',
-    };
-  }
-
-  /**
-   * Render.
-   */
+export default class Settings extends Component {
   render() {
     console.log(this.state.foo);
     return (
@@ -46,4 +32,3 @@ class Settings extends Component {
     );
   }
 }
-export default Settings;
