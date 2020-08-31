@@ -94,22 +94,9 @@ class Resume extends Component {
   });
 
   /**
-   * Expands/collapses all sections.
-   */
-  expandCollapseAll(isOpen) {
-    const sectionsOpen = this.getOpenSections(isOpen);
-
-    this.setState({
-      sectionsOpen,
-    }, () => {
-      Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
-    });
-  }
-
-  /**
    * Create the provided page component.
    */
-  createPageComponent(sectionType, trigger) {
+  createPageComponent = (sectionType, trigger) => {
     const sectionOpen = this.state.sectionsOpen[`${sectionType.name}Open`];
     const classes = {
       sectionClassName: styles.section,
@@ -123,6 +110,7 @@ class Resume extends Component {
         key={sectionType.name}
         resumeSection={sectionType}
         trigger={trigger}
+        // TODO: this is ugly, get rid of it when I'm in here next
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...classes}
         isOpen={sectionOpen}
@@ -131,6 +119,19 @@ class Resume extends Component {
         {sectionType.component}
       </Collapsible>
     );
+  }
+
+  /**
+   * Expands/collapses all sections.
+   */
+  expandCollapseAll(isOpen) {
+    const sectionsOpen = this.getOpenSections(isOpen);
+
+    this.setState({
+      sectionsOpen,
+    }, () => {
+      Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
+    });
   }
 
   /**
