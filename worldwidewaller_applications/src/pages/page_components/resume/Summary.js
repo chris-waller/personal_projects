@@ -20,8 +20,8 @@ export default class Summary extends Component {
       p2: 'Database administration, configuration & development',
       li2: `SQL expertise including stored procedures, transactions, scheduled jobs,
        database backup & replication`,
-      p3: `SQL expertise including stored procedures, transactions, scheduled jobs, database
-       backup & replication`,
+      p3: `Requirements gathering, stakeholder demos, acceptance-test preparation,
+       commissioning, troubleshooting`,
       li3: 'Full & constant SDLC expsosure througout a 9+ year career',
     };
     Object.keys(pageText).forEach((key) => {

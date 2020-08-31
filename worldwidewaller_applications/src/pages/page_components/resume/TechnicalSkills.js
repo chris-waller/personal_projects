@@ -37,7 +37,7 @@ export default class TechnicalSkills extends Component {
         <Section headerText="Languages:" skills={pageText.languages} />
         <Section headerText="Frameworks & Libraries:" skills={pageText.frameWorks} />
         <Section headerText="Web Development:" skills={pageText.web} />
-        <Section headerText="Deployment" skills={pageText.deployment} />
+        <Section headerText="Deployment:" skills={pageText.deployment} />
         <Section headerText="Database:" skills={pageText.database} />
         <Section headerText="Source Control:" skills={pageText.source} />
         <Section headerText="Operating Systems:" skills={pageText.os} />
