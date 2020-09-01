@@ -5,9 +5,6 @@ import DropDown from 'react-dropdown';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
-// custom components
-import Layout from '~/components/Layout';
-
 // style imports
 import styles from './styles/theme-selector.scss';
 
@@ -54,7 +51,7 @@ class ThemeSelector extends Component {
     // no point on going further if the user selected the same theme
     if (option.label === selectedTheme.label) return;
 
-    Layout.updateSiteTheme(this.props.setThemeAction, option.label, option.value);
+    ThemeSelector.updateSiteTheme(this.props.setThemeAction, option.label, option.value);
     this.setState({ selectedTheme: option });
   }
 
