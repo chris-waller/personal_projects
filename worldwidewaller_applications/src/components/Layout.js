@@ -11,14 +11,8 @@ import Header from './Header';
 // css imports
 import styles from './styles/layout.scss';
 
-// utilities
-import {
-  THEME_NAMES, DEFAULT_THEME, getSiteThemes, changeTheme,
-} from '../utilities/theme_helpers';
-
 // redux actions
 import {
-  setTheme as setThemeAction,
   toggleHeader as toggleHeaderAction,
 } from '../redux/actions';
 
@@ -28,46 +22,11 @@ import {
  * themselves will be done in the specific classes.
  */
 class Layout extends Component {
-  /**
-   * Updates the site's theme in the DOM and informs redux of the change.
-   */
-  static updateSiteTheme(setTheme, themeName, newThemeStyle) {
-    // eslint-disable-next-line
-    changeTheme(classNames(styles.theme, newThemeStyle));
-    setTheme(themeName);
-  }
-
-  /**
-   * Constructor.
-   * Responsible for setting the site theme. This will be one of the following:
-   *  - default config
-   *  - query param
-   *  - user set (currently only works after the user toggles the theme in-session)
-   */
   constructor(props) {
     super(props);
-
-    let themeName = DEFAULT_THEME;
-
-    // figure out which theme to set (user, query param or default)
-    const queryParamTheme = (new URLSearchParams(window.location.search)).get('default_theme');
-    const currentTheme = props.selectedTheme;
-    if (currentTheme !== null
-      && THEME_NAMES[currentTheme.toUpperCase()] !== undefined) {
-      themeName = THEME_NAMES[currentTheme.toUpperCase()];
-    } else if (queryParamTheme !== null
-      && THEME_NAMES[queryParamTheme.toUpperCase()] !== undefined) {
-      themeName = THEME_NAMES[queryParamTheme.toUpperCase()];
-    }
-
-    // ensure we've actually found the theme
-    const siteThemes = getSiteThemes();
-    const selectedTheme = siteThemes.find((theme) => theme.label === themeName);
-    Layout.updateSiteTheme(props.setThemeAction, selectedTheme.label, selectedTheme.value);
+    console.log('layout constructor');
 
     this.state = {
-      // This will need to go into a redux store so we can keep the menu
-      // toggled between page changes
       headerCollapsed: props.headerCollapsed,
     };
 
@@ -92,6 +51,7 @@ class Layout extends Component {
    * Render.
    */
   render() {
+    console.log('layout render');
     const { headerCollapsed } = this.state;
     const { children } = this.props;
 
@@ -143,24 +103,20 @@ class Layout extends Component {
 
 const mapStateToProps = (state) => (
   {
-    selectedTheme: state.updateClientSettings.selectedTheme,
     headerCollapsed: state.updateClientSettings.headerCollapsed,
   }
 );
 
 export default connect(
   mapStateToProps,
-  { setThemeAction, toggleHeaderAction },
+  { toggleHeaderAction },
 )(Layout);
 
 Layout.defaultProps = {
-  selectedTheme: null,
   headerCollapsed: false,
 };
 
 Layout.propTypes = {
-  selectedTheme: PropTypes.string,
-  setThemeAction: PropTypes.func.isRequired,
   headerCollapsed: PropTypes.bool,
   toggleHeaderAction: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,

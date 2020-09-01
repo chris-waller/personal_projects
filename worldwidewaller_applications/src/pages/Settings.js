@@ -11,7 +11,6 @@ import styles from './styles/settings.scss';
 /* eslint-disable react/prefer-stateless-function */
 export default class Settings extends Component {
   render() {
-    console.log(this.state.foo);
     return (
       <Layout>
         <div className={styles.container}>

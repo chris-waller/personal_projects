@@ -44,6 +44,7 @@ class Resume extends Component {
    */
   constructor(props) {
     super(props);
+    console.log('resume constructor');
 
     const defaultOpen = false;
 
@@ -210,6 +211,8 @@ class Resume extends Component {
    * Render.
    */
   render() {
+    console.log('resume render');
+    // eslint-disable-next-line
     const RESUME_SECTIONS = {
       ACHIEVEMENTS: {
         name: 'achievements',
@@ -282,6 +285,7 @@ class Resume extends Component {
               onKeyDown={this.searchBoxKeyDown}
             />
           </div>
+          {/*
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
           {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}
@@ -290,6 +294,7 @@ class Resume extends Component {
           {this.createPageComponent(RESUME_SECTIONS.LINKS, 'Links')}
           {this.createPageComponent(RESUME_SECTIONS.EDUCATION, 'Education')}
           {this.createPageComponent(RESUME_SECTIONS.HOBBIES, 'Hobbies')}
+          */}
         </div>
       </Layout>
     );
