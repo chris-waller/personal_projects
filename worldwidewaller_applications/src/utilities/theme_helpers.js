@@ -16,7 +16,7 @@ export const THEME_NAMES = {
   OCEAN: 'Ocean',
 };
 
-export const DEFAULT_THEME = THEME_NAMES.ASTRONOMY;
+export const DEFAULT_THEME = THEME_NAMES.FOREST;
 
 /**
  * List of theme names and their associated styles.

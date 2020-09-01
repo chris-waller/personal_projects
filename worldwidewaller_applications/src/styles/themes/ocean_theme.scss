@@ -1,7 +1,12 @@
-/***************/
-/* Ocean Theme */
-/***************/
+$oceanBgXl: '~images/backgrounds/ocean_bg_xlarge.jpg';
+$oceanBgL: '~images/backgrounds/ocean_bg_large.jpg';
+$oceanBgMed: '~images/backgrounds/ocean_bg_med.jpg';
+$oceanBgSm: '~images/backgrounds/ocean_bg_sm.jpg';
+$oceanLogo: '~images/backgrounds/ocean_logo.jpg';
+$oceanHeader: $oceanBgMed;
+
 .ocean_theme {
+  // pallette colours
   --color1: #0A0E11;
   --color2: #03192E;  
   --color3: #013257;
@@ -12,39 +17,45 @@
   --color8: #9BCAE6;
   --color9: #A9D1EA;
   --color10: #e5e9eb;
-  --themeBgColorMain: var(--color1);
-  --bgOpacity: 0.7;
-  --themeBgColorAlt: var(--color2);
-  --bgXl: url('~images/backgrounds/ocean_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgLarge: url('~images/backgrounds/ocean_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgMed: url('~images/backgrounds/ocean_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgSm: url('~images/backgrounds/ocean_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgHeader: url('~images/backgrounds/ocean_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --headerLogo: url('~images/backgrounds/ocean_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
-  --headerCollapsedBgColor: var(--color4);
-  
-  // background  
-  --themeBgXl: var(--bgXl);
-  --themeBgLarge: var(--bgLarge);
-  --themeBgMed: var(--bgMedium);
-  --themeBgSm: var(--bgSmall);
-  --themeBgHeader: var(--bgXl);
-  --themeBgOpacity: var(--bgOpacity);
-  --themeHeaderCollapsedBgColor: var(--headerCollapsedBgColor);
 
-  --themeFontColorMain: var(--color10);
-  --themeFontColorAlt: var(--color7);
-  --themeLinkColorMain: var(--color6);
-  --themeLinkColorAlt: var(--color5);
-  --themeLinkHoverColorMain: var(--color7);
-  --themeLinkHoverColorAlt: var(--color8);
-  --themeBorderColorMain: var(--color1);
-  --themeBorderColorAlt: var(--color5);
-  --themeMenuBgColor: var(--color6);
-  --themeMenuItemsBgColor: var(--color4);
-  --themeMenuBgHoverColor: var(--color1);
-  --themeButtonFontColor: var(--color8);
-  --themeButtonBgColor: var(--color6);
-  --themeButtonBorder: 5px groove var(--color7);
-  --themeTextShadow: 2px 2px 2px var(--color2);
+  //////////////////////////////////////////////////////////////////////
+  // The key values in here must not change, only the pallett selections
+  //////////////////////////////////////////////////////////////////////
+  
+  // font styles
+  --fontFamily:  "Arvo", Times, sans-serif;
+  --fontColorMain: var(--color10);
+  --fontColorAlt: var(--color7);
+
+  // background styles
+  --bgColorMain: var(--color1);  
+  --bgColorAlt: var(--color2);
+  --bgOpacity: 0.7;
+  --bgXl: url("#{$oceanBgXl}") center / cover no-repeat var(--bgColorMain);
+  --bgLarge: url("#{$oceanBgL}") center / cover no-repeat var(--bgColorMain);
+  --bgMed: url("#{$oceanBgMed}") center / cover no-repeat var(--bgColorMain);
+  --bgSm: url("#{$oceanBgSm}") center / cover no-repeat var(--bgColorMain);
+  --bgHeader: url("#{$oceanHeader}") center / cover no-repeat var(--bgColorMain);
+  --headerLogo: url("#{$oceanLogo}") center / cover no-repeat var(--bgColorAlt);
+
+  // border styles 
+  --borderColorMain: var(--color1);
+  --borderColorAlt: var(--color5);
+
+  // link styles
+  --linkColorMain: var(--color6);
+  --linkColorAlt: var(--color5);
+  --linkHoverColorMain: var(--color7);
+  --linkHoverColorAlt: var(--color8);
+  --linkTextShadow: 2px 2px 2px var(--color2);
+  
+  // button styles
+  --buttonFontColor: var(--color8);
+  --buttonBgColor: var(--color6);
+  --buttonBorder: 5px groove var(--color7);  
+
+  // menu styles  
+  --menuBgColor: var(--color6);
+  --menuItemsBgColor: var(--color4);
+  --menuBgHoverColor: var(--color1); 
 }

@@ -1,8 +1,9 @@
-$astronmyBgXl: '~images/backgrounds/astronomy_bg_xlarge.jpg';
-$astronmyBgL: '~images/backgrounds/astronomy_bg_large.jpg';
-$astronmyBgMed: '~images/backgrounds/astronomy_bg_med.jpg';
-$astronmyBgSm: '~images/backgrounds/astronomy_bg_sm.jpg';
+$astronomyBgXl: '~images/backgrounds/astronomy_bg_xlarge.jpg';
+$astronomyBgL: '~images/backgrounds/astronomy_bg_large.jpg';
+$astronomyBgMed: '~images/backgrounds/astronomy_bg_med.jpg';
+$astronomyBgSm: '~images/backgrounds/astronomy_bg_sm.jpg';
 $astronomyLogo: '~images/backgrounds/astronomy_logo.jpg';
+$astronomyHeader: $astronomyBgMed;
 
 .astronomy_theme {
   // pallette colours
@@ -29,11 +30,11 @@ $astronomyLogo: '~images/backgrounds/astronomy_logo.jpg';
   --bgColorMain: var(--color2);  
   --bgColorAlt: var(--color4);
   --bgOpacity: 0.4;
-  --bgXl: url("#{$astronmyBgXl}") center / cover no-repeat var(--bgColorMain);
-  --bgLarge: url("#{$astronmyBgL}") center / cover no-repeat var(--bgColorMain);
-  --bgMed: url("#{$astronmyBgMed}") center / cover no-repeat var(--bgColorMain);
-  --bgSm: url("#{$astronmyBgSm}") center / cover no-repeat var(--bgColorMain);
-  --bgHeader: url("#{$astronmyBgMed}") center / cover no-repeat var(--bgColorMain);
+  --bgXl: url("#{$astronomyBgXl}") center / cover no-repeat var(--bgColorMain);
+  --bgLarge: url("#{$astronomyBgL}") center / cover no-repeat var(--bgColorMain);
+  --bgMed: url("#{$astronomyBgMed}") center / cover no-repeat var(--bgColorMain);
+  --bgSm: url("#{$astronomyBgSm}") center / cover no-repeat var(--bgColorMain);
+  --bgHeader: url("#{$astronomyHeader}") center / cover no-repeat var(--bgColorMain);
   --headerLogo: url("#{$astronomyLogo}") center / cover no-repeat var(--bgColorAlt);
 
   // border styles 
