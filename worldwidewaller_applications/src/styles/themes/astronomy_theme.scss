@@ -1,8 +1,11 @@
-/*******************/
-/* Astronomy Theme */
-/*******************/
+$astronmyBgXl: '~images/backgrounds/astronomy_bg_xlarge.jpg';
+$astronmyBgL: '~images/backgrounds/astronomy_bg_large.jpg';
+$astronmyBgMed: '~images/backgrounds/astronomy_bg_med.jpg';
+$astronmyBgSm: '~images/backgrounds/astronomy_bg_sm.jpg';
+$astronomyLogo: '~images/backgrounds/astronomy_logo.jpg';
 
 .astronomy_theme {
+  // pallette colours
   --color1: #131C2D;
   --color2: #0B182C;
   --color3: #200E6E;
@@ -12,40 +15,45 @@
   --color7: #545A70;
   --color8: #9a9fcf;
   --color9: #DCE3EA;
-  --themeBgColorMain: var(--color2);
-  --bgOpacity: 0.4;
-  --themeBgColorAlt: var(--color4);
-  --bgXl: url('~images/backgrounds/astronomy_bg_xlarge.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgLarge: url('~images/backgrounds/astronomy_bg_large.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgMed: url('~images/backgrounds/astronomy_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgSm: url('~images/backgrounds/astronomy_bg_sm.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --bgHeader: url('~images/backgrounds/astronomy_bg_med.jpg') center / cover no-repeat var(--themeBgColorMain);
-  --headerLogo: url('~images/backgrounds/astronomy_logo.jpg') center / cover no-repeat var(--themeBgColorAlt);
-  --headerCollapsedBgColor: var(--color4);
 
-  /* Set global CSS variables here */
-  /* ***************************** */
-  // background  
-  --themeBgXl: var(--bgXl);
-  --themeBgLarge: var(--bgLarge);
-  --themeBgMed: var(--bgMedium);
-  --themeBgSm: var(--bgSmall);
-  --themeBgHeader: var(--bgXl);
-  --themeBgOpacity: var(--bgOpacity);
+  //////////////////////////////////////////////////////////////////////
+  // The key values in here must not change, only the pallett selections
+  //////////////////////////////////////////////////////////////////////
   
-  --themeFontColorMain: var(--color9);
-  --themeFontColorAlt: var(--color6);
-  --themeLinkColorMain: var(--color6);
-  --themeLinkColorAlt: var(--color5);
-  --themeLinkHoverColorMain: var(--color5);
-  --themeLinkHoverColorAlt: var(--color8);
-  --themeBorderColorMain: var(--color1);
-  --themeBorderColorAlt: var(--color5);
-  --themeMenuBgColor: var(--color5);
-  --themeMenuItemsBgColor: var(--color3);
-  --themeMenuBgHoverColor: var(--color1);
+  // font styles
+  --fontFamily:  "Arvo", Times, sans-serif;
+  --fontColorMain: var(--color9);
+  --fontColorAlt: var(--color6);
+
+  // background styles
+  --bgColorMain: var(--color2);  
+  --bgColorAlt: var(--color4);
+  --bgOpacity: 0.4;
+  --bgXl: url("#{$astronmyBgXl}") center / cover no-repeat var(--bgColorMain);
+  --bgLarge: url("#{$astronmyBgL}") center / cover no-repeat var(--bgColorMain);
+  --bgMed: url("#{$astronmyBgMed}") center / cover no-repeat var(--bgColorMain);
+  --bgSm: url("#{$astronmyBgSm}") center / cover no-repeat var(--bgColorMain);
+  --bgHeader: url("#{$astronmyBgMed}") center / cover no-repeat var(--bgColorMain);
+  --headerLogo: url("#{$astronomyLogo}") center / cover no-repeat var(--bgColorAlt);
+
+  // border styles 
+  --borderColorMain: var(--color1);
+  --borderColorAlt: var(--color5);
+
+  // link styles
+  --linkColorMain: var(--color6);
+  --linkColorAlt: var(--color5);
+  --linkHoverColorMain: var(--color5);
+  --linkHoverColorAlt: var(--color8);
+  --linkTextShadow: 2px 2px 2px var(--color2);  
+
+  // button styles
   --themeButtonFontColor: var(--color8);
   --themeButtonBgColor: var(--color5);
   --themeButtonBorder: 5px groove var(--color7);
-  --themeTextShadow: 2px 2px 2px var(--color2);
+
+  // menu styles  
+  --menuBgColor: var(--color5);
+  --menuItemsBgColor: var(--color3);
+  --menuBgHoverColor: var(--color1);
 }

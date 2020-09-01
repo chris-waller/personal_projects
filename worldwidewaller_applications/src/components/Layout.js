@@ -101,7 +101,7 @@ const mapStateToProps = (state) => (
 );
 */
 
-export default Layout;
+export default React.memo(Layout);
 
 Layout.propTypes = {
   // headerCollapsed: PropTypes.bool,

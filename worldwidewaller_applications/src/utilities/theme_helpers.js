@@ -69,6 +69,7 @@ export function getSiteThemes() {
  * Changes the site theme by updating the CSS of the overall site div
  */
 export function changeTheme(newThemeName) {
+  console.log('helper changing theme style to', newThemeName);
   // eslint-disable-next-line no-undef
   document.getElementById('root').className = `root ${newThemeName}`;
 }

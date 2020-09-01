@@ -8,45 +8,35 @@
 @import './themes/ocean_theme.scss';
 
 .theme {
-  // background styles
-  --bgXl: var(--themeBgXl);
-  --bgLarge: var(--themeBgLarge);
-  --bgMed: var(--themeBgMed);
-  --bgSm: var(--themeBgSm);
-  --bgAlt: var(--themeBgAlt);
-  --bgHeader: var(--themeBgHeader);
-  --bgColorMain: var(--themeBgColorMain);  
-  --bgColorAlt: var(--themeBgColorAlt);
-  --bgOpacity: var(--themeBgOpacity);
-  --headerLogo: var(--themeHeaderLogo);
-  --headerCollapsedBgColor: var(-themeHeaderCollapsedBgColor);
+  // --bgColorMain: var(--themeBgColorMain);  
+  // --bgColorAlt: var(--themeBgColorAlt);
+  // --bgOpacity: var(--themeBgOpacity);
 
   // font styles
-  --fontFamily:  "Arvo", Times, sans-serif;
-  --fontColorMain: var(--themeFontColorMain);
-  --fontColorAlt: var(--themeFontColorAlt);   
+  // --fontFamily:  "Arvo", Times, sans-serif;
+  // --fontColorMain: var(--themeFontColorMain);
+  // --fontColorAlt: var(--themeFontColorAlt);   
   
   // border styles
-  --borderColorMain: var(--themeBorderColorMain);
-  --borderColorAlt: var(--themeBorderColorAlt);
+  // --borderColorMain: var(--themeBorderColorMain);
+  // --borderColorAlt: var(--themeBorderColorAlt);
 
   // link styles
-  --linkColorMain: var(--themeLinkColorMain);
-  --linkColorAlt: var(--themeLinkColorAlt);
-  --linkHoverColorMain: var(--themeLinkHoverColorMain);
-  --linkHoverColorAlt: var(--themeLinkHoverColorAlt);
+  //--linkColorMain: var(--themeLinkColorMain);
+  //--linkColorAlt: var(--themeLinkColorAlt);
+  //--linkHoverColorMain: var(--themeLinkHoverColorMain);
+  //--linkHoverColorAlt: var(--themeLinkHoverColorAlt);
 
   // button styles
-  --buttonFontColor: var(--themeButtonFontColor);
-  --buttonBgColor: var(--themeButtonBgColor);
-  --buttonBorder: var(--themeButtonBorder);
+  //--buttonFontColor: var(--themeButtonFontColor);
+  //--buttonBgColor: var(--themeButtonBgColor);
+  //--buttonBorder: var(--themeButtonBorder);
 
   // menu styles
-  --menuBgColor: var(--themeMenuBgColor);
-  --menuItemsBgColor: var(--themeMenuItemsBgColor);
-  --menuBgHoverColor: var(--themeMenuBgHoverColor);
+  //--menuBgColor: var(--themeMenuBgColor);
+  //--menuItemsBgColor: var(--themeMenuItemsBgColor);
+  //--menuBgHoverColor: var(--themeMenuBgHoverColor);
 
   // extras
-  --textShadow: var(--themeTextShadow);
+  // --textShadow: var(--themeTextShadow);
 }
-
