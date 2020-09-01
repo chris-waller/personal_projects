@@ -1,111 +1,50 @@
-@import "~styles/screen_dimensions";
-
-// header height calculations
-$headerHeight: 90px;
-$collapseHeaderHeight: 20px;
-// $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
-
-.layout {
+.layout-container {
   width: 100%;
   height: 100%; 
   color: var(--fontColorMain);
+  background: var(--bgLarge);
   font-family: var(--fontFamily);    
 
-  // site grid layout
-  display: grid;  
-  grid-template-rows: $headerHeight auto;
-  grid-template-areas: 
-    "header"
-    "page_content";  
+  display: flex;
+  flex-direction: column;
+ 
 }
-/*
-.layout.collapsed {
-  grid-template-rows: calc(100% - #{$collapseHeaderHeight});
-}
-*/
 
-.site-header {  
-  grid-area: header;
-  background: var(--bgHeader);
-  border-bottom: 2px solid var(--borderColorMain);
-}
-/*
-.site-header.collapsed {
-  display: none;
-}
-*/
-
-/*
-.collapseHeaderWrapper {
-  display: grid;
-  justify-content: center;
-  color: var(--fontColorAlt);
-}
-.collapse-header {
-  width: 100%;
-  height: $collapseHeaderHeight;    
+.layout-overlay {
   position: absolute;
-  top: $collapseHeaderHeightOffset;  
-  display: grid;
-  justify-content: center;
-  align-content: center;
-}
-.collapse-header.collapsed {
-  top: 5px;
-  z-index: 1;  
-  background-color: var(--headerCollapsedBgColor);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bgColorMain);
+  opacity: var(--bgOpacity);
 }
 
-.collapse-icon {
-  font-size: 3.3em;
-  cursor: pointer;
+.site-header {
+  border-bottom: 2px solid var(--borderColorMain);
+  position: relative;  
 }
-.collapse-icon:hover {
-  color: var(--fontColorHover);
-}
-*/
 
 /* Page Content */
 /* ************* */
-.page-content-wrapper {
-  grid-area: "page_content";
-  background-color: var(--bgColorMain);
-
+.page-content-wrapper {  
   width: 100%;
   height: 100%;
   position: relative;  
 }
-/*
-.page-content-wrapper.collapsed {
-  height: 100%;
-  margin-top: $collapseHeaderHeight;
-}
-*/
-
-.page-content-overlay {
-  position: absolute;
-  top: 0px;
-  height: 0px;
-  width: 100%;
-  height: 100%;  
-  background-color: var(--bgColorMain);
-  opacity: var(--bgOpacity);
-  background: var(--bgXl);
-}
 
 .page-content {
-  background: transparent;
   width: 100%;
   height: 100%;  
   padding: 10px;  
   position: absolute;
   z-index: 0;
   top: 0;
-  left: 0;    
-  overflow-y: scroll;
-  overflow-x: scroll;
+  left: 0;  
 
   // hides the scrollbar
+  overflow-y: scroll;
+  overflow-x: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE 10+ */
   &::-webkit-scrollbar {
@@ -113,25 +52,3 @@ $collapseHeaderHeight: 20px;
     background: transparent; /* Chrome/Safari/Webkit */
   }
 }
-
-/* Background Image Sizes */
-/* ********************** */
-@media screen and (max-width: $smallMaxWidth) {   
-  .page-content-overlay{
-   background: var(--bgSm);  
-  }
-}
-@media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  
-  .page-content-overlay {
-    background: var(--bgMed);  
-  }
-}
-
-@media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {  
-  .page-content-overlay {
-    background: var(--bgLarge);  
-  }
-}
-
-
-

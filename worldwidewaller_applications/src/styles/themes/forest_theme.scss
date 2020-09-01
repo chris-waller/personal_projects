@@ -30,7 +30,7 @@ $forestHeader: '~images/backgrounds/forest_bg_header.jpg';
   // background styles
   --bgColorMain: var(--color1);  
   --bgColorAlt: var(--color9);
-  --bgOpacity: 0.8;
+  --bgOpacity: 0.2;
   --bgXl: url("#{$forestBgXl}") center / cover no-repeat var(--bgColorMain);
   --bgLarge: url("#{$forestBgL}") center / cover no-repeat var(--bgColorMain);
   --bgMed: url("#{$forestBgMed}") center / cover no-repeat var(--bgColorMain);
