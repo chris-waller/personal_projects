@@ -5,7 +5,7 @@
 // header height calculations
 $headerHeight: 90px;
 $collapseHeaderHeight: 20px;
-$collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
+// $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 
 .layout {
   width: 100%;
@@ -20,19 +20,24 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
     "header"
     "page_content";  
 }
+/*
 .layout.collapsed {
   grid-template-rows: calc(100% - #{$collapseHeaderHeight});
 }
+*/
 
 .site-header {  
   grid-area: header;
   background: var(--bgHeader);
   border-bottom: 2px solid var(--borderColorMain);
 }
+/*
 .site-header.collapsed {
   display: none;
 }
+*/
 
+/*
 .collapseHeaderWrapper {
   display: grid;
   justify-content: center;
@@ -60,6 +65,7 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
 .collapse-icon:hover {
   color: var(--fontColorHover);
 }
+*/
 
 /* Page Content */
 /* ************* */
@@ -71,10 +77,12 @@ $collapseHeaderHeightOffset: $headerHeight - $collapseHeaderHeight;
   height: 100%;
   position: relative;  
 }
+/*
 .page-content-wrapper.collapsed {
   height: 100%;
   margin-top: $collapseHeaderHeight;
 }
+*/
 
 .page-content-overlay {
   position: absolute;

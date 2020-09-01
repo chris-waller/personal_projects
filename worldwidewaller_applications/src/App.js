@@ -28,7 +28,6 @@ class App extends Component {
     // change theme in DOM
     changeTheme(newThemeStyle);
     // inform redux
-    console.log('APP is setting theme to', themeName);
     store.dispatch(setThemeAction(themeName));
   }
 
@@ -53,7 +52,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('The store', store);
     return (
       <Router>
         <Provider store={store}>
