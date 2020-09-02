@@ -1,9 +1,8 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { traceLifecycle } from 'react-lifecycle-visualizer';
-
-/* eslint-disable2 */
+// import { traceLifecycle } from 'react-lifecycle-visualizer';
+import { cloneDeep } from 'lodash';
 
 // custom components
 import { getHighlightedText } from './ResumeHelpers';
@@ -30,42 +29,27 @@ const pageText = {
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Summary extends Component {
-  /**
-   * Constructor.
-   */
-  constructor(props) {
-    super(props);
-
+  constructor() {
+    super();
     this.state = {
-      highligtedText: pageText,
+      highligtedText: null,
     };
   }
 
   static getDerivedStateFromProps(nextProps) {
-    if (nextProps.updateSection) {
-      const { searchText } = nextProps;
-      const text = pageText;
+    const { searchText } = nextProps;
+    const text = cloneDeep(pageText);
 
-      console.log('starting');
-
-      Object.keys(text).forEach((key) => {
-        const highligtedText = getHighlightedText(searchText, text[key]);
-        text[key] = highligtedText;
-      });
-      return {
-        highligtedText: text,
-      };
-    }
-    return null;
-  }
-
-  shouldComponentUpdate(nextProps) {
-    console.log('Summary should update?', nextProps.updateSection);
-    return nextProps.updateSection;
+    Object.keys(text).forEach((key) => {
+      const highligtedText = getHighlightedText(searchText, text[key]);
+      text[key] = highligtedText;
+    });
+    return {
+      highligtedText: text,
+    };
   }
 
   render() {
-    console.log('Rendering Summary');
     const { highligtedText } = this.state;
     return (
       <div className={styles.section}>
@@ -97,11 +81,10 @@ class Summary extends Component {
   }
 }
 
-export default traceLifecycle(Summary);
+export default Summary;
 
 Summary.propTypes = {
   searchText: PropTypes.string,
-  updateSection: PropTypes.bool.isRequired,
 };
 
 Summary.defaultProps = {

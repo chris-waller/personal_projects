@@ -14,8 +14,8 @@ import collapsibleStyles from './styles/collapsible.scss';
 import Layout from '~/components/Layout';
 import Collapsible from '~/components/Collapsible';
 
-/*
 import Achievements from './page_components/resume/Achievments';
+/*
 import Education from './page_components/resume/Education';
 import Experience from './page_components/resume/Experience';
 import Hobbies from './page_components/resume/Hobbies';
@@ -51,7 +51,7 @@ class Resume extends Component {
 
     this.state = {
       searchText: '',
-      updateSections: false,
+      // updateSections: false,
     };
 
     this.searchBarRef = React.createRef();
@@ -148,20 +148,10 @@ class Resume extends Component {
    */
   expandCollapseAll(isOpen) {
     const sectionsOpen = this.getOpenSections(isOpen);
-
     Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
-    /*
-    console.log('setting the state:', sectionsOpen);
-    this.setState({
-      sectionsOpen,
-    }, () => {
-
-    });
-    */
   }
 
   searchBoxKeyDown(event) {
-    // console.log(event.keyCode);
     // we really only care about the tab, enter, comma or space keys
     if (event.keyCode !== 9
       && event.keyCode !== 13
@@ -185,7 +175,7 @@ class Resume extends Component {
       searchText = `${searchText.trim()},`;
       this.setState({
         searchText,
-        updateSections: true,
+        // updateSections: true,
       });
       return;
     }
@@ -200,9 +190,10 @@ class Resume extends Component {
    * User has changed the value of the search box.
    */
   searchBoxChanged(event) {
+    // console.log('search box key changed');
     this.setState({
       searchText: event.target.value,
-      updateSections: false,
+      // updateSections: false,
     });
   }
 
@@ -211,13 +202,14 @@ class Resume extends Component {
    */
   render() {
     // console.log('Rendering Resume');
-    // eslint-disable-next-line
     const RESUME_SECTIONS = {
-      /*
       ACHIEVEMENTS: {
         name: 'achievements',
-        component: <Achievements getHighlightedText={this.getHighlightedText} />,
+        component: <Achievements
+          searchText={this.state.searchText}
+        />,
       },
+      /*
       EDUCATION: {
         name: 'education',
         component: <Education getHighlightedText={this.getHighlightedText} />,
@@ -243,7 +235,6 @@ class Resume extends Component {
         name: 'summary',
         component: <Summary
           searchText={this.state.searchText}
-          updateSection={this.state.updateSections}
         />,
       },
       /*
@@ -300,10 +291,11 @@ class Resume extends Component {
           </div>
 
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
+          {this.createPageComponent(RESUME_SECTIONS.ACHIEVEMENTS, 'Professional Achievements')}
           {/*
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
           {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}
-          {this.createPageComponent(RESUME_SECTIONS.ACHIEVEMENTS, 'Professional Achievements')}
+
           {this.createPageComponent(RESUME_SECTIONS.EXPERIENCE, 'Professional Experience')}
           {this.createPageComponent(RESUME_SECTIONS.LINKS, 'Links')}
           {this.createPageComponent(RESUME_SECTIONS.EDUCATION, 'Education')}
