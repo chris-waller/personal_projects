@@ -13,14 +13,14 @@ import {
 const initialState = {
   headerCollapsed: false,
   resumeSections: {
-    achievementsOpen: true,
-    educationOpen: true,
+    achievementsOpen: false,
+    educationOpen: false,
     experienceOpen: true,
-    hobbiesOpen: true,
-    linksOpen: true,
-    managementOpen: true,
-    summaryOpen: true,
-    technicalOpen: true,
+    hobbiesOpen: false,
+    linksOpen: false,
+    managementOpen: false,
+    summaryOpen: false,
+    technicalOpen: false,
   },
   selectedTheme: null,
 };

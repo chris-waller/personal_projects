@@ -1,7 +1,6 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { traceLifecycle } from 'react-lifecycle-visualizer';
 import { cloneDeep } from 'lodash';
 
 // custom components

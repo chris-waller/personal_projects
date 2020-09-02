@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { cloneDeep } from 'lodash';
 
+// custom components
+import { getHighlightedText } from './ResumeHelpers';
+
 // style imports
 import styles from './styles/experience.scss';
 
@@ -13,39 +16,60 @@ import {
 } from './ExperienceSections';
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class Experience extends Component {
-  /**
-   * Get highlighted text.
-   * This is a recursive function that will iterate through all child
-   * nodes and wrap all found text in a highlight style.
-   */
-  getHighlightedText = (node) => {
-    const nodeType = typeof (node);
-    const highlightedNode = node;
-    if (nodeType === 'string') {
-      return this.props.getHighlightedText(node);
-    }
+class Experience extends Component {
+  static foo() {
 
-    Object.keys(node).forEach((key) => {
-      const entry = node[key];
-      const highligtedText = this.getHighlightedText(entry);
-      highlightedNode[key] = highligtedText;
+  }
+
+  constructor() {
+    super();
+    this.state = {
+      job1Highlighted: null,
+      // job2Highlighted: null,
+      // job3Highlighted: null,
+      // job4Highlighted: null,
+      // job5Highlighted: null,
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    const { searchText } = nextProps;
+
+    const job1Highlighted = cloneDeep(Job1);
+    const job2Highlighted = cloneDeep(Job2);
+    const job3Highlighted = cloneDeep(Job3);
+    const job4Highlighted = cloneDeep(Job4);
+    const job5Highlighted = cloneDeep(Job5);
+
+    Object.keys(job1Highlighted).forEach((key) => {
+      const highligtedText = getHighlightedText(searchText, job1Highlighted[key]);
+      job1Highlighted[key] = highligtedText;
     });
 
-    return highlightedNode;
+    /*
+    Object.keys(job2Highlighted).forEach((key) => {
+      const highligtedText = getHighlightedText(searchText, job2Highlighted[key]);
+      job2Highlighted[key] = highligtedText;
+    });
+    */
+
+    return {
+      job1Highlighted,
+      job2Highlighted,
+      job3Highlighted,
+      job4Highlighted,
+      job5Highlighted,
+    };
   }
 
   render() {
-    let job1Highlighted = cloneDeep(Job1);
-    job1Highlighted = this.getHighlightedText(job1Highlighted);
-    let job2Highlighted = cloneDeep(Job2);
-    job2Highlighted = this.getHighlightedText(job2Highlighted);
-    let job3Highlighted = cloneDeep(Job3);
-    job3Highlighted = this.getHighlightedText(job3Highlighted);
-    let job4Highlighted = cloneDeep(Job4);
-    job4Highlighted = this.getHighlightedText(job4Highlighted);
-    let job5Highlighted = cloneDeep(Job5);
-    job5Highlighted = this.getHighlightedText(job5Highlighted);
+    const {
+      job1Highlighted,
+      // job2Highlighted,
+      // job3Highlighted,
+      // job4Highlighted,
+      // job5Highlighted,
+    } = this.state;
 
     return (
       <div className={styles.container}>
@@ -61,18 +85,26 @@ export default class Experience extends Component {
           </li>
         </ul>
 
+        {/*
         <JobSection job={job2Highlighted} />
         <JobSection job={job3Highlighted} />
         <JobSection job={job4Highlighted} />
         <JobSection job={job5Highlighted} />
+        */ }
 
       </div>
     );
   }
 }
 
+export default Experience;
+
 Experience.propTypes = {
-  getHighlightedText: PropTypes.func.isRequired,
+  searchText: PropTypes.string,
+};
+
+Experience.defaultProps = {
+  searchText: '',
 };
 
 // eslint-disable-next-line react/prefer-stateless-function

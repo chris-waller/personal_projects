@@ -15,12 +15,10 @@ import Layout from '~/components/Layout';
 import Collapsible from '~/components/Collapsible';
 
 import Achievements from './page_components/resume/Achievments';
-/*
 import Education from './page_components/resume/Education';
 import Experience from './page_components/resume/Experience';
 import Hobbies from './page_components/resume/Hobbies';
 import Links from './page_components/resume/Links';
-*/
 import ManagementSkills from './page_components/resume/ManagementSkills';
 import Summary from './page_components/resume/Summary';
 import TechnicalSkills from './page_components/resume/TechnicalSkills';
@@ -207,24 +205,23 @@ class Resume extends Component {
         name: 'achievements',
         component: <Achievements searchText={this.state.searchText} />,
       },
-      /*
+
       EDUCATION: {
         name: 'education',
-        component: <Education getHighlightedText={this.getHighlightedText} />,
+        component: <Education />,
       },
       EXPERIENCE: {
         name: 'experience',
-        component: <Experience getHighlightedText={this.getHighlightedText} />,
+        component: <Experience searchText={this.state.searchText} />,
       },
       HOBBIES: {
         name: 'hobbies',
-        component: <Hobbies getHighlightedText={this.getHighlightedText} />,
+        component: <Hobbies />,
       },
       LINKS: {
         name: 'links',
-        component: <Links getHighlightedText={this.getHighlightedText} />,
+        component: <Links />,
       },
-      */
       MANAGEMENT: {
         name: 'management',
         component: <ManagementSkills searchText={this.state.searchText} />,
@@ -284,12 +281,12 @@ class Resume extends Component {
             <Log />
           </div>
 
+          {this.createPageComponent(RESUME_SECTIONS.EXPERIENCE, 'Professional Experience')}
+          {/*
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
           {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}
           {this.createPageComponent(RESUME_SECTIONS.ACHIEVEMENTS, 'Professional Achievements')}
-          {/*
-          {this.createPageComponent(RESUME_SECTIONS.EXPERIENCE, 'Professional Experience')}
           {this.createPageComponent(RESUME_SECTIONS.LINKS, 'Links')}
           {this.createPageComponent(RESUME_SECTIONS.EDUCATION, 'Education')}
           {this.createPageComponent(RESUME_SECTIONS.HOBBIES, 'Hobbies')}
