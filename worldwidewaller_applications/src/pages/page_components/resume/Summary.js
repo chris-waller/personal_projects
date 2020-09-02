@@ -42,8 +42,7 @@ class Summary extends Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    // if (nextProps.updateSection) {
-    if (nextProps) {
+    if (nextProps.updateSection) {
       const { searchText } = nextProps;
       const text = pageText;
 
@@ -62,8 +61,7 @@ class Summary extends Component {
 
   shouldComponentUpdate(nextProps) {
     console.log('Summary should update?', nextProps.updateSection);
-    // return nextProps.updateSection;
-    return true;
+    return nextProps.updateSection;
   }
 
   render() {
