@@ -22,7 +22,7 @@ import Hobbies from './page_components/resume/Hobbies';
 import Links from './page_components/resume/Links';
 import ManagementSkills from './page_components/resume/ManagementSkills';
 */
-// import Summary from './page_components/resume/Summary';
+import Summary from './page_components/resume/Summary';
 // import TechnicalSkills from './page_components/resume/TechnicalSkills';
 import Button from '~/components/Button';
 
@@ -40,7 +40,6 @@ class Resume extends Component {
    * Informs redux of the site toggle
    */
   static updateSectionToggle(updateSection, sectionsOpen) {
-    // console.log('updating redux');
     updateSection(sectionsOpen);
   }
 
@@ -50,35 +49,9 @@ class Resume extends Component {
   constructor(props) {
     super(props);
 
-    // const defaultOpen = true;
-
-    /*
-    let { sectionsOpen } = props;
-
-    console.log('the store', store.getState().updateClientSettings.resumeSections);
-    // first time this page has been loaded so nothing set in redux
-    if (sectionsOpen === null) {
-      console.log('NULL');
-    } else {
-      console.log('NOT NULL', sectionsOpen);
-    }
-
-    console.log('Resume constrector props', sectionsOpen);
-    console.log('Resume constrector state', this.state);
-    const toggleSections = props.toggleResumeSections;
-    if (sectionsOpen !== null) {
-      console.log('NOT EXPECTING TO BE HERE', toggleSections);
-      // Resume.updateSectionToggle(toggleSections, sectionsOpen);
-    } else {
-      console.log('Setting defaults');
-      sectionsOpen = this.getOpenSections(defaultOpen);
-    }
-    */
-
     this.state = {
-      // sectionsOpen,
       searchText: '',
-      // updateSections: false,
+      updateSections: false,
     };
 
     this.searchBarRef = React.createRef();
@@ -95,16 +68,17 @@ class Resume extends Component {
     };
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps, nextState) {
     // console.log('***************');
     // console.log('Should resume update? (props)', nextProps.sectionsOpen);
     // console.log('Should resume update2? (state)', nextState.sectionsOpen);
 
     let shouldUpdate = true;
-    if (isEqual(this.state.sectionsOpen, nextProps.sectionsOpen)) {
+    if (isEqual(this.state.sectionsOpen, nextProps.sectionsOpen)
+      && nextState.searchText === this.state.searchText) {
       shouldUpdate = false;
     }
-    // console.log('resume should update?', shouldUpdate);
+    // console.log('Resume should update?', shouldUpdate);
 
     return shouldUpdate;
   }
@@ -211,7 +185,7 @@ class Resume extends Component {
       searchText = `${searchText.trim()},`;
       this.setState({
         searchText,
-        // updateSections: true,
+        updateSections: true,
       });
       return;
     }
@@ -228,7 +202,7 @@ class Resume extends Component {
   searchBoxChanged(event) {
     this.setState({
       searchText: event.target.value,
-      // updateSections: false,
+      updateSections: false,
     });
   }
 
@@ -236,7 +210,7 @@ class Resume extends Component {
    * Render.
    */
   render() {
-    console.log('Rendering Resume');
+    // console.log('Rendering Resume');
     // eslint-disable-next-line
     const RESUME_SECTIONS = {
       /*
@@ -264,6 +238,7 @@ class Resume extends Component {
         name: 'management',
         component: <ManagementSkills getHighlightedText={this.getHighlightedText} />,
       },
+      */
       SUMMARY: {
         name: 'summary',
         component: <Summary
@@ -317,12 +292,15 @@ class Resume extends Component {
             />
           </div>
 
-          <div style={{ marginTop: '10px', color: 'black', backgroundColor: 'white' }}>
+          <div style={{
+            display: 'none', marginTop: '10px', color: 'black', backgroundColor: 'white',
+          }}
+          >
             <Log />
           </div>
 
-          {/*
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
+          {/*
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
           {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}
           {this.createPageComponent(RESUME_SECTIONS.ACHIEVEMENTS, 'Professional Achievements')}
