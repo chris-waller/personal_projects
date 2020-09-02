@@ -281,16 +281,14 @@ class Resume extends Component {
             <Log />
           </div>
 
-          {this.createPageComponent(RESUME_SECTIONS.EXPERIENCE, 'Professional Experience')}
-          {/*
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
           {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}
           {this.createPageComponent(RESUME_SECTIONS.ACHIEVEMENTS, 'Professional Achievements')}
+          {this.createPageComponent(RESUME_SECTIONS.EXPERIENCE, 'Professional Experience')}
           {this.createPageComponent(RESUME_SECTIONS.LINKS, 'Links')}
           {this.createPageComponent(RESUME_SECTIONS.EDUCATION, 'Education')}
           {this.createPageComponent(RESUME_SECTIONS.HOBBIES, 'Hobbies')}
-          */}
         </div>
       </Layout>
     );

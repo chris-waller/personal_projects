@@ -19,16 +19,17 @@ function getSearchTerms(searchText) {
  * @param {*} searchTerm
  */
 function highlightText(node, searchTerm) {
-  console.log('\n\n');
-  console.log('the search term', searchTerm);
+  // console.log('\n\n');
+  // console.log('the search term', searchTerm);
   const nodeType = typeof (node);
-  console.log('node type', nodeType);
+  // console.log('node type', nodeType);
   const nodeToSearch = node;
-  console.log('The node', nodeToSearch);
+  // console.log('The node', nodeToSearch);
 
   if (nodeType === 'symbol') {
-    console.log('symbol found', nodeToSearch);
-    return nodeToSearch;
+    // console.log('symbol found', nodeToSearch);
+    // console.log(nodeToSearch);
+    return null;
   }
 
   if (nodeType === 'string') {
@@ -39,8 +40,8 @@ function highlightText(node, searchTerm) {
     ));
   }
 
-  if (nodeType === 'object') {
-    console.log('the object', nodeToSearch);
+  if (nodeType === 'object' && nodeToSearch !== null) {
+    // console.log('the object', nodeToSearch);
     const foo = cloneDeep(nodeToSearch);
     Object.keys(foo).forEach((key) => {
       const highligtedText = highlightText(foo[key], searchTerm);
@@ -49,19 +50,14 @@ function highlightText(node, searchTerm) {
     return foo;
   }
 
-  if (nodeType === 'symbol') {
-    console.log('SYMBOL FOUND');
-  }
-
   if (Array.isArray(nodeToSearch)) {
     nodeToSearch.forEach((entry) => highlightText(entry, searchTerm));
     return nodeToSearch;
   }
 
-  console.log('*****************************ERRROR********************');
-  console.log('The node type', nodeType);
-  console.log('NEXT ITERATION', nodeToSearch);
-  // return null;
+  // console.log('*****************************ERRROR********************');
+  // console.log('The node type', nodeType);
+  // console.log('NEXT ITERATION', nodeToSearch);
   return nodeToSearch;
 }
 
@@ -73,8 +69,8 @@ export function getHighlightedText(searchText, text) {
   searchTerms.forEach((searchTerm) => {
     if (searchTerm.trim() !== '') {
       textToHighlight = highlightText(textToHighlight, searchTerm);
-      console.log('\n\n');
-      console.log('The highlighted text', textToHighlight);
+      // console.log('\n\n');
+      // console.log('The highlighted text', textToHighlight);
     }
   });
 

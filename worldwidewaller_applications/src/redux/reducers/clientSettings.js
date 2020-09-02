@@ -15,7 +15,7 @@ const initialState = {
   resumeSections: {
     achievementsOpen: false,
     educationOpen: false,
-    experienceOpen: true,
+    experienceOpen: false,
     hobbiesOpen: false,
     linksOpen: false,
     managementOpen: false,

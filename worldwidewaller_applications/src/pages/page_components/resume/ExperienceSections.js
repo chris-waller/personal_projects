@@ -17,7 +17,6 @@ export const job2 = {
       Postgres, AWS, XML, JIRA, GIT, SVN, maven, npm, docker`,
       summary: `Designed and developed a scalable, cross-platform ReactJs web application
       capable of displaying live video and telemetry from aerial drone cameras`,
-      /*
       examples: [
         {
           description: `Researched and began initial development into an RTSP video player for
@@ -34,7 +33,7 @@ export const job2 = {
           ],
         },
         {
-      description: `Created a custom Java 8 DropWizard back-end system designed around cloud-based
+          description: `Created a custom Java 8 DropWizard back-end system designed around cloud-based
           infrastructure, specifically AWS but designed to be 100% vendor-agnostic.`,
         },
         {
@@ -45,7 +44,7 @@ export const job2 = {
           description: `Conducted dozens of interviews to hire for management, senior, junior and
           co-op positions`,
         },
-      ], */
+      ],
     },
   ],
 };

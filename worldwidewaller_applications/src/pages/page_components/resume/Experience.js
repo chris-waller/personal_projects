@@ -25,10 +25,10 @@ class Experience extends Component {
     super();
     this.state = {
       job1Highlighted: null,
-      // job2Highlighted: null,
-      // job3Highlighted: null,
-      // job4Highlighted: null,
-      // job5Highlighted: null,
+      job2Highlighted: null,
+      job3Highlighted: null,
+      job4Highlighted: null,
+      job5Highlighted: null,
     };
   }
 
@@ -46,12 +46,25 @@ class Experience extends Component {
       job1Highlighted[key] = highligtedText;
     });
 
-    /*
     Object.keys(job2Highlighted).forEach((key) => {
       const highligtedText = getHighlightedText(searchText, job2Highlighted[key]);
       job2Highlighted[key] = highligtedText;
     });
-    */
+
+    Object.keys(job3Highlighted).forEach((key) => {
+      const highligtedText = getHighlightedText(searchText, job3Highlighted[key]);
+      job3Highlighted[key] = highligtedText;
+    });
+
+    Object.keys(job4Highlighted).forEach((key) => {
+      const highligtedText = getHighlightedText(searchText, job4Highlighted[key]);
+      job4Highlighted[key] = highligtedText;
+    });
+
+    Object.keys(job5Highlighted).forEach((key) => {
+      const highligtedText = getHighlightedText(searchText, job5Highlighted[key]);
+      job5Highlighted[key] = highligtedText;
+    });
 
     return {
       job1Highlighted,
@@ -65,10 +78,10 @@ class Experience extends Component {
   render() {
     const {
       job1Highlighted,
-      // job2Highlighted,
-      // job3Highlighted,
-      // job4Highlighted,
-      // job5Highlighted,
+      job2Highlighted,
+      job3Highlighted,
+      job4Highlighted,
+      job5Highlighted,
     } = this.state;
 
     return (
@@ -85,12 +98,10 @@ class Experience extends Component {
           </li>
         </ul>
 
-        {/*
         <JobSection job={job2Highlighted} />
         <JobSection job={job3Highlighted} />
         <JobSection job={job4Highlighted} />
         <JobSection job={job5Highlighted} />
-        */ }
 
       </div>
     );
