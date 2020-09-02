@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import reactStringReplace from 'react-string-replace';
+import isEqual from 'react-fast-compare';
+import { Log, traceLifecycle } from 'react-lifecycle-visualizer';
 
 // style imports
 import styles from './styles/resume.scss';
@@ -13,14 +13,17 @@ import collapsibleStyles from './styles/collapsible.scss';
 // custom components
 import Layout from '~/components/Layout';
 import Collapsible from '~/components/Collapsible';
+
+/*
 import Achievements from './page_components/resume/Achievments';
 import Education from './page_components/resume/Education';
 import Experience from './page_components/resume/Experience';
 import Hobbies from './page_components/resume/Hobbies';
 import Links from './page_components/resume/Links';
 import ManagementSkills from './page_components/resume/ManagementSkills';
-import Summary from './page_components/resume/Summary';
-import TechnicalSkills from './page_components/resume/TechnicalSkills';
+*/
+// import Summary from './page_components/resume/Summary';
+// import TechnicalSkills from './page_components/resume/TechnicalSkills';
 import Button from '~/components/Button';
 
 // resource imports
@@ -29,13 +32,15 @@ import resumePdf from '~/resources/resume.pdf';
 // redux actions
 import {
   toggleResumeSections,
-} from '../redux/actions';
+} from '~/redux/actions';
+// import store from '~/redux/store';
 
 class Resume extends Component {
   /**
    * Informs redux of the site toggle
    */
   static updateSectionToggle(updateSection, sectionsOpen) {
+    // console.log('updating redux');
     updateSection(sectionsOpen);
   }
 
@@ -44,21 +49,36 @@ class Resume extends Component {
    */
   constructor(props) {
     super(props);
-    console.log('resume constructor');
 
-    const defaultOpen = false;
+    // const defaultOpen = true;
 
-    // check if we've already set sections open/closed in redux
+    /*
     let { sectionsOpen } = props;
-    const toggleSections = props.toggleResumeSections;
+
+    console.log('the store', store.getState().updateClientSettings.resumeSections);
+    // first time this page has been loaded so nothing set in redux
     if (sectionsOpen === null) {
-      sectionsOpen = this.getOpenSections(defaultOpen);
-      Resume.updateSectionToggle(toggleSections, sectionsOpen);
+      console.log('NULL');
+    } else {
+      console.log('NOT NULL', sectionsOpen);
     }
 
+    console.log('Resume constrector props', sectionsOpen);
+    console.log('Resume constrector state', this.state);
+    const toggleSections = props.toggleResumeSections;
+    if (sectionsOpen !== null) {
+      console.log('NOT EXPECTING TO BE HERE', toggleSections);
+      // Resume.updateSectionToggle(toggleSections, sectionsOpen);
+    } else {
+      console.log('Setting defaults');
+      sectionsOpen = this.getOpenSections(defaultOpen);
+    }
+    */
+
     this.state = {
-      sectionsOpen,
+      // sectionsOpen,
       searchText: '',
+      // updateSections: false,
     };
 
     this.searchBarRef = React.createRef();
@@ -66,6 +86,27 @@ class Resume extends Component {
     this.onTriggerClick = this.onTriggerClick.bind(this);
     this.searchBoxChanged = this.searchBoxChanged.bind(this);
     this.searchBoxKeyDown = this.searchBoxKeyDown.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    // console.log('get derived state (props)', nextProps.sectionsOpen);
+    return {
+      sectionsOpen: nextProps.sectionsOpen,
+    };
+  }
+
+  shouldComponentUpdate(nextProps) {
+    // console.log('***************');
+    // console.log('Should resume update? (props)', nextProps.sectionsOpen);
+    // console.log('Should resume update2? (state)', nextState.sectionsOpen);
+
+    let shouldUpdate = true;
+    if (isEqual(this.state.sectionsOpen, nextProps.sectionsOpen)) {
+      shouldUpdate = false;
+    }
+    // console.log('resume should update?', shouldUpdate);
+
+    return shouldUpdate;
   }
 
   /**
@@ -101,28 +142,6 @@ class Resume extends Component {
   });
 
   /**
-   * Highlites specified text.
-   */
-  getHighlightedText = (text) => {
-    const searchText = this.state.searchText.split(',');
-    let highlightedText = text;
-
-    searchText.forEach((searchTerm) => {
-      highlightedText = reactStringReplace(
-        highlightedText,
-        searchTerm,
-        (match) => (
-          <span key={uuidv4()} style={{ background: 'red' }}>
-            {match}
-          </span>
-        ),
-      );
-    });
-
-    return highlightedText;
-  }
-
-  /**
    * Create the provided page component.
    */
   createPageComponent = (sectionType, trigger) => {
@@ -156,11 +175,15 @@ class Resume extends Component {
   expandCollapseAll(isOpen) {
     const sectionsOpen = this.getOpenSections(isOpen);
 
+    Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
+    /*
+    console.log('setting the state:', sectionsOpen);
     this.setState({
       sectionsOpen,
     }, () => {
-      Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
+
     });
+    */
   }
 
   searchBoxKeyDown(event) {
@@ -188,6 +211,7 @@ class Resume extends Component {
       searchText = `${searchText.trim()},`;
       this.setState({
         searchText,
+        // updateSections: true,
       });
       return;
     }
@@ -204,6 +228,7 @@ class Resume extends Component {
   searchBoxChanged(event) {
     this.setState({
       searchText: event.target.value,
+      // updateSections: false,
     });
   }
 
@@ -211,9 +236,10 @@ class Resume extends Component {
    * Render.
    */
   render() {
-    console.log('resume render');
+    console.log('Rendering Resume');
     // eslint-disable-next-line
     const RESUME_SECTIONS = {
+      /*
       ACHIEVEMENTS: {
         name: 'achievements',
         component: <Achievements getHighlightedText={this.getHighlightedText} />,
@@ -240,12 +266,17 @@ class Resume extends Component {
       },
       SUMMARY: {
         name: 'summary',
-        component: <Summary getHighlightedText={this.getHighlightedText} />,
+        component: <Summary
+          searchText={this.state.searchText}
+          updateSection={this.state.updateSections}
+        />,
       },
+      /*
       TECHNICAL: {
         name: 'technical',
         component: <TechnicalSkills getHighlightedText={this.getHighlightedText} />,
       },
+      */
     };
 
     const { searchText } = this.state;
@@ -285,6 +316,11 @@ class Resume extends Component {
               onKeyDown={this.searchBoxKeyDown}
             />
           </div>
+
+          <div style={{ marginTop: '10px', color: 'black', backgroundColor: 'white' }}>
+            <Log />
+          </div>
+
           {/*
           {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
@@ -310,7 +346,7 @@ const mapStateToProps = (state) => (
 export default connect(
   mapStateToProps,
   { toggleResumeSections },
-)(Resume);
+)(traceLifecycle(Resume));
 
 Resume.defaultProps = {
   sectionsOpen: null,

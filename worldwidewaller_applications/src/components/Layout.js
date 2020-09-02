@@ -1,6 +1,7 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { traceLifecycle } from 'react-lifecycle-visualizer';
 
 // the Header component
 import Header from './Header';
@@ -12,12 +13,11 @@ import styles from './styles/layout.scss';
  * This component is responsible for the overall site layout and styling.
  */
 // eslint-disable-next-line
-export default class Layout extends Component {
+class Layout extends Component {
   /**
    * Render.
    */
   render() {
-    console.log('layout render');
     const { children } = this.props;
 
     return (
@@ -40,6 +40,8 @@ export default class Layout extends Component {
     );
   }
 }
+
+export default traceLifecycle(Layout);
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

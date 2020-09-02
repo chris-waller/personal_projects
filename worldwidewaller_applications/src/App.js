@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { VisualizerProvider } from 'react-lifecycle-visualizer';
 
 // custom components
 import Resume from '~/pages/Resume';
@@ -54,17 +55,19 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <Provider store={store}>
-          <Switch>
-            <Route path="/" exact component={Contact} />
-            <Route path="/resume" exact component={Resume} />
-            <Route path="/settings" exact component={Settings} />
-            <Route path="/contact" exact component={Contact} />
-            <Route component={NoMatch} />
-          </Switch>
-        </Provider>
-      </Router>
+      <VisualizerProvider>
+        <Router>
+          <Provider store={store}>
+            <Switch>
+              <Route path="/" exact component={Resume} />
+              <Route path="/resume" exact component={Resume} />
+              <Route path="/settings" exact component={Settings} />
+              <Route path="/contact" exact component={Contact} />
+              <Route component={NoMatch} />
+            </Switch>
+          </Provider>
+        </Router>
+      </VisualizerProvider>
     );
   }
 }

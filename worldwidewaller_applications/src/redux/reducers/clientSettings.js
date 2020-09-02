@@ -12,7 +12,16 @@ import {
 // initial state
 const initialState = {
   headerCollapsed: false,
-  resumeSections: null,
+  resumeSections: {
+    achievementsOpen: true,
+    educationOpen: true,
+    experienceOpen: true,
+    hobbiesOpen: true,
+    linksOpen: true,
+    managementOpen: true,
+    summaryOpen: true,
+    technicalOpen: true,
+  },
   selectedTheme: null,
 };
 
