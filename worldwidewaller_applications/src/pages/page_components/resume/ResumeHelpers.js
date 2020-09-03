@@ -18,46 +18,40 @@ function getSearchTerms(searchText) {
  * @param {*} node
  * @param {*} searchTerm
  */
-function highlightText(node, searchTerm) {
-  // console.log('\n\n');
-  // console.log('the search term', searchTerm);
+function highlightText(node, searchTerms) {
   const nodeType = typeof (node);
-  // console.log('node type', nodeType);
   const nodeToSearch = node;
-  // console.log('The node', nodeToSearch);
-
-  if (nodeType === 'symbol') {
-    // console.log('symbol found', nodeToSearch);
-    // console.log(nodeToSearch);
-    return null;
-  }
 
   if (nodeType === 'string') {
-    return reactStringReplace(nodeToSearch, searchTerm, (match) => (
-      <span key={uuidv4()} style={{ background: 'red' }}>
-        {match}
-      </span>
-    ));
+    let highlightedText = nodeToSearch;
+    searchTerms.forEach((searchTerm) => {
+      if (searchTerm.trim() !== '') {
+        highlightedText = reactStringReplace(highlightedText, searchTerm, (match) => (
+          <span key={uuidv4()} style={{ background: 'red' }}>
+            {match}
+          </span>
+        ));
+      }
+    });
+
+    return highlightedText;
   }
 
   if (nodeType === 'object' && nodeToSearch !== null) {
     // console.log('the object', nodeToSearch);
-    const foo = cloneDeep(nodeToSearch);
-    Object.keys(foo).forEach((key) => {
-      const highligtedText = highlightText(foo[key], searchTerm);
-      foo[key] = highligtedText;
+    const nodeObject = cloneDeep(nodeToSearch);
+    Object.keys(nodeObject).forEach((key) => {
+      const highligtedText = highlightText(nodeObject[key], searchTerms);
+      nodeObject[key] = highligtedText;
     });
-    return foo;
+    return nodeObject;
   }
 
   if (Array.isArray(nodeToSearch)) {
-    nodeToSearch.forEach((entry) => highlightText(entry, searchTerm));
+    nodeToSearch.forEach((entry) => highlightText(entry, searchTerms));
     return nodeToSearch;
   }
 
-  // console.log('*****************************ERRROR********************');
-  // console.log('The node type', nodeType);
-  // console.log('NEXT ITERATION', nodeToSearch);
   return nodeToSearch;
 }
 
@@ -66,14 +60,7 @@ export function getHighlightedText(searchText, text) {
   let textToHighlight = text;
   const searchTerms = getSearchTerms(searchText);
 
-  searchTerms.forEach((searchTerm) => {
-    if (searchTerm.trim() !== '') {
-      textToHighlight = highlightText(textToHighlight, searchTerm);
-      // console.log('\n\n');
-      // console.log('The highlighted text', textToHighlight);
-    }
-  });
-
+  textToHighlight = highlightText(textToHighlight, searchTerms);
   const textUpdated = true;
 
   return {

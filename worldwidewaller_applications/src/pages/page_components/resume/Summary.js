@@ -23,7 +23,7 @@ const pageText = {
    database backup & replication`,
   p3: `Requirements gathering, stakeholder demos, acceptance-test preparation,
    commissioning, troubleshooting`,
-  li3: 'Full & constant SDLC expsosure througout a 9+ year career',
+  li3: 'Full & constant SDLC exposure throughout a 9+ year career',
 };
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -39,18 +39,11 @@ class Summary extends Component {
     const { searchText } = nextProps;
     const text = cloneDeep(pageText);
 
-    let componentUpdated = false;
     Object.keys(text).forEach((key) => {
       const result = getHighlightedText(searchText, text[key]);
       const highligtedText = result.highlightedText;
       text[key] = highligtedText;
-
-      if (Array.isArray(highligtedText)) componentUpdated = true;
     });
-
-    console.log('updated?', componentUpdated);
-    console.log(text);
-
     return {
       highligtedText: text,
     };
