@@ -30,6 +30,7 @@ import resumePdf from '~/resources/resume.pdf';
 // redux actions
 import {
   toggleResumeSections,
+  setResumeSearchString,
 } from '~/redux/actions';
 
 class Resume extends Component {
@@ -41,14 +42,13 @@ class Resume extends Component {
   }
 
   /**
-   * Constructor.
+   * Constructor
    */
   constructor(props) {
     super(props);
 
     this.state = {
-      searchText: '',
-      // updateSections: false,
+      searchString: props.searchString,
     };
 
     this.searchBarRef = React.createRef();
@@ -58,25 +58,19 @@ class Resume extends Component {
     this.searchBoxKeyDown = this.searchBoxKeyDown.bind(this);
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    // console.log('get derived state (props)', nextProps.sectionsOpen);
+  static getDerivedStateFromProps(nextProps, nextState) {
     return {
       sectionsOpen: nextProps.sectionsOpen,
+      searchString: nextState.searchString,
     };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // console.log('***************');
-    // console.log('Should resume update? (props)', nextProps.sectionsOpen);
-    // console.log('Should resume update2? (state)', nextState.sectionsOpen);
-
     let shouldUpdate = true;
     if (isEqual(this.state.sectionsOpen, nextProps.sectionsOpen)
-      && nextState.searchText === this.state.searchText) {
+      && nextState.searchString === this.state.searchString) {
       shouldUpdate = false;
     }
-    // console.log('Resume should update?', shouldUpdate);
-
     return shouldUpdate;
   }
 
@@ -156,7 +150,7 @@ class Resume extends Component {
       && event.keyCode !== 32
     ) return;
 
-    let { searchText } = this.state;
+    let searchText = this.state.searchString;
     const lastIndex = searchText.lastIndexOf(',');
     let searchTerm = searchText.substring(lastIndex + 1, searchText.length);
     searchTerm = searchTerm.trim();
@@ -170,9 +164,9 @@ class Resume extends Component {
 
       // add the comma we're using as a delimeter
       searchText = `${searchText.trim()},`;
+      this.props.setResumeSearchString(searchText);
       this.setState({
-        searchText,
-        // updateSections: true,
+        searchString: searchText,
       });
       return;
     }
@@ -187,10 +181,8 @@ class Resume extends Component {
    * User has changed the value of the search box.
    */
   searchBoxChanged(event) {
-    // console.log('search box key changed');
     this.setState({
-      searchText: event.target.value,
-      // updateSections: false,
+      searchString: event.target.value,
     });
   }
 
@@ -198,11 +190,11 @@ class Resume extends Component {
    * Render.
    */
   render() {
-    // console.log('Rendering Resume');
+    const { searchString } = this.state;
     const RESUME_SECTIONS = {
       ACHIEVEMENTS: {
         name: 'achievements',
-        component: <Achievements searchText={this.state.searchText} />,
+        component: <Achievements searchText={searchString} />,
       },
 
       EDUCATION: {
@@ -211,7 +203,7 @@ class Resume extends Component {
       },
       EXPERIENCE: {
         name: 'experience',
-        component: <Experience searchText={this.state.searchText} />,
+        component: <Experience searchText={searchString} />,
       },
       HOBBIES: {
         name: 'hobbies',
@@ -223,19 +215,17 @@ class Resume extends Component {
       },
       MANAGEMENT: {
         name: 'management',
-        component: <ManagementSkills searchText={this.state.searchText} />,
+        component: <ManagementSkills searchText={searchString} />,
       },
       SUMMARY: {
         name: 'summary',
-        component: <Summary searchText={this.state.searchText} />,
+        component: <Summary searchText={searchString} />,
       },
       TECHNICAL: {
         name: 'technical',
-        component: <TechnicalSkills searchText={this.state.searchText} />,
+        component: <TechnicalSkills searchText={searchString} />,
       },
     };
-
-    const { searchText } = this.state;
 
     return (
       <Layout>
@@ -267,7 +257,7 @@ class Resume extends Component {
               ref={this.searchBarRef}
               className={styles.searchBox}
               placeholder="Search resume (use tab/enter to complete term)"
-              value={searchText}
+              value={searchString}
               onChange={this.searchBoxChanged}
               onKeyDown={this.searchBoxKeyDown}
             />
@@ -297,20 +287,24 @@ class Resume extends Component {
 const mapStateToProps = (state) => (
   {
     sectionsOpen: state.clientSettings.resumeSections,
+    searchString: state.clientSettings.resumeSearchString,
   }
 );
 
 export default connect(
   mapStateToProps,
-  { toggleResumeSections },
+  { toggleResumeSections, setResumeSearchString },
 )(traceLifecycle(Resume));
 
 Resume.defaultProps = {
   sectionsOpen: null,
+  searchString: '',
 };
 
 Resume.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   sectionsOpen: PropTypes.object,
   toggleResumeSections: PropTypes.func.isRequired,
+  searchString: PropTypes.string,
+  setResumeSearchString: PropTypes.func.isRequired,
 };

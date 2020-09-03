@@ -5,6 +5,7 @@ import {
   SET_THEME,
   TOGGLE_HEADER_COLLAPSED,
   TOGGLE_RESUME_SECTIONS,
+  SET_RESUME_SEARCH_STRING,
 } from './actionTypes';
 
 /**
@@ -29,4 +30,12 @@ export const toggleHeader = (isCollapsed) => ({
 export const toggleResumeSections = (sections) => ({
   type: TOGGLE_RESUME_SECTIONS,
   payload: { sections },
+});
+
+/**
+ * Sets the search string used on the resume page
+ */
+export const setResumeSearchString = (resumeSearchString) => ({
+  type: SET_RESUME_SEARCH_STRING,
+  payload: { resumeSearchString },
 });

@@ -7,6 +7,7 @@ import {
   SET_THEME,
   TOGGLE_HEADER_COLLAPSED,
   TOGGLE_RESUME_SECTIONS,
+  SET_RESUME_SEARCH_STRING,
 } from '../actionTypes';
 
 // initial state
@@ -23,6 +24,7 @@ const initialState = {
     technicalOpen: false,
   },
   selectedTheme: null,
+  resumeSearchString: '',
 };
 
 const clientSettings = (state = initialState, action) => {
@@ -48,6 +50,14 @@ const clientSettings = (state = initialState, action) => {
       return {
         ...state,
         resumeSections: action.payload.sections,
+      };
+    }
+
+    // Sets the search string used on the resume page
+    case SET_RESUME_SEARCH_STRING: {
+      return {
+        ...state,
+        resumeSearchString: action.payload.resumeSearchString,
       };
     }
 
