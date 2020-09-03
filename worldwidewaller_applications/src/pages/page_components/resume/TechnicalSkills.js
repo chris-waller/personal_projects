@@ -34,7 +34,8 @@ class TechnicalSkills extends Component {
     const text = cloneDeep(pageText);
 
     Object.keys(text).forEach((key) => {
-      const highligtedText = getHighlightedText(searchText, text[key]);
+      const result = getHighlightedText(searchText, text[key]);
+      const highligtedText = result.highlightedText;
       text[key] = highligtedText;
     });
     return {

@@ -74,5 +74,10 @@ export function getHighlightedText(searchText, text) {
     }
   });
 
-  return textToHighlight;
+  const textUpdated = true;
+
+  return {
+    highlightedText: textToHighlight,
+    textUpdated,
+  };
 }

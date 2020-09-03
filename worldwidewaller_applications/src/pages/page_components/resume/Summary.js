@@ -39,10 +39,18 @@ class Summary extends Component {
     const { searchText } = nextProps;
     const text = cloneDeep(pageText);
 
+    let componentUpdated = false;
     Object.keys(text).forEach((key) => {
-      const highligtedText = getHighlightedText(searchText, text[key]);
+      const result = getHighlightedText(searchText, text[key]);
+      const highligtedText = result.highlightedText;
       text[key] = highligtedText;
+
+      if (Array.isArray(highligtedText)) componentUpdated = true;
     });
+
+    console.log('updated?', componentUpdated);
+    console.log(text);
+
     return {
       highligtedText: text,
     };

@@ -42,27 +42,32 @@ class Experience extends Component {
     const job5Highlighted = cloneDeep(Job5);
 
     Object.keys(job1Highlighted).forEach((key) => {
-      const highligtedText = getHighlightedText(searchText, job1Highlighted[key]);
+      const result = getHighlightedText(searchText, job1Highlighted[key]);
+      const highligtedText = result.highlightedText;
       job1Highlighted[key] = highligtedText;
     });
 
     Object.keys(job2Highlighted).forEach((key) => {
-      const highligtedText = getHighlightedText(searchText, job2Highlighted[key]);
+      const result = getHighlightedText(searchText, job2Highlighted[key]);
+      const highligtedText = result.highlightedText;
       job2Highlighted[key] = highligtedText;
     });
 
     Object.keys(job3Highlighted).forEach((key) => {
-      const highligtedText = getHighlightedText(searchText, job3Highlighted[key]);
+      const result = getHighlightedText(searchText, job3Highlighted[key]);
+      const highligtedText = result.highlightedText;
       job3Highlighted[key] = highligtedText;
     });
 
     Object.keys(job4Highlighted).forEach((key) => {
-      const highligtedText = getHighlightedText(searchText, job4Highlighted[key]);
+      const result = getHighlightedText(searchText, job4Highlighted[key]);
+      const highligtedText = result.highlightedText;
       job4Highlighted[key] = highligtedText;
     });
 
     Object.keys(job5Highlighted).forEach((key) => {
-      const highligtedText = getHighlightedText(searchText, job5Highlighted[key]);
+      const result = getHighlightedText(searchText, job5Highlighted[key]);
+      const highligtedText = result.highlightedText;
       job5Highlighted[key] = highligtedText;
     });
 
