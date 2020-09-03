@@ -9,11 +9,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // import logger from 'redux-logger';
 
 // reducer import
-import updateClientSettings from './reducers/clientSettings';
+import clientSettings from './reducers/clientSettings';
 
 // add all reducers here
 const rootReducer = combineReducers({
-  updateClientSettings,
+  clientSettings,
 });
 
 // create the store with devtools and logging

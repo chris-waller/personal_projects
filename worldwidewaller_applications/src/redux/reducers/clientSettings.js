@@ -25,7 +25,7 @@ const initialState = {
   selectedTheme: null,
 };
 
-const updateClientSettings = (state = initialState, action) => {
+const clientSettings = (state = initialState, action) => {
   switch (action.type) {
     // Sets the theme for the application
     case SET_THEME: {
@@ -57,4 +57,4 @@ const updateClientSettings = (state = initialState, action) => {
   }
 };
 
-export default updateClientSettings;
+export default clientSettings;

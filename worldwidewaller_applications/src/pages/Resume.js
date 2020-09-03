@@ -31,7 +31,6 @@ import resumePdf from '~/resources/resume.pdf';
 import {
   toggleResumeSections,
 } from '~/redux/actions';
-// import store from '~/redux/store';
 
 class Resume extends Component {
   /**
@@ -297,7 +296,7 @@ class Resume extends Component {
 
 const mapStateToProps = (state) => (
   {
-    sectionsOpen: state.updateClientSettings.resumeSections,
+    sectionsOpen: state.clientSettings.resumeSections,
   }
 );
 
