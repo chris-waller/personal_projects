@@ -11,7 +11,7 @@ import Layout from '~/components/Layout';
  * This component is responsible for displaying the site header.
  * The header will be replaced with a humburger menu at a specified screen size
  */
-/* eslint-disable react/prefer-stateless-function */
+// eslint-disable-next-line react/prefer-stateless-function
 export default class Contact extends Component {
   render() {
     return (

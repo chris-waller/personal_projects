@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 // custom components
+import Collapsible from '~/components/Collapsible';
 import { getHighlightedText } from './ResumeHelpers';
 
 // style imports
@@ -47,23 +49,32 @@ class ManagementSkills extends Component {
 
   render() {
     const { highligtedText } = this.state;
+    const { isOpen, sectionName, handleTriggerClick } = this.props;
     return (
-      <div className={styles.container}>
-        <ul className={styles.list}>
-          <p className={styles.header}>People Management:</p>
-          <li>{highligtedText.li1}</li>
-          <li>{highligtedText.li2}</li>
-          <li>{highligtedText.li3}</li>
-        </ul>
-        <ul className={styles.list}>
-          <p className={styles.header}>Project Management:</p>
-          <li>{highligtedText.li4}</li>
-          <li>{highligtedText.li5}</li>
-          <li>{highligtedText.li6}</li>
-          <li>{highligtedText.li7}</li>
-          <li>{highligtedText.li8}</li>
-        </ul>
-      </div>
+      <Collapsible
+        key={uuidv4()}
+        trigger="Management Skills"
+        isOpen={isOpen}
+        sectionName={sectionName}
+        handleTriggerClick={handleTriggerClick}
+      >
+        <div className={styles.container}>
+          <ul className={styles.list}>
+            <p className={styles.header}>People Management:</p>
+            <li>{highligtedText.li1}</li>
+            <li>{highligtedText.li2}</li>
+            <li>{highligtedText.li3}</li>
+          </ul>
+          <ul className={styles.list}>
+            <p className={styles.header}>Project Management:</p>
+            <li>{highligtedText.li4}</li>
+            <li>{highligtedText.li5}</li>
+            <li>{highligtedText.li6}</li>
+            <li>{highligtedText.li7}</li>
+            <li>{highligtedText.li8}</li>
+          </ul>
+        </div>
+      </Collapsible>
     );
   }
 }
@@ -72,6 +83,9 @@ export default ManagementSkills;
 
 ManagementSkills.propTypes = {
   searchText: PropTypes.string,
+  sectionName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  handleTriggerClick: PropTypes.func.isRequired,
 };
 
 ManagementSkills.defaultProps = {

@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 // custom components
+import Collapsible from '~/components/Collapsible';
 import { getHighlightedText } from './ResumeHelpers';
 
 // style imports
@@ -48,23 +50,32 @@ class TechnicalSkills extends Component {
    */
   render() {
     const { highligtedText } = this.state;
+    const { isOpen, sectionName, handleTriggerClick } = this.props;
     return (
-      <div className={styles.container}>
-        <p className={styles.summary}>
-          {`
-            All listed skills have been used professionally to develop and deliver
-             production-ready web applications
-          `}
-        </p>
-        <Section headerText="Languages:" skills={highligtedText.languages} />
-        <Section headerText="Frameworks & Libraries:" skills={highligtedText.frameWorks} />
-        <Section headerText="Web Development:" skills={highligtedText.web} />
-        <Section headerText="Deployment:" skills={highligtedText.deployment} />
-        <Section headerText="Database:" skills={highligtedText.database} />
-        <Section headerText="Source Control:" skills={highligtedText.source} />
-        <Section headerText="Operating Systems:" skills={highligtedText.os} />
-        <Section headerText="Code Testing:" skills={highligtedText.testing} />
-      </div>
+      <Collapsible
+        key={uuidv4()}
+        trigger="Technical Skills"
+        isOpen={isOpen}
+        sectionName={sectionName}
+        handleTriggerClick={handleTriggerClick}
+      >
+        <div className={styles.container}>
+          <p className={styles.summary}>
+            {`
+              All listed skills have been used professionally to develop and deliver
+              production-ready web applications
+            `}
+          </p>
+          <Section headerText="Languages:" skills={highligtedText.languages} />
+          <Section headerText="Frameworks & Libraries:" skills={highligtedText.frameWorks} />
+          <Section headerText="Web Development:" skills={highligtedText.web} />
+          <Section headerText="Deployment:" skills={highligtedText.deployment} />
+          <Section headerText="Database:" skills={highligtedText.database} />
+          <Section headerText="Source Control:" skills={highligtedText.source} />
+          <Section headerText="Operating Systems:" skills={highligtedText.os} />
+          <Section headerText="Code Testing:" skills={highligtedText.testing} />
+        </div>
+      </Collapsible>
     );
   }
 }
@@ -73,6 +84,9 @@ export default TechnicalSkills;
 
 TechnicalSkills.propTypes = {
   searchText: PropTypes.string,
+  sectionName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  handleTriggerClick: PropTypes.func.isRequired,
 };
 
 TechnicalSkills.defaultProps = {
@@ -97,7 +111,6 @@ class Section extends Component {
 
 Section.propTypes = {
   headerText: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   skills: PropTypes.node,
 };
 

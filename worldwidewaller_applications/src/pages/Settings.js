@@ -8,7 +8,7 @@ import ThemeSelector from '~/components/ThemeSelector';
 // css imports
 import styles from './styles/settings.scss';
 
-/* eslint-disable react/prefer-stateless-function */
+// eslint-disable-next-line react/prefer-stateless-function
 export default class Settings extends Component {
   render() {
     return (

@@ -8,20 +8,17 @@ import { Log, traceLifecycle } from 'react-lifecycle-visualizer';
 
 // style imports
 import styles from './styles/resume.scss';
-import collapsibleStyles from './styles/collapsible.scss';
 
 // custom components
 import Layout from '~/components/Layout';
-import Collapsible from '~/components/Collapsible';
-
-// import Achievements from './page_components/resume/Achievments';
-// import Education from './page_components/resume/Education';
-// import Experience from './page_components/resume/Experience';
-// import Hobbies from './page_components/resume/Hobbies';
-// import Links from './page_components/resume/Links';
-// import ManagementSkills from './page_components/resume/ManagementSkills';
+import Achievements from './page_components/resume/Achievments';
+import Education from './page_components/resume/Education';
+import Experience from './page_components/resume/Experience';
+import Hobbies from './page_components/resume/Hobbies';
+import Links from './page_components/resume/Links';
+import ManagementSkills from './page_components/resume/ManagementSkills';
 import Summary from './page_components/resume/Summary';
-// import TechnicalSkills from './page_components/resume/TechnicalSkills';
+import TechnicalSkills from './page_components/resume/TechnicalSkills';
 import Button from '~/components/Button';
 
 // resource imports
@@ -107,34 +104,6 @@ class Resume extends Component {
   });
 
   /**
-   * Create the provided page component.
-   */
-  createPageComponent = (sectionType, trigger) => {
-    const sectionOpen = this.state.sectionsOpen[`${sectionType.name}Open`];
-    const classes = {
-      sectionClassName: styles.section,
-      triggerClassName: collapsibleStyles.trigger,
-      openClassName: collapsibleStyles.open,
-      contentClassName: collapsibleStyles.content,
-    };
-
-    return (
-      <Collapsible
-        key={sectionType.name}
-        sectionName={sectionType}
-        trigger={trigger}
-        // TODO: this is ugly, get rid of it when I'm in here next
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...classes}
-        isOpen={sectionOpen}
-        handleTriggerClick={this.onTriggerClick}
-      >
-        {sectionType.component}
-      </Collapsible>
-    );
-  }
-
-  /**
    * Expands/collapses all sections.
    */
   expandCollapseAll(isOpen) {
@@ -191,39 +160,6 @@ class Resume extends Component {
    */
   render() {
     const { searchString } = this.state;
-    /*
-    const RESUME_SECTIONS = {
-      ACHIEVEMENTS: {
-        name: 'achievements',
-        component: <Achievements searchText={searchString} />,
-      },
-
-      EDUCATION: {
-        name: 'education',
-        component: <Education />,
-      },
-      EXPERIENCE: {
-        name: 'experience',
-        component: <Experience searchText={searchString} />,
-      },
-      HOBBIES: {
-        name: 'hobbies',
-        component: <Hobbies />,
-      },
-      LINKS: {
-        name: 'links',
-        component: <Links />,
-      },
-      MANAGEMENT: {
-        name: 'management',
-        component: <ManagementSkills searchText={searchString} />,
-      },
-      TECHNICAL: {
-        name: 'technical',
-        component: <TechnicalSkills searchText={searchString} />,
-      },
-    };
-    */
 
     return (
       <Layout>
@@ -268,23 +204,51 @@ class Resume extends Component {
             <Log />
           </div>
 
-          {/* this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary') */}
           <Summary
             searchText={searchString}
             sectionName="summary"
             isOpen={this.state.sectionsOpen.summaryOpen}
             handleTriggerClick={this.onTriggerClick}
           />
-
-          {/*
-          {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
-          {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}
-          {this.createPageComponent(RESUME_SECTIONS.ACHIEVEMENTS, 'Professional Achievements')}
-          {this.createPageComponent(RESUME_SECTIONS.EXPERIENCE, 'Professional Experience')}
-          {this.createPageComponent(RESUME_SECTIONS.LINKS, 'Links')}
-          {this.createPageComponent(RESUME_SECTIONS.EDUCATION, 'Education')}
-          {this.createPageComponent(RESUME_SECTIONS.HOBBIES, 'Hobbies')}
-          */}
+          <TechnicalSkills
+            searchText={searchString}
+            sectionName="technical"
+            isOpen={this.state.sectionsOpen.technicalOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <ManagementSkills
+            searchText={searchString}
+            sectionName="management"
+            isOpen={this.state.sectionsOpen.managementOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Achievements
+            searchText={searchString}
+            sectionName="achievements"
+            isOpen={this.state.sectionsOpen.achievementsOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Experience
+            searchText={searchString}
+            sectionName="experience"
+            isOpen={this.state.sectionsOpen.experienceOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Links
+            sectionName="links"
+            isOpen={this.state.sectionsOpen.linksOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Education
+            sectionName="education"
+            isOpen={this.state.sectionsOpen.educationOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Hobbies
+            sectionName="hobbies"
+            isOpen={this.state.sectionsOpen.hobbiesOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
         </div>
       </Layout>
     );
@@ -309,8 +273,18 @@ Resume.defaultProps = {
 };
 
 Resume.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  sectionsOpen: PropTypes.object,
+  sectionsOpen: PropTypes.shape(
+    {
+      achievementsOpen: PropTypes.bool.isRequired,
+      educationOpen: PropTypes.bool.isRequired,
+      experienceOpen: PropTypes.bool.isRequired,
+      hobbiesOpen: PropTypes.bool.isRequired,
+      linksOpen: PropTypes.bool.isRequired,
+      managementOpen: PropTypes.bool.isRequired,
+      summaryOpen: PropTypes.bool.isRequired,
+      technicalOpen: PropTypes.bool.isRequired,
+    },
+  ),
   toggleResumeSections: PropTypes.func.isRequired,
   searchString: PropTypes.string,
   setResumeSearchString: PropTypes.func.isRequired,

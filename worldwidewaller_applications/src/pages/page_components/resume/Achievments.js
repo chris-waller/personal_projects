@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 // custom components
+import Collapsible from '~/components/Collapsible';
 import { getHighlightedText } from './ResumeHelpers';
 
 // style imports
@@ -59,17 +61,26 @@ class Achievements extends Component {
 
   render() {
     const { highligtedText } = this.state;
+    const { isOpen, sectionName, handleTriggerClick } = this.props;
     return (
-      <div className={styles.container}>
-        <div className={styles.heading}>{highligtedText.heading1}</div>
-        <div className={styles.content}>{highligtedText.content1}</div>
-        <div className={styles.heading}>{highligtedText.heading2}</div>
-        <div className={styles.content}>{highligtedText.content2}</div>
-        <div className={styles.heading}>{highligtedText.heading3}</div>
-        <div className={styles.content}>{highligtedText.content3}</div>
-        <div className={styles.heading}>{highligtedText.heading4}</div>
-        <div className={styles.content}>{highligtedText.content4}</div>
-      </div>
+      <Collapsible
+        key={uuidv4()}
+        trigger="Professional Achievements"
+        isOpen={isOpen}
+        sectionName={sectionName}
+        handleTriggerClick={handleTriggerClick}
+      >
+        <div className={styles.container}>
+          <div className={styles.heading}>{highligtedText.heading1}</div>
+          <div className={styles.content}>{highligtedText.content1}</div>
+          <div className={styles.heading}>{highligtedText.heading2}</div>
+          <div className={styles.content}>{highligtedText.content2}</div>
+          <div className={styles.heading}>{highligtedText.heading3}</div>
+          <div className={styles.content}>{highligtedText.content3}</div>
+          <div className={styles.heading}>{highligtedText.heading4}</div>
+          <div className={styles.content}>{highligtedText.content4}</div>
+        </div>
+      </Collapsible>
     );
   }
 }
@@ -78,6 +89,9 @@ export default Achievements;
 
 Achievements.propTypes = {
   searchText: PropTypes.string,
+  sectionName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  handleTriggerClick: PropTypes.func.isRequired,
 };
 
 Achievements.defaultProps = {

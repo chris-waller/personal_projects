@@ -9,17 +9,6 @@
   padding-bottom: 30px; 
 }
 
-.section {
-  width: 100%;
-  margin: 20px 0 0 0;
-  padding: 10px 45px;
-  border: 3px solid var(--borderColorMain);
-  color: var(--fontColorMain);
-  background-color: var(--bgColorAlt);
-  opacity: 0.8;
-  border-radius: 30px;
-}
-
 .page-options {
   width: 80%;
   display: flex;
@@ -51,15 +40,9 @@ span.search-bar {
   .container {
     font-size: 0.8em;
   }
-  .section {
-    padding: 10px 0px;    
-  } 
 }
 
 @media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  
-  .section {
-    padding: 10px 20px;
-  }
 }
 
 @media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {  

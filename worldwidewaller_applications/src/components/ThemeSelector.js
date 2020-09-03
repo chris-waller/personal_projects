@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DropDown from 'react-dropdown';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 // style imports
@@ -25,8 +24,7 @@ class ThemeSelector extends Component {
    */
   static updateSiteTheme(setTheme, themeName, newThemeStyle) {
     console.log('theme selector changing to new theme style:', newThemeStyle);
-    // eslint-disable-next-line
-    changeTheme(classNames(styles.theme, newThemeStyle));
+    changeTheme(newThemeStyle);
     setTheme(themeName);
   }
 
