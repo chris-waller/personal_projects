@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
-import { v4 as uuidv4 } from 'uuid';
 
 // custom components
 import Collapsible from '~/components/Collapsible';
@@ -53,7 +52,7 @@ class TechnicalSkills extends Component {
     const { isOpen, sectionName, handleTriggerClick } = this.props;
     return (
       <Collapsible
-        key={uuidv4()}
+        key="Technical Skills Section"
         trigger="Technical Skills"
         isOpen={isOpen}
         sectionName={sectionName}

@@ -46,6 +46,7 @@ class Collapsible extends Component {
         triggerOpenedClassName={classNames(styles.trigger, styles.open)}
         contentInnerClassName={styles.content}
         open={isOpen}
+        transitionTime={500}
       >
         {children}
       </ReactCollapsible>

@@ -93,7 +93,7 @@ class Experience extends Component {
 
     return (
       <Collapsible
-        key={uuidv4()}
+        key="Experience Section"
         trigger="Professional Experience"
         isOpen={isOpen}
         sectionName={sectionName}

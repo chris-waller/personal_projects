@@ -1,7 +1,6 @@
 // npm imports
 import React from 'react';
 import PropTypes from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
 
 // custom components
 import Collapsible from '~/components/Collapsible';
@@ -13,7 +12,7 @@ const Hobbies = (props) => {
   const { sectionName, isOpen, handleTriggerClick } = props;
   return (
     <Collapsible
-      key={uuidv4()}
+      key="Hobbies Section"
       trigger="Hobbies"
       isOpen={isOpen}
       sectionName={sectionName}
