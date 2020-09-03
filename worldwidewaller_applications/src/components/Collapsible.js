@@ -6,6 +6,9 @@ import classNames from 'classnames';
 // custom components
 import ReactCollapsible from 'react-collapsible';
 
+// sytle imports
+import styles from './styles/collapsible.scss';
+
 /**
  * Generic component to wrap some HTML in a collapsible react component.
  */
@@ -24,27 +27,24 @@ class Collapsible extends Component {
    */
   onTriggerClick() {
     const { isOpen } = this.props;
-    const { handleTriggerClick, resumeSection } = this.props;
-    handleTriggerClick(resumeSection, !isOpen);
+    const { handleTriggerClick, sectionName } = this.props;
+    handleTriggerClick(sectionName, !isOpen);
   }
 
   /**
    * Render.
    */
   render() {
-    const {
-      trigger, sectionClassName, triggerClassName, openClassName,
-      contentClassName, isOpen, children,
-    } = this.props;
+    const { trigger, isOpen, children } = this.props;
     return (
       <ReactCollapsible
         trigger={trigger}
         handleTriggerClick={this.onTriggerClick}
-        className={sectionClassName}
-        openedClassName={sectionClassName}
-        triggerClassName={triggerClassName}
-        triggerOpenedClassName={classNames(triggerClassName, openClassName)}
-        contentInnerClassName={contentClassName}
+        className={styles.section}
+        openedClassName={styles.section}
+        triggerClassName={styles.trigger}
+        triggerOpenedClassName={classNames(styles.trigger, styles.open)}
+        contentInnerClassName={styles.content}
         open={isOpen}
       >
         {children}
@@ -57,12 +57,7 @@ export default Collapsible;
 
 Collapsible.propTypes = {
   trigger: PropTypes.string.isRequired,
-  // eslint-disable-next-line
-  resumeSection: PropTypes.object.isRequired,
-  sectionClassName: PropTypes.string.isRequired,
-  triggerClassName: PropTypes.string.isRequired,
-  openClassName: PropTypes.string.isRequired,
-  contentClassName: PropTypes.string.isRequired,
+  sectionName: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handleTriggerClick: PropTypes.func.isRequired,
 };

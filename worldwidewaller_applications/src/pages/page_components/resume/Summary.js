@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 // custom components
+import Collapsible from '~/components/Collapsible';
 import { getHighlightedText } from './ResumeHelpers';
 
 // styles imports
@@ -51,32 +53,41 @@ class Summary extends Component {
 
   render() {
     const { highligtedText } = this.state;
+    const { isOpen, sectionName, handleTriggerClick } = this.props;
     return (
-      <div className={styles.section}>
-        <p>
-          {highligtedText.overview}
-        </p>
-        <ul className={styles.list}>
-          <li>
-            <p className={styles.header}>{highligtedText.p1}</p>
-            <ul>
-              <li>{highligtedText.li1}</li>
-            </ul>
-          </li>
-          <li>
-            <p className={styles.header}>{highligtedText.p2}</p>
-            <ul>
-              <li>{highligtedText.li2}</li>
-            </ul>
-          </li>
-          <li>
-            <p className={styles.header}>{highligtedText.p3}</p>
-            <ul>
-              <li>{highligtedText.li3}</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+      <Collapsible
+        key={uuidv4()}
+        trigger="Career Summary"
+        isOpen={isOpen}
+        sectionName={sectionName}
+        handleTriggerClick={handleTriggerClick}
+      >
+        <div className={styles.section}>
+          <p>
+            {highligtedText.overview}
+          </p>
+          <ul className={styles.list}>
+            <li>
+              <p className={styles.header}>{highligtedText.p1}</p>
+              <ul>
+                <li>{highligtedText.li1}</li>
+              </ul>
+            </li>
+            <li>
+              <p className={styles.header}>{highligtedText.p2}</p>
+              <ul>
+                <li>{highligtedText.li2}</li>
+              </ul>
+            </li>
+            <li>
+              <p className={styles.header}>{highligtedText.p3}</p>
+              <ul>
+                <li>{highligtedText.li3}</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </Collapsible>
     );
   }
 }
@@ -85,6 +96,9 @@ export default Summary;
 
 Summary.propTypes = {
   searchText: PropTypes.string,
+  sectionName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  handleTriggerClick: PropTypes.func.isRequired,
 };
 
 Summary.defaultProps = {

@@ -14,14 +14,14 @@ import collapsibleStyles from './styles/collapsible.scss';
 import Layout from '~/components/Layout';
 import Collapsible from '~/components/Collapsible';
 
-import Achievements from './page_components/resume/Achievments';
-import Education from './page_components/resume/Education';
-import Experience from './page_components/resume/Experience';
-import Hobbies from './page_components/resume/Hobbies';
-import Links from './page_components/resume/Links';
-import ManagementSkills from './page_components/resume/ManagementSkills';
+// import Achievements from './page_components/resume/Achievments';
+// import Education from './page_components/resume/Education';
+// import Experience from './page_components/resume/Experience';
+// import Hobbies from './page_components/resume/Hobbies';
+// import Links from './page_components/resume/Links';
+// import ManagementSkills from './page_components/resume/ManagementSkills';
 import Summary from './page_components/resume/Summary';
-import TechnicalSkills from './page_components/resume/TechnicalSkills';
+// import TechnicalSkills from './page_components/resume/TechnicalSkills';
 import Button from '~/components/Button';
 
 // resource imports
@@ -77,12 +77,12 @@ class Resume extends Component {
   /**
    * User has clicked a trigger
    */
-  onTriggerClick(section, isOpen) {
+  onTriggerClick(sectionName, isOpen) {
     let { sectionsOpen } = this.state;
 
     sectionsOpen = {
       ...sectionsOpen,
-      [`${section.name}Open`]: isOpen,
+      [`${sectionName}Open`]: isOpen,
     };
 
     this.setState({
@@ -121,7 +121,7 @@ class Resume extends Component {
     return (
       <Collapsible
         key={sectionType.name}
-        resumeSection={sectionType}
+        sectionName={sectionType}
         trigger={trigger}
         // TODO: this is ugly, get rid of it when I'm in here next
         // eslint-disable-next-line react/jsx-props-no-spreading
@@ -191,6 +191,7 @@ class Resume extends Component {
    */
   render() {
     const { searchString } = this.state;
+    /*
     const RESUME_SECTIONS = {
       ACHIEVEMENTS: {
         name: 'achievements',
@@ -217,15 +218,12 @@ class Resume extends Component {
         name: 'management',
         component: <ManagementSkills searchText={searchString} />,
       },
-      SUMMARY: {
-        name: 'summary',
-        component: <Summary searchText={searchString} />,
-      },
       TECHNICAL: {
         name: 'technical',
         component: <TechnicalSkills searchText={searchString} />,
       },
     };
+    */
 
     return (
       <Layout>
@@ -270,7 +268,15 @@ class Resume extends Component {
             <Log />
           </div>
 
-          {this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary')}
+          {/* this.createPageComponent(RESUME_SECTIONS.SUMMARY, 'Career Summary') */}
+          <Summary
+            searchText={searchString}
+            sectionName="summary"
+            isOpen={this.state.sectionsOpen.summaryOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+
+          {/*
           {this.createPageComponent(RESUME_SECTIONS.TECHNICAL, 'Technical Skills')}
           {this.createPageComponent(RESUME_SECTIONS.MANAGEMENT, 'Management Skills')}
           {this.createPageComponent(RESUME_SECTIONS.ACHIEVEMENTS, 'Professional Achievements')}
@@ -278,6 +284,7 @@ class Resume extends Component {
           {this.createPageComponent(RESUME_SECTIONS.LINKS, 'Links')}
           {this.createPageComponent(RESUME_SECTIONS.EDUCATION, 'Education')}
           {this.createPageComponent(RESUME_SECTIONS.HOBBIES, 'Hobbies')}
+          */}
         </div>
       </Layout>
     );
