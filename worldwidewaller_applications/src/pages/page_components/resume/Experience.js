@@ -26,7 +26,6 @@ class Experience extends Component {
 
   render() {
     const highlightedText = this.props.pageText;
-    console.log(highlightedText);
     const {
       job1,
       job2,

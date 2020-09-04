@@ -45,7 +45,6 @@ function processStringNode(text, searchTerms) {
 function highlightText(node, searchTerms) {
   const nodeType = typeof (node);
   const nodeToSearch = node;
-  const anyTextHighlighted = false;
 
   if (nodeType === 'string') {
     let highlightedText = nodeToSearch;
@@ -60,7 +59,7 @@ function highlightText(node, searchTerms) {
   }
 
   if (nodeType === 'object') {
-    const nodeObject = nodeToSearch;// cloneDeep(nodeToSearch);
+    const nodeObject = nodeToSearch;
     let wasObjectHighlighted = false;
     Object.keys(nodeObject).forEach((key) => {
       const results = highlightText(nodeObject[key], searchTerms);
@@ -74,17 +73,7 @@ function highlightText(node, searchTerms) {
       wasObjectHighlighted,
     };
   }
-
-  /*
-  if (Array.isArray(nodeToSearch)) {
-    nodeToSearch.forEach((entry) => highlightText(entry, searchTerms));
-    return nodeToSearch;
-  }
-
-  return nodeToSearch;
-  */
-  console.log('HMMMMMM *******************');
-  return anyTextHighlighted;
+  throw new Error('Error parsing resume data');
 }
 
 // eslint-disable-next-line import/prefer-default-export
@@ -93,7 +82,6 @@ export function getHighlightedText(searchText, text) {
   const searchTerms = getSearchTerms(searchText);
 
   const results = highlightText(textToHighlight, searchTerms);
-  // console.log('THE FINAL RESULT:', textToHighlight);
   textToHighlight = results.data;
   const { wasObjectHighlighted } = results;
 

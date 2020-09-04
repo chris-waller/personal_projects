@@ -23,7 +23,6 @@ class ThemeSelector extends Component {
    * Updates the site's theme in the DOM and informs redux of the change.
    */
   static updateSiteTheme(setTheme, themeName, newThemeStyle) {
-    console.log('theme selector changing to new theme style:', newThemeStyle);
     changeTheme(newThemeStyle);
     setTheme(themeName);
   }
