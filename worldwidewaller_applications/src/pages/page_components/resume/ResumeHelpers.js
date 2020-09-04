@@ -2,7 +2,6 @@
 import React from 'react';
 import reactStringReplace from 'react-string-replace';
 import { v4 as uuidv4 } from 'uuid';
-// import { cloneDeep } from 'lodash';
 
 // style imports
 import styles from './resume_helpers.scss';
@@ -38,9 +37,7 @@ function processStringNode(text, searchTerms) {
 }
 
 /**
- * Highlight text node
- * @param {*} node
- * @param {*} searchTerm
+ *
  */
 function highlightText(node, searchTerms) {
   const nodeType = typeof (node);
