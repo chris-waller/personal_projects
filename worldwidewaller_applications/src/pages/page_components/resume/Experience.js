@@ -1,12 +1,10 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { cloneDeep } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
-/* eslint-disable */
+
 // custom components
 import Collapsible from '~/components/Collapsible';
-import { getHighlightedText } from './ResumeHelpers';
 
 // style imports
 import styles from './styles/experience.scss';
@@ -18,85 +16,25 @@ import {
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Experience extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      job1Highlighted: null,
-      job2Highlighted: null,
-      job3Highlighted: null,
-      job4Highlighted: null,
-      job5Highlighted: null,
-      isOpen: props.isOpen,
-    };
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    const { searchText } = props;
-    let anyJobsUpdated = false;
-    let highlightedText = '';
-    let results = null;
-    let wasTextUpdated = false;
-
-    // Job 1
-    let job1Highlighted = cloneDeep(Job1);
-    results = getHighlightedText(searchText, job1Highlighted);
-    highlightedText = results.highlightedText;
-    wasTextUpdated = results.wasTextUpdated;
-    job1Highlighted = highlightedText;
-    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
-
-    // Job 2
-    let job2Highlighted = cloneDeep(Job2);
-    results = getHighlightedText(searchText, job2Highlighted);
-    highlightedText = results.highlightedText;
-    wasTextUpdated = results.wasTextUpdated
-    job2Highlighted = highlightedText;
-    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
-
-    // Job 3
-    let job3Highlighted = cloneDeep(Job3);
-    results = getHighlightedText(searchText, job3Highlighted);
-    highlightedText = results.highlightedText;
-    wasTextUpdated = results.wasTextUpdated
-    job3Highlighted = highlightedText;
-    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
-
-    // Job 4
-    let job4Highlighted = cloneDeep(Job4);
-    results = getHighlightedText(searchText, job4Highlighted);
-    highlightedText = results.highlightedText;
-    wasTextUpdated = results.wasTextUpdated
-    job4Highlighted = highlightedText;
-    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
-
-    // Job 5
-    let job5Highlighted = cloneDeep(Job5);
-    results = getHighlightedText(searchText, job5Highlighted);
-    highlightedText = results.highlightedText;
-    wasTextUpdated = results.wasTextUpdated
-    job5Highlighted = highlightedText;
-    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
-
-    return {
-      job1Highlighted,
-      job2Highlighted,
-      job3Highlighted,
-      job4Highlighted,
-      job5Highlighted,
-      anyJobsUpdated,
-    };
-  }
+  static pageText = {
+    job1: Job1,
+    job2: Job2,
+    job3: Job3,
+    job4: Job4,
+    job5: Job5,
+  };
 
   render() {
+    const highlightedText = this.props.pageText;
+    console.log(highlightedText);
     const {
-      job1Highlighted,
-      job2Highlighted,
-      job3Highlighted,
-      job4Highlighted,
-      job5Highlighted,
-      isOpen,
-    } = this.state;
-    const { sectionName, handleTriggerClick } = this.props;
+      job1,
+      job2,
+      job3,
+      job4,
+      job5,
+    } = highlightedText;
+    const { isOpen, sectionName, handleTriggerClick } = this.props;
 
     return (
       <Collapsible
@@ -107,22 +45,22 @@ class Experience extends Component {
         handleTriggerClick={handleTriggerClick}
       >
         <div className={styles.container}>
-          <div className={styles.header}>{job1Highlighted.title}</div>
+          <div className={styles.header}>{job1.title}</div>
           <ul>
-            <li>{job1Highlighted.li1}</li>
+            <li>{job1.li1}</li>
             <li>
-              {job1Highlighted.li2A}
+              {job1.li2A}
               <a target="__blank" href="https://github.com/chris-waller/personal_projects">
-                {job1Highlighted.li2B}
+                {job1.li2B}
               </a>
-              {job1Highlighted.li2C}
+              {job1.li2C}
             </li>
           </ul>
 
-          <JobSection job={job2Highlighted} />
-          <JobSection job={job3Highlighted} />
-          <JobSection job={job4Highlighted} />
-          <JobSection job={job5Highlighted} />
+          <JobSection job={job2} />
+          <JobSection job={job3} />
+          <JobSection job={job4} />
+          <JobSection job={job5} />
 
         </div>
       </Collapsible>
@@ -133,14 +71,11 @@ class Experience extends Component {
 export default Experience;
 
 Experience.propTypes = {
-  searchText: PropTypes.string,
+  // eslint-disable-next-line
+  pageText: PropTypes.object.isRequired,
   sectionName: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handleTriggerClick: PropTypes.func.isRequired,
-};
-
-Experience.defaultProps = {
-  searchText: '',
 };
 
 // eslint-disable-next-line react/prefer-stateless-function

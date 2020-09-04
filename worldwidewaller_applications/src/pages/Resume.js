@@ -14,15 +14,12 @@ import styles from './styles/resume.scss';
 import Layout from '~/components/Layout';
 import Summary from './page_components/resume/Summary';
 import Achievements from './page_components/resume/Achievments';
-/*
-import Education from './page_components/resume/Education';
+import ManagementSkills from './page_components/resume/ManagementSkills';
+import TechnicalSkills from './page_components/resume/TechnicalSkills';
 import Experience from './page_components/resume/Experience';
 import Hobbies from './page_components/resume/Hobbies';
 import Links from './page_components/resume/Links';
-import ManagementSkills from './page_components/resume/ManagementSkills';
-import Summary from './page_components/resume/Summary';
-import TechnicalSkills from './page_components/resume/TechnicalSkills';
-*/
+import Education from './page_components/resume/Education';
 import Button from '~/components/Button';
 import { getHighlightedText } from './page_components/resume/ResumeHelpers';
 
@@ -47,6 +44,9 @@ class Resume extends Component {
     const sectionData = {
       summary: cloneDeep(Summary.pageText),
       achievements: cloneDeep(Achievements.pageText),
+      management: cloneDeep(ManagementSkills.pageText),
+      technical: cloneDeep(TechnicalSkills.pageText),
+      experience: cloneDeep(Experience.pageText),
     };
 
     Object.keys(sectionData).forEach((key) => {
@@ -75,6 +75,18 @@ class Resume extends Component {
         },
         achievements: {
           pageText: Achievements.pageText,
+          update: false,
+        },
+        management: {
+          pageText: ManagementSkills.pageText,
+          update: false,
+        },
+        technical: {
+          pageText: TechnicalSkills.pageText,
+          update: false,
+        },
+        experience: {
+          pageText: Experience.pageText,
           update: false,
         },
       },
@@ -173,14 +185,21 @@ class Resume extends Component {
       this.props.setResumeSearchString(searchText);
 
       const pageText = Resume.getResumeSections(searchText);
+      let { sectionsOpen } = this.state;
+
       Object.keys(pageText).forEach((key) => {
         const wasHighlighted = pageText[key].updated;
         if (wasHighlighted) {
-          this.onTriggerClick(key, true);
+          sectionsOpen = {
+            ...sectionsOpen,
+            [`${key}Open`]: true,
+          };
+          Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
         }
       });
 
       this.setState({
+        sectionsOpen,
         searchString: searchText,
         pageText: { ...pageText },
       });
@@ -260,11 +279,47 @@ class Resume extends Component {
             isOpen={this.state.sectionsOpen.summaryOpen}
             handleTriggerClick={this.onTriggerClick}
           />
+          <TechnicalSkills
+            pageText={this.state.pageText.technical.pageText}
+            searchText={searchString}
+            sectionName="technical"
+            isOpen={this.state.sectionsOpen.technicalOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <ManagementSkills
+            pageText={this.state.pageText.management.pageText}
+            searchText={searchString}
+            sectionName="management"
+            isOpen={this.state.sectionsOpen.managementOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
           <Achievements
             pageText={this.state.pageText.achievements.pageText}
             searchText={searchString}
             sectionName="achievements"
             isOpen={this.state.sectionsOpen.achievementsOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Experience
+            pageText={this.state.pageText.experience.pageText}
+            searchText={searchString}
+            sectionName="experience"
+            isOpen={this.state.sectionsOpen.experienceOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Links
+            sectionName="links"
+            isOpen={this.state.sectionsOpen.linksOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Education
+            sectionName="education"
+            isOpen={this.state.sectionsOpen.educationOpen}
+            handleTriggerClick={this.onTriggerClick}
+          />
+          <Hobbies
+            sectionName="hobbies"
+            isOpen={this.state.sectionsOpen.hobbiesOpen}
             handleTriggerClick={this.onTriggerClick}
           />
         </div>
