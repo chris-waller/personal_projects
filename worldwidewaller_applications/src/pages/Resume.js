@@ -8,7 +8,7 @@ import { Log, traceLifecycle } from 'react-lifecycle-visualizer';
 
 // style imports
 import styles from './styles/resume.scss';
-
+/* eslint-disable */
 // custom components
 import Layout from '~/components/Layout';
 import Achievements from './page_components/resume/Achievments';
@@ -203,13 +203,13 @@ class Resume extends Component {
           >
             <Log />
           </div>
-
           <Summary
             searchText={searchString}
             sectionName="summary"
             isOpen={this.state.sectionsOpen.summaryOpen}
             handleTriggerClick={this.onTriggerClick}
           />
+        {/*
           <TechnicalSkills
             searchText={searchString}
             sectionName="technical"
@@ -228,12 +228,14 @@ class Resume extends Component {
             isOpen={this.state.sectionsOpen.achievementsOpen}
             handleTriggerClick={this.onTriggerClick}
           />
+          */}
           <Experience
             searchText={searchString}
             sectionName="experience"
             isOpen={this.state.sectionsOpen.experienceOpen}
             handleTriggerClick={this.onTriggerClick}
           />
+          {/*
           <Links
             sectionName="links"
             isOpen={this.state.sectionsOpen.linksOpen}
@@ -249,6 +251,7 @@ class Resume extends Component {
             isOpen={this.state.sectionsOpen.hobbiesOpen}
             handleTriggerClick={this.onTriggerClick}
           />
+          */}
         </div>
       </Layout>
     );

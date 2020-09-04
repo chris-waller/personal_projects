@@ -2,7 +2,7 @@
 import React from 'react';
 import reactStringReplace from 'react-string-replace';
 import { v4 as uuidv4 } from 'uuid';
-import { cloneDeep } from 'lodash';
+// import { cloneDeep } from 'lodash';
 
 // style imports
 import styles from './resume_helpers.scss';
@@ -16,6 +16,27 @@ function getSearchTerms(searchText) {
   return textToSanitize.split(',');
 }
 
+function processStringNode(text, searchTerms) {
+  let highlightedText = text;
+  let anyTextHighlighted = false;
+  searchTerms.forEach((searchTerm) => {
+    if (searchTerm.trim() !== '') {
+      highlightedText = reactStringReplace(highlightedText, searchTerm, (match) => {
+        anyTextHighlighted = true;
+        return (
+          <span key={uuidv4()} className={styles.highlight}>
+            {match}
+          </span>
+        );
+      });
+    }
+  });
+  return {
+    data: highlightedText,
+    wasObjectHighlighted: anyTextHighlighted,
+  };
+}
+
 /**
  * Highlight text node
  * @param {*} node
@@ -24,37 +45,46 @@ function getSearchTerms(searchText) {
 function highlightText(node, searchTerms) {
   const nodeType = typeof (node);
   const nodeToSearch = node;
+  const anyTextHighlighted = false;
 
   if (nodeType === 'string') {
     let highlightedText = nodeToSearch;
-    searchTerms.forEach((searchTerm) => {
-      if (searchTerm.trim() !== '') {
-        highlightedText = reactStringReplace(highlightedText, searchTerm, (match) => (
-          <span key={uuidv4()} className={styles.highlight}>
-            {match}
-          </span>
-        ));
-      }
-    });
-
-    return highlightedText;
+    const results = processStringNode(nodeToSearch, searchTerms);
+    // get the results of the string highlight
+    highlightedText = results.data;
+    const { wasObjectHighlighted } = results;
+    return {
+      data: highlightedText,
+      wasObjectHighlighted,
+    };
   }
 
-  if (nodeType === 'object' && nodeToSearch !== null) {
-    const nodeObject = cloneDeep(nodeToSearch);
+  if (nodeType === 'object') {
+    const nodeObject = nodeToSearch;// cloneDeep(nodeToSearch);
+    let wasObjectHighlighted = false;
     Object.keys(nodeObject).forEach((key) => {
-      const highligtedText = highlightText(nodeObject[key], searchTerms);
-      nodeObject[key] = highligtedText;
+      const results = highlightText(nodeObject[key], searchTerms);
+      const highlightedText = results.data;
+      wasObjectHighlighted = wasObjectHighlighted || results.wasObjectHighlighted;
+      nodeObject[key] = highlightedText;
     });
-    return nodeObject;
+
+    return {
+      data: nodeObject,
+      wasObjectHighlighted,
+    };
   }
 
+  /*
   if (Array.isArray(nodeToSearch)) {
     nodeToSearch.forEach((entry) => highlightText(entry, searchTerms));
     return nodeToSearch;
   }
 
   return nodeToSearch;
+  */
+  console.log('HMMMMMM *******************');
+  return anyTextHighlighted;
 }
 
 // eslint-disable-next-line import/prefer-default-export
@@ -62,11 +92,13 @@ export function getHighlightedText(searchText, text) {
   let textToHighlight = text;
   const searchTerms = getSearchTerms(searchText);
 
-  textToHighlight = highlightText(textToHighlight, searchTerms);
-  const textUpdated = true;
+  const results = highlightText(textToHighlight, searchTerms);
+  // console.log('THE FINAL RESULT:', textToHighlight);
+  textToHighlight = results.data;
+  const { wasObjectHighlighted } = results;
 
   return {
     highlightedText: textToHighlight,
-    textUpdated,
+    wasTextUpdated: wasObjectHighlighted,
   };
 }

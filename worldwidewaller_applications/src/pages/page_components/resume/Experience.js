@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
-
+/* eslint-disable */
 // custom components
 import Collapsible from '~/components/Collapsible';
 import { getHighlightedText } from './ResumeHelpers';
@@ -18,10 +18,6 @@ import {
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Experience extends Component {
-  static foo() {
-
-  }
-
   constructor() {
     super();
     this.state = {
@@ -42,18 +38,23 @@ class Experience extends Component {
     const job4Highlighted = cloneDeep(Job4);
     const job5Highlighted = cloneDeep(Job5);
 
+    /*
     Object.keys(job1Highlighted).forEach((key) => {
       const result = getHighlightedText(searchText, job1Highlighted[key]);
-      const highligtedText = result.highlightedText;
-      job1Highlighted[key] = highligtedText;
+      const highlightedText = result.highlightedText;
+      console.log('returned results', highlightedText);
+      job1Highlighted[key] = highlightedText;
     });
-
+    */
+    /*
     Object.keys(job2Highlighted).forEach((key) => {
       const result = getHighlightedText(searchText, job2Highlighted[key]);
-      const highligtedText = result.highlightedText;
-      job2Highlighted[key] = highligtedText;
-    });
+      const highlightedText = result.highlightedText;
+      console.log('returned results', highlightedText);
+      job2Highlighted[key] = highlightedText;
+    });*/
 
+    /*
     Object.keys(job3Highlighted).forEach((key) => {
       const result = getHighlightedText(searchText, job3Highlighted[key]);
       const highligtedText = result.highlightedText;
@@ -71,6 +72,7 @@ class Experience extends Component {
       const highligtedText = result.highlightedText;
       job5Highlighted[key] = highligtedText;
     });
+    */
 
     return {
       job1Highlighted,
@@ -113,9 +115,11 @@ class Experience extends Component {
           </ul>
 
           <JobSection job={job2Highlighted} />
+          {/*
           <JobSection job={job3Highlighted} />
           <JobSection job={job4Highlighted} />
           <JobSection job={job5Highlighted} />
+          */}
 
         </div>
       </Collapsible>
@@ -140,7 +144,6 @@ Experience.defaultProps = {
 class JobSection extends Component {
   render() {
     const { job } = this.props;
-    // eslint-disable-next-line
     const { subJobs } = job;
     return (
       <>
@@ -149,7 +152,7 @@ class JobSection extends Component {
         </div>
         {
           // eslint-disable-next-line arrow-body-style
-          job.subJobs.map((subJob) => {
+          subJobs.map((subJob) => {
             return (
               <div className={styles.subSection} key={uuidv4()}>
                 <p className={styles.subHeader}>{subJob.title}</p>
