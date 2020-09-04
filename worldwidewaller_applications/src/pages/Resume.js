@@ -203,13 +203,14 @@ class Resume extends Component {
           >
             <Log />
           </div>
+        {/*
           <Summary
             searchText={searchString}
             sectionName="summary"
             isOpen={this.state.sectionsOpen.summaryOpen}
             handleTriggerClick={this.onTriggerClick}
           />
-        {/*
+
           <TechnicalSkills
             searchText={searchString}
             sectionName="technical"

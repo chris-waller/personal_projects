@@ -31,48 +31,50 @@ class Experience extends Component {
 
   static getDerivedStateFromProps(nextProps) {
     const { searchText } = nextProps;
+    let anyJobsUpdated = false;
+    let highlightedText = '';
+    let results = null;
+    let wasTextUpdated = false;
 
-    const job1Highlighted = cloneDeep(Job1);
-    const job2Highlighted = cloneDeep(Job2);
-    const job3Highlighted = cloneDeep(Job3);
-    const job4Highlighted = cloneDeep(Job4);
-    const job5Highlighted = cloneDeep(Job5);
+    // Job 1
+    let job1Highlighted = cloneDeep(Job1);
+    results = getHighlightedText(searchText, job1Highlighted);
+    highlightedText = results.highlightedText;
+    wasTextUpdated = results.wasTextUpdated;
+    job1Highlighted = highlightedText;
+    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
 
-    /*
-    Object.keys(job1Highlighted).forEach((key) => {
-      const result = getHighlightedText(searchText, job1Highlighted[key]);
-      const highlightedText = result.highlightedText;
-      console.log('returned results', highlightedText);
-      job1Highlighted[key] = highlightedText;
-    });
-    */
-    /*
-    Object.keys(job2Highlighted).forEach((key) => {
-      const result = getHighlightedText(searchText, job2Highlighted[key]);
-      const highlightedText = result.highlightedText;
-      console.log('returned results', highlightedText);
-      job2Highlighted[key] = highlightedText;
-    });*/
+    // Job 2
+    let job2Highlighted = cloneDeep(Job2);
+    results = getHighlightedText(searchText, job2Highlighted);
+    highlightedText = results.highlightedText;
+    wasTextUpdated = results.wasTextUpdated
+    job2Highlighted = highlightedText;
+    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
 
-    /*
-    Object.keys(job3Highlighted).forEach((key) => {
-      const result = getHighlightedText(searchText, job3Highlighted[key]);
-      const highligtedText = result.highlightedText;
-      job3Highlighted[key] = highligtedText;
-    });
+    // Job 3
+    let job3Highlighted = cloneDeep(Job3);
+    results = getHighlightedText(searchText, job3Highlighted);
+    highlightedText = results.highlightedText;
+    wasTextUpdated = results.wasTextUpdated
+    job3Highlighted = highlightedText;
+    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
 
-    Object.keys(job4Highlighted).forEach((key) => {
-      const result = getHighlightedText(searchText, job4Highlighted[key]);
-      const highligtedText = result.highlightedText;
-      job4Highlighted[key] = highligtedText;
-    });
+    // Job 4
+    let job4Highlighted = cloneDeep(Job4);
+    results = getHighlightedText(searchText, job4Highlighted);
+    highlightedText = results.highlightedText;
+    wasTextUpdated = results.wasTextUpdated
+    job4Highlighted = highlightedText;
+    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
 
-    Object.keys(job5Highlighted).forEach((key) => {
-      const result = getHighlightedText(searchText, job5Highlighted[key]);
-      const highligtedText = result.highlightedText;
-      job5Highlighted[key] = highligtedText;
-    });
-    */
+    // Job 5
+    let job5Highlighted = cloneDeep(Job5);
+    results = getHighlightedText(searchText, job5Highlighted);
+    highlightedText = results.highlightedText;
+    wasTextUpdated = results.wasTextUpdated
+    job5Highlighted = highlightedText;
+    anyJobsUpdated = anyJobsUpdated || results.wasTextUpdated;
 
     return {
       job1Highlighted,
@@ -80,6 +82,7 @@ class Experience extends Component {
       job3Highlighted,
       job4Highlighted,
       job5Highlighted,
+      anyJobsUpdated,
     };
   }
 
@@ -115,11 +118,9 @@ class Experience extends Component {
           </ul>
 
           <JobSection job={job2Highlighted} />
-          {/*
           <JobSection job={job3Highlighted} />
           <JobSection job={job4Highlighted} />
           <JobSection job={job5Highlighted} />
-          */}
 
         </div>
       </Collapsible>
