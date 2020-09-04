@@ -101,6 +101,7 @@ class Resume extends Component {
 
   static getDerivedStateFromProps(nextProps, nextState) {
     return {
+      pageText: Resume.getResumeSections(nextState.searchString),
       sectionsOpen: nextProps.sectionsOpen,
       searchString: nextState.searchString,
     };
@@ -201,7 +202,7 @@ class Resume extends Component {
       this.setState({
         sectionsOpen,
         searchString: searchText,
-        pageText: { ...pageText },
+        pageText,
       });
       return;
     }
