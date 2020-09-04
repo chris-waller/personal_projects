@@ -12,7 +12,6 @@ import styles from './styles/layout.scss';
 /**
  * This component is responsible for the overall site layout and styling.
  */
-// eslint-disable-next-line react/prefer-stateless-function
 class Layout extends Component {
   /**
    * Render.

@@ -8,7 +8,6 @@ import Collapsible from '~/components/Collapsible';
 // style imports
 import styles from './styles/management_skills.scss';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class ManagementSkills extends Component {
   static pageText = {
     li1: 'Onboard new team members (design docs, dev/build environment setups)',
@@ -58,7 +57,7 @@ class ManagementSkills extends Component {
 export default ManagementSkills;
 
 ManagementSkills.propTypes = {
-  // eslint-disable-next-line
+  // eslint-disable-next-line react/forbid-prop-types
   pageText: PropTypes.object.isRequired,
   sectionName: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,

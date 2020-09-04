@@ -8,7 +8,6 @@ import Collapsible from '~/components/Collapsible';
 // style imports
 import styles from './styles/technical_skills.scss';
 
-// react/prefer-stateless-function
 class TechnicalSkills extends Component {
   static pageText = {
     languages: 'JavaScript, CSS/SCSS, HTML5, SQL, Java 8, Ruby on Rails, PHP, XML, YML, C#',
@@ -59,14 +58,13 @@ class TechnicalSkills extends Component {
 export default TechnicalSkills;
 
 TechnicalSkills.propTypes = {
-  // eslint-disable-next-line
+  // eslint-disable-next-line react/forbid-prop-types
   pageText: PropTypes.object.isRequired,
   sectionName: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handleTriggerClick: PropTypes.func.isRequired,
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Section extends Component {
   render() {
     return (

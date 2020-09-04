@@ -8,7 +8,6 @@ import Collapsible from '~/components/Collapsible';
 // styles imports
 import styles from './styles/summary.scss';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Summary extends Component {
   static pageText = {
     overview: `8+ years experience designing, developing, delivering and maintaining
@@ -71,7 +70,7 @@ class Summary extends Component {
 export default Summary;
 
 Summary.propTypes = {
-  // eslint-disable-next-line
+  // eslint-disable-next-line react/forbid-prop-types
   pageText: PropTypes.object.isRequired,
   sectionName: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,

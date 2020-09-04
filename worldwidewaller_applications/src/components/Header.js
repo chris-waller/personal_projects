@@ -18,7 +18,6 @@ import {
  * This component is responsible for displaying the site header.
  * The header will be replaced with a humburger menu at a specified screen size
  */
-// eslint-disable-next-line react/prefer-stateless-function
 class Header extends Component {
   constructor(props) {
     super(props);

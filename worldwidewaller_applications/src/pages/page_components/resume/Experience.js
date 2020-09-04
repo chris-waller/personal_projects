@@ -14,7 +14,6 @@ import {
   job1 as Job1, job2 as Job2, job3 as Job3, job4 as Job4, job5 as Job5,
 } from './ExperienceSections';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Experience extends Component {
   static pageText = {
     job1: Job1,
@@ -70,14 +69,13 @@ class Experience extends Component {
 export default Experience;
 
 Experience.propTypes = {
-  // eslint-disable-next-line
+  // eslint-disable-next-line react/forbid-prop-types
   pageText: PropTypes.object.isRequired,
   sectionName: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handleTriggerClick: PropTypes.func.isRequired,
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
 class JobSection extends Component {
   render() {
     const { job } = this.props;
@@ -130,6 +128,6 @@ class JobSection extends Component {
   }
 }
 JobSection.propTypes = {
-  // eslint-disable-next-line
+  // eslint-disable-next-line react/forbid-prop-types
   job: PropTypes.object.isRequired,
 };

@@ -9,7 +9,6 @@ import styles from './styles/button.scss';
 /**
  * A simple component to ensure all button elements have consistancy throughout the app.
  */
-// eslint-disable-next-line react/prefer-stateless-function
 class Button extends Component {
   /**
    * Redner.

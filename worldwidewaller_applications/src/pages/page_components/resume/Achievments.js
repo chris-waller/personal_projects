@@ -10,7 +10,6 @@ import styles from './styles/achievements.scss';
 
 const nbsp = '\xa0';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Achievements extends Component {
   static pageText = {
     heading1: `January, 2019 ${nbsp}${nbsp}[Aeryon Labs / FLIR]`,
@@ -65,7 +64,7 @@ class Achievements extends Component {
 export default Achievements;
 
 Achievements.propTypes = {
-  // eslint-disable-next-line
+  // eslint-disable-next-line react/forbid-prop-types
   pageText: PropTypes.object.isRequired,
   sectionName: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
