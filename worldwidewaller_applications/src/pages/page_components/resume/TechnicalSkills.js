@@ -23,23 +23,32 @@ const pageText = {
 
 // eslint-disable-next-line react/prefer-stateless-function
 class TechnicalSkills extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       highligtedText: null,
+      isOpen: props.isOpen,
     };
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    const { searchText } = nextProps;
+  static getDerivedStateFromProps(props, state) {
+    const { searchText } = props;
     const textToHighlight = cloneDeep(pageText);
     const results = getHighlightedText(searchText, textToHighlight);
     const highligtedText = results.highlightedText;
     const { wasTextUpdated } = results;
 
+    let { isOpen } = props;
+    if (wasTextUpdated) {
+      isOpen = true;
+    } else if (state.isOpen) {
+      isOpen = true;
+    }
+
     return {
       highligtedText,
       wasTextUpdated,
+      isOpen,
     };
   }
 
@@ -47,8 +56,8 @@ class TechnicalSkills extends Component {
    * Render.
    */
   render() {
-    const { highligtedText } = this.state;
-    const { isOpen, sectionName, handleTriggerClick } = this.props;
+    const { highligtedText, isOpen } = this.state;
+    const { sectionName, handleTriggerClick } = this.props;
     return (
       <Collapsible
         key="Technical Skills Section"

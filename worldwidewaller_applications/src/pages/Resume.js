@@ -5,13 +5,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import isEqual from 'react-fast-compare';
 import { Log, traceLifecycle } from 'react-lifecycle-visualizer';
+import { cloneDeep } from 'lodash';
 
 // style imports
 import styles from './styles/resume.scss';
-/* eslint-disable */
+
 // custom components
 import Layout from '~/components/Layout';
+import Summary from './page_components/resume/Summary';
 import Achievements from './page_components/resume/Achievments';
+/*
 import Education from './page_components/resume/Education';
 import Experience from './page_components/resume/Experience';
 import Hobbies from './page_components/resume/Hobbies';
@@ -19,7 +22,9 @@ import Links from './page_components/resume/Links';
 import ManagementSkills from './page_components/resume/ManagementSkills';
 import Summary from './page_components/resume/Summary';
 import TechnicalSkills from './page_components/resume/TechnicalSkills';
+*/
 import Button from '~/components/Button';
+import { getHighlightedText } from './page_components/resume/ResumeHelpers';
 
 // resource imports
 import resumePdf from '~/resources/resume.pdf';
@@ -38,6 +43,23 @@ class Resume extends Component {
     updateSection(sectionsOpen);
   }
 
+  static getResumeSections(searchText) {
+    const sectionData = {
+      summary: cloneDeep(Summary.pageText),
+      achievements: cloneDeep(Achievements.pageText),
+    };
+
+    Object.keys(sectionData).forEach((key) => {
+      const results = getHighlightedText(searchText, sectionData[key]);
+      sectionData[key] = {
+        pageText: results.highlightedText,
+        updated: results.wasTextUpdated,
+      };
+    });
+
+    return sectionData;
+  }
+
   /**
    * Constructor
    */
@@ -46,6 +68,16 @@ class Resume extends Component {
 
     this.state = {
       searchString: props.searchString,
+      pageText: {
+        summary: {
+          pageText: Summary.pageText,
+          updated: false,
+        },
+        achievements: {
+          pageText: Achievements.pageText,
+          update: false,
+        },
+      },
     };
 
     this.searchBarRef = React.createRef();
@@ -75,7 +107,12 @@ class Resume extends Component {
    * User has clicked a trigger
    */
   onTriggerClick(sectionName, isOpen) {
+    // check if the section is already open/closed
     let { sectionsOpen } = this.state;
+    const currentStatus = sectionsOpen[`${sectionName}Open`];
+    if (isOpen === currentStatus) {
+      return;
+    }
 
     sectionsOpen = {
       ...sectionsOpen,
@@ -134,8 +171,18 @@ class Resume extends Component {
       // add the comma we're using as a delimeter
       searchText = `${searchText.trim()},`;
       this.props.setResumeSearchString(searchText);
+
+      const pageText = Resume.getResumeSections(searchText);
+      Object.keys(pageText).forEach((key) => {
+        const wasHighlighted = pageText[key].updated;
+        if (wasHighlighted) {
+          this.onTriggerClick(key, true);
+        }
+      });
+
       this.setState({
         searchString: searchText,
+        pageText: { ...pageText },
       });
       return;
     }
@@ -150,8 +197,11 @@ class Resume extends Component {
    * User has changed the value of the search box.
    */
   searchBoxChanged(event) {
+    const searchString = event.target.value;
+    const pageText = Resume.getResumeSections(searchString);
     this.setState({
-      searchString: event.target.value,
+      searchString,
+      pageText,
     });
   }
 
@@ -160,7 +210,6 @@ class Resume extends Component {
    */
   render() {
     const { searchString } = this.state;
-
     return (
       <Layout>
         <div className={styles.container}>
@@ -203,51 +252,21 @@ class Resume extends Component {
           >
             <Log />
           </div>
+
           <Summary
+            pageText={this.state.pageText.summary.pageText}
             searchText={searchString}
             sectionName="summary"
             isOpen={this.state.sectionsOpen.summaryOpen}
             handleTriggerClick={this.onTriggerClick}
           />
-          <TechnicalSkills
-            searchText={searchString}
-            sectionName="technical"
-            isOpen={this.state.sectionsOpen.technicalOpen}
-            handleTriggerClick={this.onTriggerClick}
-          />
-          <ManagementSkills
-            searchText={searchString}
-            sectionName="management"
-            isOpen={this.state.sectionsOpen.managementOpen}
-            handleTriggerClick={this.onTriggerClick}
-          />
           <Achievements
+            pageText={this.state.pageText.achievements.pageText}
             searchText={searchString}
             sectionName="achievements"
             isOpen={this.state.sectionsOpen.achievementsOpen}
             handleTriggerClick={this.onTriggerClick}
           />
-          <Experience
-            searchText={searchString}
-            sectionName="experience"
-            isOpen={this.state.sectionsOpen.experienceOpen}
-            handleTriggerClick={this.onTriggerClick}
-          />
-          <Links
-            sectionName="links"
-            isOpen={this.state.sectionsOpen.linksOpen}
-            handleTriggerClick={this.onTriggerClick}
-          />
-          <Education
-            sectionName="education"
-            isOpen={this.state.sectionsOpen.educationOpen}
-            handleTriggerClick={this.onTriggerClick}
-          />
-          <Hobbies
-            sectionName="hobbies"
-            isOpen={this.state.sectionsOpen.hobbiesOpen}
-            handleTriggerClick={this.onTriggerClick}
-          /> 
         </div>
       </Layout>
     );

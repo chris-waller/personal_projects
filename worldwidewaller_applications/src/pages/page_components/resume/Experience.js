@@ -18,19 +18,20 @@ import {
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Experience extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       job1Highlighted: null,
       job2Highlighted: null,
       job3Highlighted: null,
       job4Highlighted: null,
       job5Highlighted: null,
+      isOpen: props.isOpen,
     };
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    const { searchText } = nextProps;
+  static getDerivedStateFromProps(props, state) {
+    const { searchText } = props;
     let anyJobsUpdated = false;
     let highlightedText = '';
     let results = null;
@@ -93,8 +94,9 @@ class Experience extends Component {
       job3Highlighted,
       job4Highlighted,
       job5Highlighted,
+      isOpen,
     } = this.state;
-    const { isOpen, sectionName, handleTriggerClick } = this.props;
+    const { sectionName, handleTriggerClick } = this.props;
 
     return (
       <Collapsible
