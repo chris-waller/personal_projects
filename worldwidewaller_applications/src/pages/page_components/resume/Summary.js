@@ -38,7 +38,6 @@ class Summary extends Component {
 
   static getDerivedStateFromProps(nextProps) {
     const { searchText } = nextProps;
-    // todo: figure out if I need to do this
     const textToHighlight = cloneDeep(pageText);
     const results = getHighlightedText(searchText, textToHighlight);
     const highligtedText = results.highlightedText;

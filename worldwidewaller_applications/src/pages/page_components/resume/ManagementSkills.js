@@ -34,15 +34,14 @@ class ManagementSkills extends Component {
 
   static getDerivedStateFromProps(nextProps) {
     const { searchText } = nextProps;
-    const text = cloneDeep(pageText);
+    const textToHighlight = cloneDeep(pageText);
+    const results = getHighlightedText(searchText, textToHighlight);
+    const highligtedText = results.highlightedText;
+    const { wasTextUpdated } = results;
 
-    Object.keys(text).forEach((key) => {
-      const result = getHighlightedText(searchText, text[key]);
-      const highligtedText = result.highlightedText;
-      text[key] = highligtedText;
-    });
     return {
-      highligtedText: text,
+      highligtedText,
+      wasTextUpdated,
     };
   }
 
