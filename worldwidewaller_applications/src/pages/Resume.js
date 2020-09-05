@@ -21,6 +21,7 @@ import Hobbies from './page_components/resume/Hobbies';
 import Links from './page_components/resume/Links';
 import Education from './page_components/resume/Education';
 import Button from '~/components/Button';
+import SearchTerm from '~/components/SearchTerm';
 import { getHighlightedText } from './page_components/resume/ResumeHelpers';
 
 // resource imports
@@ -38,6 +39,27 @@ class Resume extends Component {
    */
   static updateSectionToggle(updateSection, sectionsOpen) {
     updateSection(sectionsOpen);
+  }
+
+  static getSearchbarText(searchText) {
+    console.log(searchText);
+    const searchbarText = searchText;
+
+    return searchbarText;
+  }
+
+  static getSearchTerms(searchString) {
+    // we only care about completed search terms
+    const lastCommaIndex = searchString.lastIndexOf(',');
+    if (lastCommaIndex === -1 || searchString.length === 0) {
+      return {};
+    }
+    // const newSearchString = searchString.substring(0, lastCommaIndex);
+    if (searchString.indexOf(',') === -1) {
+      return searchString;
+    }
+    const foo = searchString.split(',');
+    return foo;
   }
 
   static getResumeSections(searchText) {
@@ -68,6 +90,7 @@ class Resume extends Component {
 
     this.state = {
       searchString: props.searchString,
+      searchTerms: {},
       pageText: {
         summary: {
           pageText: Summary.pageText,
@@ -75,19 +98,19 @@ class Resume extends Component {
         },
         achievements: {
           pageText: Achievements.pageText,
-          update: false,
+          updated: false,
         },
         management: {
           pageText: ManagementSkills.pageText,
-          update: false,
+          updated: false,
         },
         technical: {
           pageText: TechnicalSkills.pageText,
-          update: false,
+          updated: false,
         },
         experience: {
           pageText: Experience.pageText,
-          update: false,
+          updated: false,
         },
       },
     };
@@ -97,6 +120,7 @@ class Resume extends Component {
     this.onTriggerClick = this.onTriggerClick.bind(this);
     this.searchBoxChanged = this.searchBoxChanged.bind(this);
     this.searchBoxKeyDown = this.searchBoxKeyDown.bind(this);
+    this.deleteSearchTerm = this.deleteSearchTerm.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, nextState) {
@@ -104,6 +128,7 @@ class Resume extends Component {
       pageText: Resume.getResumeSections(nextState.searchString),
       sectionsOpen: nextProps.sectionsOpen,
       searchString: nextState.searchString,
+      searchTerms: Resume.getSearchTerms(nextState.searchString),
     };
   }
 
@@ -199,9 +224,12 @@ class Resume extends Component {
         }
       });
 
+      const searchTerms = Resume.getSearchTerms(searchText);
+
       this.setState({
         sectionsOpen,
         searchString: searchText,
+        searchTerms,
         pageText,
       });
       return;
@@ -221,7 +249,20 @@ class Resume extends Component {
     const pageText = Resume.getResumeSections(searchString);
     this.setState({
       searchString,
+      // searchTerms: Resume.getSearchTerms(searchString),
       pageText,
+    });
+  }
+
+  deleteSearchTerm(term) {
+    const { searchTerms } = this.state;
+    const index = searchTerms.indexOf(term);
+    if (index > -1) {
+      searchTerms.splice(index, 1);
+    }
+    this.setState({
+      searchTerms,
+      searchString: `${searchTerms.join(',')}`,
     });
   }
 
@@ -229,7 +270,9 @@ class Resume extends Component {
    * Render.
    */
   render() {
-    const { searchString } = this.state;
+    const { searchString, searchTerms } = this.state;
+    const searchBarText = Resume.getSearchbarText(searchString);
+    console.log('Render Search Terrms', searchTerms);
     return (
       <Layout>
         <div className={styles.container}>
@@ -255,12 +298,27 @@ class Resume extends Component {
           </div>
           <div className={styles.searchBar}>
             <span className={styles.searchBar}>Search Resume:</span>
+            {
+              Object.keys(searchTerms).length > 0 && searchTerms.map((term) => {
+                if (term !== '') {
+                  return (
+                    <SearchTerm
+                      key={`term-${term}`}
+                      name={term}
+                      termClicked={() => this.deleteSearchTerm(term)}
+                    />
+                  );
+                }
+                return null;
+              })
+            }
+
             <input
               type="text"
               ref={this.searchBarRef}
               className={styles.searchBox}
               placeholder="Search resume (use tab/enter to complete term)"
-              value={searchString}
+              value={searchBarText}
               onChange={this.searchBoxChanged}
               onKeyDown={this.searchBoxKeyDown}
             />

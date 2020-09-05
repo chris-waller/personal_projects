@@ -24,15 +24,18 @@ div.search-bar {
   margin-top: 5px;
   display: flex;
   align-items: center;
-  background: lightgray;
-  color: black;
+  background-color: var(--bgColorAlt);
+  color: var(--fontColorMain);
 }
 span.search-bar {
   margin: 0 5px;
 }
 
 .search-box {
-  flex-grow: 1;
+  flex-grow: 1;  
+  background: red;
+  border-left: 0;
+  margin-left: 0;
 }
 
 
