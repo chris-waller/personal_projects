@@ -47,17 +47,22 @@ class SearchBar extends Component {
 
     // user has pressed the tab/enter/comma key so we need to complete the current search term
     if (event.keyCode === 9 || event.keyCode === 13 || event.keyCode === 188) {
-      event.preventDefault();
       const { searchTerms } = this.state;
       const newSearchTerms = searchTerms.slice();
       const searchString = event.target.value;
       newSearchTerms.push(searchString);
 
+      let foo = '';
+      if (searchTerms.length > 0) {
+        foo = `${searchTerms.join(',')},`;
+      }
+      const newSearchString = `${foo}${searchString.trim()},`;
+
       this.setState({
         searchString: '',
         searchTerms: newSearchTerms,
       }, () => {
-        this.props.searchFilterChanged(`${searchString.trim()},`);
+        this.props.searchFilterChanged(newSearchString);
       });
 
       event.preventDefault();
@@ -91,6 +96,13 @@ class SearchBar extends Component {
     }
     this.setState({
       searchTerms: newSearchTerms,
+    }, () => {
+      let { searchString } = this.state;
+      if (Object.keys(newSearchTerms).length > 0) {
+        searchString = `${newSearchTerms.join(',')},`;
+      }
+      // searchString += searchString;
+      this.props.searchFilterChanged(searchString);
     });
   }
 
