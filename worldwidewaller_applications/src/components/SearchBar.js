@@ -16,18 +16,17 @@ class SearchBar extends Component {
 
     this.state = {
       searchString: '',
-      searchTerms: {},
+      searchTerms: [],
     };
 
     this.searchBarChanged = this.searchBarChanged.bind(this);
     this.searchBoxKeyDown = this.searchBoxKeyDown.bind(this);
+    this.searchTermClicked = this.searchTermClicked.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // console.log(this.state);
-    // console.log(nextState);
-    // console.log('\n');
-    if (nextState.searchString === this.state.searchString) return false;
+    if (nextState.searchString === this.state.searchString
+      && nextState.searchTerms === this.state.searchTerms) return false;
     return true;
   }
 
@@ -49,52 +48,20 @@ class SearchBar extends Component {
     // user has pressed the tab/enter/comma key so we need to complete the current search term
     if (event.keyCode === 9 || event.keyCode === 13 || event.keyCode === 188) {
       event.preventDefault();
-      let { searchString } = this.state;
-
-      // figure out which terms are complete
-      const searchTerms = searchString.split(',');
-      // add the comma we're using as a delimeter
-      searchString = `${searchString.trim()},`;
-      console.log(searchString);
+      const { searchTerms } = this.state;
+      const newSearchTerms = searchTerms.slice();
+      const searchString = event.target.value;
+      newSearchTerms.push(searchString);
 
       this.setState({
         searchString: '',
-        searchTerms,
+        searchTerms: newSearchTerms,
       }, () => {
-        this.props.searchFilterChanged(searchString);
-      });
-    }
-
-    /*
-      this.props.setResumeSearchString(searchText);
-
-      const pageText = Resume.getResumeSections(searchText);
-      let { sectionsOpen } = this.state;
-
-      Object.keys(pageText).forEach((key) => {
-        const wasHighlighted = pageText[key].updated;
-        if (wasHighlighted) {
-          sectionsOpen = {
-            ...sectionsOpen,
-            [`${key}Open`]: true,
-          };
-          Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
-        }
+        this.props.searchFilterChanged(`${searchString.trim()},`);
       });
 
-      this.setState({
-        sectionsOpen,
-        searchString: searchText,
-        pageText,
-      });
-      return;
-    }
-        // user has pressed the space key
-    if (searchString.length < 1) {
       event.preventDefault();
     }
-
-    */
   }
 
   /**
@@ -115,20 +82,33 @@ class SearchBar extends Component {
     });
   }
 
+  searchTermClicked(term) {
+    const { searchTerms } = this.state;
+    const newSearchTerms = searchTerms.slice();
+    const index = newSearchTerms.indexOf(term);
+    if (index > -1) {
+      newSearchTerms.splice(index, 1);
+    }
+    this.setState({
+      searchTerms: newSearchTerms,
+    });
+  }
+
   render() {
     // const { termClicked } = this.props;
     const { searchString, searchTerms } = this.state;
-    console.log('Search string', searchString);
-    console.log('Search terms', searchTerms);
-    console.log('\n');
     return (
       <div>
         {
           Object.keys(searchTerms).length > 0
           // eslint-disable-next-line
-          && Object.values(searchTerms).map((term) => {
+          && searchTerms.map((searchItem) => {            
             return (
-              <SearchTerm key={`search_term-${term}`} name={term} />
+              <SearchTerm
+                key={`search_term-${searchItem}`}
+                name={searchItem}
+                termClicked={this.searchTermClicked}
+              />
             );
           })
         }
@@ -136,7 +116,7 @@ class SearchBar extends Component {
           type="text"
           // ref={this.searchBarRef}
           // className={styles.searchBox}
-          // placeholder="Search resume (use tab/enter to complete term)"
+          placeholder="Search resume (use tab/enter to complete term)"
           value={searchString}
           onChange={this.searchBarChanged}
           onKeyDown={this.searchBoxKeyDown}
