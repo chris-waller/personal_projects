@@ -136,6 +136,7 @@ class SearchBar extends Component {
           type="text"
           className={styles.searchBar}
           placeholder="Search resume (use tab/enter to complete term)"
+          maxLength={50}
           value={searchString}
           onChange={this.searchBarChanged}
           onKeyDown={this.searchBoxKeyDown}
