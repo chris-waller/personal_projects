@@ -67,33 +67,10 @@ class Resume extends Component {
   constructor(props) {
     super(props);
 
+    const searchStringSanitized = (props.searchString === null ? '' : props.searchString);
     this.state = {
       searchString: props.searchString,
-      pageText: Resume.getResumeSections(props.searchString),
-      /*
-      pageText: {
-        summary: {
-          pageText: Summary.pageText,
-          updated: false,
-        },
-        achievements: {
-          pageText: Achievements.pageText,
-          updated: false,
-        },
-        management: {
-          pageText: ManagementSkills.pageText,
-          updated: false,
-        },
-        technical: {
-          pageText: TechnicalSkills.pageText,
-          updated: false,
-        },
-        experience: {
-          pageText: Experience.pageText,
-          updated: false,
-        },
-      },
-      */
+      pageText: Resume.getResumeSections(searchStringSanitized),
     };
 
     this.searchBarRef = React.createRef();
@@ -104,7 +81,6 @@ class Resume extends Component {
 
   static getDerivedStateFromProps(nextProps, nextState) {
     return {
-      // pageText: Resume.getResumeSections(nextState.searchString),
       sectionsOpen: nextProps.sectionsOpen,
       searchString: nextState.searchString,
     };
@@ -221,7 +197,10 @@ class Resume extends Component {
           </div>
           <div className={styles.searchBar}>
             <span className={styles.searchBar}>Search Resume:</span>
-            <SearchBar searchFilterChanged={this.searchFilterChanged} />
+            <SearchBar
+              searchFilterChanged={this.searchFilterChanged}
+              searchString={searchString}
+            />
           </div>
           <div style={{
             display: 'none', marginTop: '10px', color: 'black', backgroundColor: 'white',

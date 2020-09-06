@@ -24,7 +24,7 @@ const initialState = {
     technicalOpen: false,
   },
   selectedTheme: null,
-  resumeSearchString: '',
+  resumeSearchString: null,
 };
 
 const clientSettings = (state = initialState, action) => {

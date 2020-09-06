@@ -14,13 +14,44 @@ class SearchBar extends Component {
     super();
 
     this.state = {
-      searchString: '',
-      searchTerms: [],
+      searchString: null,
+      searchTerms: null,
     };
 
     this.searchBarChanged = this.searchBarChanged.bind(this);
     this.searchBoxKeyDown = this.searchBoxKeyDown.bind(this);
-    this.searchTermClicked = this.searchTermClicked.bind(this);
+    this.deleteSearchTerm = this.deleteSearchTerm.bind(this);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    // first time component loaded but data being passed in from redux via parent
+    if (state.searchString === null && props.searchString != null) {
+      let searchTerms = [];
+      let newSearchString = props.searchString;
+      const index = newSearchString.lastIndexOf(',');
+      if (index !== -1) {
+        const searchTermsString = newSearchString.substring(0, index);
+        searchTerms = searchTermsString.split(',');
+        newSearchString = newSearchString.substring(index + 1);
+      }
+      return {
+        searchString: newSearchString,
+        searchTerms,
+      };
+    }
+
+    // first time comoponent being loaded and no search string update from redux
+    if (state.searchString === null) {
+      return {
+        searchString: '',
+        searchTerms: [],
+      };
+    }
+
+    // just a regular state update from SearchBar
+    return {
+      ...state,
+    };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -93,21 +124,26 @@ class SearchBar extends Component {
     });
   }
 
-  searchTermClicked(term) {
+  deleteSearchTerm(term) {
     const { searchTerms } = this.state;
     const newSearchTerms = searchTerms.slice();
     const index = newSearchTerms.indexOf(term);
     if (index > -1) {
       newSearchTerms.splice(index, 1);
     }
+
+    let { searchString } = this.state;
+    if (newSearchTerms.length > 0) {
+      const stringIndex = this.state.searchString.lastIndexOf(',');
+      const currentSearchTerm = this.state.searchString.substring(stringIndex + 1);
+
+      searchString = `${newSearchTerms.join(',')},${currentSearchTerm}`;
+    }
+
     this.setState({
       searchTerms: newSearchTerms,
+      searchString,
     }, () => {
-      let { searchString } = this.state;
-      if (Object.keys(newSearchTerms).length > 0) {
-        searchString = `${newSearchTerms.join(',')},`;
-      }
-      // searchString += searchString;
       this.props.searchFilterChanged(searchString);
     });
   }
@@ -126,7 +162,7 @@ class SearchBar extends Component {
                 <SearchTerm
                   key={`search_term-${searchItem}`}
                   name={searchItem}
-                  termClicked={this.searchTermClicked}
+                  termClicked={this.deleteSearchTerm}
                 />
               );
             })
@@ -150,6 +186,9 @@ export default traceLifecycle(SearchBar);
 
 SearchBar.propTypes = {
   searchFilterChanged: PropTypes.func.isRequired,
-  // name: PropTypes.string.isRequired,
-  // termClicked: PropTypes.func.isRequired,
+  searchString: PropTypes.string,
+};
+
+SearchBar.defaultProps = {
+  searchString: null,
 };
