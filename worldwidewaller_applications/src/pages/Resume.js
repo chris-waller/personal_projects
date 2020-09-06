@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import isEqual from 'react-fast-compare';
 import { Log, traceLifecycle } from 'react-lifecycle-visualizer';
 import { cloneDeep } from 'lodash';
-/* eslint-disable */
+
 // style imports
+// eslint-disable-next-line
 import styles from './styles/resume.scss';
 
 // custom components
@@ -39,7 +40,7 @@ class Resume extends Component {
    */
   static updateSectionToggle(updateSection, sectionsOpen) {
     updateSection(sectionsOpen);
-  }  
+  }
 
   static getResumeSections(searchText) {
     const sectionData = {
@@ -159,24 +160,24 @@ class Resume extends Component {
   expandCollapseAll(isOpen) {
     const sectionsOpen = this.getOpenSections(isOpen);
     Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
-  }  
+  }
 
   searchFilterChanged(newSearchString) {
-    console.log("Resume received a new search string update:", newSearchString);
     const currentSearchString = this.state.searchString;
     if (currentSearchString !== newSearchString) {
       this.setState({
         searchString: newSearchString,
-      })
+      }, () => {
+        this.props.setResumeSearchString(newSearchString);
+      });
     }
-    
   }
 
   /**
    * Render.
    */
   render() {
-    const { searchString } = this.state;    
+    const { searchString } = this.state;
     return (
       <Layout>
         <div className={styles.container}>
@@ -202,7 +203,9 @@ class Resume extends Component {
           </div>
           <div className={styles.searchBar}>
             <span className={styles.searchBar}>Search Resume:</span>
-            <SearchBar searchFilterChanged={this.searchFilterChanged} />
+            <SearchBar
+              searchFilterChanged={this.searchFilterChanged}
+            />
           </div>
           <div style={{
             display: 'none', marginTop: '10px', color: 'black', backgroundColor: 'white',

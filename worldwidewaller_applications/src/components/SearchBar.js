@@ -52,11 +52,11 @@ class SearchBar extends Component {
       const searchString = event.target.value;
       newSearchTerms.push(searchString);
 
-      let foo = '';
+      let newSearchString = '';
       if (searchTerms.length > 0) {
-        foo = `${searchTerms.join(',')},`;
+        newSearchString = `${searchTerms.join(',')},`;
       }
-      const newSearchString = `${foo}${searchString.trim()},`;
+      newSearchString = `${newSearchString}${searchString.trim()},`;
 
       this.setState({
         searchString: '',
