@@ -70,6 +70,8 @@ class Resume extends Component {
 
     this.state = {
       searchString: props.searchString,
+      pageText: Resume.getResumeSections(props.searchString),
+      /*
       pageText: {
         summary: {
           pageText: Summary.pageText,
@@ -92,6 +94,7 @@ class Resume extends Component {
           updated: false,
         },
       },
+      */
     };
 
     this.searchBarRef = React.createRef();
@@ -102,7 +105,7 @@ class Resume extends Component {
 
   static getDerivedStateFromProps(nextProps, nextState) {
     return {
-      pageText: Resume.getResumeSections(nextState.searchString),
+      // pageText: Resume.getResumeSections(nextState.searchString),
       sectionsOpen: nextProps.sectionsOpen,
       searchString: nextState.searchString,
     };
@@ -162,13 +165,32 @@ class Resume extends Component {
     Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
   }
 
-  searchFilterChanged(newSearchString) {
+  searchFilterChanged(newSearchString, isNewTerm) {
     const currentSearchString = this.state.searchString;
     if (currentSearchString !== newSearchString) {
+      const pageText = Resume.getResumeSections(newSearchString);
+      let { sectionsOpen } = this.state;
+      Object.keys(pageText).forEach((key) => {
+        const wasHighlighted = pageText[key].updated;
+        if (wasHighlighted) {
+          sectionsOpen = {
+            ...sectionsOpen,
+            [`${key}Open`]: true,
+          };
+        }
+      });
+
+      // update the redux store
+      if (isNewTerm) Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
+      this.props.setResumeSearchString(newSearchString);
+
       this.setState({
+        pageText,
+        sectionsOpen,
         searchString: newSearchString,
       }, () => {
-        this.props.setResumeSearchString(newSearchString);
+        // Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
+        // this.props.setResumeSearchString(newSearchString);
       });
     }
   }
@@ -203,9 +225,7 @@ class Resume extends Component {
           </div>
           <div className={styles.searchBar}>
             <span className={styles.searchBar}>Search Resume:</span>
-            <SearchBar
-              searchFilterChanged={this.searchFilterChanged}
-            />
+            <SearchBar searchFilterChanged={this.searchFilterChanged} />
           </div>
           <div style={{
             display: 'none', marginTop: '10px', color: 'black', backgroundColor: 'white',

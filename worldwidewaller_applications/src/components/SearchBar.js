@@ -62,7 +62,8 @@ class SearchBar extends Component {
         searchString: '',
         searchTerms: newSearchTerms,
       }, () => {
-        this.props.searchFilterChanged(newSearchString);
+        const isNewTerm = true;
+        this.props.searchFilterChanged(newSearchString, isNewTerm);
       });
 
       event.preventDefault();
@@ -83,7 +84,8 @@ class SearchBar extends Component {
         newSearchString = `${searchTerms.join(',')},`;
       }
       newSearchString += searchString;
-      this.props.searchFilterChanged(newSearchString);
+      const isNewTerm = false;
+      this.props.searchFilterChanged(newSearchString, isNewTerm);
     });
   }
 
