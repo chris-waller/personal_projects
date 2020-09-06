@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import isEqual from 'react-fast-compare';
 import { Log, traceLifecycle } from 'react-lifecycle-visualizer';
 import { cloneDeep } from 'lodash';
-
+/* eslint-disable */
 // style imports
 import styles from './styles/resume.scss';
 
@@ -21,7 +21,7 @@ import Hobbies from './page_components/resume/Hobbies';
 import Links from './page_components/resume/Links';
 import Education from './page_components/resume/Education';
 import Button from '~/components/Button';
-import SearchTerm from '~/components/SearchTerm';
+import SearchBar from '~/components/SearchBar';
 import { getHighlightedText } from './page_components/resume/ResumeHelpers';
 
 // resource imports
@@ -39,28 +39,7 @@ class Resume extends Component {
    */
   static updateSectionToggle(updateSection, sectionsOpen) {
     updateSection(sectionsOpen);
-  }
-
-  static getSearchbarText(searchText) {
-    console.log(searchText);
-    const searchbarText = searchText;
-
-    return searchbarText;
-  }
-
-  static getSearchTerms(searchString) {
-    // we only care about completed search terms
-    const lastCommaIndex = searchString.lastIndexOf(',');
-    if (lastCommaIndex === -1 || searchString.length === 0) {
-      return {};
-    }
-    // const newSearchString = searchString.substring(0, lastCommaIndex);
-    if (searchString.indexOf(',') === -1) {
-      return searchString;
-    }
-    const foo = searchString.split(',');
-    return foo;
-  }
+  }  
 
   static getResumeSections(searchText) {
     const sectionData = {
@@ -90,7 +69,6 @@ class Resume extends Component {
 
     this.state = {
       searchString: props.searchString,
-      searchTerms: {},
       pageText: {
         summary: {
           pageText: Summary.pageText,
@@ -118,9 +96,7 @@ class Resume extends Component {
     this.searchBarRef = React.createRef();
     this.expandCollapseAll = this.expandCollapseAll.bind(this);
     this.onTriggerClick = this.onTriggerClick.bind(this);
-    this.searchBoxChanged = this.searchBoxChanged.bind(this);
-    this.searchBoxKeyDown = this.searchBoxKeyDown.bind(this);
-    this.deleteSearchTerm = this.deleteSearchTerm.bind(this);
+    this.searchFilterChanged = this.searchFilterChanged.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, nextState) {
@@ -128,7 +104,6 @@ class Resume extends Component {
       pageText: Resume.getResumeSections(nextState.searchString),
       sectionsOpen: nextProps.sectionsOpen,
       searchString: nextState.searchString,
-      searchTerms: Resume.getSearchTerms(nextState.searchString),
     };
   }
 
@@ -184,95 +159,24 @@ class Resume extends Component {
   expandCollapseAll(isOpen) {
     const sectionsOpen = this.getOpenSections(isOpen);
     Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
-  }
+  }  
 
-  searchBoxKeyDown(event) {
-    // we really only care about the tab, enter, comma or space keys
-    if (event.keyCode !== 9
-      && event.keyCode !== 13
-      && event.keyCode !== 188
-      && event.keyCode !== 32
-    ) return;
-
-    let searchText = this.state.searchString;
-    const lastIndex = searchText.lastIndexOf(',');
-    let searchTerm = searchText.substring(lastIndex + 1, searchText.length);
-    searchTerm = searchTerm.trim();
-
-    // user has pressed the tab/enter/comma key so we need to complete the current search term
-    if (event.keyCode === 9 || event.keyCode === 13 || event.keyCode === 188) {
-      event.preventDefault();
-
-      // user hasn't entered any text yet
-      if (searchTerm === '') return;
-
-      // add the comma we're using as a delimeter
-      searchText = `${searchText.trim()},`;
-      this.props.setResumeSearchString(searchText);
-
-      const pageText = Resume.getResumeSections(searchText);
-      let { sectionsOpen } = this.state;
-
-      Object.keys(pageText).forEach((key) => {
-        const wasHighlighted = pageText[key].updated;
-        if (wasHighlighted) {
-          sectionsOpen = {
-            ...sectionsOpen,
-            [`${key}Open`]: true,
-          };
-          Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
-        }
-      });
-
-      const searchTerms = Resume.getSearchTerms(searchText);
-
+  searchFilterChanged(newSearchString) {
+    console.log("Resume received a new search string update:", newSearchString);
+    const currentSearchString = this.state.searchString;
+    if (currentSearchString !== newSearchString) {
       this.setState({
-        sectionsOpen,
-        searchString: searchText,
-        searchTerms,
-        pageText,
-      });
-      return;
+        searchString: newSearchString,
+      })
     }
-
-    // user has pressed the space key
-    if (searchTerm.length < 1) {
-      event.preventDefault();
-    }
-  }
-
-  /**
-   * User has changed the value of the search box.
-   */
-  searchBoxChanged(event) {
-    const searchString = event.target.value;
-    const pageText = Resume.getResumeSections(searchString);
-    this.setState({
-      searchString,
-      // searchTerms: Resume.getSearchTerms(searchString),
-      pageText,
-    });
-  }
-
-  deleteSearchTerm(term) {
-    const { searchTerms } = this.state;
-    const index = searchTerms.indexOf(term);
-    if (index > -1) {
-      searchTerms.splice(index, 1);
-    }
-    this.setState({
-      searchTerms,
-      searchString: `${searchTerms.join(',')}`,
-    });
+    
   }
 
   /**
    * Render.
    */
   render() {
-    const { searchString, searchTerms } = this.state;
-    const searchBarText = Resume.getSearchbarText(searchString);
-    console.log('Render Search Terrms', searchTerms);
+    const { searchString } = this.state;    
     return (
       <Layout>
         <div className={styles.container}>
@@ -298,32 +202,8 @@ class Resume extends Component {
           </div>
           <div className={styles.searchBar}>
             <span className={styles.searchBar}>Search Resume:</span>
-            {
-              Object.keys(searchTerms).length > 0 && searchTerms.map((term) => {
-                if (term !== '') {
-                  return (
-                    <SearchTerm
-                      key={`term-${term}`}
-                      name={term}
-                      termClicked={() => this.deleteSearchTerm(term)}
-                    />
-                  );
-                }
-                return null;
-              })
-            }
-
-            <input
-              type="text"
-              ref={this.searchBarRef}
-              className={styles.searchBox}
-              placeholder="Search resume (use tab/enter to complete term)"
-              value={searchBarText}
-              onChange={this.searchBoxChanged}
-              onKeyDown={this.searchBoxKeyDown}
-            />
+            <SearchBar searchFilterChanged={this.searchFilterChanged} />
           </div>
-
           <div style={{
             display: 'none', marginTop: '10px', color: 'black', backgroundColor: 'white',
           }}
