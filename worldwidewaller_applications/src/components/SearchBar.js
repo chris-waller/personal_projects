@@ -147,15 +147,13 @@ class SearchBar extends Component {
   }
 
   render() {
-    // const { termClicked } = this.props;
     const { searchString, searchTerms } = this.state;
     return (
       <div className={styles.searchBar}>
         <div className={styles.searchBarItems}>
           {
             Object.keys(searchTerms).length > 0
-            // eslint-disable-next-line
-            && searchTerms.map((searchItem) => {            
+            && searchTerms.map((searchItem) => {
               return (
                 <SearchTerm
                   key={`search_term-${searchItem}`}

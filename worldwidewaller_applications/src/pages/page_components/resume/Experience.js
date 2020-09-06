@@ -86,7 +86,6 @@ class JobSection extends Component {
           {job.title}
         </div>
         {
-          // eslint-disable-next-line arrow-body-style
           subJobs.map((subJob) => {
             return (
               <div className={styles.subSection} key={uuidv4()}>
@@ -96,7 +95,6 @@ class JobSection extends Component {
                 {(subJob.examples !== undefined) && (
                 <ul>
                   {
-                    // eslint-disable-next-line arrow-body-style
                     subJob.examples.map((example) => {
                       return (
                         <React.Fragment key={uuidv4()}>
@@ -104,7 +102,6 @@ class JobSection extends Component {
                           {(example.subDescriptions !== undefined) && (
                           <ul>
                             {
-                              // eslint-disable-next-line arrow-body-style
                               example.subDescriptions.map((subDescription) => {
                                 return (
                                   <li key={uuidv4()}>{subDescription.text}</li>
