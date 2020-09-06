@@ -7,8 +7,7 @@ import { traceLifecycle } from 'react-lifecycle-visualizer';
 import SearchTerm from './SearchTerm';
 
 // sytle imports
-// eslint-disable-next-line
-import styles from './styles/search-term.scss';
+import styles from './styles/search-bar.scss';
 
 class SearchBar extends Component {
   constructor() {
@@ -112,24 +111,25 @@ class SearchBar extends Component {
     // const { termClicked } = this.props;
     const { searchString, searchTerms } = this.state;
     return (
-      <div>
-        {
-          Object.keys(searchTerms).length > 0
-          // eslint-disable-next-line
-          && searchTerms.map((searchItem) => {            
-            return (
-              <SearchTerm
-                key={`search_term-${searchItem}`}
-                name={searchItem}
-                termClicked={this.searchTermClicked}
-              />
-            );
-          })
-        }
+      <div className={styles.searchBar}>
+        <div className={styles.searchBarItems}>
+          {
+            Object.keys(searchTerms).length > 0
+            // eslint-disable-next-line
+            && searchTerms.map((searchItem) => {            
+              return (
+                <SearchTerm
+                  key={`search_term-${searchItem}`}
+                  name={searchItem}
+                  termClicked={this.searchTermClicked}
+                />
+              );
+            })
+          }
+        </div>
         <input
           type="text"
-          // ref={this.searchBarRef}
-          // className={styles.searchBox}
+          className={styles.searchBar}
           placeholder="Search resume (use tab/enter to complete term)"
           value={searchString}
           onChange={this.searchBarChanged}

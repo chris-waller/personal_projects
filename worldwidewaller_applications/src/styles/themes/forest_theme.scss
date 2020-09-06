@@ -58,5 +58,13 @@ $forestHeader: '~images/backgrounds/forest_bg_header.jpg';
   // menu styles  
   --menuBgColor: var(--color7);
   --menuItemsBgColor: var(--color8);
-  --menuBgHoverColor: var(--color1); 
+  --menuBgHoverColor: var(--color1);
+  
+  // searchbar styles
+  --searchbarBgColor: var(--color1);
+  --searchbarFontColor: var(--color9);
+  --searchbarBorderColor: var(--color7);
+  --searchbarItemBgColor: var(--color1);
+  --searchbarItemFontColor: var(--color9);
+  --searchbarItemBorderColor: var(--color7);
 }

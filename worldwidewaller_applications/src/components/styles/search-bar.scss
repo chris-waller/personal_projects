@@ -1,0 +1,35 @@
+@import '~styles/screen_dimensions.scss';
+
+.search-bar {
+  height: 100%;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  padding: 5px;
+}
+
+.search-bar-items {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  max-width: 70vw;
+}
+
+input.search-bar {
+  margin: 5px 5px 5px 3px;
+  padding: 3px;
+  color: var(--searchbarFontColor);
+  background-color: var(--searchbarBgColor);
+  border: 1px solid var(--searchbarBorderColor);
+}
+
+@media screen and (max-width: $smallMaxWidth) {   
+  .search-bar-items {
+    max-width: 220px;
+  }
+}
+@media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  
+}
+
+@media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {  
+}

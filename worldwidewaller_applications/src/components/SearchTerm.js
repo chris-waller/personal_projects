@@ -13,7 +13,7 @@ class SearchTerm extends Component {
         className={styles.searchTerm}
         onClick={() => termClicked(name)}
       >
-        {name}
+        <span>{name}</span>
       </div>
     );
   }

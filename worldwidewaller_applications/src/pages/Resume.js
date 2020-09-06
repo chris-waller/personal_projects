@@ -8,7 +8,6 @@ import { Log, traceLifecycle } from 'react-lifecycle-visualizer';
 import { cloneDeep } from 'lodash';
 
 // style imports
-// eslint-disable-next-line
 import styles from './styles/resume.scss';
 
 // custom components
@@ -188,9 +187,6 @@ class Resume extends Component {
         pageText,
         sectionsOpen,
         searchString: newSearchString,
-      }, () => {
-        // Resume.updateSectionToggle(this.props.toggleResumeSections, sectionsOpen);
-        // this.props.setResumeSearchString(newSearchString);
       });
     }
   }

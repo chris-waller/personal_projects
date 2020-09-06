@@ -1,7 +1,13 @@
 .searchTerm {
   cursor: pointer;
-  // padding: 0 5px;
-  margin: 0 5px;
-  border: 2px solid black;
-  background: red;
+  padding: 0 4px;
+  margin: 0 2px;
+  color: var(--searchbarItemFontColor);
+  border: 1px solid var(--searchbarItemBorderColor);
+  background: var(--searchbarItemBgColor);
+  border-radius: 7px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: min-content;
 }
