@@ -49,6 +49,11 @@ class SearchBar extends Component {
       const { searchTerms } = this.state;
       const newSearchTerms = searchTerms.slice();
       const searchString = event.target.value;
+
+      if (newSearchTerms.includes(searchString)) {
+        event.preventDefault();
+        return;
+      }
       newSearchTerms.push(searchString);
 
       let newSearchString = '';
