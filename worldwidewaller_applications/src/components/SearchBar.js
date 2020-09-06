@@ -132,19 +132,17 @@ class SearchBar extends Component {
       newSearchTerms.splice(index, 1);
     }
 
-    let { searchString } = this.state;
+    const { searchString } = this.state;
+    let newSearchString = searchString;
     if (newSearchTerms.length > 0) {
-      const stringIndex = this.state.searchString.lastIndexOf(',');
-      const currentSearchTerm = this.state.searchString.substring(stringIndex + 1);
-
-      searchString = `${newSearchTerms.join(',')},${currentSearchTerm}`;
+      newSearchString = `${newSearchTerms.join(',')},${searchString}`;
     }
 
     this.setState({
       searchTerms: newSearchTerms,
       searchString,
     }, () => {
-      this.props.searchFilterChanged(searchString);
+      this.props.searchFilterChanged(newSearchString);
     });
   }
 
