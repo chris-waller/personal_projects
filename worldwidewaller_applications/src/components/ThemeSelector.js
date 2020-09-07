@@ -13,7 +13,7 @@ import { getSiteThemes, changeTheme } from '../utilities/theme_helpers';
 // redux actions
 import {
   setTheme as setThemeAction,
-} from '../redux/actions';
+} from '../redux/actions/userSettings';
 
 /**
  * Allows the user to change the overall site theme.

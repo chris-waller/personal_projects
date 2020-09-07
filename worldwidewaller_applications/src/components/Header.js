@@ -12,7 +12,7 @@ import styles from './styles/header.scss';
 // redux actions
 import {
   toggleHeader as toggleHeaderAction,
-} from '../redux/actions';
+} from '~/redux/actions/appSettings';
 
 /**
  * This component is responsible for displaying the site header.

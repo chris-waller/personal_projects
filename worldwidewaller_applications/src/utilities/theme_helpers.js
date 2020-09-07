@@ -16,7 +16,7 @@ export const THEME_NAMES = {
   OCEAN: 'Ocean',
 };
 
-export const DEFAULT_THEME = THEME_NAMES.FOREST;
+export const DEFAULT_THEME = THEME_NAMES.OCEAN;
 
 /**
  * List of theme names and their associated styles.

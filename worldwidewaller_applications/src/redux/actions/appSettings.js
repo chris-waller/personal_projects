@@ -1,20 +1,9 @@
-/* ****************** */
-/* Redux action file  */
-/* ****************** */
+// redux actions for all user settings (will eventually be stored in the db)
 import {
-  SET_THEME,
   TOGGLE_HEADER_COLLAPSED,
   TOGGLE_RESUME_SECTIONS,
   SET_RESUME_SEARCH_STRING,
-} from './actionTypes';
-
-/**
- * Sets the application theme.
- */
-export const setTheme = (theme) => ({
-  type: SET_THEME,
-  payload: { theme },
-});
+} from '../actionTypes';
 
 /**
  * Toggles the main site header open/closed.

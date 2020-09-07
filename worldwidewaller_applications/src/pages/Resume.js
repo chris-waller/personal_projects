@@ -31,7 +31,7 @@ import resumePdf from '~/resources/resume.pdf';
 import {
   toggleResumeSections,
   setResumeSearchString,
-} from '~/redux/actions';
+} from '~/redux/actions/appSettings';
 
 class Resume extends Component {
   /**

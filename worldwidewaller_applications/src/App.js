@@ -22,7 +22,7 @@ import {
 import store from '~/redux/store';
 import {
   setTheme as setThemeAction,
-} from '~/redux/actions';
+} from '~/redux/actions/userSettings';
 
 class App extends Component {
   /**
