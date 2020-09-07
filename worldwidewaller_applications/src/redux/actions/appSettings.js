@@ -3,6 +3,7 @@ import {
   TOGGLE_HEADER_COLLAPSED,
   TOGGLE_RESUME_SECTIONS,
   SET_RESUME_SEARCH_STRING,
+  SET_SPLASH_VIS,
 } from '../actionTypes';
 
 /**
@@ -28,3 +29,10 @@ export const setResumeSearchString = (resumeSearchString) => ({
   type: SET_RESUME_SEARCH_STRING,
   payload: { resumeSearchString },
 });
+
+export const setSplashPageVisibility = (resumeSplashPages) => (
+  {
+    type: SET_SPLASH_VIS,
+    payload: { resumeSplashPages },
+  }
+);

@@ -3,23 +3,23 @@
 /* *********** */
 
 // npm imports
-// import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-// import logger from 'redux-logger';
+import logger from 'redux-logger';
 
 // reducer import
-import clientSettings from './reducers/clientSettings';
+import userSettings from './reducers/userSettings';
+import appSettings from './reducers/appSettings';
 
 // add all reducers here
 const rootReducer = combineReducers({
-  clientSettings,
+  userSettings, appSettings,
 });
 
 // create the store with devtools and logging
 export default createStore(
   rootReducer,
   composeWithDevTools(
-    // applyMiddleware(logger),
+    applyMiddleware(logger),
   ),
 );

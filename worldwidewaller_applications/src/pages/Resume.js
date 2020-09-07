@@ -267,8 +267,8 @@ class Resume extends Component {
 
 const mapStateToProps = (state) => (
   {
-    sectionsOpen: state.clientSettings.resumeSections,
-    searchString: state.clientSettings.resumeSearchString,
+    sectionsOpen: state.userSettings.resumeSections,
+    searchString: state.userSettings.resumeSearchString,
   }
 );
 

@@ -91,7 +91,7 @@ class Header extends Component {
 
 const mapStateToProps = (state) => (
   {
-    headerCollapsed: state.clientSettings.headerCollapsed,
+    headerCollapsed: state.userSettings.headerCollapsed,
   }
 );
 

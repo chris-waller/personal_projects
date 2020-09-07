@@ -1,10 +1,5 @@
-// ///////////////////////////////////////// //
-// Reducer file for updating client settings //
-// ///////////////////////////////////////// //
-
-// helper files
+// Reducer file for updating user settings
 import {
-  SET_THEME,
   TOGGLE_HEADER_COLLAPSED,
   TOGGLE_RESUME_SECTIONS,
   SET_RESUME_SEARCH_STRING,
@@ -23,20 +18,11 @@ const initialState = {
     summaryOpen: false,
     technicalOpen: false,
   },
-  selectedTheme: null,
   resumeSearchString: null,
 };
 
-const clientSettings = (state = initialState, action) => {
+const userSettings = (state = initialState, action) => {
   switch (action.type) {
-    // Sets the theme for the application
-    case SET_THEME: {
-      return {
-        ...state,
-        selectedTheme: action.payload.theme,
-      };
-    }
-
     // Toggles the main header open/closed for the application
     case TOGGLE_HEADER_COLLAPSED: {
       return {
@@ -67,4 +53,4 @@ const clientSettings = (state = initialState, action) => {
   }
 };
 
-export default clientSettings;
+export default userSettings;

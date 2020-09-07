@@ -74,7 +74,7 @@ class ThemeSelector extends Component {
 
 const mapStateToProps = (state) => (
   {
-    selectedTheme: state.clientSettings.selectedTheme,
+    selectedTheme: state.userSettings.selectedTheme,
   }
 );
 
