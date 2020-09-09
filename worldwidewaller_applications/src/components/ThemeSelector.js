@@ -13,7 +13,7 @@ import { getSiteThemes, changeTheme } from '../utilities/theme_helpers';
 // redux actions
 import {
   setTheme as setThemeAction,
-} from '../redux/actions/userSettings';
+} from '~/redux/actions/userSettings';
 
 /**
  * Allows the user to change the overall site theme.
@@ -74,7 +74,7 @@ class ThemeSelector extends Component {
 
 const mapStateToProps = (state) => (
   {
-    selectedTheme: state.userSettings.selectedTheme,
+    selectedTheme: state.appSettings.selectedTheme,
   }
 );
 
