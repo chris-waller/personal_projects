@@ -79,9 +79,9 @@ class Header extends Component {
         {/* Links Section */}
         {/* ************* */}
         <div className={classNames(styles.optionsSection, collapsedStyle)}>
-          <Link to="/" className={styles.link}>Resume</Link>
-          <Link to="/settings" className={styles.link}>Settings</Link>
-          <Link to="/contact" className={styles.link}>Contact Me</Link>
+          <Link to="/" className={styles.headerLink}>Resume</Link>
+          <Link to="/settings" className={styles.headerLink}>Settings</Link>
+          <Link to="/contact" className={styles.headerLink}>Contact Me</Link>
         </div>
 
       </div>
