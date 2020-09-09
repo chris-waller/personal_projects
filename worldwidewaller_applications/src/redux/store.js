@@ -3,9 +3,10 @@
 /* *********** */
 
 // npm imports
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+// import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 
 // reducer import
 import userSettings from './reducers/userSettings';
@@ -20,6 +21,6 @@ const rootReducer = combineReducers({
 export default createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(logger),
+    // applyMiddleware(logger),
   ),
 );

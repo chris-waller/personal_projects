@@ -9,7 +9,7 @@ const initialState = {
   splashPageVisibility: {
     welcome: true, // displayed when a user visits the site for the first time
     resume: true, // displayed when a user visits the resume page for the first time
-    setting: true, // displayed when a user visits the settings page for the first time
+    settings: true, // displayed when a user visits the settings page for the first time
   },
   selectedTheme: null,
 };
