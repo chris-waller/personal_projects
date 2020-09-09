@@ -33,15 +33,15 @@ class ManagementSkills extends Component {
         sectionName={sectionName}
         handleTriggerClick={handleTriggerClick}
       >
-        <div className={styles.container}>
-          <ul className={styles.list}>
-            <p className={styles.header}>People Management:</p>
+        <div className={styles.managementContainer}>
+          <ul>
+            <span>People Management:</span>
             <li>{highlightedText.li1}</li>
             <li>{highlightedText.li2}</li>
             <li>{highlightedText.li3}</li>
           </ul>
-          <ul className={styles.list}>
-            <p className={styles.header}>Project Management:</p>
+          <ul>
+            <span>Project Management:</span>
             <li>{highlightedText.li4}</li>
             <li>{highlightedText.li5}</li>
             <li>{highlightedText.li6}</li>
