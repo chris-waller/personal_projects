@@ -16,11 +16,13 @@
 
 .management-container li {
   margin-left: 30px;
+  
 }
 
 @media screen and (max-width: $smallMaxWidth) {
   .management-container li {
     margin-left: 20px;
+    margin-bottom: 5px;
   }
 }
 

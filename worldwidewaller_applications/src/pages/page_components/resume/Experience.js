@@ -42,8 +42,11 @@ class Experience extends Component {
         sectionName={sectionName}
         handleTriggerClick={handleTriggerClick}
       >
-        <div className={styles.container}>
-          <div className={styles.header}>{job1.title}</div>
+        <div className={styles.experienceContainer}>
+          <p className={styles.experienceHeader}>
+            {job1.title}
+            <span>{`(${job1.date})`}</span>
+          </p>
           <ul>
             <li>{job1.li1}</li>
             <li>
@@ -82,16 +85,23 @@ class JobSection extends Component {
     const { subJobs } = job;
     return (
       <>
-        <div className={styles.header}>
+        <p className={styles.experienceHeader}>
           {job.title}
-        </div>
+          <span>{`(${job.date})`}</span>
+        </p>
         {
           subJobs.map((subJob) => {
             return (
-              <div className={styles.subSection} key={uuidv4()}>
-                <p className={styles.subHeader}>{subJob.title}</p>
-                <p className={styles.skills}>{subJob.skills}</p>
-                <div>{subJob.summary}</div>
+              <div className={styles.experienceSubSection} key={uuidv4()}>
+                <p className={styles.experienceSubHeader}>{subJob.title}</p>
+                <p className={styles.experienceSkills}>
+                  <span>Skills/Tools/Libraries Used:</span>
+                  <span>{subJob.skills}</span>
+                </p>
+                <p className={styles.summarySkills}>
+                  <span>Job Summary:</span>
+                  <span>{subJob.summary}</span>
+                </p>
                 {(subJob.examples !== undefined) && (
                 <ul>
                   {

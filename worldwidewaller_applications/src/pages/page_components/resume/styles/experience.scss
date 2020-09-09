@@ -1,37 +1,74 @@
 @import '~styles/screen_dimensions.scss';
 
-.container {
+.experience-container {
   width: 100%;
   height: 100%;
 }
 
-.container ul {
-  margin-top: 0px;
+.experience-container ul {
+  margin: 0 0 15px 5px;
 }
 
-.header {
+.experience-header {
+  font-size: 1.2em;
   font-weight: bold;
   font-style: italic;
   color: var(--fontColorAlt);
 }
 
-.sub-header {
-  font-weight: bold;
-  
+.experience-header span {
+  margin-left: 5px;
 }
 
-.sub-section {
+.experience-sub-header {
+  width: max-content;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 2px;
+  text-decoration: underline;
+}
+
+.experience-sub-section {
   margin: 5px 20px;
 }
 
-.skills {  
-  font-style: italic;
-  font-size: 0.9em;
-  margin-bottom: 2px;
+.experience-sub-section ul {
+  padding-left: 25px;
 }
 
-@media screen and (max-width: $smallMaxWidth) {   
-  .sub-section {
+.experience-skills,
+.summary-skills {  
+  margin-bottom: 4px;
+}
+
+.summary-skills span:first-of-type,
+.experience-skills span:first-of-type {
+  color: var(--fontColorAlt);
+  margin-right: 5px;
+}
+
+@media screen and (max-width: $smallMaxWidth) {
+  .experience-header { 
+    font-size: 1.1em;
+  }
+  .experience-sub-section ul {
+    padding-left: 15px;
+  }
+  .experience-header span {
+    display: block;
+    margin-left: 0px;
+  }
+  .experience-container li {
+    margin-top: 5px;
+  }
+  .experience-skills span:last-of-type {
+    margin-left: 2px;
+  }
+
+  .experience-sub-section {
     margin: 0 10px;
+  }
+  .experience-sub-header {
+    margin-bottom: 2px;
   }
 }

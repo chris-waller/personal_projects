@@ -1,18 +1,20 @@
 const nbsp = '\xa0';
 export const job1 = {
-  title: 'Voluntary Work Hiatus (March 2019 – Present)',
-  li1: 'Voluntary time off of work to focus on personal projects',
+  title: 'Personal Projects',
+  date: 'March 2019 – Present',
+  li1: 'Voluntary took time off of work to focus on personal projects and advanced learning',
   li2A: 'See my private',
   li2B: `${nbsp}Github profile${nbsp}`,
   li2C: 'for samples of personal web applications completed or currently being developed',
 };
 
 export const job2 = {
-  title: 'Aeryon Labs Inc / FLIR, Kitchener, ON (Mar. 2016 – Mar. 2019)',
+  title: 'Aeryon Labs Inc, Kitchener, ON',
+  date: 'Mar. 2016 – Mar. 2019',
   subJobs: [
     {
       title: 'Web Application Developer / Team Lead',
-      skills: `Skills/Tools/Libraries Used: ReactJs, redux, HTML5, CSS, JavaScript,
+      skills: `ReactJs, redux, HTML5, CSS, JavaScript,
       jQuery, JSON, AJAX, REST, websockets, bootstrap, flex, Java 8, DropWizard,
       Postgres, AWS, XML, JIRA, GIT, SVN, maven, npm, docker`,
       summary: `Designed and developed a scalable, cross-platform ReactJs web application
@@ -50,11 +52,12 @@ export const job2 = {
 };
 
 export const job3 = {
-  title: 'Formulating Change, Kitchener, ON (Feb. 2015 – Mar. 2016)',
+  title: 'Formulating Change, Kitchener, ON',
+  date: 'Feb. 2015 – Mar. 2016',
   subJobs: [
     {
       title: 'Web Application Developer and Administrator',
-      skills: `Skills/Tools/Libraries Used: Ruby on Rails, C#, REST, HTML, CSS, JavaScript,
+      skills: `Ruby on Rails, C#, REST, HTML, CSS, JavaScript,
       jQuery, JSON, AJAX, bootstrap, flex, XML, YML, MySQL, JIRA, Subversion, GIT,
       Windows, Debian, Visual Studio`,
       summary: `Developed and deployed scalable, cross-platform Ruby on Rails web applications
@@ -76,11 +79,13 @@ export const job3 = {
 };
 
 export const job4 = {
-  title: 'Brock Solutions, Kitchener, ON (Jul. 2011 – Feb. 2015)',
+  title: 'Brock Solutions, Kitchener, ON',
+  date: 'Jul. 2011 – Feb. 2015',
   subJobs: [
     {
-      title: 'Project Tech Lead (Apr. 2013 – Feb. 2015)',
-      skills: `Skills/Tools/Libraries Used: C#, HTML, CSS, JavaScript, jQuery,
+      title: 'Project Tech Lead',
+      date: 'Apr. 2013 – Feb. 2015',
+      skills: `C#, HTML, CSS, JavaScript, jQuery,
       Objective-C, ASP.NET, REST, MSSQL, Perforce, XML, SSRS, Windows,
       Windows Server, IIS, Visio`,
       summary: `Enhanced and maintained a scheduling and training application for a large
@@ -96,8 +101,9 @@ export const job4 = {
       ],
     },
     {
-      title: 'Software Tech Lead (Feb. 2012 – Feb. 2015)',
-      skills: `Skills/Tools/Libraries Used: C#, HTML, CSS, JavaScript, jQuery, ASP.NET,
+      title: 'Software Tech Lead',
+      date: 'Feb. 2012 – Feb. 2015',
+      skills: `C#, HTML, CSS, JavaScript, jQuery, ASP.NET,
       REST, MSSQL, JIRA, Perforce XML, Crystal Reports, SSRS, Windows, Windows
       Server, IIS, Visio`,
       summary: `Worked on multiple teams developing baggage handling systems for
@@ -117,8 +123,9 @@ export const job4 = {
       ],
     },
     {
-      title: 'Web Application Developer (Jul. 2011 – Feb. 2015)',
-      skills: `Skills/Tools/Libraries Used: C#, HTML, CSS, JavaScript, jQuery, ASP.NET, REST,
+      title: 'Web Application Developer',
+      date: 'Jul. 2011 – Feb. 2015',
+      skills: `C#, HTML, CSS, JavaScript, jQuery, ASP.NET, REST,
       MSSQL, JIRA, Perforce, XML, Crystal Reports, Windows`,
       summary: `Worked for multiple projects on the company’s core web application that
       provided customers with a real-time look at the baggage system through dashboards,
@@ -140,11 +147,12 @@ export const job4 = {
 };
 
 export const job5 = {
-  title: 'ABC ETC, Hamilton, ON, (Jul. 2011 – Feb. 2012, contract)',
+  title: 'ABC ETC, Hamilton, ON,',
+  date: 'Jul. 2011 – Feb. 2012, contract',
   subJobs: [
     {
       title: 'Web Application Developer',
-      skills: 'Skills/Tools/Libraries Used: VB.NET, HTML, CSS, MSSQL , XML, Windows',
+      skills: 'VB.NET, HTML, CSS, MSSQL , XML, Windows',
       summary: `Responsible for reverse-engineering, refactoring and documenting an
        existing VB.NET application`,
       examples: [
