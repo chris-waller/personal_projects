@@ -56,13 +56,13 @@ class ThemeSelector extends Component {
     const { selectedTheme } = this.props;
     const siteThemes = getSiteThemes();
     return (
-      <div className={styles.container}>
-        <h5 className={styles.selectTheme}>Select Theme:</h5>
+      <div className={styles.themeSelectorContainer}>
+        <h5>Select Theme:</h5>
         <DropDown
           options={siteThemes}
           onChange={this.themeChanged}
           value={selectedTheme}
-          placeholder="Select an option"
+          placeholder="Select a site theme"
           className={styles.dropDown}
           placeholderClassName={styles.dropDownPlaceholder}
           menuClassName={styles.dropDownMenu}

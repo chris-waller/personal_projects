@@ -12,15 +12,15 @@ export default class Settings extends Component {
   render() {
     return (
       <Layout>
-        <div className={styles.container}>
-          <h1 className={styles.header}>Application Settings</h1>
-          <div className={styles.themeSelector}>
+        <div className={styles.settingsContainer}>
+          <h1>Application Settings</h1>
+          <div className={styles.settingsThemeSelector}>
             <ThemeSelector />
           </div>
           <div>
             <br />
-            Developer Note: &nbsp;This page is more of a placeholder until I get a proper&nbsp;
-            back-end setup so I can save user-settings to a db.
+            {`Developer Note: This page is more of a placeholder until I get a proper
+            back-end setup so I can save user-settings to a db.`}
             <br />
             <br />
             At the moment, this is purely redux client-side session management only.

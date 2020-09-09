@@ -7,10 +7,6 @@ import Layout from '~/components/Layout';
 // css imports
 // import styles from './styles/header.scss';
 
-/**
- * This component is responsible for displaying the site header.
- * The header will be replaced with a humburger menu at a specified screen size
- */
 export default class Contact extends Component {
   render() {
     return (
@@ -18,17 +14,17 @@ export default class Contact extends Component {
         <div>
           <span>Email:&nbsp;&nbsp;</span>
           <a href="mailto:chris.waller@worldwidewaller.ca">
-            chris.waller@worldwidewaller(temp).ca
+            chris.waller@worldwidewaller.ca
           </a>
         </div>
         <div>
           <span>Phone #:&nbsp;&nbsp;</span>
-          <span>555-555-5555</span>
+          <span>226-791-8618</span>
         </div>
         <div>
           <br />
-          Developer Note: &nbsp;&nbsp;This page is currently being&nbsp;
-          polished for prod-ready presentation.
+          {`Developer Note: This is just a placeholder page
+          as I continue working on the web application.`}
         </div>
       </Layout>
     );

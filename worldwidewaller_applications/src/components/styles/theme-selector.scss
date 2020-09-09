@@ -1,24 +1,21 @@
-@import "~styles/screen_dimensions";
-
-.container {
+.theme-selector-container {
   display: flex;
   align-items: center;
   height: 30px;
 }
 
-/* DropDown menu */
-/* ************* */
-$dropdownWidth: 110px;
-$dropdownPadding: 3px;
-div.select-theme {
-  width: $dropdownWidth;  
-}
-h5.select-theme {
+.theme-selector-container h5 {
   color: var(--fontColorMain);
   margin-right: 10px;
 }
 
+/* DropDown menu */
+/* ************* */
+$dropdownWidth: 150px;
+$dropdownPadding: 3px;
+
 .drop-down {
+  width: $dropdownWidth; 
   position: relative;
   z-index: 3;
   cursor: pointer;

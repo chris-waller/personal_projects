@@ -60,7 +60,7 @@ class Header extends Component {
     );
 
     return (
-      <div className={classNames(styles.container, collapsedStyle)}>
+      <div className={classNames(styles.headerContainer, collapsedStyle)}>
 
         <div className={classNames(styles.collapseSection, collapsedStyle)}>
           {collapseIcon}

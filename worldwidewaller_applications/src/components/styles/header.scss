@@ -1,6 +1,6 @@
 @import "~styles/screen_dimensions";
 
-.container {
+.header-container {
   width: 100%;
   display: flex;
   background: var(--bgHeader);
@@ -8,7 +8,7 @@
   height: 90px;
 }
 
-.container.collapsed {
+.header-container.collapsed {
   padding: 0;
   display: grid;
   justify-content: center;
