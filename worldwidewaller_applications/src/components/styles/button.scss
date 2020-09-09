@@ -1,7 +1,9 @@
-.container {
+@import "~styles/screen_dimensions";
+
+.button-container {
   width: max-content;  
 }
-.container.min {
+.button-container.min {
   width: min-content;
 }
 
@@ -13,4 +15,11 @@
   margin: 1px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+@media screen and (max-width: $smallMaxWidth) {
+  .button {
+    font-size: 0.9em;
+  }
+
 }

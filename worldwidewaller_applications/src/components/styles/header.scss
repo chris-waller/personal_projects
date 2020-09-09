@@ -73,7 +73,10 @@
   color: var(--fontColorAlt);
 }
 
-@media screen and (max-width: $smallMaxWidth) {   
+@media screen and (max-width: $smallMaxWidth) {
+  .header-container {
+    height: 70px;
+  }
   .home-link {
     width: 40px;
     height: 40px;

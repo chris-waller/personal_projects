@@ -20,7 +20,7 @@ class Button extends Component {
     );
 
     return (
-      <div className={styles.container}>
+      <div className={styles.buttonContainer}>
         <button
           type="button"
           onClick={() => this.props.onClick()}

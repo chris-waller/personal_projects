@@ -37,25 +37,23 @@ class Summary extends Component {
         sectionName={sectionName}
         handleTriggerClick={handleTriggerClick}
       >
-        <div className={styles.section}>
-          <p>
-            {highlightedText.overview}
-          </p>
-          <ul className={styles.list}>
+        <div className={styles.summaryContainer}>
+          <p>{highlightedText.overview}</p>
+          <ul className={styles.summaryList}>
             <li>
-              <p className={styles.header}>{highlightedText.p1}</p>
+              <p className={styles.summaryHeader}>{highlightedText.p1}</p>
               <ul>
                 <li>{highlightedText.li1}</li>
               </ul>
             </li>
             <li>
-              <p className={styles.header}>{highlightedText.p2}</p>
+              <p className={styles.summaryHeader}>{highlightedText.p2}</p>
               <ul>
                 <li>{highlightedText.li2}</li>
               </ul>
             </li>
             <li>
-              <p className={styles.header}>{highlightedText.p3}</p>
+              <p className={styles.summaryHeader}>{highlightedText.p3}</p>
               <ul>
                 <li>{highlightedText.li3}</li>
               </ul>

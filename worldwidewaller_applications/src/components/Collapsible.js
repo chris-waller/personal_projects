@@ -40,11 +40,11 @@ class Collapsible extends Component {
       <ReactCollapsible
         trigger={trigger}
         handleTriggerClick={this.onTriggerClick}
-        className={styles.section}
-        openedClassName={styles.section}
+        className={styles.collapsibleSection}
+        openedClassName={styles.collapsibleSection}
         triggerClassName={styles.trigger}
         triggerOpenedClassName={classNames(styles.trigger, styles.open)}
-        contentInnerClassName={styles.content}
+        contentInnerClassName={styles.collapsibleContent}
         open={isOpen}
         transitionTime={500}
       >

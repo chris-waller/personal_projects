@@ -5,13 +5,19 @@ import React, { Component } from 'react';
 import Layout from '~/components/Layout';
 
 // css imports
-// import styles from './styles/header.scss';
+import styles from './styles/contact.scss';
 
 export default class Contact extends Component {
   render() {
     return (
       <Layout>
         <div>
+          <h2 className={styles.title}>
+            Chris Waller,&nbsp;
+            <span>
+              full stack web application developer
+            </span>
+          </h2>
           <span>Email:&nbsp;&nbsp;</span>
           <a href="mailto:chris.waller@worldwidewaller.ca">
             chris.waller@worldwidewaller.ca

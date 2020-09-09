@@ -1,27 +1,35 @@
 @import "~styles/screen_dimensions";
 
-.section {
+.summary-container {
   width: 100%;
   height: 100%; 
 }
 
-.header {
+.summaryHeader {
   color: var(--fontColorAlt);
 }
 
-.list ul {
-  padding-left: 25px;  
+ul.summaryList {    
+  margin-top: 10px;  
 }
-.list li {
+.summaryList ul {
+  margin-bottom: 10px;
+  padding-left: 20px; 
+}
+.summaryList li {
   margin-bottom: 2px;  
 }
 
-@media screen and (max-width: $smallMaxWidth) {   
-  .list {
-    padding-left: 25px;
-  }  
-  .list ul {
-    padding-left: 20px;
+@media screen and (max-width: $smallMaxWidth) {
+  ul.summaryList {    
+    margin: 7px 0 0 0;
+    padding: 0px 20px 0 0;
+  }
+  .summaryList ul {
+    margin-bottom: 10px
+  }
+  .summaryList li {
+    line-height: 1.3em;
   }
 }
 
