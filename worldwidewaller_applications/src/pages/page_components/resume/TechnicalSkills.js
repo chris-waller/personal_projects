@@ -10,8 +10,8 @@ import styles from './styles/technical_skills.scss';
 
 class TechnicalSkills extends Component {
   static pageText = {
-    languages: 'JavaScript, CSS/SCSS, HTML5, SQL, Java 8, Ruby on Rails, PHP, XML, YML, C#',
-    frameWorks: 'ReactJs, redux, AJAX, JSON, flex, bootsrap, npm, webpack, jQuery, leaflet, mapbox, highcharts, recaptcha, OATH2, Java DropWizard, .NET, Crystal Reports, SSRS',
+    languages: 'JavaScript, CSS/SCSS, HTML, SQL, Java 8, Ruby on Rails, PHP, XML, YML, C#',
+    frameWorks: 'ReactJs, redux, AJAX, JSON, flex, bootstrap, npm, webpack, jQuery, leaflet, mapbox, highcharts, recaptcha, Java DropWizard, .NET, Crystal Reports, SSRS',
     web: 'RESTful/SOAP web services, websockets, SSL certificates, domain registration',
     deployment: 'Amazon Web Services (AWS), docker, Jenkins, Maven',
     database: 'SQL Server, MySQL, Postgres, DynamoDB, migrations, replication, optimization, scripting',

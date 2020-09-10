@@ -19,6 +19,9 @@ const Links = (props) => {
       handleTriggerClick={handleTriggerClick}
     >
       <div className={styles.container}>
+        <a target="_blank" rel="noopener noreferrer" href="http://resume.worldwidewaller.ca">
+          Online Resume
+        </a>
         <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=Yv-xtL_wfiU">
           AeryonLive beta promo video 1
         </a>

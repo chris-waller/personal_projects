@@ -33,4 +33,7 @@ li, ul {
   li {
     line-height: 1.3em;
   }
+  a, a:visited {
+    text-shadow: var(--linkTextShadowSmall);
+  }
 }

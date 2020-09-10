@@ -51,7 +51,7 @@ class Experience extends Component {
             <li>{job1.li1}</li>
             <li>
               {job1.li2A}
-              <a target="__blank" href="https://github.com/chris-waller/personal_projects">
+              <a target="__blank" href="https://resume.worldwidewaller.ca">
                 {job1.li2B}
               </a>
               {job1.li2C}

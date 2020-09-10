@@ -3,9 +3,9 @@ export const job1 = {
   title: 'Personal Projects',
   date: 'March 2019 – Present',
   li1: 'Voluntary took time off of work to focus on personal projects and advanced learning',
-  li2A: 'See my private',
-  li2B: `${nbsp}Github profile${nbsp}`,
-  li2C: 'for samples of personal web applications completed or currently being developed',
+  li2A: 'See my',
+  li2B: `${nbsp}Online Resume ${nbsp}`,
+  li2C: 'for an example of a current web application (this one) in development',
 };
 
 export const job2 = {

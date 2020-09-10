@@ -14,7 +14,7 @@ class Achievements extends Component {
   static pageText = {
     heading1: `January, 2019 ${nbsp}${nbsp}[Aeryon Labs / FLIR]`,
     content1: `Was instrumental in the initial stakeholder meetings, design, development and
-      deployment of a highly successful ReactJs/Java8 video application used by emergency
+      deployment of a highly successful ReactJS/Java8 video application used by emergency
       responders to monitor critical situations in real-time. This software played a
       key role in FLIR's public acquisition of Aeryon Labs.`,
     heading2: `November, 2015 ${nbsp}${nbsp}[Brock Solutions]`,

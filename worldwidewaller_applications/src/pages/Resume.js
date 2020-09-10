@@ -13,7 +13,7 @@ import styles from './styles/resume.scss';
 // custom components
 import Layout from '~/components/Layout';
 import Summary from './page_components/resume/Summary';
-import Achievements from './page_components/resume/Achievments';
+import Achievements from './page_components/resume/Achievements';
 import ManagementSkills from './page_components/resume/ManagementSkills';
 import TechnicalSkills from './page_components/resume/TechnicalSkills';
 import Experience from './page_components/resume/Experience';
