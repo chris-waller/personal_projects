@@ -8,9 +8,9 @@ import {
 const initialState = {
   splashPageVisibility: {
     hideAll: false, // flag to not show any splash pages
-    welcome: true, // displayed when a user visits the site for the first time
-    resume: true, // displayed when a user visits the resume page for the first time
-    settings: true, // displayed when a user visits the settings page for the first time
+    showWelcome: true, // displayed when a user visits the site for the first time
+    showResume: true, // displayed when a user visits the resume page for the first time
+    showSettings: true, // displayed when a user visits the settings page for the first time
   },
   selectedTheme: null,
 };

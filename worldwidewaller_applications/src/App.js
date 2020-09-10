@@ -9,6 +9,7 @@ import Resume from '~/pages/Resume';
 import Settings from '~/pages/Settings';
 import Contact from '~/pages/Contact';
 import NoMatch from '~/pages/NoMatch';
+import WelcomeSplash from '~/components/modals/WelcomeSplash';
 
 // global styles
 import '~/styles/global_styles.scss';
@@ -58,31 +59,40 @@ class App extends Component {
 
     const splashPageVisibility = {
       hideAll,
-      welcome: true,
-      resume: true,
-      settings: true,
+      showWelcome: true,
+      showResume: true,
+      showSettings: true,
     };
     store.dispatch(setSplashAction(splashPageVisibility));
 
-    return hideAll;
+    const hideWelcomePage = !splashPageVisibility.showWelcome || hideAll;
+    return hideWelcomePage;
   }
 
   constructor() {
     super();
+
     App.setSiteTheme();
-    const hideSplashPages = App.setSplashPageVisibility();
+    const hideWelcomePage = App.setSplashPageVisibility();
     this.state = {
-      hideSplashPages,
+      hideWelcomePage,
     };
   }
 
+  closeSplashScreen = () => {
+    this.setState({
+      hideWelcomePage: true,
+    });
+  }
+
   render() {
+    const { hideWelcomePage } = this.state;
     return (
       <VisualizerProvider>
         <Router>
           <Provider store={store}>
-            {this.state.hideSplashPages
-              && <div>Show the modal!!!!</div> }
+            {!hideWelcomePage
+              && <WelcomeSplash closeModal={this.closeSplashScreen} /> }
             <Switch>
               <Route path="/" exact component={Resume} />
               <Route path="/resume" exact component={Resume} />

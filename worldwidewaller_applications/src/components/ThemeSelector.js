@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import styles from './styles/theme-selector.scss';
 
 // utilities
-import { getSiteThemes, changeTheme } from '../utilities/theme_helpers';
+import { getSiteThemes, changeTheme } from '~/utilities/theme_helpers';
 
 // redux actions
 import {

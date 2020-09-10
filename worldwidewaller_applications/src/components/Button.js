@@ -10,9 +10,6 @@ import styles from './styles/button.scss';
  * A simple component to ensure all button elements have consistancy throughout the app.
  */
 class Button extends Component {
-  /**
-   * Redner.
-   */
   render() {
     const buttonClassName = classNames(
       styles.button,
