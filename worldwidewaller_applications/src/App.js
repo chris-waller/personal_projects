@@ -50,13 +50,30 @@ class App extends Component {
   }
 
   static setSplashPageVisibility() {
-    store.dispatch(setSplashAction());
+    const queryParamSplash = (new URLSearchParams(window.location.search)).get('hide_splash_pages');
+    let hideAll = false;
+    if (queryParamSplash !== null && queryParamSplash.toLocaleUpperCase() === 'TRUE') {
+      hideAll = true;
+    }
+
+    const splashPageVisibility = {
+      hideAll,
+      welcome: true,
+      resume: true,
+      settings: true,
+    };
+    store.dispatch(setSplashAction(splashPageVisibility));
+
+    return hideAll;
   }
 
   constructor() {
     super();
     App.setSiteTheme();
-    App.setSplashPageVisibility();
+    const hideSplashPages = App.setSplashPageVisibility();
+    this.state = {
+      hideSplashPages,
+    };
   }
 
   render() {
@@ -64,6 +81,8 @@ class App extends Component {
       <VisualizerProvider>
         <Router>
           <Provider store={store}>
+            {this.state.hideSplashPages
+              && <div>Show the modal!!!!</div> }
             <Switch>
               <Route path="/" exact component={Resume} />
               <Route path="/resume" exact component={Resume} />
