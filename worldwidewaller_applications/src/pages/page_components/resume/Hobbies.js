@@ -18,7 +18,8 @@ const Hobbies = (props) => {
       sectionName={sectionName}
       handleTriggerClick={handleTriggerClick}
     >
-      <div className={styles.container}>
+      <div className={styles.hobbiesContainer}>
+        <p className={styles.tilde}>~</p>
         <p className={styles.hobby}>Reading</p>
         <p className={styles.tilde}>~</p>
         <p className={styles.hobby}>Video Games</p>
@@ -36,6 +37,7 @@ const Hobbies = (props) => {
         <p className={styles.hobby}>African Cichlids</p>
         <p className={styles.tilde}>~</p>
         <p className={styles.hobby}>Halloween</p>
+        <p className={styles.tilde}>~</p>
       </div>
     </Collapsible>
   );

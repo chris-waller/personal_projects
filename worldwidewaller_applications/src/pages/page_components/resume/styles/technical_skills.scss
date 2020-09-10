@@ -33,10 +33,11 @@
 
 @media screen and (max-width: $smallMaxWidth) {   
   .heading {
-    width: 27%;
+    width: 30%;
   }
   .skills {
-    width: 73%
+    width: 70%;
+    margin-left: 15px;
   }
 }
 @media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {  

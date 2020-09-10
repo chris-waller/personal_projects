@@ -56,7 +56,7 @@ export const job3 = {
   date: 'Feb. 2015 – Mar. 2016',
   subJobs: [
     {
-      title: 'Web Application Developer and Administrator',
+      title: 'Web App Developer and Administrator',
       skills: `Ruby on Rails, C#, REST, HTML, CSS, JavaScript,
       jQuery, JSON, AJAX, bootstrap, flex, XML, YML, MySQL, JIRA, Subversion, GIT,
       Windows, Debian, Visual Studio`,

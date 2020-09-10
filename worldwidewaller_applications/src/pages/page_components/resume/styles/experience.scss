@@ -6,7 +6,7 @@
 }
 
 .experience-container ul {
-  margin: 0 0 15px 5px;
+  margin-left: 5px;
 }
 
 .experience-header {
@@ -14,6 +14,7 @@
   font-weight: bold;
   font-style: italic;
   color: var(--fontColorAlt);
+  margin-top: 15px;
 }
 
 .experience-header span {
@@ -24,7 +25,7 @@
   width: max-content;
   font-size: 1.1em;
   font-weight: bold;
-  margin-bottom: 2px;
+  margin: 5px 0 2px 0 !important;
   text-decoration: underline;
 }
 
