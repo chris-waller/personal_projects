@@ -1,49 +1,33 @@
 // Reducer file for updating user settings
 import {
-  TOGGLE_HEADER_COLLAPSED,
-  TOGGLE_RESUME_SECTIONS,
-  SET_RESUME_SEARCH_STRING,
+  SET_THEME,
+  SET_SPLASH_VIS,
 } from '../actionTypes';
 
 // initial state
 const initialState = {
-  headerCollapsed: false,
-  resumeSections: {
-    achievementsOpen: false,
-    educationOpen: false,
-    experienceOpen: false,
-    hobbiesOpen: false,
-    linksOpen: false,
-    managementOpen: false,
-    summaryOpen: false,
-    technicalOpen: false,
+  splashPageVisibility: {
+    welcome: true, // displayed when a user visits the site for the first time
+    resume: true, // displayed when a user visits the resume page for the first time
+    settings: true, // displayed when a user visits the settings page for the first time
   },
-  resumeSearchString: null,
+  selectedTheme: null,
 };
 
-const userSettings = (state = initialState, action) => {
+const appSettings = (state = initialState, action) => {
   switch (action.type) {
-    // Toggles the main header open/closed for the application
-    case TOGGLE_HEADER_COLLAPSED: {
+    // Sets the theme for the application
+    case SET_THEME: {
       return {
         ...state,
-        headerCollapsed: action.payload.isCollapsed,
+        selectedTheme: action.payload.theme,
       };
     }
 
-    // Toggles the main header open/closed for the application
-    case TOGGLE_RESUME_SECTIONS: {
+    // Sets visibility for the various splash pages throughout the site
+    case SET_SPLASH_VIS: {
       return {
         ...state,
-        resumeSections: action.payload.sections,
-      };
-    }
-
-    // Sets the search string used on the resume page
-    case SET_RESUME_SEARCH_STRING: {
-      return {
-        ...state,
-        resumeSearchString: action.payload.resumeSearchString,
       };
     }
 
@@ -53,4 +37,4 @@ const userSettings = (state = initialState, action) => {
   }
 };
 
-export default userSettings;
+export default appSettings;

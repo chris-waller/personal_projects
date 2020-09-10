@@ -22,22 +22,14 @@ import {
 import store from '~/redux/store';
 import {
   setTheme as setThemeAction,
+  setSplashPageVisibility as setSplashAction,
 } from '~/redux/actions/userSettings';
 
 class App extends Component {
   /**
    * Updates the site's theme in the DOM and informs redux of the change.
    */
-  static updateSiteTheme(themeName, newThemeStyle) {
-    // change theme in DOM
-    changeTheme(newThemeStyle);
-    // inform redux
-    store.dispatch(setThemeAction(themeName));
-  }
-
-  constructor() {
-    super();
-
+  static setSiteTheme() {
     let themeName = DEFAULT_THEME;
 
     // figure out which theme to set (default or query param)
@@ -50,7 +42,21 @@ class App extends Component {
     // ensure we've actually found the theme
     const siteThemes = getSiteThemes();
     const selectedTheme = siteThemes.find((theme) => theme.label === themeName);
-    App.updateSiteTheme(selectedTheme.label, selectedTheme.value);
+
+    // change theme in DOM
+    changeTheme(selectedTheme.value);
+    // inform redux
+    store.dispatch(setThemeAction(selectedTheme.label));
+  }
+
+  static setSplashPageVisibility() {
+    store.dispatch(setSplashAction());
+  }
+
+  constructor() {
+    super();
+    App.setSiteTheme();
+    App.setSplashPageVisibility();
   }
 
   render() {
