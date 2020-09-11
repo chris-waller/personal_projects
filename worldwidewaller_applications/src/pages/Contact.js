@@ -11,26 +11,19 @@ export default class Contact extends Component {
   render() {
     return (
       <Layout>
-        <div>
-          <h2 className={styles.title}>
-            Chris Waller,&nbsp;
-            <span>
-              full stack web application developer
-            </span>
-          </h2>
-          <span>Email:&nbsp;&nbsp;</span>
-          <a href="mailto:chris.waller@worldwidewaller.ca">
-            chris.waller@worldwidewaller.ca
-          </a>
-        </div>
-        <div>
-          <span>Phone #:&nbsp;&nbsp;</span>
-          <span>226-791-8618</span>
-        </div>
-        <div>
-          <br />
-          {`Developer Note: This is just a placeholder page
-          as I continue working on the web application.`}
+        <div className={styles.contactContainer}>
+          <h1>Chris Waller</h1>
+          <h2>Full Stack Web Application Developer</h2>
+
+          <div className={styles.contactEmail}>
+            <a href="mailto:chris.waller@worldwidewaller.ca">
+              chris.waller@worldwidewaller.ca
+            </a>
+          </div>
+
+          <div>
+            <h3>226-791-8618</h3>
+          </div>
         </div>
       </Layout>
     );

@@ -35,13 +35,13 @@ class ManagementSkills extends Component {
       >
         <div className={styles.managementContainer}>
           <ul>
-            <span>People Management:</span>
+            <h4>People Management:</h4>
             <li>{highlightedText.li1}</li>
             <li>{highlightedText.li2}</li>
             <li>{highlightedText.li3}</li>
           </ul>
           <ul>
-            <span>Project Management:</span>
+            <h4>Project Management:</h4>
             <li>{highlightedText.li4}</li>
             <li>{highlightedText.li5}</li>
             <li>{highlightedText.li6}</li>

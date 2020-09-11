@@ -42,8 +42,8 @@
   margin-bottom: 4px;
 }
 
-.summary-skills span:first-of-type,
-.experience-skills span:first-of-type {
+.summary-skills > span:first-of-type,
+.experience-skills > span:first-of-type {
   color: var(--fontColorAlt);
   margin-right: 5px;
 }
