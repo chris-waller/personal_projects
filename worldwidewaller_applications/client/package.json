@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --env.env=dev",
     "prebuild": "rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack -p --env.env=prod",    
+    "build": "cross-env NODE_ENV=production webpack -p --env.env=prod",
     "server": "nodenv -E .env server/index.js --exec nodemon | pino-colada",
     "dev2": "run-p server dev"
   },
