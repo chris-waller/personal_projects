@@ -1,4 +1,5 @@
 @import '~styles/screen_dimensions.scss';
+@import '~/pages/page_components/features/styles/features.scss';
 
 .welcome-container-wrapper {
   width: 100%;
@@ -31,41 +32,19 @@
   margin-bottom: 13px;
 }
 
-.welcome-container li {
-  list-style-type: upper-roman;
-}
-
 .welcome-container ul {
   padding-left: 25px;
 }
 
-.upcoming-features p,
-.release-notes p {
-  font-size: 95%;
-}
-
-.upcoming-features,
-.release-notes {
-  margin-top: 10px;
-}
-
-.upcoming-features h4,
-.release-notes h4 {
+.welcome-container h4 {
   text-decoration: underline;
   font-style: italic;
   margin-bottom: 5px;
-  color: var(--fontColorAlt);
+  color: var(--fontColorAlt);  
+}
+
+.welcome-container h4:not(:first-of-type) {
   margin-top: 15px;
-}
-
-.upcoming-features h5,
-.release-notes h5 {
-  font-size: 90%;
-}
-
-.upcoming-features li,
-.release-notes li {
-  list-style-type: disc;
 }
 
 .welcome-container button {
@@ -90,8 +69,7 @@
   .welcome-container li {
     font-size: 0.95em;
   }
-  .upcoming-features h4,
-  .release-notes h4 {
+  .welcome-container h4 {
     margin-top: 0;
   }
 }

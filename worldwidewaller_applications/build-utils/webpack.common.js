@@ -16,6 +16,7 @@ const config = {
       styles: path.join(path.join(__dirname, '/../'), 'src/styles'),
       utilities: path.join(path.join(__dirname, '/../'), 'src/utilities'),
       images: path.join(path.join(__dirname, '/../'), 'src/images'),
+      '~': path.join(path.join(__dirname, '/../'), 'src'),
     },
   },
   module: {

@@ -1,0 +1,21 @@
+@import '~styles/screen_dimensions.scss';
+
+.upcoming-features-container p {
+  font-size: 95%;
+}
+
+.upcoming-features-container h5 {
+  font-size: 90%;
+}
+
+.upcoming-features-container li li {
+  list-style-type: disc;
+}
+
+
+@media screen and (max-width: $smallMaxWidth) {  
+}
+@media screen and (min-width: $mediumMinWidth) and (max-width: $mediumMaxWidth) {    
+}
+@media screen and (min-width: $largeMinWidth) and (max-width: $largeMaxWidth) {   
+}

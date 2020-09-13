@@ -8,6 +8,7 @@ import { VisualizerProvider } from 'react-lifecycle-visualizer';
 import Resume from '~/pages/Resume';
 import Settings from '~/pages/Settings';
 import Contact from '~/pages/Contact';
+import About from '~/pages/About';
 import NoMatch from '~/pages/NoMatch';
 import WelcomeSplash from '~/components/modals/WelcomeSplash';
 
@@ -98,6 +99,7 @@ class App extends Component {
               <Route path="/resume" exact component={Resume} />
               <Route path="/settings" exact component={Settings} />
               <Route path="/contact" exact component={Contact} />
+              <Route path="/about" exact component={About} />
               <Route component={NoMatch} />
             </Switch>
           </Provider>
