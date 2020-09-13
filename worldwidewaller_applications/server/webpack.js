@@ -1,12 +1,15 @@
 const webpack = require('webpack');
-const commonPaths = require('./common-paths');
+
+const path = require('path');
+
+const PROJECT_ROOT = path.resolve(__dirname);
 
 const port = process.env.PORT || 3000;
 
 const config = {
   mode: 'development',
   entry: {
-    app: `${commonPaths.appEntry}/index.js`,
+    app: `${PROJECT_ROOT}/index.js`,
   },
   output: {
     filename: '[name].[hash].js',
@@ -19,34 +22,11 @@ const config = {
   devtool: 'inline-source-map',
   module: {
     rules: [
+      // File loader
       {
-        test: /\.[cs][ac]?ss$/i,
+        test: /\.(png|svg|jpg|gif|pdf)$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localsConvention: 'camelCase',
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: '',
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                indentedSyntax: true,
-              },
-            },
-          },
+          'file-loader',
         ],
       },
     ],

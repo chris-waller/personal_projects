@@ -1,7 +1,11 @@
-const express = require('express');
+// Bring in our dependencies
+const app = require('express')();
+const routes = require('./routes/resume');
 
-const app = express();
+//  Connect all our routes to our application
+app.use('/', routes);
 
-const PORT = process.env.PORT || 3001;
-
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+// Turn on that server!
+app.listen(3001, () => {
+  console.log('App listening on port 3001');
+});
