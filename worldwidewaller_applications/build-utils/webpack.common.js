@@ -1,12 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const commonPaths = require('./common-paths');
+const { UnusedFilesWebpackPlugin } = require("unused-files-webpack-plugin");
 
 const projectType = "client";
 
 const config = {
   entry: {
-    vendor: ['semantic-ui-react'],
+    // need to add more here later
+    // vendor: ['semantic-ui-react'],
   },
   output: {
     path: commonPaths.clientOutputPath,
@@ -57,6 +59,7 @@ const config = {
     },
   },
   plugins: [
+    new UnusedFilesWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
