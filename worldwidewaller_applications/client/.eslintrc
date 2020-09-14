@@ -26,6 +26,14 @@
     "css-modules/no-undef-class": [2, { "camelCase": true }]
   },
   "settings": {
-    "import/resolver": "babel-plugin-root-import"    
+    // "import/resolver": "babel-plugin-root-import"    
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["~", "./src"]
+        ],
+        "extensions": [".js", ".json"]
+      }
+    }
   }
 }

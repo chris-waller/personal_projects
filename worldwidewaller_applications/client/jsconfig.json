@@ -7,5 +7,6 @@
       "~": ["src/*"]
     }
   },
+  "eslintConfig": "./.eslint",
   "exclude": ["node_modules", "dist"]
 }
