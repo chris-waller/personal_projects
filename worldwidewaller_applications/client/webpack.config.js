@@ -1,6 +1,6 @@
 const webpackMerge = require('webpack-merge');
-const buildValidations = require('./build-utils/build-validations');
-const commonConfig = require('./build-utils/webpack.common');
+const buildValidations = require('../build-utils/build-validations');
+const commonConfig = require('../build-utils/webpack.common');
 
 // We can include Webpack plugins, through addons, that do
 // not need to run every time we are developing.
@@ -11,7 +11,7 @@ const addons = (/* string | string[] */ addonsArg) => {
     .filter(Boolean); // If addons is undefined, filter it out
 
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  return addonsMap.map((addonName) => require(`./build-utils/addons/webpack.${addonName}.js`));
+  return addonsMap.map((addonName) => require(`../build-utils/addons/webpack.${addonName}.js`));
 };
 
 // 'env' will contain the environment variable from 'scripts'
@@ -27,7 +27,7 @@ module.exports = (env) => {
   // or production
   // console.log(env.env); => dev
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  const envConfig = require(`./build-utils/webpack.${env.env}.js`);
+  const envConfig = require(`../build-utils/webpack.${env.env}.js`);
 
   // 'webpack-merge' will combine our shared configurations, the
   // environment specific configurations and any addons we are

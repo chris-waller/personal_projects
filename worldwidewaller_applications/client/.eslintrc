@@ -32,7 +32,7 @@
         "map": [
           ["~", "./src"]
         ],
-        "extensions": [".js", ".json"]
+        "extensions": [".js", ".json", "css", ".scss"]
       }
     }
   }

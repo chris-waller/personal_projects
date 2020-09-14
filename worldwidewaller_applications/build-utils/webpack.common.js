@@ -2,21 +2,23 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const commonPaths = require('./common-paths');
 
+const projectType = "client";
+
 const config = {
   entry: {
     vendor: ['semantic-ui-react'],
   },
   output: {
-    path: commonPaths.outputPath,
+    path: commonPaths.clientOutputPath,
     publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.scss', '.css'],
     alias: {
-      styles: path.join(path.join(__dirname, '/../'), 'src/styles'),
-      utilities: path.join(path.join(__dirname, '/../'), 'src/utilities'),
-      images: path.join(path.join(__dirname, '/../'), 'src/images'),
-      '~': path.join(path.join(__dirname, '/../'), 'src'),
+      styles: path.join(path.join(__dirname, '/../'), `${projectType}/src/styles`),
+      utilities: path.join(path.join(__dirname, '/../'), `${projectType}/src/utilities`),
+      images: path.join(path.join(__dirname, '/../'), `${projectType}/src/images`),
+      '~': path.join(path.join(__dirname, '/../'), `${projectType}/src`),      
     },
   },
   module: {
