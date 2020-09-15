@@ -2,11 +2,11 @@ const webpack = require('webpack');
 const commonPaths = require('./common-paths');
 
 const port = process.env.PORT || 3000;
-console.log('test', commonPaths.clientAppEntry);
+
 const config = {
   mode: 'development',
   entry: {
-    app: `${commonPaths.clientAppEntry}/index.js`,
+    app: `${commonPaths.appEntry}/index.js`,
   },
   output: {
     filename: '[name].[hash].js',
