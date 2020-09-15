@@ -170,7 +170,7 @@ class Resume extends Component {
   // eslint-disable-next-line
   downloadPdf() {
     console.log('download pdf');
-    fetch('/api/greeting')
+    fetch('/api/resume/pdf')
       .then((response) => console.log(response));
   }
 

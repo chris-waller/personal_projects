@@ -14,5 +14,5 @@ module.exports = {
   clientAppEntry: path.join(CLIENT_ROOT, 'src'), 
   // server project paths
   servertOutputPath: path.join(SERVER_ROOT, 'dist'),
-  serverAppEntry: SERVER_ROOT  
+  serverAppEntry: path.join(SERVER_ROOT, 'src'),  
 };

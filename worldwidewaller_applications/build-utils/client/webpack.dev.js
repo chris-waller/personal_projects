@@ -2,10 +2,11 @@ const webpack = require('webpack');
 const commonPaths = require('../common-paths');
 
 const port = process.env.PORT || 3000;
+console.log('test', commonPaths.clientAppEntry);
 const config = {
   mode: 'development',
   entry: {
-    // app: `${commonPaths.clientAppEntry}/backend-dev.js`,
+    app: `${commonPaths.clientAppEntry}/index.js`,
   },
   output: {
     filename: '[name].[hash].js',
@@ -62,8 +63,8 @@ const config = {
     open: false,
     proxy: {
       '/api': {
-        target: 'http://localhost:3002',
-        // pathRewrite: { '^/api': '' },
+        target: 'http://localhost:3001',
+        pathRewrite: { '^/api': '' },
         secure: false,
         changeOrigin: true,
       },

@@ -9,6 +9,7 @@ import featureStyles from './styles/features.scss';
 
 export default class ReleaseNotes extends Component {
   render() {
+    console.log('here', Content);
     return (
       <div className={featureStyles.upcomingFeaturesContainer}>
         {
