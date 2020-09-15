@@ -1,30 +1,27 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const commonPaths = require('./common-paths');
-const { UnusedFilesWebpackPlugin } = require("unused-files-webpack-plugin");
-
-const projectType = "client";
+const commonPaths = require('../common-paths');
 
 const config = {
   entry: {
     // need to add more here later
-    // vendor: ['semantic-ui-react'],
+    vendor: ['semantic-ui-react'],
   },
   output: {
-    path: commonPaths.clientOutputPath,
+    path: commonPaths.outputPath,
     publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.scss', '.css'],
     alias: {
-      styles: path.join(path.join(__dirname, '/../'), `${projectType}/src/styles`),
-      utilities: path.join(path.join(__dirname, '/../'), `${projectType}/src/utilities`),
-      images: path.join(path.join(__dirname, '/../'), `${projectType}/src/images`),
-      '~': path.join(path.join(__dirname, '/../'), `${projectType}/src`),      
+      styles: path.join(commonPaths.clientAppEntry, '/styles'),
+      utilities: path.join(commonPaths.clientAppEntry, '/utilities'),
+      images: path.join(commonPaths.clientAppEntry, '/images'),
+      '~': path.join(commonPaths.clientAppEntry, '/'),      
     },
   },
   module: {
-    rules: [
+    rules: [   
       // JS loader
       {
         test: /\.(js)$/,
@@ -59,7 +56,6 @@ const config = {
     },
   },
   plugins: [
-    new UnusedFilesWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.ico',

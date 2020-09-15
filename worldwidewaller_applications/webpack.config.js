@@ -1,8 +1,5 @@
-const webpackMerge = require('webpack-merge');
-const buildValidations = require('../build-utils/build-validations');
-const commonConfig = require('../build-utils/webpack.common');
-
-console.log('in the webpack here');
+const { merge } = require('webpack-merge');
+const buildValidations = require('./build-utils/build-validations');
 // We can include Webpack plugins, through addons, that do
 // not need to run every time we are developing.
 // We will see an example when we set up 'Bundle Analyzer'
@@ -12,31 +9,32 @@ const addons = (/* string | string[] */ addonsArg) => {
     .filter(Boolean); // If addons is undefined, filter it out
 
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  return addonsMap.map((addonName) => require(`../build-utils/addons/webpack.${addonName}.js`));
+  return addonsMap.map((addonName) => require(`./build-utils/addons/webpack.${addonName}.js`));
 };
 
 // 'env' will contain the environment variable from 'scripts'
 // section in 'package.json'.
 // console.log(env); => { env: 'dev' }
-module.exports = (env, type) => {
+module.exports = (env) => {
   if (!env) {
     throw new Error(buildValidations.ERR_NO_ENV_FLAG);
   }
-  if (!type) {
+  
+  if (!env.projectType) {
     throw new Error(buildValidations.ERR_NO_TYPE_FLAG);
   }
-  
 
   // Select which Webpack configuration to use; development
   // or production
   // console.log(env.env); => dev
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  const envConfig = require(`../build-utils/webpack.${env.env}.js`);
-
+  const commonConfig = require(`./build-utils/${env.projectType}/webpack.common.js`);
+  const envConfig = require(`./build-utils/${env.projectType}/webpack.${env.env}.js`);
+  
   // 'webpack-merge' will combine our shared configurations, the
   // environment specific configurations and any addons we are
   // including
-  const mergedConfig = webpackMerge(
+  const mergedConfig = merge(
     commonConfig,
     envConfig,
     ...addons(env.addons),

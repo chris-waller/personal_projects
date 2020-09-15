@@ -1,39 +1,35 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "css-modules"
+    "css-modules",
+    "node"
   ],
   "extends": [
-    "airbnb",
-    "plugin:css-modules/recommended"
+    "plugin:css-modules/recommended",
+    "plugin:node/recommended"
   ],
   "env": {
     "browser": true    
   },
   "rules": {
-    "linebreak-style": ["error", "windows"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "linebreak-style": 0,
     "no-console": 0,
-    "jsx-a11y/click-events-have-key-events": 0,
-    "jsx-a11y/no-static-element-interactions": 0,
-    "react/prop-types": [2, { "ignore": ["children"] }],
-    "react/destructuring-assignment": 0,
     "max-classes-per-file": 0,
-    "react/prefer-stateless-function": 0,
-    "arrow-body-style": 0,
-    
+    "arrow-body-style": 0,    
     "css-modules/no-unused-class": [2, { "camelCase": true }],
     "css-modules/no-undef-class": [2, { "camelCase": true }]
   },
   "settings": {
-    // "import/resolver": "babel-plugin-root-import"    
+    "import/resolver": "babel-plugin-root-import"    
+    /*
     "import/resolver": {
       "alias": {
         "map": [
-          ["~", "./src"]
+          ["~", "./"]
         ],
         "extensions": [".js", ".json", "css", ".scss"]
       }
     }
+    */
   }
 }

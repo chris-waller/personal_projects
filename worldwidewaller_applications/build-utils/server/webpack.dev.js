@@ -1,21 +1,18 @@
 const webpack = require('webpack');
 const commonPaths = require('../common-paths');
+const nodeExternals = require('webpack-node-externals');
 
-const port = process.env.PORT || 3000;
-console.log('test', commonPaths.clientAppEntry);
+const port = process.env.PORT || 3002;
 const config = {
   mode: 'development',
+  target: 'node',
+  externals: [nodeExternals()],
   entry: {
-    app: `${commonPaths.clientAppEntry}/index.js`,
+    app: `${commonPaths.serverAppEntry}/app.js`,
   },
   output: {
     filename: '[name].[hash].js',
-  },
-  resolve: {
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
-  },
+  }, 
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -50,25 +47,6 @@ const config = {
         ],
       },
     ],
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    // new BundleAnalyzerPlugin()
-  ],
-  devServer: {
-    host: 'localhost',
-    port,
-    historyApiFallback: true,
-    hot: true,
-    open: false,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        pathRewrite: { '^/api': '' },
-        secure: false,
-        changeOrigin: true,
-      },
-    },
   },
 };
 module.exports = config;

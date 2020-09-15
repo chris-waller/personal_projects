@@ -1,43 +1,30 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+// const cors = require('cors')
+//const bodyParser = require('body-parser');
+// const pino = require('express-pino-logger')
+const PORT = 3002;
+console.log("in server app.js");
+const app = express();
+// app.use(cors());
+//app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(pino);
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// ensure that routing is working
+console.log('before foo');
+import foo from './resources/resume.pdf';
+// const foo2 = require('~');
+// console.log(foo2);
 
-var app = express();
+const testEs6 = () => {
+  console.log('test es6');
+}
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.get('/api/greeting', (req, res) => {
+  console.log('in /api/greeting', testEs6());
+  const name = req.query.name || 'World';
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-console.log('lodaed');
-
-module.exports = app;
+app.listen(PORT, () => console.log(`Express server is running on localhost: ${PORT}`));

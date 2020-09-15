@@ -4,9 +4,9 @@
     "allowSyntheticDefaultImports": false,
     "baseUrl": "./",
     "paths": {
-      "bar": ["src/*"]
+      "~": ["./*"]
     }
   },
-  "eslintConfig": ".eslintrc",
+  "eslintConfig": "./.eslintrc",
   "exclude": ["node_modules", "dist"]
 }

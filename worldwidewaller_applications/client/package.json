@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --env.env=dev --env.projectType=client",
-    "build": "cross-env NODE_ENV=production webpack -p --env.env=prod --env.projectType=client",
-    "server": "nodenv -E .env server/index.js --exec nodemon | pino-colada",
-    "dev2": "run-p server dev"
+    "build": "cross-env NODE_ENV=production webpack -p --env.env=prod --env.projectType=client"
   },
   "keywords": [],
   "author": "Chris J Waller",

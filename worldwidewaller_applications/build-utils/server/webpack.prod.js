@@ -3,8 +3,9 @@ const commonPaths = require('../common-paths');
 
 const config = {
   mode: 'production',
+  target: 'node',
   entry: {
-    app: [`${commonPaths.clientAppEntry}/index.js`],
+    app: [`${commonPaths.serverAppEntry}/index.js`],
   },
   output: {
     filename: 'static/[name].[hash].js',
