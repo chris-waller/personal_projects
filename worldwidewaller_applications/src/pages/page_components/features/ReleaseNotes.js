@@ -9,24 +9,31 @@ import featureStyles from './styles/features.scss';
 
 export default class ReleaseNotes extends Component {
   render() {
-    console.log('here', Content);
+    let counterDiv = 0;
+    let counterLi = 0;
     return (
       <div className={featureStyles.upcomingFeaturesContainer}>
         {
-          Content.map((releaseNote) => (
-            <>
-              <h5 key={`release_data_${releaseNote.releaseDate}`}>
-                {releaseNote.releaseDate}
-              </h5>
-              <ul>
-                {
-                  releaseNote.details.map((detail) => (
-                    <li>{detail}</li>
-                  ))
-                }
-              </ul>
-            </>
-          ))
+          Content.map((releaseNote) => {
+            counterDiv += 1;
+            return (
+              <div key={`release_note-div-${counterDiv}`}>
+                <h5>
+                  {releaseNote.releaseDate}
+                </h5>
+                <ul>
+                  {
+                    releaseNote.details.map((detail) => {
+                      counterLi += 1;
+                      return (
+                        <li key={`release_note-li-${counterLi}`}>{detail}</li>
+                      );
+                    })
+                  }
+                </ul>
+              </div>
+            );
+          })
         }
       </div>
     );
