@@ -18,19 +18,16 @@ const addons = (/* string | string[] */ addonsArg) => {
 // section in 'package.json'.
 // console.log(env); => { env: 'dev' }
 module.exports = (env) => {
+  // We use 'buildValidations' to check for the 'env' flag
   if (!env) {
     throw new Error(buildValidations.ERR_NO_ENV_FLAG);
-  }
-  
-  if (!env.projectType) {
-    throw new Error(buildValidations.ERR_NO_TYPE_FLAG);
   }
 
   // Select which Webpack configuration to use; development
   // or production
   // console.log(env.env); => dev
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  const envConfig = require(`../build-utils/${env.projectType}/webpack.${env.env}.js`);
+  const envConfig = require(`../build-utils/webpack.${env.env}.js`);
 
   // 'webpack-merge' will combine our shared configurations, the
   // environment specific configurations and any addons we are

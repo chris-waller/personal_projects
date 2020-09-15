@@ -1,5 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const commonPaths = require('../common-paths');
+const commonPaths = require('./common-paths');
 
 const config = {
   mode: 'production',
