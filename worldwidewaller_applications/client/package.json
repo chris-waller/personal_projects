@@ -14,6 +14,7 @@
   "author": "Chris J Waller",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.0",
     "classnames": "^2.2.6",
     "cssnano": "^4.1.10",
     "file-loader": "^6.0.0",
@@ -23,6 +24,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-collapsible": "^2.8.0",
+    "react-delay-render": "^0.1.2",
     "react-dom": "^16.13.1",
     "react-dropdown": "^1.7.0",
     "react-fast-compare": "^3.2.0",
