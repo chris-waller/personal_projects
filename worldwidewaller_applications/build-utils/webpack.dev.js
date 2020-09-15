@@ -61,14 +61,6 @@ const config = {
     historyApiFallback: true,
     hot: true,
     open: false,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        pathRewrite: { '^/api': '' },
-        secure: false,
-        changeOrigin: true,
-      },
-    },
   },
 };
 module.exports = config;

@@ -1,7 +1,7 @@
 // npm imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import isEqual from 'react-fast-compare';
 import { Log, traceLifecycle } from 'react-lifecycle-visualizer';
@@ -25,7 +25,7 @@ import SearchBar from '~/components/SearchBar';
 import { getHighlightedText } from './page_components/resume/ResumeHelpers';
 
 // resource imports
-// import resumePdf from '~/resources/resume.pdf';
+import resumePdf from '~/resources/resume.pdf';
 
 // redux actions
 import {
@@ -167,13 +167,9 @@ class Resume extends Component {
     }
   }
 
-  // eslint-disable-next-line
-  downloadPdf() {
-    console.log('download pdf');
-    fetch('/api/resume/pdf')
-      .then((response) => console.log(response));
-  }
-
+  /**
+   * Render.
+   */
   render() {
     const { searchString } = this.state;
     return (
@@ -190,11 +186,14 @@ class Resume extends Component {
               onClick={() => this.expandCollapseAll(false)}
               className={styles.pageOption}
             />
-            <Button
-              type="button"
-              text="Download PDF"
-              onClick={() => this.downloadPdf()}
-            />
+            {/* TODO: This will eventually need to be put into a
+            proper API call when I have a server setup */ }
+            <Link to={resumePdf} target="_blank" download>
+              <Button
+                type="button"
+                text="Download PDF"
+              />
+            </Link>
           </div>
           <div className={styles.searchBar}>
             <span className={styles.searchBar}>Search Resume:</span>
