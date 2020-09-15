@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --env.env=dev",
-    "prebuild": "rimraf dist",
+    "clean": "rimraf dist node_modules package-lock.json",
     "build": "cross-env NODE_ENV=production webpack -p --env.env=prod"
   },
   "keywords": [],
