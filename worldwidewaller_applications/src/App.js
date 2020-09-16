@@ -8,6 +8,7 @@ import { VisualizerProvider } from 'react-lifecycle-visualizer';
 import Resume from '~/pages/Resume';
 import Settings from '~/pages/Settings';
 import Contact from '~/pages/Contact';
+import CodePlayground from '~/code_playground/TestPage';
 import About from '~/pages/About';
 import NoMatch from '~/pages/NoMatch';
 import WelcomeSplash from '~/components/modals/WelcomeSplash';
@@ -53,7 +54,7 @@ class App extends Component {
 
   static setSplashPageVisibility() {
     const queryParamSplash = (new URLSearchParams(window.location.search)).get('hide_splash_pages');
-    let hideAll = false;
+    let hideAll = true;
     if (queryParamSplash !== null && queryParamSplash.toLocaleUpperCase() === 'TRUE') {
       hideAll = true;
     }
@@ -95,11 +96,12 @@ class App extends Component {
             {!hideWelcomePage
               && <WelcomeSplash closeModal={this.closeSplashScreen} /> }
             <Switch>
-              <Route path="/" exact component={Resume} />
+              <Route path="/" exact component={CodePlayground} />
               <Route path="/resume" exact component={Resume} />
               <Route path="/settings" exact component={Settings} />
               <Route path="/contact" exact component={Contact} />
               <Route path="/about" exact component={About} />
+              <Route path="/code_playground" exact component={CodePlayground} />
               <Route component={NoMatch} />
             </Switch>
           </Provider>
