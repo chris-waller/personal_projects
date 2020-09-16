@@ -96,12 +96,12 @@ class App extends Component {
             {!hideWelcomePage
               && <WelcomeSplash closeModal={this.closeSplashScreen} /> }
             <Switch>
-              <Route path="/" exact component={CodePlayground} />
+              <Route path="/" exact component={Resume} />
               <Route path="/resume" exact component={Resume} />
               <Route path="/settings" exact component={Settings} />
               <Route path="/contact" exact component={Contact} />
               <Route path="/about" exact component={About} />
-              <Route path="/code_playground" exact component={CodePlayground} />
+              <Route path="/playground" exact component={CodePlayground} />
               <Route component={NoMatch} />
             </Switch>
           </Provider>

@@ -83,6 +83,7 @@ class Header extends Component {
           <Link to="/settings" className={styles.headerLink}>Settings</Link>
           <Link to="/about" className={styles.headerLink}>About This App</Link>
           <Link to="/contact" className={styles.headerLink}>Contact Me</Link>
+          <Link to="/playground" className={styles.headerLink}>Playground</Link>
         </div>
 
       </div>

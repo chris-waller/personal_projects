@@ -21,6 +21,12 @@ const config = {
   },
   module: {
     rules: [
+      // Typescript loader
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'awesome-typescript-loader',
+        include: /ResumeHelpers.tsx.bak$/,
+      },
       // JS loader
       {
         test: /\.(js)$/,
