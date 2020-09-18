@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 const cors = require('cors');
 
-const resumePdf =  require('C:/Software Projects/Personal Projects/worldwidewaller_applications/api/server/resources/resume.pdf');
+// const resumePdf =  require('C:/Software Projects/Personal Projects/worldwidewaller_applications/api/server/resources/resume.pdf');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,6 +12,7 @@ app.use(cors());
 
 app.get('/api/greeting', (req, res) => {
   console.log('Youre in the API')
+  /*
   res.download(resumePdf, 'the_pdf_file.pdf', function (err) {
     if (err) {
       // Handle error, but keep in mind the response may be partially-sent
@@ -22,6 +23,7 @@ app.get('/api/greeting', (req, res) => {
       console.log("client downloaded pdf");
     }
   })
+  */
 });
 
 app.listen(3001, () =>
