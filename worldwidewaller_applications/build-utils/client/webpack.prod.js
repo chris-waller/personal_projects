@@ -1,6 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const commonPaths = require('./common-paths');
+const commonPaths = require('../common-paths');
 
+console.log('Loading client webpack prod...');
+// TODO: optmize the chunks
 const config = {
   mode: 'production',
   entry: {

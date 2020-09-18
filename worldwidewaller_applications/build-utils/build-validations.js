@@ -4,6 +4,10 @@ const ERR_NO_ENV_FLAG = chalk.red(
   'You must pass an --env.env flag into your build for webpack to work!',
 );
 
+const ERR_INVALID_ENV = chalk.red(
+  'Invalid environment variable. Accepted values: \'dev\' & \'prod\''
+);
+
 module.exports = {
   ERR_NO_ENV_FLAG,
 };

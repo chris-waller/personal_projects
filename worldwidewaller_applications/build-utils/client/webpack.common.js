@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const commonPaths = require('./common-paths');
+const commonPaths = require('../common-paths');
 
+console.log('Loading client webpack common...');
 const config = {
   entry: {
     vendor: ['semantic-ui-react'],
@@ -11,12 +12,12 @@ const config = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.scss', '.css'],
+    extensions: ['.js', '.json', '.scss', '.css'],
     alias: {
-      styles: path.join(path.join(__dirname, '/../'), 'src/styles'),
-      utilities: path.join(path.join(__dirname, '/../'), 'src/utilities'),
-      images: path.join(path.join(__dirname, '/../'), 'src/images'),
-      '~': path.join(path.join(__dirname, '/../'), 'src'),
+      styles: path.join(commonPaths.projectRoot, 'src/styles'),
+      utilities: path.join(commonPaths.projectRoot, 'src/utilities'),
+      images: path.join(commonPaths.projectRoot, 'src/images'),
+      '~': path.join(commonPaths.projectRoot, 'src'),
     },
   },
   module: {
@@ -25,7 +26,7 @@ const config = {
       {
         test: /\.(ts|tsx)$/,
         loader: 'awesome-typescript-loader',
-        include: /ResumeHelpers.tsx.bak$/,
+        include: /nothing-yet.js$/,
       },
       // JS loader
       {

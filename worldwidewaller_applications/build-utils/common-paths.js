@@ -1,9 +1,10 @@
 const path = require('path');
 
-const PROJECT_ROOT = path.resolve(__dirname, '../');
+const CLIENT_PROJECT_ROOT = path.resolve(__dirname, '../client/');
+
 
 module.exports = {
-  projectRoot: PROJECT_ROOT,
-  outputPath: path.join(PROJECT_ROOT, 'dist'),
-  appEntry: path.join(PROJECT_ROOT, 'src'),
+  projectRoot: CLIENT_PROJECT_ROOT,
+  outputPath: path.join(CLIENT_PROJECT_ROOT, 'dist/'),
+  appEntry: path.join(CLIENT_PROJECT_ROOT, 'src/'),
 };

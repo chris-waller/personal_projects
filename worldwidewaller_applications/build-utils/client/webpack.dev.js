@@ -1,8 +1,10 @@
 const webpack = require('webpack');
-const commonPaths = require('./common-paths');
+const commonPaths = require('../common-paths');
 
 const port = process.env.PORT || 3000;
 
+console.log('Loading client webpack dev...');
+// TODO: optmize the chunks
 const config = {
   mode: 'development',
   entry: {
