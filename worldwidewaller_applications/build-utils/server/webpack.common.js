@@ -22,12 +22,6 @@ const config = {
   },
   module: {
     rules: [
-      // Typescript loader
-      {
-        test: /\.(ts|tsx)$/,
-        loader: 'awesome-typescript-loader',
-        include: /nothing-yet.js$/,
-      },
       // JS loader
       {
         test: /\.(js)$/,
