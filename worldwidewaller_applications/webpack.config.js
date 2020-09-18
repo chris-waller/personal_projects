@@ -1,8 +1,8 @@
 const webpackMerge = require('webpack-merge');
-const buildValidations = require('../build-utils/build-validations');
-const clientConfigCommon = require('../build-utils/client/webpack.common');
-const clientConfigDev = require('../build-utils/client/webpack.dev');
-const clientConfigProd = require('../build-utils/client/webpack.prod');
+const buildValidations = require('./build-utils/build-validations');
+const clientConfigCommon = require('./build-utils/client/webpack.common');
+const clientConfigDev = require('./build-utils/client/webpack.dev');
+const clientConfigProd = require('./build-utils/client/webpack.prod');
 
 // We can include Webpack plugins, through addons, that do
 // not need to run every time we are developing.
@@ -12,7 +12,7 @@ const addons = (/* string | string[] */ addonsArg) => {
     .filter(Boolean); // If addons is undefined, filter it out
 
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  return addonsMap.map((addonName) => require(`../build-utils/addons/webpack.${addonName}.js`));
+  return addonsMap.map((addonName) => require(`./build-utils/addons/webpack.${addonName}.js`));
 };
 
 // 'env' will contain the environment variable from 'scripts' section in 'package.json'.
