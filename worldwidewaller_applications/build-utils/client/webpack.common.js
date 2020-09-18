@@ -14,10 +14,10 @@ const config = {
   resolve: {
     extensions: ['.js', '.json', '.scss', '.css'],
     alias: {
-      styles: path.join(commonPaths.projectRoot, 'src/styles'),
-      utilities: path.join(commonPaths.projectRoot, 'src/utilities'),
-      images: path.join(commonPaths.projectRoot, 'src/images'),
-      '~': path.join(commonPaths.projectRoot, 'src'),
+      styles: path.join(commonPaths.clientProjectRoot, 'src/styles'),
+      utilities: path.join(commonPaths.clientProjectRoot, 'src/utilities'),
+      images: path.join(commonPaths.clientProjectRoot, 'src/images'),
+      '~': path.join(commonPaths.clientProjectRoot, 'src'),
     },
   },
   module: {

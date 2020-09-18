@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const commonPaths = require('../common-paths');
 
-console.log('Loading client webpack common...');
+console.log('Loading api webpack common...');
 const config = {
   entry: {
     vendor: ['semantic-ui-react'],
@@ -14,10 +14,10 @@ const config = {
   resolve: {
     extensions: ['.js', '.json', '.scss', '.css'],
     alias: {
-      styles: path.join(commonPaths.projectRoot, 'src/styles'),
-      utilities: path.join(commonPaths.projectRoot, 'src/utilities'),
-      images: path.join(commonPaths.projectRoot, 'src/images'),
-      '~': path.join(commonPaths.projectRoot, 'src'),
+      styles: path.join(commonPaths.apiProjectRoot, 'src/styles'),
+      utilities: path.join(commonPaths.apiProjectRoot, 'src/utilities'),
+      images: path.join(commonPaths.apiProjectRoot, 'src/images'),
+      '~': path.join(commonPaths.apiProjectRoot, 'src'),
     },
   },
   module: {

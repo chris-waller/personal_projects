@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The main web application for WorldWideWaller Applications",
   "scripts": {
-    "dev": "webpack-dev-server --env.env=dev",
+    "dev": "webpack-dev-server --env.env=dev --env.app_type=client",
     "clean": "rimraf dist node_modules package-lock.json"
   },
   "keywords": [],
