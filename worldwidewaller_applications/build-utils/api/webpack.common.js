@@ -1,5 +1,4 @@
 const path = require('path');
-// const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const commonPaths = require('../common-paths');
 
@@ -10,7 +9,6 @@ const config = {
   },
   output: {
     path: commonPaths.apiOutputPath,
-    // publicPath: '/',
   },
   target: 'node',
   node: {
@@ -37,9 +35,10 @@ const config = {
       // File loader
       {
         test: /\.(png|svg|jpg|gif|pdf)$/,
-        use: [
-          'file-loader',
-        ],
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
       },
     ],
   },
