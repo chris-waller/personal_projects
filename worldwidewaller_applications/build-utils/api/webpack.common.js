@@ -1,22 +1,28 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 const commonPaths = require('../common-paths');
 
 console.log('Loading api webpack common...');
 const config = {
   entry: {
-    vendor: ['semantic-ui-react'],
+    server: path.join(commonPaths.apiProjectRoot, 'server/bin/server.js')
   },
   output: {
-    path: commonPaths.outputPath,
-    publicPath: '/',
+    path: commonPaths.apiOutputPath,
+    // publicPath: '/',
   },
+  target: 'node',
+  node: {
+    // Need this when working with express, otherwise the build fails
+    __dirname: false,   // if you don't put this is, __dirname
+    __filename: false,  // and __filename return blank or /
+  },
+  externals: [nodeExternals()], // Need this to avoid error when 
   resolve: {
-    extensions: ['.js', '.json', '.scss', '.css'],
+    extensions: ['.js', '.json'],
     alias: {
-      styles: path.join(commonPaths.apiProjectRoot, 'src/styles'),
       utilities: path.join(commonPaths.apiProjectRoot, 'src/utilities'),
-      images: path.join(commonPaths.apiProjectRoot, 'src/images'),
       '~': path.join(commonPaths.apiProjectRoot, 'src'),
     },
   },
@@ -40,12 +46,6 @@ const config = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true,
-        },
         vendor: {
           chunks: 'initial',
           test: 'vendor',
@@ -54,12 +54,6 @@ const config = {
         },
       },
     },
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'public/index.html',
-      favicon: 'public/favicon.ico',
-    }),
-  ],
+  }, 
 };
 module.exports = config;

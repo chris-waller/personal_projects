@@ -8,7 +8,7 @@ console.log('Loading client webpack dev...');
 const config = {
   mode: 'development',
   entry: {
-    app: `${commonPaths.appEntry}/index.js`,
+    app: `${commonPaths.clientAppEntry}/index.js`,
   },
   output: {
     filename: '[name].[hash].js',

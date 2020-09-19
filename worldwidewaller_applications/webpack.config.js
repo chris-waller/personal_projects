@@ -92,5 +92,6 @@ module.exports = (env) => {
   );
 
   // return final webpack config object
+  // console.log('returning merged config', mergedConfig);
   return mergedConfig;
 };

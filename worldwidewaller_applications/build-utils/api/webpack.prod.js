@@ -6,7 +6,7 @@ console.log('Loading api webpack prod...');
 const config = {
   mode: 'production',
   entry: {
-    app: [`${commonPaths.appEntry}/index.js`],
+    app: [`${commonPaths.apiAppEntry}/index.js`],
   },
   output: {
     filename: 'static/[name].[hash].js',

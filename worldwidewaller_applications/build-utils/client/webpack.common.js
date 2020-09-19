@@ -8,7 +8,7 @@ const config = {
     vendor: ['semantic-ui-react'],
   },
   output: {
-    path: commonPaths.outputPath,
+    path: commonPaths.clientOutputPath,
     publicPath: '/',
   },
   resolve: {
