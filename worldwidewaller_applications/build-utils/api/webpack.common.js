@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const commonPaths = require('../common-paths');
 
 console.log('Loading api webpack common...');
@@ -24,6 +25,13 @@ const config = {
       '~': path.join(commonPaths.apiProjectRoot, 'src'),
     },
   },
+  plugins: [
+    new CopyWebpackPlugin({
+        patterns: [
+            { from: 'static' }
+        ]
+    })
+  ],
   module: {
     rules: [
       // JS loader

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 const cors = require('cors');
 const app = express();
-const resumePdf =  require('../../resources/resume.pdf');
+// const resumePdf =  require('../../static/resume.pdf');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(pino);
