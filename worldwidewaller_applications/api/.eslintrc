@@ -4,18 +4,12 @@
     "browser": true    
   },
   "rules": {
-    /*
-    "linebreak-style": ["error", "windows"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "linebreak-style": ["error", "windows"],    
     "no-console": 0,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,
-    "react/prop-types": [2, { "ignore": ["children"] }],
-    "react/destructuring-assignment": 0,
     "max-classes-per-file": 0,
-    "react/prefer-stateless-function": 0,
     "arrow-body-style": 0
-    */
   },
   "settings": {
     "import/resolver": "babel-plugin-root-import"    
