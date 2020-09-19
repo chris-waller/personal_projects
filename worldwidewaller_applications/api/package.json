@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "nodemonConfig": {
-    "exec": "npm run build",
+    "exec": "npm run dev",
     "watch": [
       "server/*"
     ],
@@ -14,14 +14,17 @@
     ]
   },
   "scripts": {
-    "build:dev": "webpack --env.env=dev --env.app_type=api",
-    "build:prod": "webpack --env.env=prod --env.app_type=api",
-    "clean": "rimraf dist-server dist",
+    "clean": "rimraf dist-server",
     "clean:all": "rimraf dist-server node_modules package-lock.json",
-    "dev" : "npm-run-all clean build:dev start",
-    "prod" : "npm-run-all clean build:prod start",    
-    "start": "node ./dist/server.js",
-    "watch:dev": "nodemon"
+    "start": "npm run prod",
+    "build": "npm-run-all clean transpile",
+    "server": "node ./dist-server/bin/app.js",
+    "dev": "cross-env NODE_ENV=development npm-run-all build server",
+    "prod": "cross-env NODE_ENV=production npm-run-all build",
+    "transpile": "babel ./server --out-dir dist-server",
+    "watch:dev": "nodemon",
+    "build2": "rimraf dist && webpack --env.env=dev --env.app_type=api",
+    "start2": "node ./dist/server.js"
   },
   "dependencies": {
     "@babel/cli": "^7.11.6",
