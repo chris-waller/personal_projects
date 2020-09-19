@@ -168,11 +168,18 @@ class Resume extends Component {
   downloadPdf() {
     const url = 'http://localhost:3001/api/greeting';
     console.log(`Download PDF requested... to url: ${url}`);
-    axios.get(url)
-      .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
-      });
+    axios({
+      url,
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+      const tempUrl = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = tempUrl;
+      link.setAttribute('download', 'myfile.pdf'); // or any other extension
+      document.body.appendChild(link);
+      link.click();
+    });
   }
 
   /**
