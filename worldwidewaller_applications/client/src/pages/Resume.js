@@ -166,12 +166,12 @@ class Resume extends Component {
 
   // eslint-disable-next-line
   downloadPdf() {
-    const url = 'http://localhost:3001/api/greeting?name=chris';
+    const url = 'http://localhost:3001/api/greeting';
     console.log(`Download PDF requested... to url: ${url}`);
     axios.get(url)
       .then((response) => {
-        console.log(response.data.greeting);
-        // console.log(response.status);
+        console.log(response.status);
+        console.log(response.data);
       });
   }
 

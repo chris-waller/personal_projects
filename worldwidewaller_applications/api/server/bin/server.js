@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 const cors = require('cors');
 const app = express();
-// const resumePdf =  require('../resources/resume.pdf');
+const resumePdf =  require('../../resources/resume.pdf');
 
 console.log('is this thing on?');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,16 +14,10 @@ app.use('/', express.static(`${__dirname}/dist`));
 
 app.get('/api/greeting', (req, res) => {
   console.log('Youre in the API')  
-  return res.download('./resources/resume.pdf', 'chris_waller-full_stack_developer.pdf', function (err) {
-    if (err) {
-      // Handle error, but keep in mind the response may be partially-sent
-      // so check res.headersSent
-      console.log("error downloading pdf", err);
-    } else {
-      // decrement a download credit, etc.
-      console.log("client downloaded pdf");
-    }
-  })
+  // const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
+  const file = './dist/7b4700003c78b11ef973990ce9894bff.pdf';
+  const fileName = 'foobar.pdf';
+  res.download(file, fileName); // Set disposition and send it.
 });
 
 app.listen(3001, () =>
