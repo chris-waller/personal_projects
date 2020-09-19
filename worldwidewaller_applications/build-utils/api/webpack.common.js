@@ -37,10 +37,9 @@ const config = {
       // File loader
       {
         test: /\.(png|svg|jpg|gif|pdf)$/,
-        loader: 'file-loader',
-        'options': {
-          name: '[name].[ext]',
-        }
+        use: [
+          'file-loader',
+        ],
       },
     ],
   },
