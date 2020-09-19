@@ -5,7 +5,6 @@ const cors = require('cors');
 const app = express();
 const resumePdf =  require('../../resources/resume.pdf');
 
-console.log('is this thing on?');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(pino);
 app.use(cors());
@@ -16,7 +15,7 @@ app.get('/api/greeting', (req, res) => {
   console.log('Youre in the API')  
   // const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
   const file = './dist/7b4700003c78b11ef973990ce9894bff.pdf';
-  const fileName = 'foobar.pdf';
+  const fileName = 'Chris Waller - Full Stack Application Devloper.pdf';
   res.download(file, fileName); // Set disposition and send it.
 });
 

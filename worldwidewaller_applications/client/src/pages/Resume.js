@@ -58,6 +58,42 @@ class Resume extends Component {
     return sectionData;
   }
 
+  static downloadPdf() {
+    const url = '/api/greeting';
+    axios({
+      url,
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+      const contentDispostion = response.headers['content-disposition'];
+      let filename = 'chris-waller_resume.pdf';
+
+      if (contentDispostion && contentDispostion.indexOf('filename') !== -1) {
+        const dispositions = contentDispostion.split(';');
+
+        dispositions.forEach((disposition) => {
+          const sanitizedDisposition = disposition.trim();
+
+          // we have found the filename (will look like: filename="filename.ext")
+          let startIndex = sanitizedDisposition.indexOf('filename="');
+          if (startIndex !== -1) {
+            startIndex = ('filename="').length;
+            filename = sanitizedDisposition
+              .substring(startIndex, sanitizedDisposition.length - 1);
+          }
+        });
+      }
+
+      // create the download prompt
+      const tempUrl = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = tempUrl;
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+    });
+  }
+
   /**
    * Constructor
    */
@@ -164,24 +200,6 @@ class Resume extends Component {
     }
   }
 
-  // eslint-disable-next-line
-  downloadPdf() {
-    const url = '/api/greeting';
-    console.log(`Download PDF requested... to url: ${url}`);
-    axios({
-      url,
-      method: 'GET',
-      responseType: 'blob', // important
-    }).then((response) => {
-      const tempUrl = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = tempUrl;
-      link.setAttribute('download', 'myfile.pdf'); // or any other extension
-      document.body.appendChild(link);
-      link.click();
-    });
-  }
-
   /**
    * Render.
    */
@@ -204,7 +222,7 @@ class Resume extends Component {
             <Button
               type="button"
               text="Download PDF"
-              onClick={() => this.downloadPdf()}
+              onClick={() => Resume.downloadPdf()}
             />
           </div>
           <div className={styles.searchBar}>
