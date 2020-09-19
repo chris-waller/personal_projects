@@ -13,10 +13,9 @@ app.use('/', express.static(`${__dirname}/dist`));
 
 app.get('/api/greeting', (req, res) => {
   console.log('Youre in the API')  
-  // const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
-  const file = './dist/7b4700003c78b11ef973990ce9894bff.pdf';
+  const file = `${__dirname}/resume.pdf`;
   const fileName = 'Chris Waller - Full Stack Application Devloper.pdf';
-  res.download(file, fileName); // Set disposition and send it.
+  res.download(file, fileName); // Set content-disposition and send file
 });
 
 app.listen(3001, () =>
