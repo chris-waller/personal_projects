@@ -59,7 +59,7 @@ class Resume extends Component {
   }
 
   static downloadPdf() {
-    const url = '/api/greeting';
+    const url = '/resume/download';
     axios({
       url,
       method: 'GET',
