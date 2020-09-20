@@ -6,7 +6,7 @@ const commonPaths = require('../common-paths');
 console.log('Loading api webpack common...');
 const config = {
   entry: {
-    server: path.join(commonPaths.apiProjectRoot, 'server/server.js')
+    server: path.join(commonPaths.apiProjectRoot, '/server.js')
   },
   output: {
     path: commonPaths.apiOutputPath,

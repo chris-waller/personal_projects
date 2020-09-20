@@ -3,7 +3,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import pino from 'express-pino-logger';
-import resumeRouters from './routes/resume';
+
+// API routes
+import resumeRouters from './controllers/resume';
 
 // TODO: grab this from a config at some point
 const PORT = 3001;
