@@ -2,7 +2,9 @@ import express from 'express';
 
 const router = express.Router();
 
-/* GET users listing. */
+/**
+ * Download resume
+ */
 router.get('/download', (req, res) => {
   console.log('User has requested a resume download');
   const file = `${__dirname}/resume.pdf`;

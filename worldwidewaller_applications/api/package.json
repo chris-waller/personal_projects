@@ -5,7 +5,12 @@
   "nodemonConfig": {
     "exec": "npm run dev",
     "watch": [
-      "server/*"
+      "controllers/*",
+      "models/*",
+      "services/*",
+      "subsribers/*",
+      "types/*",
+      "./server.js"
     ],
     "ignore": [
       "**/__tests__/**",
