@@ -6,3 +6,6 @@ export const SET_RESUME_SEARCH_STRING = 'SET_RESUME_SEARCH_STRING';
 
 // App setting actions
 export const SET_SPLASH_VIS = 'SET_SPLASH_VIS';
+
+// Config settings actions
+export const SET_CONFIG_SETTINGS = 'SET_CONFIG_SETTINGS';

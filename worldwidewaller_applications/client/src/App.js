@@ -17,6 +17,7 @@ import WelcomeSplash from '~/components/modals/WelcomeSplash';
 import '~/styles/global_styles.scss';
 
 // utilities
+import config from '~/config/client_config.json';
 import {
   THEME_NAMES, DEFAULT_THEME, getSiteThemes, changeTheme,
 } from '~/utilities/theme_helpers';
@@ -27,6 +28,9 @@ import {
   setTheme as setThemeAction,
   setSplashPageVisibility as setSplashAction,
 } from '~/redux/actions/userSettings';
+import {
+  setConfigSettings as setConfigSettingsAction,
+} from './redux/actions/configSettings';
 
 class App extends Component {
   /**
@@ -52,6 +56,10 @@ class App extends Component {
     store.dispatch(setThemeAction(selectedTheme.label));
   }
 
+  static setConfigSettings() {
+    store.dispatch(setConfigSettingsAction(config));
+  }
+
   static setSplashPageVisibility() {
     const queryParamSplash = (new URLSearchParams(window.location.search)).get('hide_splash_pages');
     let hideAll = true;
@@ -75,6 +83,7 @@ class App extends Component {
     super();
 
     App.setSiteTheme();
+    App.setConfigSettings();
     const hideWelcomePage = App.setSplashPageVisibility();
     this.state = {
       hideWelcomePage,

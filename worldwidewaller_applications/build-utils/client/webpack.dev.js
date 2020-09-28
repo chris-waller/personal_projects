@@ -56,28 +56,16 @@ const config = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     // new BundleAnalyzerPlugin()
+    new webpack.DefinePlugin({
+      API_URL: JSON.stringify('http://localhost:3001'),
+    })
   ],
   devServer: {
     host: 'localhost',
     port,
     historyApiFallback: true,
     hot: true,
-    open: false,
-    proxy: {
-      "http://localhost:3001": {
-        "changeOrigin": true,
-        "cookieDomainRewrite": "localhost",
-        "target": 'http://localhost:3001',
-        onProxyReq: proxyReq => {
-          // Browers may send Origin headers even with same-origin
-          // requests. To prevent CORS issues, we have to change
-          // the Origin to match the target URL.
-          if (proxyReq.getHeader('origin')) {
-            proxyReq.setHeader('origin', gdc);
-          }
-        }
-      },
-    },
+    open: false, 
   }
 }
 

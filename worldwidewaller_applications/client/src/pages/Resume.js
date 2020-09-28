@@ -59,7 +59,8 @@ class Resume extends Component {
   }
 
   static downloadPdf() {
-    const url = '/resume/download';
+    // eslint-disable-next-line no-undef
+    const url = `${API_URL}/resume/download`;
     axios({
       url,
       method: 'GET',

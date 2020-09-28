@@ -5,8 +5,8 @@ import cors from 'cors';
 import pino from 'express-pino-logger';
 
 // API routes
-import loginRouters from './controllers/login';
-import resumeRouters from './controllers/resume';
+import loginRouters from './_controllers/login';
+import resumeRouters from './_controllers/resume';
 
 // TODO: grab this from a config at some point
 const PORT = 3001;
@@ -27,11 +27,14 @@ app.use(pinoLogger);
 // enable cors
 app.use(cors());
 
-// the main server file
-app.use('/', express.static(`${__dirname}/dist`));
-
 // setup API routes
 app.use('/resume', resumeRouters);
 app.use('/login', loginRouters);
+app.use('/contact', loginRouters);
+
+// catch-all for routes not found
+app.use('/*', (req, res) => {
+  res.redirect('http://localhost:3000/');
+});
 
 app.listen(PORT, () => console.log(`Express server is running on localhost:${PORT}`));

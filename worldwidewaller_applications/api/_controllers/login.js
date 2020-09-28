@@ -1,6 +1,9 @@
 // npm imports
 import express from 'express';
 
+// services
+import LoginService from '../_services/LoginService';
+
 // helpers
 import ValidateParameters from './ValidateParameters';
 
@@ -23,7 +26,12 @@ router.get('/:username/:password', (req, res) => {
   }
 
   // simulate call to service layer
-  console.log(`Calling service layer with ${username} and ${password}`);
+  const results = LoginService.userLogin(username, password);
+  if (results.errors.length > 0) {
+    console.log('User login failed: ', results.errors);
+    res.status(500).send('Failed to login.');
+    return;
+  }
 
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify({

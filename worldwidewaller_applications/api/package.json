@@ -5,9 +5,9 @@
   "nodemonConfig": {
     "exec": "npm run dev",
     "watch": [
-      "controllers/*",
-      "models/*",
-      "services/*",
+      "_controllers/*",
+      "_models/*",
+      "_services/*",
       "subsribers/*",
       "types/*",
       "./server.js"

@@ -11,10 +11,11 @@ import logger from 'redux-logger';
 // reducer import
 import userSettings from './reducers/userSettings';
 import appSettings from './reducers/appSettings';
+import configSettings from './reducers/configSettings';
 
 // add all reducers here
 const rootReducer = combineReducers({
-  userSettings, appSettings,
+  configSettings, userSettings, appSettings,
 });
 
 // create the store with devtools and logging
