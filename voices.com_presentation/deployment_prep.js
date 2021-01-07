@@ -1,29 +1,3 @@
-/*
-The problem background:
-----------------------------
-•	Devs create files with the extension .sql that contain code to update databases as part of a deployment package
-•	As part of the deployment building process, all dev .sql files are automatically included in 
-    the “migrations” folder in the deployment package
-•	Some .sql files can be run up to 12 hours before deployment occurs (i.e creating new tables)
-•	Some .sql files must only be run after deployment occurs (i.e. dropping existing tables that are no longer used)
-•	Currently all .sql files are run manually, preventing a full automated deployment process.
-
-In 10-20 minute presentation, outline the following:
-------------------------------------------------------
-1.	A method that can take a deployment identifier (ie. a number) and find all the .sql files 
-    relating to that deployment
-2.	A way to differentiate pre and post deployment files
-3.	In the language of your choice, or pseudo code, write a routine to read the “migrations” folder directory
-      and build 2 lists of file names – those to be run in advance of deployment, and those to be run after.  
-      Be prepared to present your routine and discuss how it works. 
-      
-Although your presentation is on Friday, part of being a Voices developer is working with timelines and of course,
-setting timelines and expectations with other colleagues. How long do you think you would need to complete
-this presentation? I would love you to provide an estimate to me and send your presentation back to me 
-when you are complete prior to your interview. That will give Peter a chance to review before you present 
-on Friday as well. 
-*/
-
 /**
  * This script will search through a static directory to search for sql files required for pre and
  * post deployment.
