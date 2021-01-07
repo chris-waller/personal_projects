@@ -39,7 +39,7 @@ function prepareScripts(deploymentVersion) {
   };
 
   if (deploymentVersion === undefined || deploymentVersion === null) {
-    throw new Error ('Must provide a deployment version.');
+    throw new Error ('Must provide a deployment version.'); 
   }
 
   console.log('Prepping migrations for version ', deploymentVersion);
